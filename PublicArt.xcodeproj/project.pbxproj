@@ -89,12 +89,12 @@
 		1F01D3DF1B22713400D4B156 /* PublicArt */ = {
 			isa = PBXGroup;
 			children = (
+				1F8915F81B22B3B100E83891 /* Assets */,
 				1F8915F51B229E3000E83891 /* Models */,
 				1F01D4091B22783700D4B156 /* Views */,
 				1F01D4041B22742800D4B156 /* ViewControllers */,
 				1F01D3E21B22713400D4B156 /* AppDelegate.swift */,
 				1F01D3E81B22713400D4B156 /* Main.storyboard */,
-				1F01D3EB1B22713400D4B156 /* Images.xcassets */,
 				1F01D3ED1B22713400D4B156 /* LaunchScreen.xib */,
 				1F01D3E01B22713400D4B156 /* Supporting Files */,
 			);
@@ -152,6 +152,14 @@
 				1F8915F61B229ED400E83891 /* MenuModel.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		1F8915F81B22B3B100E83891 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				1F01D3EB1B22713400D4B156 /* Images.xcassets */,
+			);
+			name = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

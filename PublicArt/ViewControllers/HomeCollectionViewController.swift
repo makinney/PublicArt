@@ -23,7 +23,7 @@ class HomeCollectionViewController: UICollectionViewController {
 
 		var nibName = UINib(nibName: "HomeCollectionViewCell", bundle: nil)
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: "HomeCollectionViewCellID")
-		
+				
 		setupFlowLayout()
 	
 		collectionView?.reloadData()
@@ -98,7 +98,11 @@ class HomeCollectionViewController: UICollectionViewController {
 		}
 	}
 	
-
+	override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+		setupFlowLayout()
+		//		collectionView?.reloadData()
+	}
+	
 
     // MARK: UICollectionViewDataSource
 
