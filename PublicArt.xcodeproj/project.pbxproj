@@ -19,6 +19,42 @@
 		1F01D4131B228A1900D4B156 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F01D4121B228A1900D4B156 /* ContentViewController.swift */; };
 		1F8915F41B229A1000E83891 /* HomeSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8915F31B229A1000E83891 /* HomeSplitViewController.swift */; };
 		1F8915F71B229ED400E83891 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8915F61B229ED400E83891 /* MenuModel.swift */; };
+		1F8916591B23C21D00E83891 /* PublicArtModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916571B23C21D00E83891 /* PublicArtModel.xcdatamodeld */; };
+		1F8916921B23D04100E83891 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916911B23D04100E83891 /* CoreDataStack.swift */; };
+		1F89169F1B23D1D700E83891 /* ArtDataCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916941B23D1D700E83891 /* ArtDataCreator.swift */; };
+		1F8916A01B23D1D700E83891 /* ArtDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916951B23D1D700E83891 /* ArtDataManager.swift */; };
+		1F8916A11B23D1D700E83891 /* ArtFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916961B23D1D700E83891 /* ArtFileManager.swift */; };
+		1F8916A21B23D1D700E83891 /* ArtPhotoCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916971B23D1D700E83891 /* ArtPhotoCache.swift */; };
+		1F8916A31B23D1D700E83891 /* ArtPhotoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916981B23D1D700E83891 /* ArtPhotoDownloader.swift */; };
+		1F8916A41B23D1D700E83891 /* ArtPhotoImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916991B23D1D700E83891 /* ArtPhotoImages.swift */; };
+		1F8916A51B23D1D700E83891 /* ArtPhotosByLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F89169A1B23D1D700E83891 /* ArtPhotosByLocation.swift */; };
+		1F8916A61B23D1D700E83891 /* Importer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F89169B1B23D1D700E83891 /* Importer.swift */; };
+		1F8916A71B23D1D700E83891 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F89169C1B23D1D700E83891 /* LocationData.swift */; };
+		1F8916A81B23D1D700E83891 /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F89169D1B23D1D700E83891 /* Locations.swift */; };
+		1F8916A91B23D1D700E83891 /* PhotoFileNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F89169E1B23D1D700E83891 /* PhotoFileNames.swift */; };
+		1F8916AB1B23D1F700E83891 /* CityArtFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916AA1B23D1F700E83891 /* CityArtFunctions.swift */; };
+		1F8916B01B23D20700E83891 /* CoreDataIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916AC1B23D20700E83891 /* CoreDataIdentifiers.swift */; };
+		1F8916B11B23D20700E83891 /* DbaseIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916AD1B23D20700E83891 /* DbaseIds.swift */; };
+		1F8916B21B23D20700E83891 /* GeneralIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916AE1B23D20700E83891 /* GeneralIdentifiers.swift */; };
+		1F8916B31B23D20700E83891 /* StoryboardIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916AF1B23D20700E83891 /* StoryboardIdentifiers.swift */; };
+		1F8916B51B23D21900E83891 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916B41B23D21900E83891 /* SwiftyJSON.swift */; };
+		1F8916BB1B23D22B00E83891 /* ArtMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916B61B23D22B00E83891 /* ArtMapAnnotation.swift */; };
+		1F8916BC1B23D22B00E83891 /* ArtMapPins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916B71B23D22B00E83891 /* ArtMapPins.swift */; };
+		1F8916BD1B23D22B00E83891 /* ArtUserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916B81B23D22B00E83891 /* ArtUserLocation.swift */; };
+		1F8916BE1B23D22B00E83891 /* MappingIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916B91B23D22B00E83891 /* MappingIdentifiers.swift */; };
+		1F8916BF1B23D22B00E83891 /* MKArtAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916BA1B23D22B00E83891 /* MKArtAnnotationView.swift */; };
+		1F8916CA1B23D59700E83891 /* ImageProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916C91B23D59700E83891 /* ImageProcess.swift */; };
+		1F8916CD1B23D76E00E83891 /* ImageProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916CC1B23D76E00E83891 /* ImageProcess.m */; };
+		1F8916E41B23F23700E83891 /* Art.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916E11B23F23700E83891 /* Art.swift */; };
+		1F8916E51B23F23700E83891 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916E21B23F23700E83891 /* Location.swift */; };
+		1F8916E61B23F23700E83891 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916E31B23F23700E83891 /* Photo.swift */; };
+		1F8916EB1B23F29800E83891 /* ArtExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916E71B23F29800E83891 /* ArtExtension.swift */; };
+		1F8916EC1B23F29800E83891 /* LocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916E81B23F29800E83891 /* LocationExtension.swift */; };
+		1F8916ED1B23F29800E83891 /* PhotoExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916E91B23F29800E83891 /* PhotoExtension.swift */; };
+		1F8916EE1B23F29800E83891 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916EA1B23F29800E83891 /* UIImageViewExtension.swift */; };
+		1F8916F01B23F2CE00E83891 /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916EF1B23F2CE00E83891 /* Fetcher.swift */; };
+		1F8916F21B23F2F000E83891 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916F11B23F2F000E83891 /* WebService.swift */; };
+		1F8916F61B23F67A00E83891 /* ArtRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916F51B23F67A00E83891 /* ArtRefresh.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +84,44 @@
 		1F01D4121B228A1900D4B156 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentViewController.swift; path = ViewControllers/ContentViewController.swift; sourceTree = "<group>"; };
 		1F8915F31B229A1000E83891 /* HomeSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeSplitViewController.swift; path = ViewControllers/HomeSplitViewController.swift; sourceTree = "<group>"; };
 		1F8915F61B229ED400E83891 /* MenuModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuModel.swift; path = Models/MenuModel.swift; sourceTree = "<group>"; };
+		1F8916581B23C21D00E83891 /* PublicArtModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PublicArtModel.xcdatamodel; sourceTree = "<group>"; };
+		1F8916911B23D04100E83891 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = CoreData/CoreDataStack.swift; sourceTree = "<group>"; };
+		1F8916941B23D1D700E83891 /* ArtDataCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtDataCreator.swift; path = ArtData/ArtDataCreator.swift; sourceTree = "<group>"; };
+		1F8916951B23D1D700E83891 /* ArtDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtDataManager.swift; path = ArtData/ArtDataManager.swift; sourceTree = "<group>"; };
+		1F8916961B23D1D700E83891 /* ArtFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtFileManager.swift; path = ArtData/ArtFileManager.swift; sourceTree = "<group>"; };
+		1F8916971B23D1D700E83891 /* ArtPhotoCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtPhotoCache.swift; path = ArtData/ArtPhotoCache.swift; sourceTree = "<group>"; };
+		1F8916981B23D1D700E83891 /* ArtPhotoDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtPhotoDownloader.swift; path = ArtData/ArtPhotoDownloader.swift; sourceTree = "<group>"; };
+		1F8916991B23D1D700E83891 /* ArtPhotoImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtPhotoImages.swift; path = ArtData/ArtPhotoImages.swift; sourceTree = "<group>"; };
+		1F89169A1B23D1D700E83891 /* ArtPhotosByLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtPhotosByLocation.swift; path = ArtData/ArtPhotosByLocation.swift; sourceTree = "<group>"; };
+		1F89169B1B23D1D700E83891 /* Importer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Importer.swift; path = ArtData/Importer.swift; sourceTree = "<group>"; };
+		1F89169C1B23D1D700E83891 /* LocationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationData.swift; path = ArtData/LocationData.swift; sourceTree = "<group>"; };
+		1F89169D1B23D1D700E83891 /* Locations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Locations.swift; path = ArtData/Locations.swift; sourceTree = "<group>"; };
+		1F89169E1B23D1D700E83891 /* PhotoFileNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoFileNames.swift; path = ArtData/PhotoFileNames.swift; sourceTree = "<group>"; };
+		1F8916AA1B23D1F700E83891 /* CityArtFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CityArtFunctions.swift; path = Functions/CityArtFunctions.swift; sourceTree = "<group>"; };
+		1F8916AC1B23D20700E83891 /* CoreDataIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataIdentifiers.swift; path = Identifiers/CoreDataIdentifiers.swift; sourceTree = "<group>"; };
+		1F8916AD1B23D20700E83891 /* DbaseIds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DbaseIds.swift; path = Identifiers/DbaseIds.swift; sourceTree = "<group>"; };
+		1F8916AE1B23D20700E83891 /* GeneralIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeneralIdentifiers.swift; path = Identifiers/GeneralIdentifiers.swift; sourceTree = "<group>"; };
+		1F8916AF1B23D20700E83891 /* StoryboardIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoryboardIdentifiers.swift; path = Identifiers/StoryboardIdentifiers.swift; sourceTree = "<group>"; };
+		1F8916B41B23D21900E83891 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = JSON/SwiftyJSON.swift; sourceTree = "<group>"; };
+		1F8916B61B23D22B00E83891 /* ArtMapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtMapAnnotation.swift; path = Mapping/ArtMapAnnotation.swift; sourceTree = "<group>"; };
+		1F8916B71B23D22B00E83891 /* ArtMapPins.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtMapPins.swift; path = Mapping/ArtMapPins.swift; sourceTree = "<group>"; };
+		1F8916B81B23D22B00E83891 /* ArtUserLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtUserLocation.swift; path = Mapping/ArtUserLocation.swift; sourceTree = "<group>"; };
+		1F8916B91B23D22B00E83891 /* MappingIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MappingIdentifiers.swift; path = Mapping/MappingIdentifiers.swift; sourceTree = "<group>"; };
+		1F8916BA1B23D22B00E83891 /* MKArtAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MKArtAnnotationView.swift; path = Mapping/MKArtAnnotationView.swift; sourceTree = "<group>"; };
+		1F8916C91B23D59700E83891 /* ImageProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageProcess.swift; path = Imaging/ImageProcess.swift; sourceTree = "<group>"; };
+		1F8916CB1B23D76E00E83891 /* ImageProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageProcess.h; path = ImageProcessing/ImageProcess.h; sourceTree = "<group>"; };
+		1F8916CC1B23D76E00E83891 /* ImageProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageProcess.m; path = ImageProcessing/ImageProcess.m; sourceTree = "<group>"; };
+		1F8916CE1B23D7B000E83891 /* PublicArt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PublicArt-Bridging-Header.h"; sourceTree = "<group>"; };
+		1F8916E11B23F23700E83891 /* Art.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Art.swift; path = CoreData/Art.swift; sourceTree = "<group>"; };
+		1F8916E21B23F23700E83891 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = CoreData/Location.swift; sourceTree = "<group>"; };
+		1F8916E31B23F23700E83891 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Photo.swift; path = CoreData/Photo.swift; sourceTree = "<group>"; };
+		1F8916E71B23F29800E83891 /* ArtExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtExtension.swift; path = Extensions/ArtExtension.swift; sourceTree = "<group>"; };
+		1F8916E81B23F29800E83891 /* LocationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationExtension.swift; path = Extensions/LocationExtension.swift; sourceTree = "<group>"; };
+		1F8916E91B23F29800E83891 /* PhotoExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoExtension.swift; path = Extensions/PhotoExtension.swift; sourceTree = "<group>"; };
+		1F8916EA1B23F29800E83891 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageViewExtension.swift; path = Extensions/UIImageViewExtension.swift; sourceTree = "<group>"; };
+		1F8916EF1B23F2CE00E83891 /* Fetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fetcher.swift; path = ArtData/Fetcher.swift; sourceTree = "<group>"; };
+		1F8916F11B23F2F000E83891 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebService.swift; path = Network/WebService.swift; sourceTree = "<group>"; };
+		1F8916F51B23F67A00E83891 /* ArtRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtRefresh.swift; path = ArtData/ArtRefresh.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,8 +163,20 @@
 		1F01D3DF1B22713400D4B156 /* PublicArt */ = {
 			isa = PBXGroup;
 			children = (
+				1F8916931B23D1C500E83891 /* ArtDataControl */,
 				1F8915F81B22B3B100E83891 /* Assets */,
+				1F8916561B23C04300E83891 /* CoreData */,
+				1F8916731B23CDF300E83891 /* Extensions */,
+				1F89167C1B23CF2200E83891 /* Functions */,
+				1F89167D1B23CF2A00E83891 /* Identifiers */,
+				1F8916C21B23D2B700E83891 /* Imaging */,
+				1F8916721B23CDE700E83891 /* JSON */,
+				1F89167E1B23CF3B00E83891 /* Mapping */,
 				1F8915F51B229E3000E83891 /* Models */,
+				1F89167F1B23CF4500E83891 /* Network */,
+				1F8916811B23CF5700E83891 /* Photos */,
+				1F8916821B23CF6500E83891 /* Protocol */,
+				1F8916801B23CF4D00E83891 /* Transistions */,
 				1F01D4091B22783700D4B156 /* Views */,
 				1F01D4041B22742800D4B156 /* ViewControllers */,
 				1F01D3E21B22713400D4B156 /* AppDelegate.swift */,
@@ -104,6 +190,7 @@
 		1F01D3E01B22713400D4B156 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1F8916CE1B23D7B000E83891 /* PublicArt-Bridging-Header.h */,
 				1F01D3E11B22713400D4B156 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -160,6 +247,127 @@
 				1F01D3EB1B22713400D4B156 /* Images.xcassets */,
 			);
 			name = Assets;
+			sourceTree = "<group>";
+		};
+		1F8916561B23C04300E83891 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				1F8916E11B23F23700E83891 /* Art.swift */,
+				1F8916E21B23F23700E83891 /* Location.swift */,
+				1F8916E31B23F23700E83891 /* Photo.swift */,
+				1F8916911B23D04100E83891 /* CoreDataStack.swift */,
+				1F8916571B23C21D00E83891 /* PublicArtModel.xcdatamodeld */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		1F8916721B23CDE700E83891 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				1F8916B41B23D21900E83891 /* SwiftyJSON.swift */,
+			);
+			name = JSON;
+			sourceTree = "<group>";
+		};
+		1F8916731B23CDF300E83891 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1F8916E71B23F29800E83891 /* ArtExtension.swift */,
+				1F8916E81B23F29800E83891 /* LocationExtension.swift */,
+				1F8916E91B23F29800E83891 /* PhotoExtension.swift */,
+				1F8916EA1B23F29800E83891 /* UIImageViewExtension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		1F89167C1B23CF2200E83891 /* Functions */ = {
+			isa = PBXGroup;
+			children = (
+				1F8916AA1B23D1F700E83891 /* CityArtFunctions.swift */,
+			);
+			name = Functions;
+			sourceTree = "<group>";
+		};
+		1F89167D1B23CF2A00E83891 /* Identifiers */ = {
+			isa = PBXGroup;
+			children = (
+				1F8916AC1B23D20700E83891 /* CoreDataIdentifiers.swift */,
+				1F8916AD1B23D20700E83891 /* DbaseIds.swift */,
+				1F8916AE1B23D20700E83891 /* GeneralIdentifiers.swift */,
+				1F8916AF1B23D20700E83891 /* StoryboardIdentifiers.swift */,
+			);
+			name = Identifiers;
+			sourceTree = "<group>";
+		};
+		1F89167E1B23CF3B00E83891 /* Mapping */ = {
+			isa = PBXGroup;
+			children = (
+				1F8916B61B23D22B00E83891 /* ArtMapAnnotation.swift */,
+				1F8916B71B23D22B00E83891 /* ArtMapPins.swift */,
+				1F8916B81B23D22B00E83891 /* ArtUserLocation.swift */,
+				1F8916B91B23D22B00E83891 /* MappingIdentifiers.swift */,
+				1F8916BA1B23D22B00E83891 /* MKArtAnnotationView.swift */,
+			);
+			name = Mapping;
+			sourceTree = "<group>";
+		};
+		1F89167F1B23CF4500E83891 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				1F8916F11B23F2F000E83891 /* WebService.swift */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		1F8916801B23CF4D00E83891 /* Transistions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Transistions;
+			sourceTree = "<group>";
+		};
+		1F8916811B23CF5700E83891 /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Photos;
+			sourceTree = "<group>";
+		};
+		1F8916821B23CF6500E83891 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Protocol;
+			sourceTree = "<group>";
+		};
+		1F8916931B23D1C500E83891 /* ArtDataControl */ = {
+			isa = PBXGroup;
+			children = (
+				1F8916EF1B23F2CE00E83891 /* Fetcher.swift */,
+				1F8916941B23D1D700E83891 /* ArtDataCreator.swift */,
+				1F8916951B23D1D700E83891 /* ArtDataManager.swift */,
+				1F8916961B23D1D700E83891 /* ArtFileManager.swift */,
+				1F8916971B23D1D700E83891 /* ArtPhotoCache.swift */,
+				1F8916981B23D1D700E83891 /* ArtPhotoDownloader.swift */,
+				1F8916991B23D1D700E83891 /* ArtPhotoImages.swift */,
+				1F89169A1B23D1D700E83891 /* ArtPhotosByLocation.swift */,
+				1F8916F51B23F67A00E83891 /* ArtRefresh.swift */,
+				1F89169B1B23D1D700E83891 /* Importer.swift */,
+				1F89169C1B23D1D700E83891 /* LocationData.swift */,
+				1F89169D1B23D1D700E83891 /* Locations.swift */,
+				1F89169E1B23D1D700E83891 /* PhotoFileNames.swift */,
+			);
+			name = ArtDataControl;
+			sourceTree = "<group>";
+		};
+		1F8916C21B23D2B700E83891 /* Imaging */ = {
+			isa = PBXGroup;
+			children = (
+				1F8916CB1B23D76E00E83891 /* ImageProcess.h */,
+				1F8916CC1B23D76E00E83891 /* ImageProcess.m */,
+				1F8916C91B23D59700E83891 /* ImageProcess.swift */,
+			);
+			name = Imaging;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,13 +471,49 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F8916E61B23F23700E83891 /* Photo.swift in Sources */,
 				1F01D4131B228A1900D4B156 /* ContentViewController.swift in Sources */,
+				1F8916A11B23D1D700E83891 /* ArtFileManager.swift in Sources */,
+				1F8916BB1B23D22B00E83891 /* ArtMapAnnotation.swift in Sources */,
+				1F8916BD1B23D22B00E83891 /* ArtUserLocation.swift in Sources */,
 				1F01D3E31B22713400D4B156 /* AppDelegate.swift in Sources */,
+				1F8916A61B23D1D700E83891 /* Importer.swift in Sources */,
+				1F8916A01B23D1D700E83891 /* ArtDataManager.swift in Sources */,
+				1F8916EE1B23F29800E83891 /* UIImageViewExtension.swift in Sources */,
+				1F8916EC1B23F29800E83891 /* LocationExtension.swift in Sources */,
+				1F8916B21B23D20700E83891 /* GeneralIdentifiers.swift in Sources */,
+				1F8916A41B23D1D700E83891 /* ArtPhotoImages.swift in Sources */,
+				1F8916591B23C21D00E83891 /* PublicArtModel.xcdatamodeld in Sources */,
+				1F8916AB1B23D1F700E83891 /* CityArtFunctions.swift in Sources */,
+				1F89169F1B23D1D700E83891 /* ArtDataCreator.swift in Sources */,
 				1F01D4061B22745A00D4B156 /* HomeCollectionViewController.swift in Sources */,
 				1F8915F71B229ED400E83891 /* MenuModel.swift in Sources */,
+				1F8916F61B23F67A00E83891 /* ArtRefresh.swift in Sources */,
+				1F8916A51B23D1D700E83891 /* ArtPhotosByLocation.swift in Sources */,
 				1F01D4081B22747A00D4B156 /* ExploreCollectionViewController.swift in Sources */,
+				1F8916A21B23D1D700E83891 /* ArtPhotoCache.swift in Sources */,
+				1F8916BE1B23D22B00E83891 /* MappingIdentifiers.swift in Sources */,
+				1F8916CA1B23D59700E83891 /* ImageProcess.swift in Sources */,
+				1F8916A91B23D1D700E83891 /* PhotoFileNames.swift in Sources */,
+				1F8916A81B23D1D700E83891 /* Locations.swift in Sources */,
+				1F8916921B23D04100E83891 /* CoreDataStack.swift in Sources */,
+				1F8916BF1B23D22B00E83891 /* MKArtAnnotationView.swift in Sources */,
+				1F8916E41B23F23700E83891 /* Art.swift in Sources */,
+				1F8916A31B23D1D700E83891 /* ArtPhotoDownloader.swift in Sources */,
+				1F8916BC1B23D22B00E83891 /* ArtMapPins.swift in Sources */,
 				1F8915F41B229A1000E83891 /* HomeSplitViewController.swift in Sources */,
+				1F8916F21B23F2F000E83891 /* WebService.swift in Sources */,
+				1F8916A71B23D1D700E83891 /* LocationData.swift in Sources */,
+				1F8916EB1B23F29800E83891 /* ArtExtension.swift in Sources */,
+				1F8916B11B23D20700E83891 /* DbaseIds.swift in Sources */,
+				1F8916CD1B23D76E00E83891 /* ImageProcess.m in Sources */,
+				1F8916F01B23F2CE00E83891 /* Fetcher.swift in Sources */,
 				1F01D4101B227B2000D4B156 /* HomeCollectionViewCell.swift in Sources */,
+				1F8916E51B23F23700E83891 /* Location.swift in Sources */,
+				1F8916B51B23D21900E83891 /* SwiftyJSON.swift in Sources */,
+				1F8916B31B23D20700E83891 /* StoryboardIdentifiers.swift in Sources */,
+				1F8916B01B23D20700E83891 /* CoreDataIdentifiers.swift in Sources */,
+				1F8916ED1B23F29800E83891 /* PhotoExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,9 +642,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/PublicArtData-fkfryhgnyrdpjkcgftxfyorqipvh/Build/Products/Debug-iphonesimulator",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/PublicArtData-fkfryhgnyrdpjkcgftxfyorqipvh/Build/Products/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = PublicArt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PublicArt/PublicArt-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -408,9 +658,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/PublicArtData-fkfryhgnyrdpjkcgftxfyorqipvh/Build/Products/Debug-iphonesimulator",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/PublicArtData-fkfryhgnyrdpjkcgftxfyorqipvh/Build/Products/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = PublicArt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PublicArt/PublicArt-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -479,6 +735,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1F8916571B23C21D00E83891 /* PublicArtModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1F8916581B23C21D00E83891 /* PublicArtModel.xcdatamodel */,
+			);
+			currentVersion = 1F8916581B23C21D00E83891 /* PublicArtModel.xcdatamodel */;
+			name = PublicArtModel.xcdatamodeld;
+			path = CoreData/PublicArtModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1F01D3D51B22713300D4B156 /* Project object */;
 }
