@@ -8,7 +8,7 @@
 //  TODO: Error handling and recovery
 //
 import Foundation
-//import AlamoFire
+import Alamofire
 //import UIKit
 
 struct WebServices {
@@ -63,7 +63,7 @@ class WebService {
 		if let token = self.loadSessionToken() {
 			setTokenInHeader(token)
 		}
-//		Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders = headers
+		Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders = headers
 	}
 
 	func logInUser(userName:String, password:String, completion:(success:Bool)-> ()) {
