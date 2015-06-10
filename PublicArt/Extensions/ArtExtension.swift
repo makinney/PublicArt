@@ -31,7 +31,8 @@ extension Art {
 			art.medium = json["medium"].stringValue
 			art.objectId = json["objectId"].stringValue
 			art.title = json["title"].stringValue
-			art.thumbFile = json["thumbFile"].stringValue
+			art.imageFileName = json["thumbFile"].stringValue
+			art.imageAspectRatio = json["imageAspectRatio"].double ?? 1.0
 			art.updatedAt = json["updatedAt"].stringValue
 	//		art.prevailingColor = UIColor()
 			return art

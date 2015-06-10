@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 
+@objc(Location)
+
 class Location: NSManagedObject {
 
     @NSManaged var createdAt: String

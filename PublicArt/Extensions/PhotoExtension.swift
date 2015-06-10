@@ -19,6 +19,7 @@ extension Photo {
 		if let photo = NSEntityDescription.insertNewObjectForEntityForName(ModelEntity.photo, inManagedObjectContext:moc) as? Photo {
 			photo.createdAt = json["createdAt"].stringValue
 			photo.idArt = json["idArt"].stringValue
+			photo.imageAspectRatio = json["imageAspectRatio"].double ?? 1.0
 			photo.imageFileName = extractImageFileName(json["imageFile"]["name"].stringValue)
 			photo.imageFileURL = json["imageFile"]["url"].stringValue
 			photo.objectId = json["objectId"].stringValue

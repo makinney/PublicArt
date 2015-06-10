@@ -43,8 +43,8 @@ class PhotoFileNames {
 	
 	private func getFileNames(art: Art, excludePlaceholderImages: Bool) -> [String] {
 		var fileNames: [String] = []
-		if !art.thumbFile.isEmpty  {
-			var filename = art.thumbFile
+		if !art.imageFileName.isEmpty  {
+			var filename = art.imageFileName
 			if excludePlaceholderImages == true {
 				if filename != "copyrightedImage.png" && filename != "noPhotosImage.png" { // TODO: define
 					fileNames.append(filename)

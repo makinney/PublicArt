@@ -31,12 +31,12 @@ class WebService {
 	}
 
 	struct Headers {
-		static let serviceAppIdKey = ""
-		static let serviceAppIdValue = ""
-		static let serviceRestApiKey = ""
-		static let serviceRestApiValue = ""
-		static let sessionTokenKey = ""
-		static let contentTypeKey =	""
+		static let serviceAppIdKey = "X-Parse-Application-Id"
+		static let serviceAppIdValue = "vn8LOzGh4T5iLT3z09bHpjhnfimdwmJP0CMee9kL"
+		static let serviceRestApiKey = "X-Parse-REST-API-Key"
+		static let serviceRestApiValue = "4VA4ARKMO7rqCTVvhyLrKpwdqJRy3Tagqj4eOxMf"
+		static let sessionTokenKey = "X-Parse-Session-Token"
+		static let contentTypeKey =	"Content-Type"
 	}
 	
 	struct Storage {
@@ -67,50 +67,50 @@ class WebService {
 	}
 
 	func logInUser(userName:String, password:String, completion:(success:Bool)-> ()) {
-//		let URL = WebService.baseURL + WebServices.EndPoints.login + "/?"
-//		Alamofire.request(.GET, URL,parameters:["username":userName, "password":password])
-//			.responseJSON { (_, _, JSON, error) -> Void in
-//				if(error == nil){
-//					if let sessionToken = self.getTokenInResponse(JSON)? {
-//						self.storeSessionToken(sessionToken)
-//						self.setTokenInHeader(sessionToken)
-//						Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders = self.headers
-//					}
-//					completion(success: true)
-//				} else {
-//					DLog("json processing error on log in \(error)")
-//					completion(success: false)
-//				}
-//		}
+		let URL = WebService.baseURL + WebServices.EndPoints.login + "/?"
+		Alamofire.request(.GET, URL,parameters:["username":userName, "password":password])
+			.responseJSON { (_, _, JSON, error) -> Void in
+				if(error == nil){
+					if let sessionToken = self.getTokenInResponse(JSON) {
+						self.storeSessionToken(sessionToken)
+						self.setTokenInHeader(sessionToken)
+						Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders = self.headers
+					}
+					completion(success: true)
+				} else {
+					DLog("json processing error on log in \(error)")
+					completion(success: false)
+				}
+		}
 	}
 	
 	func getNSData(url: String, complete:(data:NSData?) -> ()) {
-//		Alamofire.request(.GET,url).response() {
-//			(_,_,data,_) in
-//			complete(data:data as? NSData) // TODO: test if data nil
-//		}
+		Alamofire.request(.GET,url).response() {
+			(_,_,data,_) in
+			complete(data:data as? NSData) // TODO: test if data nil
+		}
 	}
 	
 	func getNSData(photo: Photo,  complete:(photo: Photo, data:NSData?) -> ()) {
-//		var url = photo.imageFileURL
-//		Alamofire.request(.GET,url).response() {
-//			(_,_,data,_) in
-//			complete(photo: photo, data: data as? NSData) // TODO: test if data nil
-//		}
+		var url = photo.imageFileURL
+		Alamofire.request(.GET,url).response() {
+			(_,_,data,_) in
+			complete(photo: photo, data: data as? NSData) // TODO: test if data nil
+		}
 	}
 	
 	func getJSON(endPoint: String, paginationLimit: String = Pagination.limit, skip: String = Pagination.skip, result: (json:AnyObject?) -> ()) {
 		var url = WebService.baseURL + endPoint
-//		Alamofire.request(.GET, url, parameters:["limit":paginationLimit,"skip":skip]) // TODO
-//			     .responseJSON {(_, _, JSON, error) -> Void in
-//						if(error == nil){
-//							//println(JSON)
-//							result(json:JSON)
-//						} else {
-//							DLog("getJSON error \(error)")
-//							result(json:nil)
-//						}
-//					}
+		Alamofire.request(.GET, url, parameters:["limit":paginationLimit,"skip":skip]) // TODO
+			     .responseJSON {(_, _, JSON, error) -> Void in
+						if(error == nil){
+							//println(JSON)
+							result(json:JSON)
+						} else {
+							DLog("getJSON error \(error)")
+							result(json:nil)
+						}
+					}
 	}
 	
 	func updateAvailable(completion:(available:Bool) -> ()) {
@@ -163,7 +163,7 @@ class WebService {
 //		var url = WebService.baseURL + endPoint
 //		var thumbs = ["Garfield3.jpg","Cervantes3.jpg"]
 //		var inThumbs = ["$in":["Garfield3.jpg","Cervantes3.jpg"]]
-//		var thumbSearch = ["thumbFile":inThumbs]
+//		var thumbSearch = ["imageFileName":inThumbs]
 //		Alamofire.request(.GET, url, parameters:["where":thumbSearch]) // TODO
 //			.responseJSON {(_, _, JSON, error) -> Void in
 //				if(error == nil){
@@ -183,7 +183,7 @@ class WebService {
 //		var url = WebService.baseURL + endPoint
 //		var thumbs = ["Garfield3.jpg","Cervantes3.jpg"]
 //		var inThumbs = ["$in":thumbs]
-//		var thumbSearch = ["thumbFile":inThumbs]
+//		var thumbSearch = ["imageFileName":inThumbs]
 //		Alamofire.request(.GET, url, parameters:["where":thumbSearch]) // TODO
 //			.responseJSON {(_, _, JSON, error) -> Void in
 //				if(error == nil){
@@ -201,7 +201,7 @@ class WebService {
 //		func getJSONExisting(endPoint: String, result: (json:AnyObject?) -> ()) {
 //			var url = WebService.baseURL + endPoint
 //			var exists = ["$exists":false]
-//			var thumbSearch = ["thumbFile":exists]
+//			var thumbSearch = ["imageFileName":exists]
 //			Alamofire.request(.GET, url, parameters:["where":thumbSearch]) // TODO
 //				.responseJSON {(_, _, JSON, error) -> Void in
 //					if(error == nil){
@@ -218,7 +218,7 @@ class WebService {
 
 //	func getJSONThumbsOneThumb(endPoint: String, result: (json:AnyObject?) -> ()) {
 //		var url = WebService.baseURL + endPoint
-//		var a = ["thumbFile":"Garfield3.jpg"]
+//		var a = ["imageFileName":"Garfield3.jpg"]
 //		Alamofire.request(.GET, url, parameters:["where":a]) // TODO
 //			.responseJSON {(_, _, JSON, error) -> Void in
 //				if(error == nil){

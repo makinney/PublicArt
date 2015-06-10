@@ -40,7 +40,7 @@ public class CoreDataStack {
 	
 	lazy var managedObjectModel: NSManagedObjectModel = {
 		// The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-		let modelURL = NSBundle.mainBundle().URLForResource("ArtCityModel", withExtension: "momd")!
+		let modelURL = NSBundle.mainBundle().URLForResource("PublicArtModel", withExtension: "momd")!
 		return NSManagedObjectModel(contentsOfURL: modelURL)!
 		}()
 	
@@ -51,7 +51,7 @@ public class CoreDataStack {
 		
 		// Create the coordinator and store
 		var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-		let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("ArtCityModel.sqlite")
+		let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("PublicArtModel.sqlite")
 		
 		var error: NSError? = nil
 		var failureReason = "There was an error creating or loading the application's saved data."
@@ -101,7 +101,7 @@ public class CoreDataStack {
 	
 		func bundledSqliteExists() -> Bool {
 			var exists = false
-			var artCityModelBundledPath = NSBundle.mainBundle().pathForResource("ArtCityModel", ofType: "sqlite")
+			var artCityModelBundledPath = NSBundle.mainBundle().pathForResource("PublicArtModel", ofType: "sqlite")
 			if artCityModelBundledPath != nil {
 				exists = true
 			}
@@ -128,11 +128,11 @@ public class CoreDataStack {
 			var error: NSError?
 			let fileManager = NSFileManager.defaultManager()
 			
-			var artCityModelSourcePath = NSBundle.mainBundle().pathForResource("ArtCityModel", ofType: "sqlite")
+			var artCityModelSourcePath = NSBundle.mainBundle().pathForResource("PublicArtModel", ofType: "sqlite")
 			//println("bundle store path \(artCityModelSourcePath)")
 			
 			var storePath = self.applicationDocumentsDirectory.path
-			var fullPath = storePath?.stringByAppendingPathComponent("ArtCityModel.sqlite") // must be named in destination
+			var fullPath = storePath?.stringByAppendingPathComponent("PublicArtModel.sqlite") // must be named in destination
 			//println(" full path \(fullPath)")
 			
 			fileManager.copyItemAtPath(artCityModelSourcePath!, toPath: fullPath! , error: &error)
@@ -161,7 +161,7 @@ public class CoreDataStack {
 			while nextObj != nil {
 				if let url = nextObj as? NSURL {
 					// println("last path \(url.lastPathComponent)")
-					var hasPrefix = url.lastPathComponent?.hasPrefix("ArtCityModel") ?? false
+					var hasPrefix = url.lastPathComponent?.hasPrefix("PublicArtModel") ?? false
 					if hasPrefix {
 						fileManager.removeItemAtURL(url, error: &error)
 					}
@@ -174,7 +174,7 @@ public class CoreDataStack {
 		func updateSeedVersionNumber() {
 			var bundleVersion = getBundleVersion()
 			var userDefaults = NSUserDefaults.standardUserDefaults
-			userDefaults().setObject(bundleVersion, forKey: "ArtCityModelSeedVersion") // TODO: define
+			userDefaults().setObject(bundleVersion, forKey: "PublicArtModelSeedVersion") // TODO: define
 		}
 	
 		// MARK: Notifications

@@ -7,13 +7,14 @@
         <attribute name="dimensions" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="idArt" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="idLocation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageAspectRatio" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="imageFileName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="locationName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="locDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="medium" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="thumbFile" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="art" inverseEntity="Location" syncable="YES"/>
@@ -33,6 +34,7 @@
     <entity name="Photo" representedClassName="Photo" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="idArt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageAspectRatio" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="imageFileName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageFileURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
@@ -40,8 +42,8 @@
         <relationship name="art" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Art" inverseName="photos" inverseEntity="Art" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Art" positionX="-63" positionY="-18" width="128" height="300"/>
+        <element name="Art" positionX="-63" positionY="-18" width="128" height="315"/>
         <element name="Location" positionX="-54" positionY="108" width="128" height="180"/>
-        <element name="Photo" positionX="-36" positionY="126" width="128" height="150"/>
+        <element name="Photo" positionX="-36" positionY="126" width="128" height="165"/>
     </elements>
 </model>

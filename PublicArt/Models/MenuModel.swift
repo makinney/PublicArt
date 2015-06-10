@@ -9,7 +9,8 @@
 import Foundation
 
 enum ExploreCatagoryType {
-	case Artists
+	case All
+//	case Artists
 	case Monuments
 	case Murals
 	case Plagues
@@ -19,7 +20,8 @@ enum ExploreCatagoryType {
 }
 
 enum ExploreCatagoryMenuRow: Int {
-	case Artists = 0
+	case All = 0
+//	case Artists = 0
 	case Monuments = 1
 	case Murals = 2
 	case Plagues = 3
@@ -35,8 +37,8 @@ struct ExploreCatagoryTitles {
 	func title(exploreCatagoryType: ExploreCatagoryType) -> String {
 		var title = ""
 		switch(exploreCatagoryType) {
-		case .Artists:
-			title = "Artists"
+		case .All:
+			title = "All"
 		case .Monuments:
 			title = "Monuments"
 		case .Murals:

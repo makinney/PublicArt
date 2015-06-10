@@ -30,7 +30,7 @@ class ArtDataManager : NSObject {
 	}
 	
 	override init() {
-		coreDataStack = CoreDataStack.sharedInstance
+		coreDataStack = CoreDataStack.sharedInstance // TODO not do this, pass in instead, 
 		moc = coreDataStack.managedObjectContext!
 		artDataCreator = ArtDataCreator(managedObjectContext: moc)
 		fetcher = Fetcher(managedObjectContext: moc)
@@ -52,7 +52,7 @@ class ArtDataManager : NSObject {
 	}
 	
 	private func startRefresh() {
-		refreshArt( { () -> () in
+		refreshArt( { () -> () in // TODO weakself here and everywhere
 			self.refreshPhotos({ (success) -> () in
 					self.refreshLocations({ (success) -> () in
 						self.coreDataStack.saveContext()

@@ -14,7 +14,7 @@ extension Location {
 	
 	class func fromJSON(json:JSON) -> (Location)? {
 		//		println("\(__FUNCTION__) \(json)")
-		let moc = CoreDataStack.sharedInstance.managedObjectContext!
+		let moc = CoreDataStack.sharedInstance.managedObjectContext! // TODO - do not do this ! pass in instead , check other models
 		
 		if let location = NSEntityDescription.insertNewObjectForEntityForName(ModelEntity.location, inManagedObjectContext:moc) as? Location {
 	

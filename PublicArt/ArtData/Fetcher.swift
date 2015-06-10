@@ -35,7 +35,7 @@ class Fetcher {
 		var art = [Art]()
 		let fetchRequest = NSFetchRequest()
 		fetchRequest.entity = NSEntityDescription.entityForName(ModelEntity.art, inManagedObjectContext:moc)
-		fetchRequest.predicate = NSPredicate(format:"%K != %@", "thumbFile", "")
+		fetchRequest.predicate = NSPredicate(format:"%K != %@", "imageFileName", "")
 
 		var error:NSError? = nil
 		var fetchedObjects = moc.executeFetchRequest(fetchRequest, error:&error)
@@ -93,7 +93,7 @@ class Fetcher {
 		}
 		
 		var locationPredicate = NSPredicate(format:"%K == %@", "idLocation", idLocation)
-		var thumbPredicate = NSPredicate(format:"%K != %@", "thumbFile", "")
+		var thumbPredicate = NSPredicate(format:"%K != %@", "imageFileName", "")
 		var predicateArray = [locationPredicate, thumbPredicate]
 		var compound = NSCompoundPredicate.andPredicateWithSubpredicates(predicateArray)
 		fetchRequest.predicate = compound

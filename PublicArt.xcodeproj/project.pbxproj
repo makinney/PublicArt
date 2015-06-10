@@ -19,6 +19,7 @@
 		1F01D4131B228A1900D4B156 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F01D4121B228A1900D4B156 /* ContentViewController.swift */; };
 		1F1EE0EF1B2646690087FBBF /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1EE0E81B26464F0087FBBF /* Alamofire.framework */; };
 		1F1EE0F01B2646690087FBBF /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1EE0E81B26464F0087FBBF /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F1EE0F51B26472B0087FBBF /* LogInUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EE0F41B26472B0087FBBF /* LogInUser.swift */; };
 		1F8915F41B229A1000E83891 /* HomeSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8915F31B229A1000E83891 /* HomeSplitViewController.swift */; };
 		1F8915F71B229ED400E83891 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8915F61B229ED400E83891 /* MenuModel.swift */; };
 		1F8916591B23C21D00E83891 /* PublicArtModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916571B23C21D00E83891 /* PublicArtModel.xcdatamodeld */; };
@@ -134,6 +135,7 @@
 		1F01D40F1B227B2000D4B156 /* HomeCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeCollectionViewCell.xib; path = Views/HomeCollectionViewCell.xib; sourceTree = "<group>"; };
 		1F01D4121B228A1900D4B156 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentViewController.swift; path = ViewControllers/ContentViewController.swift; sourceTree = "<group>"; };
 		1F1EE0E01B26464F0087FBBF /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
+		1F1EE0F41B26472B0087FBBF /* LogInUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogInUser.swift; path = Network/LogInUser.swift; sourceTree = "<group>"; };
 		1F8915F31B229A1000E83891 /* HomeSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeSplitViewController.swift; path = ViewControllers/HomeSplitViewController.swift; sourceTree = "<group>"; };
 		1F8915F61B229ED400E83891 /* MenuModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuModel.swift; path = Models/MenuModel.swift; sourceTree = "<group>"; };
 		1F8916581B23C21D00E83891 /* PublicArtModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PublicArtModel.xcdatamodel; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				1F8916F11B23F2F000E83891 /* WebService.swift */,
+				1F1EE0F41B26472B0087FBBF /* LogInUser.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -585,6 +588,7 @@
 				1F8916A01B23D1D700E83891 /* ArtDataManager.swift in Sources */,
 				1F8916EE1B23F29800E83891 /* UIImageViewExtension.swift in Sources */,
 				1F8916EC1B23F29800E83891 /* LocationExtension.swift in Sources */,
+				1F1EE0F51B26472B0087FBBF /* LogInUser.swift in Sources */,
 				1F8916B21B23D20700E83891 /* GeneralIdentifiers.swift in Sources */,
 				1F8916A41B23D1D700E83891 /* ArtPhotoImages.swift in Sources */,
 				1F8916591B23C21D00E83891 /* PublicArtModel.xcdatamodeld in Sources */,

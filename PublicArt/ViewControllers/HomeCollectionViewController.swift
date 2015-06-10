@@ -122,8 +122,8 @@ class HomeCollectionViewController: UICollectionViewController {
 		var row = indexPath.row
 		
 		switch(row) {
-		case ExploreCatagoryMenuRow.Artists.rawValue:
-			 cell.menuItemName.text = exploreCategoryTitles.title(.Artists)
+		case ExploreCatagoryMenuRow.All.rawValue:
+			 cell.menuItemName.text = exploreCategoryTitles.title(.All)
 		case ExploreCatagoryMenuRow.Monuments.rawValue:
 			cell.menuItemName.text = exploreCategoryTitles.title(.Monuments)
 		case ExploreCatagoryMenuRow.Murals.rawValue:
