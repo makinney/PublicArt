@@ -19,23 +19,26 @@ class ArtDataManager : NSObject {
 	let coreDataStack: CoreDataStack
 	let fetcher: Fetcher
 	let importer: Importer
-	let moc: NSManagedObjectContext
-	var newPhotos = [Photo]()
+	var newArt: [Art]?
+	var newLocations: [Location]?
+	var newPhotos: [Photo]?
 	
-	class var sharedInstance: ArtDataManager {
-		struct Singleton {
-			static let instance = ArtDataManager()
-		}
-		return Singleton.instance
-	}
+//	
+//	class var sharedInstance: ArtDataManager {
+//		struct Singleton {
+//			static let instance = ArtDataManager()
+//		}
+//		return Singleton.instance
+//	}
+
 	
-	override init() {
-		coreDataStack = CoreDataStack.sharedInstance // TODO not do this, pass in instead, 
-		moc = coreDataStack.managedObjectContext!
-		artDataCreator = ArtDataCreator(managedObjectContext: moc)
-		fetcher = Fetcher(managedObjectContext: moc)
-		importer = Importer(webService: WebService(), coreDataStack:coreDataStack)
-		super.init()
+	// TODO: this does not have to be a singleton
+	
+	 init(coreDataStack: CoreDataStack) {
+		self.coreDataStack = coreDataStack
+		artDataCreator = ArtDataCreator(managedObjectContext: coreDataStack.managedObjectContext!)
+		fetcher = Fetcher(managedObjectContext: coreDataStack.managedObjectContext!)
+		importer = Importer(webService: WebService(), managedObjectContext: coreDataStack.managedObjectContext!)
 	}
 	
 	deinit {
@@ -52,57 +55,49 @@ class ArtDataManager : NSObject {
 	}
 	
 	private func startRefresh() {
-		refreshArt( { () -> () in // TODO weakself here and everywhere
-			self.refreshPhotos({ (success) -> () in
-					self.refreshLocations({ (success) -> () in
-						self.coreDataStack.saveContext()
-						// TODO: update refreshed timestamps
-						self.checkForRequiredNotifications()
-					})
+		getNewArt({[weak self] () -> () in
+			self!.getNewPhotos({() -> () in
+				self!.getNewLocations({() -> () in
+					
+					// 	self.updateArtRelationships(newArt)
+					// 	self.updatePhotoRelationships(photos)
+
+					self!.coreDataStack.saveContext()
+					// TODO: update refreshed timestamps
+					self!.checkForRequiredNotifications()
+				})
 
 			})
 		})
 	}
 	
-	private func refreshArt(complete:() ->()) {
-		importer.getArt{ (jsonArt) -> () in
+	private func getNewArt(complete:() ->()) {
+		importer.getArt{[weak self] (jsonArt) -> ()  in
 			if let jsonArt = jsonArt {
-				if let newArt  = self.artDataCreator.createArt(jsonArt) {
-					self.updateArtRelationships(newArt)
-					println("\(__FUNCTION__) created  \(newArt.count) pieces of art")
-				}
+				self!.newArt  = self!.artDataCreator.createArt(jsonArt)
 			}
 			complete()
 		}
 	}
 	
-	private func refreshLocations(complete:(success:Bool) ->()) {
-		importer.getLocations { (jsonLocations) -> () in
+	private func getNewLocations(complete:() ->()) {
+		importer.getLocations {[weak self]  (jsonLocations) -> () in
 			if let jsonLocation = jsonLocations {
-				if let newLocations = self.artDataCreator.createLocations(jsonLocation) {
-//	this was just location photos				self.updateLocationRelationships(newLocations)
-					println("\(__FUNCTION__) created \(newLocations.count) locations")
-				} 
-				complete(success: true)
+				self!.newLocations = self!.artDataCreator.createLocations(jsonLocation)
+				complete()
 			} else {
-				complete(success: true)
+				complete()
 			}
 		}
 	}
 
-	private func refreshPhotos(complete:(success:Bool) ->()) {
-		importer.getPhotoInfo { (jsonPhotoInfo) -> () in
+	private func getNewPhotos(complete:() ->()) {
+		importer.getPhotoInfo { [weak self] (jsonPhotoInfo) -> () in
 			if let jsonPhotoInfo = jsonPhotoInfo {
-				if let photos = self.artDataCreator.createPhotos(jsonPhotoInfo) {
-					self.updatePhotoRelationships(photos)
-					println("\(__FUNCTION__) created \(photos.count) photos ")
-					if photos.count > 0 {
-						self.newPhotos = photos // TODO: test this, creating new array or passing by reference ?  I suspect creating new since it's an array
-					}
-				}
-				complete(success: true)
+				self!.newPhotos = self!.artDataCreator.createPhotos(jsonPhotoInfo)
+				complete()
 			} else {
-				complete(success: true)
+				complete()
 			}
 		}
 	}
@@ -123,12 +118,6 @@ class ArtDataManager : NSObject {
 	}
 	
 
-//	func printLocationArtCount(location: [Location]) {
-//		for location in location {
-//			println("location name and art count \(location.name) and count \(location.art.count) \n ")
-//		}
-//	}
-	
 	private func updatePhotoRelationships(photos:[Photo]) {
 		for photo in photos {
 			if let art = self.fetcher.fetchArt(photo.idArt) {
@@ -169,14 +158,14 @@ class ArtDataManager : NSObject {
 	// MARK: notifications
 	
 	private func checkForRequiredNotifications() {
-		if newPhotos.count > 0 {
+		if let newPhotos = newPhotos where newPhotos.count > 0 {
 			var timeInterval: NSTimeInterval = 1 // TODO: define
 			var timer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target:self, selector: "postNewPhotosNotification", userInfo:nil, repeats:false)
 		}
 	}
 	
 	func postNewPhotosNotification() {
-		if newPhotos.count > 0 {
+		if let newPhotos = newPhotos where newPhotos.count > 0 {
 			var dict = ["photos": newPhotos]
 			NSNotificationCenter.defaultCenter().postNotificationName(ArtAppNotifications.PhotosDownloaded.rawValue,
 																		object: self,

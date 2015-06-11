@@ -11,9 +11,7 @@ import CoreData
 
 extension Art {
 	
-	class func fromJSON(json:JSON) -> (Art)? {
-		//		println("\(__FUNCTION__) \(json)")
-		let moc = CoreDataStack.sharedInstance.managedObjectContext!
+	class func fromJSON(json:JSON, moc: NSManagedObjectContext) -> (Art)? {
 		
 		if let art = NSEntityDescription.insertNewObjectForEntityForName(ModelEntity.art, inManagedObjectContext:moc) as? Art {
 			art.artistName = json["artistName"].stringValue
@@ -34,7 +32,6 @@ extension Art {
 			art.imageFileName = json["thumbFile"].stringValue
 			art.imageAspectRatio = json["imageAspectRatio"].double ?? 1.0
 			art.updatedAt = json["updatedAt"].stringValue
-	//		art.prevailingColor = UIColor()
 			return art
 		}
 		

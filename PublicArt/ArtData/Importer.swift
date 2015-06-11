@@ -12,14 +12,12 @@ import UIKit
 
 class Importer {
 
-	let coreDataStack:CoreDataStack
 	let webService:WebService
 	let moc:NSManagedObjectContext
 	
-	init(webService: WebService, coreDataStack: CoreDataStack) {
+	init(webService: WebService, managedObjectContext: NSManagedObjectContext) {
 		self.webService = webService
-		self.coreDataStack = coreDataStack
-		self.moc = self.coreDataStack.managedObjectContext!
+		self.moc = managedObjectContext
 	}
 	
 	func getArt(completion: (jsonArt: [JSON]?) -> ()) {

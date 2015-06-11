@@ -12,10 +12,8 @@ import CoreData
 
 extension Photo {
 	
-	class func fromJSON(json:JSON) -> (Photo)? {
+	class func fromJSON(json:JSON,  moc: NSManagedObjectContext) -> (Photo)? {
 		//	println("\(__FUNCTION__) \(json)")
-		let moc = CoreDataStack.sharedInstance.managedObjectContext!
-		
 		if let photo = NSEntityDescription.insertNewObjectForEntityForName(ModelEntity.photo, inManagedObjectContext:moc) as? Photo {
 			photo.createdAt = json["createdAt"].stringValue
 			photo.idArt = json["idArt"].stringValue

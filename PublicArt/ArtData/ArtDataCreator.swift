@@ -29,7 +29,7 @@ class ArtDataCreator {
 				for index in 0..<jsonArt.count {
 					if let jsonId = jsonArt[index][ModelEntity.objectId].string {
 						if contains(idsWithoutObjects, jsonId) {
-							if let art = Art.fromJSON(jsonArt[index]) {
+							if let art = Art.fromJSON(jsonArt[index], moc: moc) {
 								newArt += [art]
 							}
 						}
@@ -38,7 +38,7 @@ class ArtDataCreator {
 			}
 		} else {
 			for index in 0..<jsonArt.count {
-				if let art = Art.fromJSON(jsonArt[index]) {
+				if let art = Art.fromJSON(jsonArt[index], moc: moc) {
 					newArt += [art]
 				}
 			}
@@ -59,7 +59,7 @@ class ArtDataCreator {
 				for index in 0..<jsonLocations.count {
 					if let jsonId = jsonLocations[index][ModelEntity.objectId].string {
 						if contains(idsWithoutObjects, jsonId) {
-							if let location = Location.fromJSON(jsonLocations[index]) {
+							if let location = Location.fromJSON(jsonLocations[index], moc: moc) {
 								newLocations += [location]
 							}
 						}
@@ -68,7 +68,7 @@ class ArtDataCreator {
 			}
 		} else {
 			for index in 0..<jsonLocations.count {
-				if let location = Location.fromJSON(jsonLocations[index]) {
+				if let location = Location.fromJSON(jsonLocations[index], moc: moc) {
 					newLocations += [location]
 				}
 			}
@@ -89,7 +89,7 @@ class ArtDataCreator {
 				for index in 0..<jsonPhotoInfo.count {
 					if let jsonId = jsonPhotoInfo[index][ModelEntity.objectId].string {
 						if contains(idsWithoutObjects, jsonId) {
-							if let photo =  Photo.fromJSON(jsonPhotoInfo[index]) {
+							if let photo =  Photo.fromJSON(jsonPhotoInfo[index], moc: moc) {
 								newPhotos += [photo]
 							}
 						}
@@ -98,7 +98,7 @@ class ArtDataCreator {
 			}
 		} else {
 			for index in 0..<jsonPhotoInfo.count {
-				if let photo =  Photo.fromJSON(jsonPhotoInfo[index]) {
+				if let photo =  Photo.fromJSON(jsonPhotoInfo[index], moc: moc) {
 					newPhotos += [photo]
 				}
 			}

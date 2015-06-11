@@ -7,17 +7,21 @@
 //
 
 import Foundation
+import CoreData
 
+var artDataManager: ArtDataManager?
 
 func artRefreshFromWeb() {
 	let webService:WebService = WebService()
 	// TODO: logging in this way just for development
 	if webService.loggedIn {
-		ArtDataManager.sharedInstance.refresh()
+		artDataManager = ArtDataManager(coreDataStack: CoreDataStack.sharedInstance)
+		artDataManager!.refresh()
 	} else {
 		webService.logInUser("mike", password:"12345678" , completion: { (success) -> () in
 			if success == true {
-				ArtDataManager.sharedInstance.refresh()
+				artDataManager = ArtDataManager(coreDataStack: CoreDataStack.sharedInstance)
+				artDataManager!.refresh()
 			}
 		})
 	}

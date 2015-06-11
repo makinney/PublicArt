@@ -12,12 +12,10 @@ import CoreData
 
 extension Location {
 	
-	class func fromJSON(json:JSON) -> (Location)? {
+	class func fromJSON(json:JSON, moc: NSManagedObjectContext) -> (Location)? {
 		//		println("\(__FUNCTION__) \(json)")
-		let moc = CoreDataStack.sharedInstance.managedObjectContext! // TODO - do not do this ! pass in instead , check other models
 		
 		if let location = NSEntityDescription.insertNewObjectForEntityForName(ModelEntity.location, inManagedObjectContext:moc) as? Location {
-	
 			location.idLocation = json["idLocation"].stringValue			
 			location.createdAt = json["createdAt"].stringValue
 			var latitude = json["latitude"].stringValue
@@ -29,7 +27,6 @@ extension Location {
 			location.objectId = json["objectId"].stringValue
 			location.type = json["type"].stringValue
 			location.updatedAt = json["updatedAt"].stringValue
-		
 			return location
 		}
 		return nil

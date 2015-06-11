@@ -13,6 +13,7 @@ class Locations {
 	
 	let locations: [Location]// = [Location]()
 	let fetcher: Fetcher
+	// TODO do not use shared instance
 	let moc = CoreDataStack.sharedInstance.managedObjectContext!
 	
 	init() {
