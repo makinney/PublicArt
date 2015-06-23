@@ -10,6 +10,7 @@ import UIKit
 
 class HomeCollectionViewCell: UICollectionViewCell {
 
+	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var menuItemName: UILabel!
 	
     override func awakeFromNib() {

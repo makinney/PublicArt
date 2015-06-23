@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
-enum ExploreCatagoryType {
+// MARK: Catagory
+
+enum CatagoryType {
 	case All
-//	case Artists
 	case Monuments
 	case Murals
 	case Plagues
@@ -19,9 +21,8 @@ enum ExploreCatagoryType {
 	case StreetArt
 }
 
-enum ExploreCatagoryMenuRow: Int {
+enum CatagoryMenuOrder: Int {
 	case All = 0
-//	case Artists = 0
 	case Monuments = 1
 	case Murals = 2
 	case Plagues = 3
@@ -31,12 +32,11 @@ enum ExploreCatagoryMenuRow: Int {
 	case CountRows = 7
 }
 
-
-struct ExploreCatagoryTitles {
+struct CatagoryMenuTitles {
 	
-	func title(exploreCatagoryType: ExploreCatagoryType) -> String {
+	func title(catagoryType: CatagoryType) -> String {
 		var title = ""
-		switch(exploreCatagoryType) {
+		switch(catagoryType) {
 		case .All:
 			title = "All"
 		case .Monuments:
@@ -54,8 +54,70 @@ struct ExploreCatagoryTitles {
 		default:
 			title = ""
 		}
-		
 		return title
 	}
 	
 }
+
+// MARK: Discover
+
+enum MainMenuType {
+	case Artists
+	case Catagory
+	case Neighborhoods
+	case Titles
+	case Medium
+	case Favorites
+}
+
+enum MainMenuRow: Int {
+	case Artists = 3
+	case Catagory = 2
+	case Neighborhoods = 1
+	case Titles = 0
+	case Medium = 4
+	case Favorites = 5
+	case CountRows = 6
+}
+
+struct MainMenuItem {
+	var title = ""
+	var image = UIImage()
+	
+}
+
+struct MainMenu {
+	
+	func item(mainMenuType: MainMenuType) -> MainMenuItem {
+		var title = ""
+		var image = UIImage()
+		switch(mainMenuType) {
+		case .Artists:
+			image = UIImage(named: "PianoPlayer") ?? image
+			title = "Artists"
+		case .Catagory:
+			image = UIImage(named: "catagories2") ?? image
+			title = "Catagories"
+		case .Neighborhoods:
+			image = UIImage(named: "Locations1") ?? image
+			title = "Locations"
+		case .Titles:
+			image = UIImage(named: "SphinxCropped") ?? image
+			title = "Pieces"
+		case .Medium:
+			image = UIImage(named: "mediumRedStone") ?? image
+			title = "Medium"
+		case .Favorites:
+			image = UIImage(named: "SixteenthAveTiledStepsCropped") ?? image
+			title =  "Favorites"
+		default:
+			title = ""
+		}
+		
+		return MainMenuItem(title: title, image: image)
+	}
+	
+
+	
+}
+

@@ -43,26 +43,26 @@ class PhotoFileNames {
 	
 	private func getFileNames(art: Art, excludePlaceholderImages: Bool) -> [String] {
 		var fileNames: [String] = []
-		if !art.imageFileName.isEmpty  {
-			var filename = art.imageFileName
-			if excludePlaceholderImages == true {
-				if filename != "copyrightedImage.png" && filename != "noPhotosImage.png" { // TODO: define
-					fileNames.append(filename)
-				}
-			} else {
-				fileNames.append(filename)
-			}
-		}
-		var enumerator = art.photos.objectEnumerator()
-		var nextObj: AnyObject? = enumerator.nextObject()
-		while nextObj != nil {
-			if let photo = nextObj as? Photo {
-				if !photo.imageFileName.isEmpty {
-					fileNames.append(photo.imageFileName)
-				}
-			}
-			nextObj = enumerator.nextObject()
-		}
+//		if !art.imageFileName.isEmpty  {
+//			var filename = art.imageFileName
+//			if excludePlaceholderImages == true {
+//				if filename != "copyrightedImage.png" && filename != "noPhotosImage.png" { // TODO: define
+//					fileNames.append(filename)
+//				}
+//			} else {
+//				fileNames.append(filename)
+//			}
+//		}
+//		var enumerator = art.photos.objectEnumerator()
+//		var nextObj: AnyObject? = enumerator.nextObject()
+//		while nextObj != nil {
+//			if let photo = nextObj as? Photo {
+//				if !photo.imageFileName.isEmpty {
+//					fileNames.append(photo.imageFileName)
+//				}
+//			}
+//			nextObj = enumerator.nextObject()
+//		}
 		return fileNames
 	}
 }

@@ -7,18 +7,34 @@
 //
 
 import UIKit
+import Parse
+import Bolts
+
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-
+	var artDataManager: ArtDataManager?
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
 		
-		artRefreshFromWeb()
+	//	artRefreshFromWeb()
+		Parse.enableLocalDatastore()
+		ParsePhoto.registerSubclass()
+		ParseArtist.registerSubclass()
+		ParseArt.registerSubclass()
+		ParseLocation.registerSubclass()
 		
+		Parse.setApplicationId("SL4Z3PKg3yQMNDgiZOWzO6QYdrfSXaiyefVnesqS",
+			clientKey: "M2nmbAOma1185BZDslTSqnWGmScwGHXkswt5Ea8e")
+		
+		artDataManager = ArtDataManager(coreDataStack: CoreDataStack.sharedInstance)
+		artDataManager!.refresh()
+
+	
 		return true
 	}
 

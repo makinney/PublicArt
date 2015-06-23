@@ -10,9 +10,9 @@ import Foundation
 
 struct ModelEntity {
 	static let art = "Art"
+	static let artist = "Artist"
 	static let location = "Location"
 	static let photo = "Photo"
-	static let locationPhoto = "LocationPhoto"
 	static let objectId = "objectId"
 }
 

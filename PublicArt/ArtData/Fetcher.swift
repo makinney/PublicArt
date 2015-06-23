@@ -174,6 +174,24 @@ class Fetcher {
 		return photos
 	}
 	
+	func fetchManagedObjWithId(objectId: String, inEntityNamed:String, moc: NSManagedObjectContext) -> NSManagedObject? {
+		let fetchRequest = NSFetchRequest()
+		fetchRequest.entity = NSEntityDescription.entityForName(inEntityNamed, inManagedObjectContext:moc)
+		fetchRequest.predicate = NSPredicate(format:"%K == %@", ModelEntity.objectId, objectId)
+		
+		var error:NSError? = nil
+		var fetchedObjects:[AnyObject] = moc.executeFetchRequest(fetchRequest, error:&error)!
+		if(error == nil) {
+			var managedObject = fetchedObjects.last as? NSManagedObject
+			return managedObject
+		} else {
+			println("\(__FILE__) \(__FUNCTION__) \(error?.description)")
+		}
+		
+		return nil
+	}
+	
+
 	
 	func fetchManagedObjsWithIdsMatching(jsonIds: [String], inEntityNamed:String, moc: NSManagedObjectContext) -> [String]? {
 		var objectIds = [String]()
