@@ -1,16 +1,15 @@
 //
-//  ParseArtist.swift
+//  ParseThumb.swift
 //  PublicArt
 //
-//  Created by Michael Kinney on 6/17/15.
+//  Created by Michael Kinney on 6/23/15.
 //  Copyright (c) 2015 makinney. All rights reserved.
 //
 
 import Foundation
 import Parse
 
-
-class ParseArtist : PFObject, PFSubclassing {
+class ParseThumb : PFObject, PFSubclassing {
 	override class func initialize() {
 		struct Static {
 			static var onceToken : dispatch_once_t = 0
@@ -21,12 +20,10 @@ class ParseArtist : PFObject, PFSubclassing {
 	}
 	
 	static func parseClassName() -> String {
-		return "artist"
+		return "thumb"
 	}
 	
-	@NSManaged var name: String?
-	@NSManaged var idArtist: String?
-	@NSManaged var webLinkName: String?
-	@NSManaged var webLinkURL: String?
-	
+	@NSManaged var idArt: String?
+	@NSManaged var imageFile: PFFile?
+	@NSManaged var imageAspectRatio: Double
 }

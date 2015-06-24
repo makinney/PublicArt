@@ -189,10 +189,11 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 		let art = fetchResultsController.objectAtIndexPath(indexPath) as! Art
 //		cell.imageUrl = art.thumbFile
 
-		if let thumbNailPhotoInfo = getThumbNailPhotoInfoFor(art) {
-			println("thumb name is \(thumbNailPhotoInfo.thumbFileName)")
-			cell.imageView.image = UIImage(named: thumbNailPhotoInfo.thumbFileName) ?? UIImage()
-		}
+			if let thumb = art.thumb {
+				println("thumb name is \(thumb.imageFileName)")
+				cell.imageView.image = UIImage(named: thumb.imageFileName) ?? UIImage()
+			}
+		
 		cell.title.text = art.title
 
 /*
@@ -227,12 +228,12 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 		var width: CGFloat = maxPhotoWidth
 	
 		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
-			if let thumbNailPhotoInfo = getThumbNailPhotoInfoFor(art) {
-				var aspectRatio = thumbNailPhotoInfo.thumbAspectRatio
+			if let thumb = art.thumb {
+				var aspectRatio = thumb.imageAspectRatio
 				if aspectRatio > 0 && aspectRatio <= 1 {
 					height = width / CGFloat(aspectRatio.doubleValue)
 				} else if aspectRatio > 1 {
-					width = width * 2.0
+					width = width * 2.0  // FIXME fine tune
 					height = width / CGFloat(aspectRatio.doubleValue)
 				}
 			}

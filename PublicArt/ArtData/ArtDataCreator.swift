@@ -67,8 +67,8 @@ class ArtDataCreator {
 		
 		for parsePhoto in parsePhoto {
 			if let objectId = parsePhoto.objectId,
-				let photo = self.fetcher.fetchManagedObjWithId(objectId, inEntityNamed: ModelEntity.photo, moc: moc) as? Photo {
-					Photo.update(photo, parsePhoto: parsePhoto)
+			   let photo = self.fetcher.fetchManagedObjWithId(objectId, inEntityNamed: ModelEntity.photo, moc: moc) as? Photo {
+				Photo.update(photo, parsePhoto: parsePhoto )
 					updated.append(photo)
 			} else {
 				if let photo = Photo.create(parsePhoto, moc: moc) {
@@ -78,6 +78,27 @@ class ArtDataCreator {
 		}
 		return (created, updated)
 	}
+	
+	
+	func createOrUpdateThumbs(parseThumb: [ParseThumb]) ->(created: [Thumb], updated: [Thumb]) {
+		var created = [Thumb]()
+		var updated = [Thumb]()
+			var managedObject: NSManagedObject?
+		
+		for parseThumb in parseThumb {
+			if let objectId = parseThumb.objectId,
+				let thumb = self.fetcher.fetchManagedObjWithId(objectId, inEntityNamed: ModelEntity.thumb, moc: moc) as? Thumb {
+					Thumb.update(thumb, parseThumb: parseThumb )
+					updated.append(thumb)
+			} else {
+				if let thumb = Thumb.create(parseThumb, moc: moc) {
+					created.append(thumb)
+				}
+			}
+		}
+		return (created, updated)
+	}
+	
 	
 	func createOrUpdateLocations(parseLocation: [ParseLocation]) ->(created: [Location], updated: [Location]) {
 		var created = [Location]()

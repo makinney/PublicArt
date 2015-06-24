@@ -19,9 +19,11 @@ extension Artist {
 
 			artist.idArtist = parseArtist.idArtist ?? ""
 			artist.name = parseArtist.name ?? ""
-			if let webLink = parseArtist.webLink1 {
-				artist.webLinkName = webLink.name
-				artist.webLinkURL = webLink.url ?? ""
+			if let webLinkName = parseArtist.webLinkName {
+				artist.webLinkName = webLinkName
+			}
+			if let webLinkURL = parseArtist.webLinkURL {
+				artist.webLinkURL = webLinkURL
 			}
 		
 			return artist
@@ -37,9 +39,11 @@ extension Artist {
 		
 		artist.idArtist = parseArtist.idArtist ?? ""
 		artist.name = parseArtist.name ?? ""
-		if let webLink = parseArtist.webLink1 {
-			artist.webLinkName = webLink.name
-			artist.webLinkURL = webLink.url ?? ""
+		if let webLinkName = parseArtist.webLinkName {
+			artist.webLinkName = webLinkName
+		}
+		if let webLinkURL = parseArtist.webLinkURL {
+			artist.webLinkURL = webLinkURL
 		}
 	}
 

@@ -1,25 +1,25 @@
 //
-//  Location.swift
+//  Artist.swift
 //  PublicArt
 //
-//  Created by Michael Kinney on 6/17/15.
+//  Created by Michael Kinney on 6/23/15.
 //  Copyright (c) 2015 makinney. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-@objc(Location)
+@objc(Artist)
 
-class Location: NSManagedObject {
+class Artist: NSManagedObject {
 
     @NSManaged var createdAt: NSDate
-    @NSManaged var idLocation: String
-    @NSManaged var latitude: NSNumber
-    @NSManaged var longitude: NSNumber
+    @NSManaged var idArtist: String
     @NSManaged var name: String
     @NSManaged var objectId: String
     @NSManaged var updatedAt: NSDate
+    @NSManaged var webLinkName: String
+    @NSManaged var webLinkURL: String
     @NSManaged var artwork: NSSet
 
 }

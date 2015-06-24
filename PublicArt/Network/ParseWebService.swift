@@ -10,10 +10,12 @@ import Foundation
 import Parse
 
 class ParseWebService {
+
+	
 	
 	class func getAllArtSince(date: NSDate, complete:(parseArt: [ParseArt]) -> Void) -> Void {
 		var query = PFQuery(className: ParseArt.parseClassName())
-		query.whereKey("hasThumbPhoto", equalTo: 1)
+		query.whereKey("hasThumb", equalTo: NSNumber(bool: true))
 //		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
 		query.limit = 999 // max per parse
 		query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error: NSError?) -> Void in
@@ -31,7 +33,7 @@ class ParseWebService {
 	}
 	
 	class func getAllPhotosSince(date: NSDate, complete:(parsePhotos: [ParsePhoto]) -> Void) -> Void {
-		var query = PFQuery(className: "photo")
+		var query = PFQuery(className: ParsePhoto.parseClassName())
 		//		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
 		query.limit = 999 // max per parse
 		query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error: NSError?) -> Void in
@@ -48,20 +50,39 @@ class ParseWebService {
 		}
 	}
 	
-	class func getAllLocationsSince(date: NSDate, complete:(parseLocation: [ParseLocation]) -> Void) -> Void {
-		var query = PFQuery(className: "location")
+	class func getAllThumbsSince(date: NSDate, complete:(parseThumbs: [ParseThumb]) -> Void) -> Void {
+		var query = PFQuery(className: ParseThumb.parseClassName())
+		//		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
+		query.limit = 999 // max per parse
+		query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error: NSError?) -> Void in
+			if error == nil {
+				if let parseThumbs: [ParseThumb] = objects as? [ParseThumb] {
+					complete(parseThumbs: parseThumbs)
+				} else {
+					complete(parseThumbs: [ParseThumb]())
+				}
+			} else {
+				println("\(__FILE__) \(__FUNCTION__) \(error?.description)")
+				complete(parseThumbs: [ParseThumb]())
+			}
+		}
+	}
+	
+	
+	class func getAllLocationsSince(date: NSDate, complete:(parseLocations: [ParseLocation]) -> Void) -> Void {
+		var query = PFQuery(className: ParseLocation.parseClassName())
 		//		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
 		query.limit = 999 // max per parse
 		query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error: NSError?) -> Void in
 			if error == nil {
 				if let parseLocation: [ParseLocation] = objects as? [ParseLocation] {
-					complete(parseLocation: parseLocation)
+					complete(parseLocations: parseLocation)
 				} else {
-					complete(parseLocation: [ParseLocation]())
+					complete(parseLocations: [ParseLocation]())
 				}
 			} else {
 				println("\(__FILE__) \(__FUNCTION__) \(error?.description)")
-				complete(parseLocation: [ParseLocation]())
+				complete(parseLocations: [ParseLocation]())
 			}
 		}
 	}
@@ -69,7 +90,7 @@ class ParseWebService {
 
 	
 	class func getAllArtistSince(date: NSDate, complete:(parseArtist: [ParseArtist]) -> Void) -> Void {
-		var query = PFQuery(className: "artist")
+		var query = PFQuery(className: ParseArtist.parseClassName())
 		//		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
 
 		query.limit = 999 // max per parse

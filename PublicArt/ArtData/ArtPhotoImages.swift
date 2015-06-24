@@ -10,22 +10,6 @@ import Foundation
 import ImageIO
 import UIKit
 
-// TODO: fix this hack
-func getThumbNailPhotoInfoFor(art: Art) -> Photo? {
-	var thumbNailPhotoInfo: Photo?
-
-	var photos: [Photo] = art.photos.allObjects as! [Photo]
-	for photo in photos {
-		if count(photo.thumbFileName) > 3 { // 3 is extension size, TODO hack since CD does not use Optionals
-	//		println("found thumbfile name \(photo.thumbFileName)")
-			thumbNailPhotoInfo = photo
-			break
-		}
-	}
-	
-	return thumbNailPhotoInfo
-}
-
 class ArtPhotoImages {
 
 	let cache: ArtPhotoCache

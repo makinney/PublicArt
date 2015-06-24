@@ -32,13 +32,14 @@ class ParseArt : PFObject, PFSubclassing {
 	@NSManaged var latitude: String?
 	@NSManaged var longitude: String?
 	@NSManaged var address: String?
-	@NSManaged var webLink1: PFFile?
+	@NSManaged var webLinkName: String?
+	@NSManaged var webLinkURL: String?
 	@NSManaged var accession: String?
 	@NSManaged var credit: String?
 	@NSManaged var condition: String?
 	@NSManaged var dimensions: String?
 	@NSManaged var medium: String?
-	@NSManaged var missing: NSNumber
-	@NSManaged var hasThumbPhoto: NSNumber
+	@NSManaged var missing: Bool
+	@NSManaged var hasThumb: Bool
 	
 }

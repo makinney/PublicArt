@@ -25,7 +25,7 @@ extension Art {
 			art.credit = parseArt.credit ?? ""
 		
 			art.dimensions = parseArt.dimensions ?? ""
-			art.hasThumbPhoto = parseArt.hasThumbPhoto ?? false
+			art.hasThumb = parseArt.hasThumb ?? false
 			art.idArt = parseArt.idArt ?? ""
 			art.idLocation = parseArt.idLocation ?? ""
 			art.medium = parseArt.medium ?? ""
@@ -44,9 +44,11 @@ extension Art {
 				art.descriptionFileURL = descriptionFile.url ?? ""
 			}
 			
-			if let webLink = parseArt.webLink1 {
-				art.webLinkName = webLink.name
-				art.webLinkURL = webLink.url ?? ""
+			if let webLinkName = parseArt.webLinkName {
+				art.webLinkName = webLinkName
+			}
+			if let webLinkURL = parseArt.webLinkURL {
+				art.webLinkURL = webLinkURL
 			}
 			
 			return art
@@ -55,6 +57,7 @@ extension Art {
 		return nil
 	}
 	
+
 	class func update(art: Art, parseArt: ParseArt) {
 		art.objectId = parseArt.objectId!
 		art.createdAt = parseArt.createdAt!
@@ -66,7 +69,7 @@ extension Art {
 		art.credit = parseArt.credit ?? ""
 		
 		art.dimensions = parseArt.dimensions ?? ""
-		art.hasThumbPhoto = parseArt.hasThumbPhoto ?? false
+		art.hasThumb = parseArt.hasThumb ?? false
 		art.idArt = parseArt.idArt ?? ""
 		art.idLocation = parseArt.idLocation ?? ""
 		art.medium = parseArt.medium ?? ""
@@ -85,40 +88,12 @@ extension Art {
 			art.descriptionFileURL = descriptionFile.url ?? ""
 		}
 		
-		if let webLink = parseArt.webLink1 {
-			art.webLinkName = webLink.name
-			art.webLinkURL = webLink.url ?? ""
-		}		
+		if let webLinkName = parseArt.webLinkName {
+			art.webLinkName = webLinkName
+		}
+		if let webLinkURL = parseArt.webLinkURL {
+			art.webLinkURL = webLinkURL
+		}
 	}
-	
-//	//
-//	class func fromJSON(json:JSON, moc: NSManagedObjectContext) -> (Art)? {
-//		
-//		if let art = NSEntityDescription.insertNewObjectForEntityForName(ModelEntity.art, inManagedObjectContext:moc) as? Art {
-//			art.artistName = json["artistName"].stringValue
-//			art.createdAt = json["createdAt"].stringValue
-//			art.credit = json["credit"].stringValue
-//			art.dimensions = json["dimensions"].stringValue
-//			art.idArt = json["idArt"].stringValue
-//			art.idLocation = json["idLocation"].stringValue
-//			var latitude = json["latitude"].stringValue
-//			var longitude = json["longitude"].stringValue
-//			var coordinates = mapCoordinates(latitude: latitude, longitude: longitude)
-//			art.longitude = coordinates.longitude
-//			art.latitude = coordinates.latitude
-//			//			art.locDescription = json["locDescription"].stringValue
-//			art.medium = json["medium"].stringValue
-//			art.objectId = json["objectId"].stringValue
-//			art.title = json["title"].stringValue
-//			//			art.imageFileName = json["thumbFile"].stringValue
-//			//			art.imageAspectRatio = json["imageAspectRatio"].double ?? 1.0
-//			art.updatedAt = json["updatedAt"].stringValue
-//			return art
-//		}
-//		
-//		return nil
-//	}
-//	
-
 	
 }

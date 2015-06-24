@@ -20,10 +20,6 @@ class ArtDataManager : NSObject {
 	let coreDataStack: CoreDataStack
 	let fetcher: Fetcher
 	let importer: Importer
-	var updatedArt: [Art]?
-	var updatedArtist: [Artist]?
-	var updatedLocations: [Location]?
-	var updatedPhotos: [Photo]?
 	
 	 init(coreDataStack: CoreDataStack) {
 		self.coreDataStack = coreDataStack
@@ -40,61 +36,40 @@ class ArtDataManager : NSObject {
 	func refresh() {
 		var lastUpdate = NSDate() // TODO has to come from parse server
 		
-			getLatestFromWeb(lastUpdate, complete: {[weak self] (art, artist, location, photo) -> () in
+			refreshFromWeb(lastUpdate, complete: {[weak self] (art, artists, locations, photos, thumbs) -> () in
 			
 			println("\(__FILE__) \(__FUNCTION__) got art count is \(art.count)")
-			
+				println("\(__FILE__) \(__FUNCTION__) got thumb count is \(thumbs.count)")
+
 	//		println("\(__FILE__) \(__FUNCTION__) got artist count is \(artist.count)")
 	//		println("\(__FILE__) \(__FUNCTION__) got location count is \(location.count)")
-			println("\(__FILE__) \(__FUNCTION__) got photos count is \(photo.count) \n")
+	//		println("\(__FILE__) \(__FUNCTION__) got photos count is \(photos.count) \n")
 			
-				for piece in art {
-					println("before bind art name \(piece.title) and photo count \(piece.photos.count)")
-					
-					var thumbPhoto = getThumbNailPhotoInfoFor(piece)
-					println("thumb file name is \(thumbPhoto?.thumbFileName) \n")
-
-				}
-			
+	
 			// bind everything up
-			self!.updatePhotoArtRelationships(photo) // TODO .. test for nil self ?
-			self!.updateArtLocationRelationships(art)
-			
-				for piece in art {
-					println("after bind art name \(piece.title) and photo count \(piece.photos.count)")
-					var thumbPhoto = getThumbNailPhotoInfoFor(piece)
-					println("thumb file name is \(thumbPhoto?.thumbFileName) \n")
-
-				}
-				
+			self!.updatePhotoToArtBindings(photos) // TODO .. test for nil self ?
+			self!.updateArtToLocationBindings(art)
+			self!.updateThumbToArtBindings(thumbs)
 
 			// save it
 			self!.coreDataStack.saveContext()
 			
-				for piece in art {
-					println("after save art name \(piece.title) and photo count \(piece.photos.count)")
-					var thumbPhoto = getThumbNailPhotoInfoFor(piece)
-					println("thumb file name is \(thumbPhoto?.thumbFileName) \n")
-				}
-		
-			self!.checkForRequiredNotifications()
+//			self!.checkForRequiredNotifications()
 	
 		
 		})
 	}
 	
 	
-	private func getLatestFromWeb(beginningDate: NSDate, complete:(art: [Art], artist: [Artist], location: [Location], photo: [Photo] ) ->()) {
+	private func refreshFromWeb(beginningDate: NSDate, complete:(art: [Art], artists: [Artist], locations: [Location], photos: [Photo], thumbs: [Thumb] ) ->()) {
 		// get art and create or update
-		latestArtFromWeb(beginningDate, complete: {[weak self] (art) -> () in
-			self!.updatedArt = art
-			self!.latestPhotosFromWeb(beginningDate, complete: { (photo) -> () in
-				self!.updatedPhotos = photo
-				self!.latestLocationsFromWeb(beginningDate, complete: { (location) -> () in
-					self!.updatedLocations = location
-					self!.latestArtistsFromWeb(beginningDate, complete: { (artist) -> () in
-						self!.updatedArtist = artist
-						complete(art: art, artist: artist, location: location, photo: photo)
+		refreshArtFromWeb(beginningDate, complete: {[weak self] (art) -> () in
+			self!.refreshPhotosFromWeb(beginningDate, complete: { (photos) -> () in
+				self!.refreshLocationsFromWeb(beginningDate, complete: { (locations) -> () in
+					self!.refreshArtistsFromWeb(beginningDate, complete: { (artists) -> () in
+						self!.refreshThumbsFromWeb(beginningDate, complete: { (thumbs) -> () in
+							complete(art: art, artists: artists, locations: locations, photos: photos, thumbs: thumbs)
+						})
 					})
 				})
 			})
@@ -102,8 +77,9 @@ class ArtDataManager : NSObject {
 		
 	}
 	
+	// MARK: get latest from web --- refactor to other class ?
 	
-	private func latestArtFromWeb(date: NSDate, complete:(art: [Art]) ->()) {
+	private func refreshArtFromWeb(date: NSDate, complete:(art: [Art]) ->()) {
 		ParseWebService.getAllArtSince(date) {[weak self] (parseArt) -> Void in
 			var crud = self!.artDataCreator.createOrUpdateArt(parseArt)
 			var art = crud.created + crud.updated
@@ -111,33 +87,43 @@ class ArtDataManager : NSObject {
 		}
 	}
 	
-	private func latestArtistsFromWeb(date: NSDate, complete:(artist: [Artist]) ->()) {
-		ParseWebService.getAllArtistSince(date) {[weak self] (parseArtist) -> Void in
-			var crud = self!.artDataCreator.createOrUpdateArtist(parseArtist)
-			var artist = crud.created + crud.updated
-			complete(artist: artist)
+	private func refreshArtistsFromWeb(date: NSDate, complete:(artists: [Artist]) ->()) {
+		ParseWebService.getAllArtistSince(date) {[weak self] (parseArtists) -> Void in
+			var crud = self!.artDataCreator.createOrUpdateArtist(parseArtists)
+			var artists = crud.created + crud.updated
+			complete(artists: artists)
 		}
 	}
 
 	
-	private func latestPhotosFromWeb(date: NSDate, complete:(photo: [Photo]) ->()) {
-		ParseWebService.getAllPhotosSince(date) {[weak self] (parsePhoto) -> Void in
-			var crud = self!.artDataCreator.createOrUpdatePhotos(parsePhoto)
-			var photo = crud.created + crud.updated
-			complete(photo: photo)
+	private func refreshPhotosFromWeb(date: NSDate, complete:(photos: [Photo]) ->()) {
+		ParseWebService.getAllPhotosSince(date) {[weak self] (parsePhotos) -> Void in
+			var crud = self!.artDataCreator.createOrUpdatePhotos(parsePhotos)
+			var photos = crud.created + crud.updated
+			complete(photos: photos)
 		}
 	}
 	
-	private func latestLocationsFromWeb(date: NSDate, complete:(location: [Location]) ->()) {
-		ParseWebService.getAllLocationsSince(date) {[weak self] (parseLocation) -> Void in
-			var crud = self!.artDataCreator.createOrUpdateLocations(parseLocation)
-			var location = crud.created + crud.updated
-			complete(location: location)
+	private func refreshLocationsFromWeb(date: NSDate, complete:(locations: [Location]) ->()) {
+		ParseWebService.getAllLocationsSince(date) {[weak self] (parseLocations) -> Void in
+			var crud = self!.artDataCreator.createOrUpdateLocations(parseLocations)
+			var locations = crud.created + crud.updated
+			complete(locations: locations)
+		}
+	}
+	
+	private func refreshThumbsFromWeb(date: NSDate, complete:(thumbs: [Thumb]) ->()) {
+		ParseWebService.getAllThumbsSince(date) {[weak self] (parseThumbs) -> Void in
+			var crud = self!.artDataCreator.createOrUpdateThumbs(parseThumbs)
+			var thumbs = crud.created + crud.updated
+			complete(thumbs: thumbs)
 		}
 	}
 
+
+	// MARK: Update bindings
 	
-	private func updateArtLocationRelationships(art:[Art]) {
+	private func updateArtToLocationBindings(art:[Art]) {
 		for art in art {
 			if let location = self.fetcher.fetchLocation(art.idLocation) {
 				var artSet:NSMutableSet = location.artwork.mutableCopy() as! NSMutableSet
@@ -147,14 +133,21 @@ class ArtDataManager : NSObject {
 		}
 	}
 
-	private func updatePhotoArtRelationships(photos:[Photo]) {
+	private func updatePhotoToArtBindings(photos:[Photo]) {
 		for photo in photos {
 			if let art = self.fetcher.fetchArt(photo.idArt) {
-		//		println("art hasthumbnail \(art.hasThumbPhoto)")
 				var relationSet: NSMutableSet = art.photos.mutableCopy() as! NSMutableSet
 				relationSet.addObject(photo)
 				art.photos = relationSet.copy() as! NSSet
 			
+			}
+		}
+	}
+	
+	private func updateThumbToArtBindings(thumbs:[Thumb]) {
+		for thumb in thumbs {
+			if let art = self.fetcher.fetchArt(thumb.idArt) {
+				art.thumb = thumb
 			}
 		}
 	}
@@ -179,22 +172,3 @@ class ArtDataManager : NSObject {
 	}
 }
 
-/*
-
-
-for piece in art {
-if piece.descriptionFile != "" {
-// get pffile, if not in local store, then parse should get if from server
-let query = PFQuery(className: "descriptionFile")
-//			query.fromLocalDatastore()
-query.getObjectInBackgroundWithId(piece.descriptionFile, block: { (pfObject, error) -> Void in
-var pffile: PFFile = pfObject?.valueForKey("file") as! PFFile
-var data = pffile.getData()
-self.testImage = UIImage(data: data!)
-var view = UIImageView(frame:CGRect(x:0,y:0,width:50, height:50))
-view.image = self.testImage!
-
-})
-}
-}
-*/
