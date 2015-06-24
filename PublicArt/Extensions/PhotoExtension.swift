@@ -26,7 +26,8 @@ extension Photo {
 			}
 	
 			if let imageFile = parsePhoto.thumbFile {
-				photo.thumbFileName = imageFile.name
+				println("create")
+				photo.thumbFileName = extractImageFileName(imageFile.name) // TODO only for debugging
 				photo.thumbFileURL = imageFile.url ?? ""
 			}
 			
@@ -51,7 +52,9 @@ extension Photo {
 			}
 		
 			if let imageFile = parsePhoto.thumbFile {
-				photo.thumbFileName = imageFile.name
+				println("update")
+	//			println("imagefile name is \(imageFile.name)")
+				photo.thumbFileName = extractImageFileName(imageFile.name) // TODO only for debugging
 				photo.thumbFileURL = imageFile.url ?? ""
 			}
 		
@@ -79,7 +82,7 @@ extension Photo {
 		if let lastDelimiter = source.rangeOfString(delimiter, options: NSStringCompareOptions.BackwardsSearch) {
 			imageFileName = source[lastDelimiter.endIndex..<source.endIndex]
 		}
-//		println("image file name \(imageFileName)")
+		println("extracted image file name \(imageFileName)")
 		return imageFileName
 	}
 }

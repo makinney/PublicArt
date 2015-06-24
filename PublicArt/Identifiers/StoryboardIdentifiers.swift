@@ -30,7 +30,10 @@ enum SegueIdentifier: String {
 }
 
 enum ViewControllerIdentifier: String { // TODO: make these consistent
-//	case ArtViewController = "idArtViewController"
+	case ArtPiecesViewController = "ArtPiecesViewControllerID"
+
+/*
+	case ArtViewController = "idArtViewController"
 	case ArtNavigationController = "idArtNavigationController"
 	case CityMapsListViewController = "idCityMapsListViewController"
 	case CityMapsViewController = "idCityMapsViewController"
@@ -42,5 +45,6 @@ enum ViewControllerIdentifier: String { // TODO: make these consistent
 	case SingleArtViewController = "idSingleArtViewController"
 	case SubTopicListViewController = "idSubTopicListViewController"
 	case TopicListViewController = "idTopicListViewController"
+	*/
 }
 

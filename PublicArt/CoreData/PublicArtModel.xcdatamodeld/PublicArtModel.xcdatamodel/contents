@@ -1,70 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D131" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Art" representedClassName="Art" syncable="YES">
-        <attribute name="accession" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="artistName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="condition" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="accession" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="address" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="artistName" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="condition" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="credit" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="descriptionFileName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="descriptionFileURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="dimensions" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="credit" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="descriptionFileName" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="descriptionFileURL" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="dimensions" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
         <attribute name="favorite" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
-        <attribute name="hasThumbPhoto" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="idArt" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="idLocation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasThumbPhoto" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="idArt" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="idLocation" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="medium" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="missing" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="medium" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="missing" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="objectId" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="tags" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="webLinkName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="webLinkURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="webLinkName" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="webLinkURL" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
         <relationship name="artist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artist" inverseName="artwork" inverseEntity="Artist" syncable="YES"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="artwork" inverseEntity="Location" syncable="YES"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="artwork" inverseEntity="Photo" syncable="YES"/>
     </entity>
     <entity name="Artist" representedClassName="Artist" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="idArtist" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="idArtist" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="objectId" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="webLinkName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="webLinkURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="webLinkName" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="webLinkURL" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
         <relationship name="artwork" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Art" inverseName="artist" inverseEntity="Art" syncable="YES"/>
     </entity>
     <entity name="Location" representedClassName="Location" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="idLocation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="idLocation" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="objectId" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="artwork" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Art" inverseName="location" inverseEntity="Art" syncable="YES"/>
     </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="idArt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="idArt" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
         <attribute name="imageAspectRatio" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="imageFileName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="imageFileURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageFileName" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="imageFileURL" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="objectId" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
         <attribute name="thumbAspectRatio" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="thumbFileName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="thumbFileURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thumbFileName" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="thumbFileURL" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="artwork" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Art" inverseName="photos" inverseEntity="Art" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Art" positionX="-99" positionY="-261" width="128" height="433"/>
-        <element name="Artist" positionX="223" positionY="-261" width="128" height="163"/>
-        <element name="Location" positionX="223" positionY="-81" width="128" height="163"/>
-        <element name="Photo" positionX="223" positionY="96" width="128" height="208"/>
+        <element name="Art" positionX="-648" positionY="-469" width="128" height="433"/>
+        <element name="Artist" positionX="36" positionY="-477" width="128" height="163"/>
+        <element name="Location" positionX="160" positionY="-252" width="128" height="163"/>
+        <element name="Photo" positionX="108" positionY="-0" width="128" height="208"/>
     </elements>
 </model>

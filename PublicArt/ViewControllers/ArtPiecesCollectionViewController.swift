@@ -14,18 +14,18 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 	private let artPhotoImages = ArtPhotoImages.sharedInstance
 	private var collapseDetailViewController = true
 	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
-	
+	private var maxPhotoWidth: CGFloat = 0.0
 
 	private var error:NSError?
 	private let moc: NSManagedObjectContext?
 	
-	private lazy var artNavController:UINavigationController = {
-		var navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtNavigationController.rawValue) as! UINavigationController
-		var vc = navigationController.viewControllers.last as! UIViewController!
-		vc.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-		vc.navigationItem.leftItemsSupplementBackButton = true
-		return navigationController
-		}()
+//	private lazy var artNavController:UINavigationController = {
+//		var navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtNavigationController.rawValue) as! UINavigationController
+//		var vc = navigationController.viewControllers.last as! UIViewController!
+//		vc.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+//		vc.navigationItem.leftItemsSupplementBackButton = true
+//		return navigationController
+//		}()
 
 	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
 	
@@ -82,7 +82,7 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-		self.navigationController?.navigationBar.topItem?.title = "Art City San Francisco"
+		self.navigationController?.navigationBar.topItem?.title = "Public Art"
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -111,13 +111,7 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 	//
 	lazy var fetchResultsController:NSFetchedResultsController = {
 		let fetchRequest = NSFetchRequest(entityName:ModelEntity.art)
-		fetchRequest.predicate = NSPredicate(format:"%K != %@", "thumbFile", "") // TODO: define
-/*	// sort by location and then title
-		let sortDescriptor = [NSSortDescriptor(key: "locationName", ascending: true, selector: "localizedStandardCompare:"),
-			NSSortDescriptor(key:ModelAttributes.artworkTitle, ascending:true, selector: "localizedStandardCompare:")]
-*/
 		let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.artworkTitle, ascending:true, selector: "localizedStandardCompare:")]
-
 		fetchRequest.sortDescriptors = sortDescriptor
 		let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc!, sectionNameKeyPath: nil, cacheName: nil)
 		return frc
@@ -146,7 +140,7 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
 			
 			collectionViewFlowLayout.minimumLineSpacing = 5
-				var minimumPhotosPerLine = 0 // ultimately up to flow layout
+				var minimumPhotosPerLine = 2 // ultimately up to flow layout
 			
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
 			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
@@ -158,8 +152,8 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 
 				
 				minimumPhotosPerLine = 2
-				var maxPhotoWidth = photoWidthAvailable(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
-				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: 1.33 * maxPhotoWidth) // TODO: hard constant hack for aspect ratio
+				maxPhotoWidth = photoWidthAvailable(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
+				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxPhotoWidth) // TODO: hard constant hack for aspect ratio
 			} else {
 				let sectionInset: CGFloat = 5.0
 				collectionViewFlowLayout.sectionInset.left = sectionInset
@@ -167,8 +161,8 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 				let itemSpacing: CGFloat = sectionInset / 2.0
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				minimumPhotosPerLine = 2
-				var maxPhotoWidth = photoWidthAvailable(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
-				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: 1.33 * maxPhotoWidth)
+				maxPhotoWidth = photoWidthAvailable(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
+				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxPhotoWidth)
 			}
 		}
 	}
@@ -194,7 +188,14 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.ArtworkCollectionViewCell.rawValue, forIndexPath: indexPath) as! ArtworkCollectionViewCell
 		let art = fetchResultsController.objectAtIndexPath(indexPath) as! Art
 //		cell.imageUrl = art.thumbFile
-		cell.imageView.image = nil
+
+		if let thumbNailPhotoInfo = getThumbNailPhotoInfoFor(art) {
+			println("thumb name is \(thumbNailPhotoInfo.thumbFileName)")
+			cell.imageView.image = UIImage(named: thumbNailPhotoInfo.thumbFileName) ?? UIImage()
+		}
+		cell.title.text = art.title
+
+/*
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 			if let thumbNail = self.artPhotoImages.getThumbNailWith(cell.imageUrl, size: cell.imageView.frame.size) {
 				if thumbNail.fileName == cell.imageUrl {
@@ -214,47 +215,34 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 				}
 			}
 		})
-		
+	*/
 		return cell
 	}
 		
 	
-//	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//		var height = 100
-//		var width = 160
-//		
-//		var row = indexPath.row % 5
-//		
-//		switch(row) {
-//		case 0:
-//		 height = 100
-//		 width = 160
-//		 
-//		case 1:
-//		 height = 200
-//		width = 160
-//		
-//		case 2:
-//		 height = 175
-//		width = 160
-//		
-//		case 3:
-//		 height = 250
-//		width = 160
-//		
-//		case 4:
-//		 height = 75
-//		width = 160
-//			
-//		default:
-//		 height = 100
-//		 width = 160
-//		 
-//		}
-//		return CGSize(width: width, height: height)
-//	}
-//	
+	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+		
+		// default square
+		var height: CGFloat = maxPhotoWidth
+		var width: CGFloat = maxPhotoWidth
 	
+		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
+			if let thumbNailPhotoInfo = getThumbNailPhotoInfoFor(art) {
+				var aspectRatio = thumbNailPhotoInfo.thumbAspectRatio
+				if aspectRatio > 0 && aspectRatio <= 1 {
+					height = width / CGFloat(aspectRatio.doubleValue)
+				} else if aspectRatio > 1 {
+					width = width * 2.0
+					height = width / CGFloat(aspectRatio.doubleValue)
+				}
+			}
+			
+		}
+		
+		return CGSize(width: width, height: height)
+	}
+	
+
 //	override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
 //		var supplementaryView: UICollectionReusableView = UICollectionReusableView()
 //		if kind == UICollectionElementKindSectionHeader {

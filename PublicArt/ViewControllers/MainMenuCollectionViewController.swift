@@ -152,6 +152,24 @@ class MainMenuCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDelegate
 	
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+		var row = indexPath.row
+	
+	
+		switch(row) {
+//		case MainMenuRow.Artists.rawValue:
+//		case MainMenuRow.Catagory.rawValue:
+//		case MainMenuRow.Neighborhoods.rawValue:
+		case MainMenuRow.Titles.rawValue:
+			var vc: ArtPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtPiecesViewController.rawValue) as! ArtPiecesCollectionViewController
+			showViewController(vc, sender: self)
+		
+//		case MainMenuRow.Medium.rawValue:
+//		case MainMenuRow.Favorites.rawValue:
+		default:
+			println("\(__FILE__) \(__FUNCTION__) menu row not defined for row \(row)")
+		}
+		
+	
 //		var exploreCollectionViewController:ExploreCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ExploreCollectionViewControllerID") as! ExploreCollectionViewController
 //		showViewController(exploreCollectionViewController, sender: self)
 	}

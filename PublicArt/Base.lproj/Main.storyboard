@@ -103,7 +103,7 @@
         <!--Art Pieces Collection View Controller-->
         <scene sceneID="3OF-YD-2vk">
             <objects>
-                <collectionViewController id="3UN-qf-gh0" customClass="ArtPiecesCollectionViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="ArtPiecesViewControllerID" id="3UN-qf-gh0" customClass="ArtPiecesCollectionViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="37X-E6-bx6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

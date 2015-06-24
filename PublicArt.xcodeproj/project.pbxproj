@@ -84,6 +84,11 @@
 		1F8916F61B23F67A00E83891 /* ArtRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916F51B23F67A00E83891 /* ArtRefresh.swift */; };
 		1FC6F8081B33B9BF00810258 /* Art.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6F8071B33B9BF00810258 /* Art.swift */; };
 		1FC6F80C1B33C1A000810258 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6F80B1B33C1A000810258 /* Artist.swift */; };
+		1FC6F80E1B391EC800810258 /* Ballplayer_Thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1FC6F80D1B391EC800810258 /* Ballplayer_Thumb.jpg */; };
+		1FC6F8131B391ED500810258 /* FireHall_Thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1FC6F80F1B391ED500810258 /* FireHall_Thumb.jpg */; };
+		1FC6F8141B391ED500810258 /* FN2_Thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1FC6F8101B391ED500810258 /* FN2_Thumb.jpg */; };
+		1FC6F8151B391ED500810258 /* Garfield_Thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1FC6F8111B391ED500810258 /* Garfield_Thumb.jpg */; };
+		1FC6F8161B391ED500810258 /* MuralAcmeBeer.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1FC6F8121B391ED500810258 /* MuralAcmeBeer.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,6 +233,11 @@
 		1F8916F51B23F67A00E83891 /* ArtRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtRefresh.swift; path = ArtData/ArtRefresh.swift; sourceTree = "<group>"; };
 		1FC6F8071B33B9BF00810258 /* Art.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Art.swift; sourceTree = "<group>"; };
 		1FC6F80B1B33C1A000810258 /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
+		1FC6F80D1B391EC800810258 /* Ballplayer_Thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Ballplayer_Thumb.jpg; sourceTree = "<group>"; };
+		1FC6F80F1B391ED500810258 /* FireHall_Thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FireHall_Thumb.jpg; sourceTree = "<group>"; };
+		1FC6F8101B391ED500810258 /* FN2_Thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FN2_Thumb.jpg; sourceTree = "<group>"; };
+		1FC6F8111B391ED500810258 /* Garfield_Thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Garfield_Thumb.jpg; sourceTree = "<group>"; };
+		1FC6F8121B391ED500810258 /* MuralAcmeBeer.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MuralAcmeBeer.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +275,11 @@
 		1F01D3D41B22713300D4B156 = {
 			isa = PBXGroup;
 			children = (
+				1FC6F80F1B391ED500810258 /* FireHall_Thumb.jpg */,
+				1FC6F8101B391ED500810258 /* FN2_Thumb.jpg */,
+				1FC6F8111B391ED500810258 /* Garfield_Thumb.jpg */,
+				1FC6F8121B391ED500810258 /* MuralAcmeBeer.jpg */,
+				1FC6F80D1B391EC800810258 /* Ballplayer_Thumb.jpg */,
 				1F1EE0E01B26464F0087FBBF /* Alamofire.xcodeproj */,
 				1F01D3DF1B22713400D4B156 /* PublicArt */,
 				1F01D3F71B22713400D4B156 /* PublicArtTests */,
@@ -666,7 +681,12 @@
 			files = (
 				1F01D3EA1B22713400D4B156 /* Main.storyboard in Resources */,
 				1F09BB7B1B30BE8100E4807C /* ArtworkCollectionViewCell.xib in Resources */,
+				1FC6F8131B391ED500810258 /* FireHall_Thumb.jpg in Resources */,
+				1FC6F8141B391ED500810258 /* FN2_Thumb.jpg in Resources */,
+				1FC6F8151B391ED500810258 /* Garfield_Thumb.jpg in Resources */,
+				1FC6F8161B391ED500810258 /* MuralAcmeBeer.jpg in Resources */,
 				1F01D3EF1B22713400D4B156 /* LaunchScreen.xib in Resources */,
+				1FC6F80E1B391EC800810258 /* Ballplayer_Thumb.jpg in Resources */,
 				1F01D3EC1B22713400D4B156 /* Images.xcassets in Resources */,
 				1F01D4111B227B2000D4B156 /* HomeCollectionViewCell.xib in Resources */,
 			);

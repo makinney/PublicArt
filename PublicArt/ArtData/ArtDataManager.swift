@@ -43,16 +43,39 @@ class ArtDataManager : NSObject {
 			getLatestFromWeb(lastUpdate, complete: {[weak self] (art, artist, location, photo) -> () in
 			
 			println("\(__FILE__) \(__FUNCTION__) got art count is \(art.count)")
-			/*
-			println("\(__FILE__) \(__FUNCTION__) got artist count is \(artist.count)")
-			println("\(__FILE__) \(__FUNCTION__) got location count is \(location.count)")
-			println("\(__FILE__) \(__FUNCTION__) got photos count is \(photo.count)")
-			*/
+			
+	//		println("\(__FILE__) \(__FUNCTION__) got artist count is \(artist.count)")
+	//		println("\(__FILE__) \(__FUNCTION__) got location count is \(location.count)")
+			println("\(__FILE__) \(__FUNCTION__) got photos count is \(photo.count) \n")
+			
+				for piece in art {
+					println("before bind art name \(piece.title) and photo count \(piece.photos.count)")
+					
+					var thumbPhoto = getThumbNailPhotoInfoFor(piece)
+					println("thumb file name is \(thumbPhoto?.thumbFileName) \n")
+
+				}
+			
 			// bind everything up
 			self!.updatePhotoArtRelationships(photo) // TODO .. test for nil self ?
 			self!.updateArtLocationRelationships(art)
+			
+				for piece in art {
+					println("after bind art name \(piece.title) and photo count \(piece.photos.count)")
+					var thumbPhoto = getThumbNailPhotoInfoFor(piece)
+					println("thumb file name is \(thumbPhoto?.thumbFileName) \n")
+
+				}
+				
+
 			// save it
 			self!.coreDataStack.saveContext()
+			
+				for piece in art {
+					println("after save art name \(piece.title) and photo count \(piece.photos.count)")
+					var thumbPhoto = getThumbNailPhotoInfoFor(piece)
+					println("thumb file name is \(thumbPhoto?.thumbFileName) \n")
+				}
 		
 			self!.checkForRequiredNotifications()
 	
@@ -127,7 +150,7 @@ class ArtDataManager : NSObject {
 	private func updatePhotoArtRelationships(photos:[Photo]) {
 		for photo in photos {
 			if let art = self.fetcher.fetchArt(photo.idArt) {
-				println("art hasthumbnail \(art.hasThumbPhoto)")
+		//		println("art hasthumbnail \(art.hasThumbPhoto)")
 				var relationSet: NSMutableSet = art.photos.mutableCopy() as! NSMutableSet
 				relationSet.addObject(photo)
 				art.photos = relationSet.copy() as! NSSet

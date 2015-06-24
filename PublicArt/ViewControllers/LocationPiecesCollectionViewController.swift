@@ -19,13 +19,13 @@ class LocationPiecesCollectionViewController: UICollectionViewController, UINavi
 	private var error:NSError?
 	private let moc: NSManagedObjectContext?
 	
-	private lazy var artNavController:UINavigationController = {
-		var navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtNavigationController.rawValue) as! UINavigationController
-		var vc = navigationController.viewControllers.last as! UIViewController!
-		vc.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-		vc.navigationItem.leftItemsSupplementBackButton = true
-		return navigationController
-		}()
+//	private lazy var artNavController:UINavigationController = {
+//		var navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtNavigationController.rawValue) as! UINavigationController
+//		var vc = navigationController.viewControllers.last as! UIViewController!
+//		vc.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+//		vc.navigationItem.leftItemsSupplementBackButton = true
+//		return navigationController
+//		}()
 
 	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
 	
@@ -82,7 +82,7 @@ class LocationPiecesCollectionViewController: UICollectionViewController, UINavi
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-		self.navigationController?.navigationBar.topItem?.title = "Art City San Francisco"
+		self.navigationController?.navigationBar.topItem?.title = "Location Pieces"
 	}
 	
 	override func viewDidAppear(animated: Bool) {
