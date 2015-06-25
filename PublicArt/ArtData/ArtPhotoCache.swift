@@ -11,7 +11,7 @@ import UIKit
 
 class ArtPhotoCache {
 	
-	let MaxImages = 500 // TODO: better if this was a size
+	let MaxImages = 50 // TODO: better if this was a size
 	
 	var cache: [String: UIImage] = Dictionary()
 	

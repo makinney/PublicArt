@@ -36,10 +36,10 @@ class ArtDataManager : NSObject {
 	func refresh() {
 		var lastUpdate = NSDate() // TODO has to come from parse server
 		
-			refreshFromWeb(lastUpdate, complete: {[weak self] (art, artists, locations, photos, thumbs) -> () in
+			refreshFromWeb(lastUpdate, complete: {[weak self] (art, artists, locations, photos, thumbs, locPhotos) -> () in
 			
-			println("\(__FILE__) \(__FUNCTION__) got art count is \(art.count)")
-				println("\(__FILE__) \(__FUNCTION__) got thumb count is \(thumbs.count)")
+	//		println("\(__FILE__) \(__FUNCTION__) got art count is \(art.count)")
+	//			println("\(__FILE__) \(__FUNCTION__) got thumb count is \(thumbs.count)")
 
 	//		println("\(__FILE__) \(__FUNCTION__) got artist count is \(artist.count)")
 	//		println("\(__FILE__) \(__FUNCTION__) got location count is \(location.count)")
@@ -50,6 +50,7 @@ class ArtDataManager : NSObject {
 			self!.updatePhotoToArtBindings(photos) // TODO .. test for nil self ?
 			self!.updateArtToLocationBindings(art)
 			self!.updateThumbToArtBindings(thumbs)
+			self!.updateLocPhotoToLocationBindings(locPhotos)
 
 			// save it
 			self!.coreDataStack.saveContext()
@@ -60,21 +61,23 @@ class ArtDataManager : NSObject {
 		})
 	}
 	
-	
-	private func refreshFromWeb(beginningDate: NSDate, complete:(art: [Art], artists: [Artist], locations: [Location], photos: [Photo], thumbs: [Thumb] ) ->()) {
+	// TODO: needs error handling !!!
+	//
+	private func refreshFromWeb(beginningDate: NSDate, complete:(art: [Art], artists: [Artist], locations: [Location], photos: [Photo], thumbs: [Thumb], locPhotos: [LocPhoto]) ->()) {
 		// get art and create or update
 		refreshArtFromWeb(beginningDate, complete: {[weak self] (art) -> () in
 			self!.refreshPhotosFromWeb(beginningDate, complete: { (photos) -> () in
 				self!.refreshLocationsFromWeb(beginningDate, complete: { (locations) -> () in
 					self!.refreshArtistsFromWeb(beginningDate, complete: { (artists) -> () in
 						self!.refreshThumbsFromWeb(beginningDate, complete: { (thumbs) -> () in
-							complete(art: art, artists: artists, locations: locations, photos: photos, thumbs: thumbs)
+							self!.refreshLocPhotosFromWeb(beginningDate, complete: { (locPhotos) -> () in
+								complete(art: art, artists: artists, locations: locations, photos: photos, thumbs: thumbs, locPhotos: locPhotos)
+							})
 						})
 					})
 				})
 			})
 		})
-		
 	}
 	
 	// MARK: get latest from web --- refactor to other class ?
@@ -119,8 +122,15 @@ class ArtDataManager : NSObject {
 			complete(thumbs: thumbs)
 		}
 	}
-
-
+	
+	private func refreshLocPhotosFromWeb(date: NSDate, complete:(locPhotos: [LocPhoto]) ->()) {
+		ParseWebService.getAllLocPhotosSince(date) {[weak self] (parseLocPhotos) -> Void in
+			var crud = self!.artDataCreator.createOrUpdateLocPhotos(parseLocPhotos)
+			var locPhotos = crud.created + crud.updated
+			complete(locPhotos: locPhotos)
+		}
+	}
+	
 	// MARK: Update bindings
 	
 	private func updateArtToLocationBindings(art:[Art]) {
@@ -148,6 +158,14 @@ class ArtDataManager : NSObject {
 		for thumb in thumbs {
 			if let art = self.fetcher.fetchArt(thumb.idArt) {
 				art.thumb = thumb
+			}
+		}
+	}
+	
+	private func updateLocPhotoToLocationBindings(locPhotos:[LocPhoto]) {
+		for locPhoto in locPhotos {
+			if let location = self.fetcher.fetchLocation(locPhoto.idLocation) {
+				location.photo = locPhoto
 			}
 		}
 	}

@@ -195,25 +195,25 @@ class LocationPiecesCollectionViewController: UICollectionViewController, UINavi
 		let art = fetchResultsController.objectAtIndexPath(indexPath) as! Art
 //		cell.imageUrl = art.thumbFile
 		cell.imageView.image = nil
-		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-			if let thumbNail = self.artPhotoImages.getThumbNailWith(cell.imageUrl, size: cell.imageView.frame.size) {
-				if thumbNail.fileName == cell.imageUrl {
-					dispatch_async(dispatch_get_main_queue(), {
-						[weak self] in
-						cell.imageView.image = thumbNail.image
-						cell.title.alpha = 1.0
-						cell.title.text = art.title
-						cell.title.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody) // TODO: has to be a better way
-						// FIXME: this should be done one time somehow as it can slow scrolling down
-	//					cell.photoBorderView.backgroundColor = self?.prevailingColor(thumbNail.image, cacheKey: thumbNail.fileName)
-						})
-				} else {
-	//				cell.imageView.image = nil
-	//				cell.title.text = ""
-	//				cell.photoBorderView.backgroundColor = UIColor.whiteColor()
-				}
-			}
-		})
+//		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+//			if let thumbNail = self.artPhotoImages.getThumbNailWith(cell.imageUrl, size: cell.imageView.frame.size) {
+//				if thumbNail.fileName == cell.imageUrl {
+//					dispatch_async(dispatch_get_main_queue(), {
+//						[weak self] in
+//						cell.imageView.image = thumbNail.image
+//						cell.title.alpha = 1.0
+//						cell.title.text = art.title
+//						cell.title.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody) // TODO: has to be a better way
+//						// FIXME: this should be done one time somehow as it can slow scrolling down
+//	//					cell.photoBorderView.backgroundColor = self?.prevailingColor(thumbNail.image, cacheKey: thumbNail.fileName)
+//						})
+//				} else {
+//	//				cell.imageView.image = nil
+//	//				cell.title.text = ""
+//	//				cell.photoBorderView.backgroundColor = UIColor.whiteColor()
+//				}
+//			}
+//		})
 		
 		return cell
 	}

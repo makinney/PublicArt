@@ -87,6 +87,26 @@ class ParseWebService {
 		}
 	}
 	
+	class func getAllLocPhotosSince(date: NSDate, complete:(parseLocPhotos: [ParseLocPhoto]) -> Void) -> Void {
+		var query = PFQuery(className: ParseLocPhoto.parseClassName())
+		//		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
+		query.limit = 999 // max per parse
+		query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error: NSError?) -> Void in
+			if error == nil {
+				if let parseLocPhotos: [ParseLocPhoto] = objects as? [ParseLocPhoto] {
+					complete(parseLocPhotos: parseLocPhotos)
+				} else {
+					complete(parseLocPhotos: [ParseLocPhoto]())
+				}
+			} else {
+				println("\(__FILE__) \(__FUNCTION__) \(error?.description)")
+				complete(parseLocPhotos: [ParseLocPhoto]())
+			}
+		}
+	}
+	
+
+	
 
 	
 	class func getAllArtistSince(date: NSDate, complete:(parseArtist: [ParseArtist]) -> Void) -> Void {

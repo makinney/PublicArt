@@ -12,6 +12,7 @@ struct ModelEntity {
 	static let art = "Art"
 	static let artist = "Artist"
 	static let location = "Location"
+	static let locPhoto = "LocPhoto"
 	static let photo = "Photo"
 	static let thumb = "Thumb"
 	static let objectId = "objectId"

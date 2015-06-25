@@ -24,7 +24,6 @@
 		1F09BB731B30A4B800E4807C /* LocationPiecesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB721B30A4B800E4807C /* LocationPiecesCollectionViewController.swift */; };
 		1F09BB7A1B30BE8100E4807C /* ArtworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB781B30BE8100E4807C /* ArtworkCollectionViewCell.swift */; };
 		1F09BB7B1B30BE8100E4807C /* ArtworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F09BB791B30BE8100E4807C /* ArtworkCollectionViewCell.xib */; };
-		1F09BB7F1B30D30300E4807C /* ParseWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB7E1B30D30300E4807C /* ParseWebService.swift */; };
 		1F09BB821B3102ED00E4807C /* ParsePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB811B3102ED00E4807C /* ParsePhoto.swift */; };
 		1F09BB8E1B31F54B00E4807C /* ParseArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB8D1B31F54B00E4807C /* ParseArtist.swift */; };
 		1F09BB901B31F5D200E4807C /* ParseLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB8F1B31F5D200E4807C /* ParseLocation.swift */; };
@@ -79,12 +78,6 @@
 		1F8916F01B23F2CE00E83891 /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916EF1B23F2CE00E83891 /* Fetcher.swift */; };
 		1F8916F21B23F2F000E83891 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916F11B23F2F000E83891 /* WebService.swift */; };
 		1F8916F61B23F67A00E83891 /* ArtRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916F51B23F67A00E83891 /* ArtRefresh.swift */; };
-		1FC6F80E1B391EC800810258 /* Ballplayer_Thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1FC6F80D1B391EC800810258 /* Ballplayer_Thumb.jpg */; };
-		1FC6F8131B391ED500810258 /* FireHall_Thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1FC6F80F1B391ED500810258 /* FireHall_Thumb.jpg */; };
-		1FC6F8141B391ED500810258 /* FN2_Thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1FC6F8101B391ED500810258 /* FN2_Thumb.jpg */; };
-		1FC6F8151B391ED500810258 /* Garfield_Thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1FC6F8111B391ED500810258 /* Garfield_Thumb.jpg */; };
-		1FC6F8161B391ED500810258 /* MuralAcmeBeer.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1FC6F8121B391ED500810258 /* MuralAcmeBeer.jpg */; };
-		1FC6F8181B3A4CF400810258 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6F8171B3A4CF400810258 /* Location.swift */; };
 		1FC6F81C1B3A4CF500810258 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6F81B1B3A4CF500810258 /* Artist.swift */; };
 		1FC6F81E1B3A4CF500810258 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6F81D1B3A4CF500810258 /* Photo.swift */; };
 		1FC6F8201B3A4CF500810258 /* Thumb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6F81F1B3A4CF500810258 /* Thumb.swift */; };
@@ -92,6 +85,12 @@
 		1FC6F8241B3A510B00810258 /* ParseThumb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6F8231B3A510B00810258 /* ParseThumb.swift */; };
 		1FC6F8261B3A515500810258 /* ParseArt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6F8251B3A515500810258 /* ParseArt.swift */; };
 		1FC6F8281B3A52D100810258 /* ThumbExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6F8271B3A52D100810258 /* ThumbExtension.swift */; };
+		1FC6F82A1B3B7F6F00810258 /* ImageDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6F8291B3B7F6F00810258 /* ImageDownload.swift */; };
+		1FC6F82C1B3B7FCA00810258 /* ParseWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6F82B1B3B7FCA00810258 /* ParseWebService.swift */; };
+		1FC6F8301B3C776F00810258 /* LocPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6F82F1B3C776F00810258 /* LocPhoto.swift */; };
+		1FC6F8321B3C782C00810258 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6F8311B3C782C00810258 /* Location.swift */; };
+		1FC6F8341B3C78AB00810258 /* ParseLocPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6F8331B3C78AB00810258 /* ParseLocPhoto.swift */; };
+		1FC6F8361B3C797100810258 /* LocPhotoExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6F8351B3C797100810258 /* LocPhotoExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,7 +174,6 @@
 		1F09BB721B30A4B800E4807C /* LocationPiecesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationPiecesCollectionViewController.swift; path = ViewControllers/LocationPiecesCollectionViewController.swift; sourceTree = "<group>"; };
 		1F09BB781B30BE8100E4807C /* ArtworkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtworkCollectionViewCell.swift; path = Views/ArtworkCollectionViewCell.swift; sourceTree = "<group>"; };
 		1F09BB791B30BE8100E4807C /* ArtworkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArtworkCollectionViewCell.xib; path = Views/ArtworkCollectionViewCell.xib; sourceTree = "<group>"; };
-		1F09BB7E1B30D30300E4807C /* ParseWebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseWebService.swift; path = Network/ParseWebService.swift; sourceTree = "<group>"; };
 		1F09BB811B3102ED00E4807C /* ParsePhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParsePhoto.swift; path = Parse/ParsePhoto.swift; sourceTree = "<group>"; };
 		1F09BB8D1B31F54B00E4807C /* ParseArtist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseArtist.swift; path = Parse/ParseArtist.swift; sourceTree = "<group>"; };
 		1F09BB8F1B31F5D200E4807C /* ParseLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseLocation.swift; path = Parse/ParseLocation.swift; sourceTree = "<group>"; };
@@ -231,12 +229,6 @@
 		1F8916EF1B23F2CE00E83891 /* Fetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fetcher.swift; path = ArtData/Fetcher.swift; sourceTree = "<group>"; };
 		1F8916F11B23F2F000E83891 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebService.swift; path = Network/WebService.swift; sourceTree = "<group>"; };
 		1F8916F51B23F67A00E83891 /* ArtRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtRefresh.swift; path = ArtData/ArtRefresh.swift; sourceTree = "<group>"; };
-		1FC6F80D1B391EC800810258 /* Ballplayer_Thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Ballplayer_Thumb.jpg; sourceTree = "<group>"; };
-		1FC6F80F1B391ED500810258 /* FireHall_Thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FireHall_Thumb.jpg; sourceTree = "<group>"; };
-		1FC6F8101B391ED500810258 /* FN2_Thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FN2_Thumb.jpg; sourceTree = "<group>"; };
-		1FC6F8111B391ED500810258 /* Garfield_Thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Garfield_Thumb.jpg; sourceTree = "<group>"; };
-		1FC6F8121B391ED500810258 /* MuralAcmeBeer.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MuralAcmeBeer.jpg; sourceTree = "<group>"; };
-		1FC6F8171B3A4CF400810258 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = CoreData/Location.swift; sourceTree = "<group>"; };
 		1FC6F81B1B3A4CF500810258 /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Artist.swift; path = CoreData/Artist.swift; sourceTree = "<group>"; };
 		1FC6F81D1B3A4CF500810258 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Photo.swift; path = CoreData/Photo.swift; sourceTree = "<group>"; };
 		1FC6F81F1B3A4CF500810258 /* Thumb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Thumb.swift; path = CoreData/Thumb.swift; sourceTree = "<group>"; };
@@ -244,6 +236,12 @@
 		1FC6F8231B3A510B00810258 /* ParseThumb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseThumb.swift; path = Parse/ParseThumb.swift; sourceTree = "<group>"; };
 		1FC6F8251B3A515500810258 /* ParseArt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseArt.swift; path = Parse/ParseArt.swift; sourceTree = "<group>"; };
 		1FC6F8271B3A52D100810258 /* ThumbExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThumbExtension.swift; path = Extensions/ThumbExtension.swift; sourceTree = "<group>"; };
+		1FC6F8291B3B7F6F00810258 /* ImageDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageDownload.swift; path = Network/ImageDownload.swift; sourceTree = "<group>"; };
+		1FC6F82B1B3B7FCA00810258 /* ParseWebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseWebService.swift; path = Parse/ParseWebService.swift; sourceTree = "<group>"; };
+		1FC6F82F1B3C776F00810258 /* LocPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocPhoto.swift; path = CoreData/LocPhoto.swift; sourceTree = "<group>"; };
+		1FC6F8311B3C782C00810258 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = CoreData/Location.swift; sourceTree = "<group>"; };
+		1FC6F8331B3C78AB00810258 /* ParseLocPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseLocPhoto.swift; path = Parse/ParseLocPhoto.swift; sourceTree = "<group>"; };
+		1FC6F8351B3C797100810258 /* LocPhotoExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocPhotoExtension.swift; path = Extensions/LocPhotoExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,11 +279,6 @@
 		1F01D3D41B22713300D4B156 = {
 			isa = PBXGroup;
 			children = (
-				1FC6F80F1B391ED500810258 /* FireHall_Thumb.jpg */,
-				1FC6F8101B391ED500810258 /* FN2_Thumb.jpg */,
-				1FC6F8111B391ED500810258 /* Garfield_Thumb.jpg */,
-				1FC6F8121B391ED500810258 /* MuralAcmeBeer.jpg */,
-				1FC6F80D1B391EC800810258 /* Ballplayer_Thumb.jpg */,
 				1F1EE0E01B26464F0087FBBF /* Alamofire.xcodeproj */,
 				1F01D3DF1B22713400D4B156 /* PublicArt */,
 				1F01D3F71B22713400D4B156 /* PublicArtTests */,
@@ -386,12 +379,13 @@
 		1F09BB801B31010D00E4807C /* Parse */ = {
 			isa = PBXGroup;
 			children = (
+				1FC6F82B1B3B7FCA00810258 /* ParseWebService.swift */,
 				1FC6F8251B3A515500810258 /* ParseArt.swift */,
-				1F09BB7E1B30D30300E4807C /* ParseWebService.swift */,
 				1F09BB811B3102ED00E4807C /* ParsePhoto.swift */,
 				1F09BB8D1B31F54B00E4807C /* ParseArtist.swift */,
 				1F09BB8F1B31F5D200E4807C /* ParseLocation.swift */,
 				1FC6F8231B3A510B00810258 /* ParseThumb.swift */,
+				1FC6F8331B3C78AB00810258 /* ParseLocPhoto.swift */,
 			);
 			name = Parse;
 			sourceTree = "<group>";
@@ -447,10 +441,11 @@
 			isa = PBXGroup;
 			children = (
 				1FC6F8211B3A4E3300810258 /* Art.swift */,
-				1FC6F81F1B3A4CF500810258 /* Thumb.swift */,
-				1FC6F81D1B3A4CF500810258 /* Photo.swift */,
 				1FC6F81B1B3A4CF500810258 /* Artist.swift */,
-				1FC6F8171B3A4CF400810258 /* Location.swift */,
+				1FC6F8311B3C782C00810258 /* Location.swift */,
+				1FC6F82F1B3C776F00810258 /* LocPhoto.swift */,
+				1FC6F81D1B3A4CF500810258 /* Photo.swift */,
+				1FC6F81F1B3A4CF500810258 /* Thumb.swift */,
 				1F8916911B23D04100E83891 /* CoreDataStack.swift */,
 				1F8916571B23C21D00E83891 /* PublicArtModel.xcdatamodeld */,
 			);
@@ -474,6 +469,7 @@
 				1F8916E91B23F29800E83891 /* PhotoExtension.swift */,
 				1FC6F8271B3A52D100810258 /* ThumbExtension.swift */,
 				1F8916EA1B23F29800E83891 /* UIImageViewExtension.swift */,
+				1FC6F8351B3C797100810258 /* LocPhotoExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -514,6 +510,7 @@
 			children = (
 				1F1EE0F41B26472B0087FBBF /* LogInUser.swift */,
 				1F8916F11B23F2F000E83891 /* WebService.swift */,
+				1FC6F8291B3B7F6F00810258 /* ImageDownload.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -690,12 +687,7 @@
 			files = (
 				1F01D3EA1B22713400D4B156 /* Main.storyboard in Resources */,
 				1F09BB7B1B30BE8100E4807C /* ArtworkCollectionViewCell.xib in Resources */,
-				1FC6F8131B391ED500810258 /* FireHall_Thumb.jpg in Resources */,
-				1FC6F8141B391ED500810258 /* FN2_Thumb.jpg in Resources */,
-				1FC6F8151B391ED500810258 /* Garfield_Thumb.jpg in Resources */,
-				1FC6F8161B391ED500810258 /* MuralAcmeBeer.jpg in Resources */,
 				1F01D3EF1B22713400D4B156 /* LaunchScreen.xib in Resources */,
-				1FC6F80E1B391EC800810258 /* Ballplayer_Thumb.jpg in Resources */,
 				1F01D3EC1B22713400D4B156 /* Images.xcassets in Resources */,
 				1F01D4111B227B2000D4B156 /* HomeCollectionViewCell.xib in Resources */,
 			);
@@ -731,19 +723,21 @@
 				1F8916A41B23D1D700E83891 /* ArtPhotoImages.swift in Sources */,
 				1F09BB821B3102ED00E4807C /* ParsePhoto.swift in Sources */,
 				1FC6F8261B3A515500810258 /* ParseArt.swift in Sources */,
+				1FC6F8321B3C782C00810258 /* Location.swift in Sources */,
 				1F09BB9C1B32886900E4807C /* ArtistExtension.swift in Sources */,
 				1F8916591B23C21D00E83891 /* PublicArtModel.xcdatamodeld in Sources */,
 				1F09BB731B30A4B800E4807C /* LocationPiecesCollectionViewController.swift in Sources */,
 				1F8916AB1B23D1F700E83891 /* CityArtFunctions.swift in Sources */,
-				1FC6F8181B3A4CF400810258 /* Location.swift in Sources */,
 				1F89169F1B23D1D700E83891 /* ArtDataCreator.swift in Sources */,
 				1F09BB901B31F5D200E4807C /* ParseLocation.swift in Sources */,
 				1F01D4061B22745A00D4B156 /* MainMenuCollectionViewController.swift in Sources */,
 				1F8915F71B229ED400E83891 /* MenuModel.swift in Sources */,
+				1FC6F8361B3C797100810258 /* LocPhotoExtension.swift in Sources */,
 				1F09BB5B1B2F79D400E4807C /* LocationsCollectionViewController.swift in Sources */,
 				1F8916F61B23F67A00E83891 /* ArtRefresh.swift in Sources */,
 				1F8916A51B23D1D700E83891 /* ArtPhotosByLocation.swift in Sources */,
 				1F8916A21B23D1D700E83891 /* ArtPhotoCache.swift in Sources */,
+				1FC6F8301B3C776F00810258 /* LocPhoto.swift in Sources */,
 				1F8916BE1B23D22B00E83891 /* MappingIdentifiers.swift in Sources */,
 				1F8916CA1B23D59700E83891 /* ImageProcess.swift in Sources */,
 				1F8916A91B23D1D700E83891 /* PhotoFileNames.swift in Sources */,
@@ -760,19 +754,21 @@
 				1F8916EB1B23F29800E83891 /* ArtExtension.swift in Sources */,
 				1F8916B11B23D20700E83891 /* DbaseIds.swift in Sources */,
 				1F8916CD1B23D76E00E83891 /* ImageProcess.m in Sources */,
+				1FC6F82A1B3B7F6F00810258 /* ImageDownload.swift in Sources */,
 				1F8916F01B23F2CE00E83891 /* Fetcher.swift in Sources */,
 				1F01D4101B227B2000D4B156 /* HomeCollectionViewCell.swift in Sources */,
 				1FC6F81C1B3A4CF500810258 /* Artist.swift in Sources */,
 				1F09BB591B2F79D400E4807C /* CatagoryCollectionViewController.swift in Sources */,
+				1FC6F82C1B3B7FCA00810258 /* ParseWebService.swift in Sources */,
 				1F8916B51B23D21900E83891 /* SwiftyJSON.swift in Sources */,
 				1F8916B31B23D20700E83891 /* StoryboardIdentifiers.swift in Sources */,
 				1F09BB8E1B31F54B00E4807C /* ParseArtist.swift in Sources */,
 				1F09BB5A1B2F79D400E4807C /* MainMenuSplitViewController.swift in Sources */,
 				1F09BB5D1B2F8B1600E4807C /* PieceViewController.swift in Sources */,
+				1FC6F8341B3C78AB00810258 /* ParseLocPhoto.swift in Sources */,
 				1F09BB6F1B30A41200E4807C /* ArtPiecesCollectionViewController.swift in Sources */,
 				1F8916B01B23D20700E83891 /* CoreDataIdentifiers.swift in Sources */,
 				1F8916ED1B23F29800E83891 /* PhotoExtension.swift in Sources */,
-				1F09BB7F1B30D30300E4807C /* ParseWebService.swift in Sources */,
 				1FC6F8201B3A4CF500810258 /* Thumb.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

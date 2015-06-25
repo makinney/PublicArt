@@ -48,6 +48,17 @@
         <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="artwork" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Art" inverseName="location" inverseEntity="Art" syncable="YES"/>
+        <relationship name="photo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocPhoto" inverseName="location" inverseEntity="LocPhoto" syncable="YES"/>
+    </entity>
+    <entity name="LocPhoto" representedClassName="LocPhoto" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="idLocation" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
+        <attribute name="imageAspectRatio" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="imageFileName" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
+        <attribute name="imageFileURL" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
+        <attribute name="objectId" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="photo" inverseEntity="Location" syncable="YES"/>
     </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
@@ -73,8 +84,9 @@
     <elements>
         <element name="Art" positionX="-648" positionY="-469" width="128" height="450"/>
         <element name="Artist" positionX="36" positionY="-477" width="128" height="165"/>
-        <element name="Location" positionX="160" positionY="-252" width="128" height="165"/>
+        <element name="Location" positionX="160" positionY="-252" width="128" height="28"/>
         <element name="Photo" positionX="108" positionY="-0" width="128" height="180"/>
-        <element name="Thumb" positionX="-450" positionY="-333" width="128" height="165"/>
+        <element name="Thumb" positionX="-416" positionY="9" width="128" height="165"/>
+        <element name="LocPhoto" positionX="-234" positionY="-153" width="128" height="165"/>
     </elements>
 </model>

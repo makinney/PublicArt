@@ -119,4 +119,24 @@ class ArtDataCreator {
 		return (created, updated)
 	}
 	
+	func createOrUpdateLocPhotos(parseLocPhoto: [ParseLocPhoto]) ->(created: [LocPhoto], updated: [LocPhoto]) {
+		var created = [LocPhoto]()
+		var updated = [LocPhoto]()
+		var managedObject: NSManagedObject?
+		
+		for parseLocPhoto in parseLocPhoto {
+			if let objectId = parseLocPhoto.objectId,
+				let locPhoto = self.fetcher.fetchManagedObjWithId(objectId, inEntityNamed: ModelEntity.locPhoto, moc: moc) as? LocPhoto {
+					LocPhoto.update(locPhoto, parseLocPhoto: parseLocPhoto )
+					updated.append(locPhoto)
+			} else {
+				if let locPhoto = LocPhoto.create(parseLocPhoto, moc: moc) {
+					created.append(locPhoto)
+				}
+			}
+		}
+		return (created, updated)
+	}
+	
+	
 }

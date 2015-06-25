@@ -1,5 +1,5 @@
 //
-//  Location.swift
+//  LocPhoto.swift
 //  PublicArt
 //
 //  Created by Michael Kinney on 6/25/15.
@@ -10,20 +10,18 @@ import Foundation
 import CoreData
 import Parse
 
-@objc(Location)
+@objc(LocPhoto)
 
-class Location: NSManagedObject {
+class LocPhoto: NSManagedObject {
 
     @NSManaged var createdAt: NSDate
     @NSManaged var idLocation: String
-    @NSManaged var latitude: NSNumber
-    @NSManaged var longitude: NSNumber
-    @NSManaged var name: String
+    @NSManaged var imageAspectRatio: NSNumber
+    @NSManaged var imageFileName: String
+    @NSManaged var imageFileURL: String
     @NSManaged var objectId: String
     @NSManaged var updatedAt: NSDate
-    @NSManaged var artwork: NSSet
-    @NSManaged var photo: LocPhoto?
-	
-	var imageFile:PFFile?
+    @NSManaged var location: Location
 
+	var imageFile:PFFile?
 }

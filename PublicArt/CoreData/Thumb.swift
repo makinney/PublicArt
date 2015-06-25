@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Parse
 
 @objc(Thumb)
 
@@ -21,5 +22,7 @@ class Thumb: NSManagedObject {
     @NSManaged var idArt: String
     @NSManaged var imageAspectRatio: NSNumber
     @NSManaged var artwork: Art
+	
+	var imageFile:PFFile?
 
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Parse
 
 @objc(Photo)
 
@@ -22,5 +23,7 @@ class Photo: NSManagedObject {
     @NSManaged var updatedAt: NSDate
     @NSManaged var tnMatch: NSNumber
     @NSManaged var artwork: Art
+	
+	var imageFile:PFFile?
 
 }

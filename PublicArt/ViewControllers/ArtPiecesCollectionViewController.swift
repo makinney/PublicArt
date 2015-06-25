@@ -97,8 +97,8 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 	}
 	
 	override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
-	//	setupArtCityPhotosFlowLayout()
-//		collectionView?.reloadData()
+		setupArtCityPhotosFlowLayout()
+		collectionView?.reloadData()
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -187,36 +187,19 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.ArtworkCollectionViewCell.rawValue, forIndexPath: indexPath) as! ArtworkCollectionViewCell
 		let art = fetchResultsController.objectAtIndexPath(indexPath) as! Art
-//		cell.imageUrl = art.thumbFile
-
-			if let thumb = art.thumb {
-				println("thumb name is \(thumb.imageFileName)")
-				cell.imageView.image = UIImage(named: thumb.imageFileName) ?? UIImage()
-			}
-		
 		cell.title.text = art.title
-
-/*
-		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-			if let thumbNail = self.artPhotoImages.getThumbNailWith(cell.imageUrl, size: cell.imageView.frame.size) {
-				if thumbNail.fileName == cell.imageUrl {
-					dispatch_async(dispatch_get_main_queue(), {
-						[weak self] in
-						cell.imageView.image = thumbNail.image
-						cell.title.alpha = 1.0
-						cell.title.text = art.title
-						cell.title.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody) // TODO: has to be a better way
-						// FIXME: this should be done one time somehow as it can slow scrolling down
-	//					cell.photoBorderView.backgroundColor = self?.prevailingColor(thumbNail.image, cacheKey: thumbNail.fileName)
-						})
-				} else {
-	//				cell.imageView.image = nil
-	//				cell.title.text = ""
-	//				cell.photoBorderView.backgroundColor = UIColor.whiteColor()
+		cell.imageView.image = nil
+		// TODO add activity indicators
+		if let thumb = art.thumb {
+			cell.imageFileName = thumb.imageFileName
+			ImageDownload.downloadThumb(art, complete: { (data, imageFileName) -> () in
+				if let data = data
+				   where cell.imageFileName == imageFileName {
+					cell.imageView.image = UIImage(data: data) ?? UIImage()
 				}
-			}
-		})
-	*/
+			})
+		}
+		
 		return cell
 	}
 		
@@ -231,10 +214,10 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 			if let thumb = art.thumb {
 				var aspectRatio = thumb.imageAspectRatio
 				if aspectRatio > 0 && aspectRatio <= 1 {
-					height = width / CGFloat(aspectRatio.doubleValue)
+					height = width / CGFloat(aspectRatio.doubleValue) + 21.0 // FIXME: hack based on label height
 				} else if aspectRatio > 1 {
 					width = width * 2.0  // FIXME fine tune
-					height = width / CGFloat(aspectRatio.doubleValue)
+					height = width / CGFloat(aspectRatio.doubleValue) + 21.0 // FIXME: hack based on label height
 				}
 			}
 			
@@ -243,23 +226,6 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 		return CGSize(width: width, height: height)
 	}
 	
-
-//	override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-//		var supplementaryView: UICollectionReusableView = UICollectionReusableView()
-//		if kind == UICollectionElementKindSectionHeader {
-//			supplementaryView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "ArtCitySupplementaryView", forIndexPath: indexPath) as! UICollectionReusableView // TODO:
-//			if let supplementaryView = supplementaryView as? ArtCitySupplementaryView {
-//				if let sections = fetchResultsController.sections {
-//					var tableSections = sections as NSArray
-//					var locationSection = tableSections[indexPath.section] as! NSFetchedResultsSectionInfo
-//					supplementaryView.label.text = locationSection.name ?? ""
-//					supplementaryView.label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody) // TODO: has to be a better way
-//				}
-//			}
-//			
-//		}
-//		return supplementaryView
-//	}
 	
 	override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
 		return fetchResultsController.sections?.count ?? 0
@@ -281,24 +247,6 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 		}
 	}
 
-	
-//	override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-//		super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-//		
-//		if let artPhotoCollectionViewFlowLayout = self.artPhotoCollectionViewFlowLayout {
-//			artPhotoCollectionViewFlowLayout.currentPage = collectionView!.contentOffset.x / collectionView!.bounds.width
-//		}
-//		
-//		coordinator.animateAlongsideTransitionInView(view, animation: { (context) -> Void in
-//			if let artPhotoCollectionViewFlowLayout = self.artPhotoCollectionViewFlowLayout {
-//				self.setupArtPhotosFullScreenItemSize(artPhotoCollectionViewFlowLayout)
-//			}
-//			
-//			}) { (context) -> Void in
-//				var i = 0.0
-//		}
-//	}
-	
 	// MARK: Notification handlers
 	
 	func contentSizeCategoryDidChange() {
@@ -318,8 +266,41 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 		//		self.collectionView?.alpha = 1.0
 	}
 	
+	//	override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+	//		var supplementaryView: UICollectionReusableView = UICollectionReusableView()
+	//		if kind == UICollectionElementKindSectionHeader {
+	//			supplementaryView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "ArtCitySupplementaryView", forIndexPath: indexPath) as! UICollectionReusableView // TODO:
+	//			if let supplementaryView = supplementaryView as? ArtCitySupplementaryView {
+	//				if let sections = fetchResultsController.sections {
+	//					var tableSections = sections as NSArray
+	//					var locationSection = tableSections[indexPath.section] as! NSFetchedResultsSectionInfo
+	//					supplementaryView.label.text = locationSection.name ?? ""
+	//					supplementaryView.label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody) // TODO: has to be a better way
+	//				}
+	//			}
+	//
+	//		}
+	//		return supplementaryView
+	//	}
 
+//	override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+//		super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+//		
+//		if let artPhotoCollectionViewFlowLayout = self.artPhotoCollectionViewFlowLayout {
+//			artPhotoCollectionViewFlowLayout.currentPage = collectionView!.contentOffset.x / collectionView!.bounds.width
+//		}
+//		
+//		coordinator.animateAlongsideTransitionInView(view, animation: { (context) -> Void in
+//			if let artPhotoCollectionViewFlowLayout = self.artPhotoCollectionViewFlowLayout {
+//				self.setupArtPhotosFullScreenItemSize(artPhotoCollectionViewFlowLayout)
+//			}
+//			
+//			}) { (context) -> Void in
+//				var i = 0.0
+//		}
+//	}
 	
+
 	
 	// MARK: UICollectionViewDelegate
 

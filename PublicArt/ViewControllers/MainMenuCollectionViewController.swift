@@ -93,7 +93,7 @@ class MainMenuCollectionViewController: UICollectionViewController {
 				collectionViewFlowLayout.sectionInset.right = sectionInset
 				let itemSpacing: CGFloat = sectionInset / 2.0
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
-				minimumPhotosPerLine = 2
+				minimumPhotosPerLine = 1
 				var maxPhotoWidth = maxCellWidth(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
 				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxPhotoWidth)
 			}

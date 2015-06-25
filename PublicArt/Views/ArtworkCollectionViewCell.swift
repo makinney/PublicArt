@@ -12,7 +12,7 @@ class ArtworkCollectionViewCell: UICollectionViewCell {
     
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var title: UILabel!
-	var imageUrl = String()
+	var imageFileName = String()
 		
 	@IBOutlet weak var photoBorderView: UIView!
 //	var imageSize:CGSize = CGSize(width: 0, height: 0)
