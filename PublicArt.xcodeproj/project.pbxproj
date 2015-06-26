@@ -28,6 +28,8 @@
 		1F09BB8E1B31F54B00E4807C /* ParseArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB8D1B31F54B00E4807C /* ParseArtist.swift */; };
 		1F09BB901B31F5D200E4807C /* ParseLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB8F1B31F5D200E4807C /* ParseLocation.swift */; };
 		1F09BB9C1B32886900E4807C /* ArtistExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB9B1B32886900E4807C /* ArtistExtension.swift */; };
+		1F0E25B71B3C8BF0003DB8AF /* LocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E25B51B3C8BF0003DB8AF /* LocationCollectionViewCell.swift */; };
+		1F0E25B81B3C8BF0003DB8AF /* LocationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F0E25B61B3C8BF0003DB8AF /* LocationCollectionViewCell.xib */; };
 		1F1EE0EF1B2646690087FBBF /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1EE0E81B26464F0087FBBF /* Alamofire.framework */; };
 		1F1EE0F01B2646690087FBBF /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1EE0E81B26464F0087FBBF /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F1EE0F51B26472B0087FBBF /* LogInUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EE0F41B26472B0087FBBF /* LogInUser.swift */; };
@@ -178,6 +180,8 @@
 		1F09BB8D1B31F54B00E4807C /* ParseArtist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseArtist.swift; path = Parse/ParseArtist.swift; sourceTree = "<group>"; };
 		1F09BB8F1B31F5D200E4807C /* ParseLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseLocation.swift; path = Parse/ParseLocation.swift; sourceTree = "<group>"; };
 		1F09BB9B1B32886900E4807C /* ArtistExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtistExtension.swift; path = Extensions/ArtistExtension.swift; sourceTree = "<group>"; };
+		1F0E25B51B3C8BF0003DB8AF /* LocationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationCollectionViewCell.swift; path = Views/LocationCollectionViewCell.swift; sourceTree = "<group>"; };
+		1F0E25B61B3C8BF0003DB8AF /* LocationCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationCollectionViewCell.xib; path = Views/LocationCollectionViewCell.xib; sourceTree = "<group>"; };
 		1F1EE0E01B26464F0087FBBF /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		1F1EE0F41B26472B0087FBBF /* LogInUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogInUser.swift; path = Network/LogInUser.swift; sourceTree = "<group>"; };
 		1F1EE0FF1B2A1DEA0087FBBF /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -368,6 +372,8 @@
 		1F01D4091B22783700D4B156 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1F0E25B51B3C8BF0003DB8AF /* LocationCollectionViewCell.swift */,
+				1F0E25B61B3C8BF0003DB8AF /* LocationCollectionViewCell.xib */,
 				1F09BB781B30BE8100E4807C /* ArtworkCollectionViewCell.swift */,
 				1F09BB791B30BE8100E4807C /* ArtworkCollectionViewCell.xib */,
 				1F01D40E1B227B2000D4B156 /* HomeCollectionViewCell.swift */,
@@ -384,8 +390,8 @@
 				1F09BB811B3102ED00E4807C /* ParsePhoto.swift */,
 				1F09BB8D1B31F54B00E4807C /* ParseArtist.swift */,
 				1F09BB8F1B31F5D200E4807C /* ParseLocation.swift */,
-				1FC6F8231B3A510B00810258 /* ParseThumb.swift */,
 				1FC6F8331B3C78AB00810258 /* ParseLocPhoto.swift */,
+				1FC6F8231B3A510B00810258 /* ParseThumb.swift */,
 			);
 			name = Parse;
 			sourceTree = "<group>";
@@ -688,6 +694,7 @@
 				1F01D3EA1B22713400D4B156 /* Main.storyboard in Resources */,
 				1F09BB7B1B30BE8100E4807C /* ArtworkCollectionViewCell.xib in Resources */,
 				1F01D3EF1B22713400D4B156 /* LaunchScreen.xib in Resources */,
+				1F0E25B81B3C8BF0003DB8AF /* LocationCollectionViewCell.xib in Resources */,
 				1F01D3EC1B22713400D4B156 /* Images.xcassets in Resources */,
 				1F01D4111B227B2000D4B156 /* HomeCollectionViewCell.xib in Resources */,
 			);
@@ -761,6 +768,7 @@
 				1F09BB591B2F79D400E4807C /* CatagoryCollectionViewController.swift in Sources */,
 				1FC6F82C1B3B7FCA00810258 /* ParseWebService.swift in Sources */,
 				1F8916B51B23D21900E83891 /* SwiftyJSON.swift in Sources */,
+				1F0E25B71B3C8BF0003DB8AF /* LocationCollectionViewCell.swift in Sources */,
 				1F8916B31B23D20700E83891 /* StoryboardIdentifiers.swift in Sources */,
 				1F09BB8E1B31F54B00E4807C /* ParseArtist.swift in Sources */,
 				1F09BB5A1B2F79D400E4807C /* MainMenuSplitViewController.swift in Sources */,

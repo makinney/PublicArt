@@ -158,10 +158,14 @@ class MainMenuCollectionViewController: UICollectionViewController {
 		switch(row) {
 //		case MainMenuRow.Artists.rawValue:
 //		case MainMenuRow.Catagory.rawValue:
-//		case MainMenuRow.Neighborhoods.rawValue:
+		case MainMenuRow.Neighborhoods.rawValue:
+			var vc: LocationsCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.LocationCollectionViewController.rawValue) as! LocationsCollectionViewController
+			showViewController(vc, sender: self)
+
+		
 		case MainMenuRow.Titles.rawValue:
 			var vc: ArtPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtPiecesViewController.rawValue) as! ArtPiecesCollectionViewController
-			showViewController(vc, sender: self)
+			showDetailViewController(vc, sender: self)
 		
 //		case MainMenuRow.Medium.rawValue:
 //		case MainMenuRow.Favorites.rawValue:

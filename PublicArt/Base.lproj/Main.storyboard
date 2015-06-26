@@ -184,10 +184,11 @@
         <!--Locations Collection View Controller-->
         <scene sceneID="3Uf-oY-7C4">
             <objects>
-                <collectionViewController id="Rlu-bl-K4j" customClass="LocationsCollectionViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="LocationCollectionViewControllerID" id="Rlu-bl-K4j" customClass="LocationsCollectionViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="eY2-Ep-ro6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.45098039220000002" green="0.62745098040000002" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gup-kI-GlO">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>

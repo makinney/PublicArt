@@ -11,13 +11,14 @@ import CoreData
 
 
 class ArtPiecesCollectionViewController: UICollectionViewController, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout {
-	private let artPhotoImages = ArtPhotoImages.sharedInstance
 	private var collapseDetailViewController = true
 	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
 	private var maxPhotoWidth: CGFloat = 0.0
 
 	private var error:NSError?
 	private let moc: NSManagedObjectContext?
+	
+	var location: Location?
 	
 //	private lazy var artNavController:UINavigationController = {
 //		var navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtNavigationController.rawValue) as! UINavigationController
@@ -48,6 +49,11 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 		navigationController?.interactivePopGestureRecognizer?.enabled = false
 		navigationController?.delegate = self
 		
+		if let location = self.location {
+			title = location.name
+		} else {
+			title = "All Pieces"
+		}
 		
 		
 		var nibName = UINib(nibName: "ArtworkCollectionViewCell", bundle: nil) // TODO:
@@ -111,6 +117,11 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 	//
 	lazy var fetchResultsController:NSFetchedResultsController = {
 		let fetchRequest = NSFetchRequest(entityName:ModelEntity.art)
+		
+		if let location = self.location {
+			fetchRequest.predicate = NSPredicate(format:"%K == %@", "idLocation", location.idLocation) // TODO: define
+		}
+
 		let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.artworkTitle, ascending:true, selector: "localizedStandardCompare:")]
 		fetchRequest.sortDescriptors = sortDescriptor
 		let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc!, sectionNameKeyPath: nil, cacheName: nil)

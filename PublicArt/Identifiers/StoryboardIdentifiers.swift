@@ -11,6 +11,7 @@ import Foundation
 
 enum CellIdentifier: String {
 	case ArtworkCollectionViewCell = "ArtworkCollectionViewCell"
+	case LocationCollectionViewCell = "LocationCollectionViewCell"
 	case ArtTableViewCellID = "ArtTableViewCell"
 	case MapTableViewCellID = "MapTableViewCell"
 	case NeighborhoodListCell = "neighborhoodListCell"
@@ -31,6 +32,7 @@ enum SegueIdentifier: String {
 
 enum ViewControllerIdentifier: String { // TODO: make these consistent
 	case ArtPiecesViewController = "ArtPiecesViewControllerID"
+	case LocationCollectionViewController = "LocationCollectionViewControllerID"
 
 /*
 	case ArtViewController = "idArtViewController"

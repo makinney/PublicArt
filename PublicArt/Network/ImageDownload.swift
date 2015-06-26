@@ -28,4 +28,19 @@ class ImageDownload {
 		}
 	}
 	
+	class func downloadLocPhoto(location: Location, complete:(data: NSData?, imageFileName: String)->()) {
+		if let locPhoto = location.photo {
+			locPhoto.imageFile?.getDataInBackgroundWithBlock({ (data, error) -> Void in
+				if error == nil {
+					complete(data:data, imageFileName: locPhoto.imageFileName)
+				} else {
+					println("\(__FILE__) \(__FUNCTION__) error \(error?.description)")
+					complete(data:nil, imageFileName: locPhoto.imageFileName)
+				}
+			})
+		} else {
+			complete(data: nil, imageFileName: String())
+		}
+	}
+	
 }
