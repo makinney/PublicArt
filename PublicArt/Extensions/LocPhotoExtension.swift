@@ -22,7 +22,6 @@ extension LocPhoto {
 			locPhoto.imageAspectRatio = parseLocPhoto.imageAspectRatio
 			
 			if let imageFile = parseLocPhoto.imageFile {
-				locPhoto.imageFile = imageFile
 				locPhoto.imageFileName = imageFile.name
 				locPhoto.imageFileURL = imageFile.url ?? ""
 			}
@@ -40,7 +39,6 @@ extension LocPhoto {
 		locPhoto.imageAspectRatio = parseLocPhoto.imageAspectRatio
 		
 		if let imageFile = parseLocPhoto.imageFile {
-			locPhoto.imageFile = imageFile
 			locPhoto.imageFileName = imageFile.name
 			locPhoto.imageFileURL = imageFile.url ?? ""
 			

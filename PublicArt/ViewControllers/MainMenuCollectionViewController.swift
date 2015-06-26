@@ -28,8 +28,8 @@ class MainMenuCollectionViewController: UICollectionViewController {
 	
 		collectionView?.reloadData()
 		
-		self.title = "Public Art"
-				
+		self.title = "Main Menu" // TITLE
+		
     }
 
     override func didReceiveMemoryWarning() {
@@ -164,9 +164,19 @@ class MainMenuCollectionViewController: UICollectionViewController {
 
 		
 		case MainMenuRow.Titles.rawValue:
-			var vc: ArtPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtPiecesViewController.rawValue) as! ArtPiecesCollectionViewController
-			showDetailViewController(vc, sender: self)
+			var userInterfaceIdion = traitCollection.userInterfaceIdiom
+			if userInterfaceIdion == .Phone {
+				var vc: ArtPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as! ArtPiecesCollectionViewController
+				showDetailViewController(vc, sender: self)
+				
+			} else {
+				var navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as! UINavigationController
+				var vc: ArtPiecesCollectionViewController = navigationController.viewControllers.last as! ArtPiecesCollectionViewController
+				showDetailViewController(navigationController, sender: self)
+			}
 		
+			
+			
 //		case MainMenuRow.Medium.rawValue:
 //		case MainMenuRow.Favorites.rawValue:
 		default:

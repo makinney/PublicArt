@@ -23,25 +23,6 @@
             </objects>
             <point key="canvasLocation" x="8" y="1220"/>
         </scene>
-        <!--Piece View Controller-->
-        <scene sceneID="Y1P-Mr-hpi">
-            <objects>
-                <viewController id="epB-S8-VdO" customClass="PieceViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Wmh-MI-JCw"/>
-                        <viewControllerLayoutGuide type="bottom" id="GXE-JP-lmx"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="LSa-Ka-GeZ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="KCV-Y1-zEi"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="50Y-pM-Ut9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2246" y="412"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pbb-6U-D4K">
             <objects>
@@ -93,12 +74,11 @@
                     <connections>
                         <segue destination="f8G-4b-S0O" kind="show" identifier="MainMenuToCatagorySegueID" id="s3z-Q0-BZr"/>
                         <segue destination="Rlu-bl-K4j" kind="show" identifier="MainMenuToNeighborhoodSegueID" id="4Wf-dO-N3w"/>
-                        <segue destination="3UN-qf-gh0" kind="show" identifier="MainMenuToArtPiecesSegueID" id="kVv-Yo-8vv"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rtt-St-hAh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2246" y="-339"/>
+            <point key="canvasLocation" x="2281" y="-333"/>
         </scene>
         <!--Art Pieces Collection View Controller-->
         <scene sceneID="3OF-YD-2vk">
@@ -130,10 +110,11 @@
                             <outlet property="delegate" destination="3UN-qf-gh0" id="SDu-bO-xwX"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="Xvn-Yy-cqt"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rvd-ej-nva" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3056" y="-991"/>
+            <point key="canvasLocation" x="2286" y="407"/>
         </scene>
         <!--Catagory Collection View Controller-->
         <scene sceneID="xft-6g-kfM">
@@ -179,7 +160,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="3056" y="-339"/>
+            <point key="canvasLocation" x="3048" y="-929"/>
         </scene>
         <!--Locations Collection View Controller-->
         <scene sceneID="3Uf-oY-7C4">
@@ -214,7 +195,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dtn-d0-Ghk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3056" y="407"/>
+            <point key="canvasLocation" x="3048" y="-245"/>
         </scene>
         <!--Browse-->
         <scene sceneID="dq0-1X-0iD">
@@ -233,7 +214,7 @@
         <!--Navigation Controller-->
         <scene sceneID="AOI-HN-6gT">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="b9c-af-Gjq" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ArtPiecesNavControllerID" automaticallyAdjustsScrollViewInsets="NO" id="b9c-af-Gjq" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gG2-4p-E6F">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -241,7 +222,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="epB-S8-VdO" kind="relationship" relationship="rootViewController" id="sol-FK-tz9"/>
+                        <segue destination="3UN-qf-gh0" kind="relationship" relationship="rootViewController" id="5t4-Mg-ucC"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Dy-51-Xqx" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -21,7 +21,6 @@ extension Thumb {
 			thumb.imageAspectRatio = parseThumb.imageAspectRatio
 			
 			if let imageFile = parseThumb.imageFile {
-				thumb.imageFile = imageFile
 				thumb.imageFileName = imageFile.name
 				thumb.imageFileURL = imageFile.url ?? ""
 			}
@@ -40,7 +39,6 @@ extension Thumb {
 		thumb.imageAspectRatio = parseThumb.imageAspectRatio
 		
 		if let imageFile = parseThumb.imageFile {
-			thumb.imageFile = imageFile
 			thumb.imageFileName = imageFile.name
 			thumb.imageFileURL = imageFile.url ?? ""
 			

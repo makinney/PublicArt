@@ -103,7 +103,7 @@ struct MainMenu {
 			title = "Locations"
 		case .Titles:
 			image = UIImage(named: "SphinxCropped") ?? image
-			title = "All Pieces"
+			title = "All Public Art"
 		case .Medium:
 			image = UIImage(named: "mediumRedStone") ?? image
 			title = "Medium"

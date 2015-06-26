@@ -24,6 +24,4 @@ class Photo: NSManagedObject {
     @NSManaged var tnMatch: NSNumber
     @NSManaged var artwork: Art
 	
-	var imageFile:PFFile?
-
 }

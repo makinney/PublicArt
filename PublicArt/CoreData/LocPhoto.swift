@@ -23,5 +23,4 @@ class LocPhoto: NSManagedObject {
     @NSManaged var updatedAt: NSDate
     @NSManaged var location: Location
 
-	var imageFile:PFFile?
 }

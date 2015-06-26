@@ -50,9 +50,9 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 		navigationController?.delegate = self
 		
 		if let location = self.location {
-			title = location.name
+			title = location.name // TITLE
 		} else {
-			title = "All Pieces"
+			title = "All Public Art"  // TITLE TODO: constant
 		}
 		
 		
@@ -88,7 +88,6 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-		self.navigationController?.navigationBar.topItem?.title = "Public Art"
 	}
 	
 	override func viewDidAppear(animated: Bool) {

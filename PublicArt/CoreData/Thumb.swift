@@ -23,6 +23,4 @@ class Thumb: NSManagedObject {
     @NSManaged var imageAspectRatio: NSNumber
     @NSManaged var artwork: Art
 	
-	var imageFile:PFFile?
-
 }

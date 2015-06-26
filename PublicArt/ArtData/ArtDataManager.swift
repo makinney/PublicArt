@@ -37,26 +37,15 @@ class ArtDataManager : NSObject {
 		var lastUpdate = NSDate() // TODO has to come from parse server
 		
 			refreshFromWeb(lastUpdate, complete: {[weak self] (art, artists, locations, photos, thumbs, locPhotos) -> () in
-			
-	//		println("\(__FILE__) \(__FUNCTION__) got art count is \(art.count)")
-	//			println("\(__FILE__) \(__FUNCTION__) got thumb count is \(thumbs.count)")
-
-	//		println("\(__FILE__) \(__FUNCTION__) got artist count is \(artist.count)")
-	//		println("\(__FILE__) \(__FUNCTION__) got location count is \(location.count)")
-	//		println("\(__FILE__) \(__FUNCTION__) got photos count is \(photos.count) \n")
-			
-	
 			// bind everything up
 			self!.updatePhotoToArtBindings(photos) // TODO .. test for nil self ?
 			self!.updateArtToLocationBindings(art)
 			self!.updateThumbToArtBindings(thumbs)
 			self!.updateLocPhotoToLocationBindings(locPhotos)
-
 			// save it
 			self!.coreDataStack.saveContext()
-			
+
 //			self!.checkForRequiredNotifications()
-	
 		
 		})
 	}
@@ -103,6 +92,7 @@ class ArtDataManager : NSObject {
 		ParseWebService.getAllPhotosSince(date) {[weak self] (parsePhotos) -> Void in
 			var crud = self!.artDataCreator.createOrUpdatePhotos(parsePhotos)
 			var photos = crud.created + crud.updated
+			PFObject.pinAllInBackground(parsePhotos) // saving the PFFile image reference
 			complete(photos: photos)
 		}
 	}
@@ -119,6 +109,7 @@ class ArtDataManager : NSObject {
 		ParseWebService.getAllThumbsSince(date) {[weak self] (parseThumbs) -> Void in
 			var crud = self!.artDataCreator.createOrUpdateThumbs(parseThumbs)
 			var thumbs = crud.created + crud.updated
+			PFObject.pinAllInBackground(parseThumbs) // saving the PFFile image reference
 			complete(thumbs: thumbs)
 		}
 	}
@@ -127,6 +118,7 @@ class ArtDataManager : NSObject {
 		ParseWebService.getAllLocPhotosSince(date) {[weak self] (parseLocPhotos) -> Void in
 			var crud = self!.artDataCreator.createOrUpdateLocPhotos(parseLocPhotos)
 			var locPhotos = crud.created + crud.updated
+			PFObject.pinAllInBackground(parseLocPhotos) // saving the PFFile image reference
 			complete(locPhotos: locPhotos)
 		}
 	}

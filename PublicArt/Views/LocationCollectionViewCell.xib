@@ -44,7 +44,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="OUk-dK-TiW" secondAttribute="trailing" id="HLn-vJ-z1s"/>
                             <constraint firstItem="OUk-dK-TiW" firstAttribute="leading" secondItem="oIU-lg-fYT" secondAttribute="leading" id="HpK-wf-T6y"/>
@@ -59,6 +59,7 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="oIU-lg-fYT" firstAttribute="top" secondItem="6US-ob-47Q" secondAttribute="top" id="bgz-bo-Jqx"/>
                 <constraint firstItem="oIU-lg-fYT" firstAttribute="leading" secondItem="6US-ob-47Q" secondAttribute="leading" id="sle-jT-O5S"/>

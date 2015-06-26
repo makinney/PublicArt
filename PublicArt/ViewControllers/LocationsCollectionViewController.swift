@@ -41,7 +41,7 @@ class LocationsCollectionViewController: UICollectionViewController, UINavigatio
 		navigationController?.interactivePopGestureRecognizer?.enabled = false
 		navigationController?.delegate = self
 		
-		title = "Locations"
+		title = "Locations" // TITLE
 		
 		var nibName = UINib(nibName: "LocationCollectionViewCell", bundle: nil) // TODO:
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: "LocationCollectionViewCell")
@@ -75,7 +75,6 @@ class LocationsCollectionViewController: UICollectionViewController, UINavigatio
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-		self.navigationController?.navigationBar.topItem?.title = "Public Art"
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -209,13 +208,13 @@ class LocationsCollectionViewController: UICollectionViewController, UINavigatio
 		cell.imageView.image = nil
 		// TODO add activity indicators
 		if let locPhoto = location.photo {
-			cell.imageFileName = locPhoto.imageFileName
-			ImageDownload.downloadLocPhoto(location, complete: { (data, imageFileName) -> () in
-				if let data = data
-					where cell.imageFileName == imageFileName {
-						cell.imageView.image = UIImage(data: data) ?? UIImage()
-				}
-			})
+//			cell.imageFileName = locPhoto.imageFileName
+//			ImageDownload.downloadLocPhoto(location, complete: { (data, imageFileName) -> () in
+//				if let data = data
+//					where cell.imageFileName == imageFileName {
+//						cell.imageView.image = UIImage(data: data) ?? UIImage()
+//				}
+//			})
 		}
 		
 		return cell
@@ -258,9 +257,10 @@ class LocationsCollectionViewController: UICollectionViewController, UINavigatio
 	
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 		if let location = fetchResultsController.objectAtIndexPath(indexPath) as? Location {
-			var vc: ArtPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtPiecesViewController.rawValue) as! ArtPiecesCollectionViewController
+			var navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as! UINavigationController
+			var vc: ArtPiecesCollectionViewController = navigationController.viewControllers.last as! ArtPiecesCollectionViewController
 			vc.location = location
-			showDetailViewController(vc, sender: self)
+			showDetailViewController(navigationController, sender: self)
 		}
 	}
 	
