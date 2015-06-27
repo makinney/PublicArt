@@ -77,8 +77,6 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 		fetchResultsController.delegate = self
 		fetchResultsController.performFetch(&error)
 		
-		collectionView?.reloadData()
-		
 		userInterfaceIdion = traitCollection.userInterfaceIdiom
 		if userInterfaceIdion == .Pad {
 			displayDefaultArt()
@@ -95,15 +93,31 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 //		collectionView?.reloadData()
 	}
 	
+	// TODO: fix rotations - note may have to pass transition to size to setupArtCityViewController
 	override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-		if initialHorizontalSizeClass == .Compact {
-			displayDefaultArt()
-		}
+//		if self.view.frame.size.width != size.width ||
+//			self.view.frame.size.height != size.height {
+//				setupArtCityPhotosFlowLayout()
+//				collectionView?.reloadData()
+//		
+//		}
+//		if initialHorizontalSizeClass == .Compact {
+//			displayDefaultArt()
+//		}
 	}
-	
+	// TODO: fix for rotation
 	override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
-		setupArtCityPhotosFlowLayout()
-		collectionView?.reloadData()
+		if let previousTraitCollection = previousTraitCollection {
+			userInterfaceIdion = traitCollection.userInterfaceIdiom
+			if userInterfaceIdion == .Pad {
+				setupArtCityPhotosFlowLayout()
+				collectionView?.reloadData()
+			} else if traitCollection.horizontalSizeClass != previousTraitCollection.horizontalSizeClass ||
+				traitCollection.verticalSizeClass != previousTraitCollection.verticalSizeClass {
+				setupArtCityPhotosFlowLayout()
+				collectionView?.reloadData()
+			}
+		}
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -250,6 +264,11 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 	
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
+		
+			var singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as! SingleArtViewController
+			singleArtViewController.updateArt(art, artBackgroundColor: nil)
+			showViewController(singleArtViewController, sender: self)
+			
 //			if let singleArtViewController = artNavController.viewControllers.last as? SingleArtViewController {
 //				singleArtViewController.updateArt(art, artBackgroundColor: nil)
 //				showDetailViewController(artNavController, sender: self)
@@ -259,9 +278,9 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 
 	// MARK: Notification handlers
 	
-	func contentSizeCategoryDidChange() {
-		collectionView?.reloadData()
-	}
+//	func contentSizeCategoryDidChange() {
+//		collectionView?.reloadData()
+//	}
 	
 	func newArtCityDatabase(notification: NSNotification) {
 		collectionView?.reloadData()

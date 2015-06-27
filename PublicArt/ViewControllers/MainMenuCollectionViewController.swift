@@ -177,8 +177,6 @@ class MainMenuCollectionViewController: UICollectionViewController {
 				var vc: ArtPiecesCollectionViewController = navigationController.viewControllers.last as! ArtPiecesCollectionViewController
 				showDetailViewController(navigationController, sender: self)
 			}
-		
-			
 			
 //		case MainMenuRow.Medium.rawValue:
 //		case MainMenuRow.Favorites.rawValue:

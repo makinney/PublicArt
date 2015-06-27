@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Tab Bar Controller-->
@@ -21,7 +22,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8" y="1220"/>
+            <point key="canvasLocation" x="-68" y="876"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pbb-6U-D4K">
@@ -111,10 +112,13 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="Xvn-Yy-cqt"/>
+                    <connections>
+                        <segue destination="7LR-GA-vD2" kind="show" id="ls7-Lq-f2r"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rvd-ej-nva" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2286" y="407"/>
+            <point key="canvasLocation" x="2281" y="407"/>
         </scene>
         <!--Catagory Collection View Controller-->
         <scene sceneID="xft-6g-kfM">
@@ -160,7 +164,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="3048" y="-929"/>
+            <point key="canvasLocation" x="3023" y="-339"/>
         </scene>
         <!--Locations Collection View Controller-->
         <scene sceneID="3Uf-oY-7C4">
@@ -195,7 +199,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dtn-d0-Ghk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3048" y="-245"/>
+            <point key="canvasLocation" x="3023" y="-1018"/>
         </scene>
         <!--Browse-->
         <scene sceneID="dq0-1X-0iD">
@@ -246,7 +250,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CjB-53-rk5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="733" y="2118"/>
+            <point key="canvasLocation" x="777" y="1266"/>
         </scene>
         <!--Explore-->
         <scene sceneID="AVe-nP-pbv">
@@ -265,7 +269,158 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rPS-Ee-MUG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="733" y="2816"/>
+            <point key="canvasLocation" x="1553" y="1260"/>
+        </scene>
+        <!--Single Art View Controller-->
+        <scene sceneID="NkW-6s-gqb">
+            <objects>
+                <viewController storyboardIdentifier="SingleArtViewControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7LR-GA-vD2" customClass="SingleArtViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="z3b-SB-8mS"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zno-Wm-nBC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="baY-jB-vrx">
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="czG-qf-Vbd">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="laB-Sb-Wvs" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="566"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jWh-d9-GTp" userLabel="InfoView">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="566"/>
+                                                <subviews>
+                                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="poq-xo-sc2" userLabel="artImageView">
+                                                        <rect key="frame" x="16" y="0.0" width="568" height="568"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="poq-xo-sc2" secondAttribute="height" multiplier="1:1" id="YZg-Ve-1YN"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ArtistNameLabel" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25W-RW-lvb">
+                                                        <rect key="frame" x="16" y="601" width="568" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" priority="501" constant="21" id="Cag-tM-18d"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="16"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MediumLabel" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDp-Vs-vO4">
+                                                        <rect key="frame" x="16" y="626" width="568" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" priority="503" constant="21" id="JZK-ld-Gul"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Baskerville" family="Baskerville" pointSize="16"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DimensionsLabel" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdV-Pl-et5">
+                                                        <rect key="frame" x="16" y="651" width="568" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" priority="504" constant="21" id="Duf-QK-wyT"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Baskerville" family="Baskerville" pointSize="16"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LocationLabel" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhb-wT-pDi">
+                                                        <rect key="frame" x="16" y="672" width="568" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" priority="502" constant="21" id="pZT-Dr-PFf"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Baskerville" family="Baskerville" pointSize="16"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Touch Photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Cm-oA-eUa">
+                                                        <rect key="frame" x="8" y="270" width="584" height="29"/>
+                                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ArtTitleLabel" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wel-DF-dUB">
+                                                        <rect key="frame" x="16" y="576" width="568" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" priority="500" constant="21" id="T9p-Py-Zgr"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Baskerville-BoldItalic" family="Baskerville" pointSize="16"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="wel-DF-dUB" firstAttribute="leading" secondItem="25W-RW-lvb" secondAttribute="leading" id="1bj-EF-Fxk"/>
+                                                    <constraint firstItem="VDp-Vs-vO4" firstAttribute="top" secondItem="25W-RW-lvb" secondAttribute="bottom" constant="4" id="DjD-yK-ebd"/>
+                                                    <constraint firstItem="VDp-Vs-vO4" firstAttribute="leading" secondItem="wel-DF-dUB" secondAttribute="leading" id="FrJ-gH-CjB"/>
+                                                    <constraint firstItem="sdV-Pl-et5" firstAttribute="bottom" secondItem="Uhb-wT-pDi" secondAttribute="top" id="GaC-Vg-Q3W"/>
+                                                    <constraint firstAttribute="trailing" secondItem="poq-xo-sc2" secondAttribute="trailing" constant="16" id="Guv-uH-fOf"/>
+                                                    <constraint firstAttribute="trailing" secondItem="wel-DF-dUB" secondAttribute="trailing" constant="16" id="Hda-rE-pc4"/>
+                                                    <constraint firstItem="VDp-Vs-vO4" firstAttribute="width" secondItem="wel-DF-dUB" secondAttribute="width" id="KOB-SH-jPd"/>
+                                                    <constraint firstItem="25W-RW-lvb" firstAttribute="top" secondItem="wel-DF-dUB" secondAttribute="bottom" constant="4" id="M3b-ny-YRW"/>
+                                                    <constraint firstItem="wel-DF-dUB" firstAttribute="top" secondItem="poq-xo-sc2" secondAttribute="bottom" constant="8" id="OGx-VC-DbR"/>
+                                                    <constraint firstItem="wel-DF-dUB" firstAttribute="width" secondItem="sdV-Pl-et5" secondAttribute="width" id="P6K-kt-fVb"/>
+                                                    <constraint firstAttribute="trailing" secondItem="3Cm-oA-eUa" secondAttribute="trailing" constant="8" id="S39-aO-B3J"/>
+                                                    <constraint firstItem="3Cm-oA-eUa" firstAttribute="leading" secondItem="jWh-d9-GTp" secondAttribute="leading" constant="8" id="ShL-t8-5f8"/>
+                                                    <constraint firstItem="Uhb-wT-pDi" firstAttribute="leading" secondItem="wel-DF-dUB" secondAttribute="leading" id="YsI-Ue-fvT"/>
+                                                    <constraint firstItem="poq-xo-sc2" firstAttribute="leading" secondItem="jWh-d9-GTp" secondAttribute="leading" constant="16" id="crN-0p-9e1"/>
+                                                    <constraint firstItem="poq-xo-sc2" firstAttribute="top" secondItem="jWh-d9-GTp" secondAttribute="top" id="g5h-Rw-Wyn"/>
+                                                    <constraint firstItem="sdV-Pl-et5" firstAttribute="top" secondItem="VDp-Vs-vO4" secondAttribute="bottom" constant="4" id="jiF-bO-VTD"/>
+                                                    <constraint firstItem="wel-DF-dUB" firstAttribute="width" secondItem="25W-RW-lvb" secondAttribute="width" id="m5y-4J-hcW"/>
+                                                    <constraint firstItem="wel-DF-dUB" firstAttribute="leading" secondItem="sdV-Pl-et5" secondAttribute="leading" id="ogn-Ag-E4D"/>
+                                                    <constraint firstItem="Uhb-wT-pDi" firstAttribute="width" secondItem="wel-DF-dUB" secondAttribute="width" id="tR6-Gw-4Nh"/>
+                                                    <constraint firstAttribute="height" priority="500" constant="566" id="wUk-pA-v6y"/>
+                                                    <constraint firstItem="wel-DF-dUB" firstAttribute="leading" secondItem="jWh-d9-GTp" secondAttribute="leading" constant="16" id="y5n-xp-wl3"/>
+                                                    <constraint firstItem="3Cm-oA-eUa" firstAttribute="centerY" secondItem="poq-xo-sc2" secondAttribute="centerY" id="yUZ-GC-Wip"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="centerX" secondItem="jWh-d9-GTp" secondAttribute="centerX" id="7y6-h9-wdF"/>
+                                            <constraint firstItem="jWh-d9-GTp" firstAttribute="top" secondItem="laB-Sb-Wvs" secondAttribute="top" id="MsH-Sa-NdO"/>
+                                            <constraint firstAttribute="bottom" secondItem="jWh-d9-GTp" secondAttribute="bottom" id="aEV-Jj-lSh"/>
+                                            <constraint firstAttribute="width" secondItem="jWh-d9-GTp" secondAttribute="width" id="nDc-g5-EBH"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="laB-Sb-Wvs" firstAttribute="leading" secondItem="czG-qf-Vbd" secondAttribute="leading" id="CuS-Rb-D9l"/>
+                                    <constraint firstItem="laB-Sb-Wvs" firstAttribute="top" secondItem="czG-qf-Vbd" secondAttribute="top" id="Uv4-4B-tIP"/>
+                                    <constraint firstAttribute="trailing" secondItem="laB-Sb-Wvs" secondAttribute="trailing" id="X7G-su-wgb"/>
+                                    <constraint firstAttribute="bottom" secondItem="laB-Sb-Wvs" secondAttribute="bottom" id="nKX-1p-dgl"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="czG-qf-Vbd" secondAttribute="trailing" id="a4N-3n-jgq"/>
+                            <constraint firstItem="czG-qf-Vbd" firstAttribute="top" secondItem="z3b-SB-8mS" secondAttribute="bottom" id="lgL-YT-9lc"/>
+                            <constraint firstItem="Zno-Wm-nBC" firstAttribute="top" secondItem="czG-qf-Vbd" secondAttribute="bottom" id="mle-0u-wrs"/>
+                            <constraint firstAttribute="width" secondItem="laB-Sb-Wvs" secondAttribute="width" id="vTh-Ph-t8f"/>
+                            <constraint firstItem="czG-qf-Vbd" firstAttribute="leading" secondItem="baY-jB-vrx" secondAttribute="leading" id="zgg-fb-3RO"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="iDf-Rh-oBO"/>
+                    <connections>
+                        <outlet property="artImageView" destination="poq-xo-sc2" id="xkl-zo-Ykw"/>
+                        <outlet property="artTitleLabel" destination="wel-DF-dUB" id="4oN-n1-BDq"/>
+                        <outlet property="artistNameLabel" destination="25W-RW-lvb" id="WS3-pg-qVZ"/>
+                        <outlet property="dimensionsLabel" destination="sdV-Pl-et5" id="k2o-NM-TgW"/>
+                        <outlet property="infoView" destination="jWh-d9-GTp" id="z9I-47-gjt"/>
+                        <outlet property="locationLabel" destination="Uhb-wT-pDi" id="gdr-21-6QB"/>
+                        <outlet property="mediumLabel" destination="VDp-Vs-vO4" id="Eqd-kv-LS8"/>
+                        <outlet property="scrollView" destination="czG-qf-Vbd" id="Vfn-Uf-EaR"/>
+                        <outlet property="touchImagePrompt" destination="3Cm-oA-eUa" id="i45-gS-7X9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FOy-VN-Huh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3023" y="407"/>
         </scene>
     </scenes>
     <resources>

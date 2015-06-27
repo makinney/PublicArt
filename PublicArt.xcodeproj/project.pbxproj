@@ -18,7 +18,6 @@
 		1F09BB591B2F79D400E4807C /* CatagoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB561B2F79D400E4807C /* CatagoryCollectionViewController.swift */; };
 		1F09BB5A1B2F79D400E4807C /* MainMenuSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB571B2F79D400E4807C /* MainMenuSplitViewController.swift */; };
 		1F09BB5B1B2F79D400E4807C /* LocationsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB581B2F79D400E4807C /* LocationsCollectionViewController.swift */; };
-		1F09BB5D1B2F8B1600E4807C /* PieceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB5C1B2F8B1600E4807C /* PieceViewController.swift */; };
 		1F09BB6F1B30A41200E4807C /* ArtPiecesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB6E1B30A41200E4807C /* ArtPiecesCollectionViewController.swift */; };
 		1F09BB711B30A44C00E4807C /* CategoryPiecesCollectionViewControllerswift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB701B30A44C00E4807C /* CategoryPiecesCollectionViewControllerswift.swift */; };
 		1F09BB731B30A4B800E4807C /* LocationPiecesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB721B30A4B800E4807C /* LocationPiecesCollectionViewController.swift */; };
@@ -46,6 +45,28 @@
 		1F1EE1171B2A1F1C0087FBBF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1EE10C1B2A1F1C0087FBBF /* Security.framework */; };
 		1F1EE1181B2A1F1C0087FBBF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1EE10D1B2A1F1C0087FBBF /* StoreKit.framework */; };
 		1F1EE1191B2A1F1C0087FBBF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1EE10E1B2A1F1C0087FBBF /* SystemConfiguration.framework */; };
+		1F4C73221B3E6B9F001ACEE0 /* MapAnimatedTransistioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C731A1B3E6B9F001ACEE0 /* MapAnimatedTransistioningDelegate.swift */; };
+		1F4C73231B3E6B9F001ACEE0 /* MapDismissAnimatedTransistioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C731B1B3E6B9F001ACEE0 /* MapDismissAnimatedTransistioning.swift */; };
+		1F4C73241B3E6B9F001ACEE0 /* MapPresentAnimatedTransistioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C731C1B3E6B9F001ACEE0 /* MapPresentAnimatedTransistioning.swift */; };
+		1F4C73251B3E6B9F001ACEE0 /* MapPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C731D1B3E6B9F001ACEE0 /* MapPresentationController.swift */; };
+		1F4C73261B3E6B9F001ACEE0 /* SingleArtPhotosAnimatedTransistioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C731E1B3E6B9F001ACEE0 /* SingleArtPhotosAnimatedTransistioningDelegate.swift */; };
+		1F4C73271B3E6B9F001ACEE0 /* SingleArtPhotosDismissAnimatedTransistioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C731F1B3E6B9F001ACEE0 /* SingleArtPhotosDismissAnimatedTransistioning.swift */; };
+		1F4C73281B3E6B9F001ACEE0 /* SingleArtPhotosPresentAnimatedTransistioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C73201B3E6B9F001ACEE0 /* SingleArtPhotosPresentAnimatedTransistioning.swift */; };
+		1F4C73291B3E6B9F001ACEE0 /* SingleArtPhotosPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C73211B3E6B9F001ACEE0 /* SingleArtPhotosPresentationController.swift */; };
+		1F4C73341B3E6BC3001ACEE0 /* ArtCitySupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C732A1B3E6BC3001ACEE0 /* ArtCitySupplementaryView.swift */; };
+		1F4C73351B3E6BC3001ACEE0 /* ArtCitySupplementaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F4C732B1B3E6BC3001ACEE0 /* ArtCitySupplementaryView.xib */; };
+		1F4C73361B3E6BC3001ACEE0 /* ArtTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C732C1B3E6BC3001ACEE0 /* ArtTableHeaderView.swift */; };
+		1F4C73371B3E6BC3001ACEE0 /* ArtTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F4C732D1B3E6BC3001ACEE0 /* ArtTableHeaderView.xib */; };
+		1F4C73381B3E6BC3001ACEE0 /* ArtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C732E1B3E6BC3001ACEE0 /* ArtTableViewCell.swift */; };
+		1F4C73391B3E6BC3001ACEE0 /* ArtTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F4C732F1B3E6BC3001ACEE0 /* ArtTableViewCell.xib */; };
+		1F4C733A1B3E6BC3001ACEE0 /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C73301B3E6BC3001ACEE0 /* MapTableViewCell.swift */; };
+		1F4C733B1B3E6BC3001ACEE0 /* MapTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F4C73311B3E6BC3001ACEE0 /* MapTableViewCell.xib */; };
+		1F4C733C1B3E6BC3001ACEE0 /* SingleArtPhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C73321B3E6BC3001ACEE0 /* SingleArtPhotosCollectionViewCell.swift */; };
+		1F4C733D1B3E6BC3001ACEE0 /* SingleArtPhotosCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F4C73331B3E6BC3001ACEE0 /* SingleArtPhotosCollectionViewCell.xib */; };
+		1F4C73421B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C733E1B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewController.swift */; };
+		1F4C73431B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C733F1B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewFlowLayout.swift */; };
+		1F4C73441B3E6E02001ACEE0 /* SingleArtSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C73401B3E6E02001ACEE0 /* SingleArtSummaryViewController.swift */; };
+		1F4C73451B3E6E02001ACEE0 /* SingleArtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C73411B3E6E02001ACEE0 /* SingleArtViewController.swift */; };
 		1F8915F71B229ED400E83891 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8915F61B229ED400E83891 /* MenuModel.swift */; };
 		1F8916591B23C21D00E83891 /* PublicArtModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916571B23C21D00E83891 /* PublicArtModel.xcdatamodeld */; };
 		1F8916921B23D04100E83891 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916911B23D04100E83891 /* CoreDataStack.swift */; };
@@ -170,7 +191,6 @@
 		1F09BB561B2F79D400E4807C /* CatagoryCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CatagoryCollectionViewController.swift; path = ViewControllers/CatagoryCollectionViewController.swift; sourceTree = "<group>"; };
 		1F09BB571B2F79D400E4807C /* MainMenuSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = MainMenuSplitViewController.swift; path = ViewControllers/MainMenuSplitViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1F09BB581B2F79D400E4807C /* LocationsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationsCollectionViewController.swift; path = ViewControllers/LocationsCollectionViewController.swift; sourceTree = "<group>"; };
-		1F09BB5C1B2F8B1600E4807C /* PieceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieceViewController.swift; path = ViewControllers/PieceViewController.swift; sourceTree = "<group>"; };
 		1F09BB6E1B30A41200E4807C /* ArtPiecesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtPiecesCollectionViewController.swift; path = ViewControllers/ArtPiecesCollectionViewController.swift; sourceTree = "<group>"; };
 		1F09BB701B30A44C00E4807C /* CategoryPiecesCollectionViewControllerswift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CategoryPiecesCollectionViewControllerswift.swift; path = ViewControllers/CategoryPiecesCollectionViewControllerswift.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1F09BB721B30A4B800E4807C /* LocationPiecesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationPiecesCollectionViewController.swift; path = ViewControllers/LocationPiecesCollectionViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +217,28 @@
 		1F1EE10C1B2A1F1C0087FBBF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1F1EE10D1B2A1F1C0087FBBF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1F1EE10E1B2A1F1C0087FBBF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1F4C731A1B3E6B9F001ACEE0 /* MapAnimatedTransistioningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapAnimatedTransistioningDelegate.swift; path = Transistions/MapAnimatedTransistioningDelegate.swift; sourceTree = "<group>"; };
+		1F4C731B1B3E6B9F001ACEE0 /* MapDismissAnimatedTransistioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapDismissAnimatedTransistioning.swift; path = Transistions/MapDismissAnimatedTransistioning.swift; sourceTree = "<group>"; };
+		1F4C731C1B3E6B9F001ACEE0 /* MapPresentAnimatedTransistioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapPresentAnimatedTransistioning.swift; path = Transistions/MapPresentAnimatedTransistioning.swift; sourceTree = "<group>"; };
+		1F4C731D1B3E6B9F001ACEE0 /* MapPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapPresentationController.swift; path = Transistions/MapPresentationController.swift; sourceTree = "<group>"; };
+		1F4C731E1B3E6B9F001ACEE0 /* SingleArtPhotosAnimatedTransistioningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleArtPhotosAnimatedTransistioningDelegate.swift; path = Transistions/SingleArtPhotosAnimatedTransistioningDelegate.swift; sourceTree = "<group>"; };
+		1F4C731F1B3E6B9F001ACEE0 /* SingleArtPhotosDismissAnimatedTransistioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleArtPhotosDismissAnimatedTransistioning.swift; path = Transistions/SingleArtPhotosDismissAnimatedTransistioning.swift; sourceTree = "<group>"; };
+		1F4C73201B3E6B9F001ACEE0 /* SingleArtPhotosPresentAnimatedTransistioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleArtPhotosPresentAnimatedTransistioning.swift; path = Transistions/SingleArtPhotosPresentAnimatedTransistioning.swift; sourceTree = "<group>"; };
+		1F4C73211B3E6B9F001ACEE0 /* SingleArtPhotosPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleArtPhotosPresentationController.swift; path = Transistions/SingleArtPhotosPresentationController.swift; sourceTree = "<group>"; };
+		1F4C732A1B3E6BC3001ACEE0 /* ArtCitySupplementaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtCitySupplementaryView.swift; path = Views/ArtCitySupplementaryView.swift; sourceTree = "<group>"; };
+		1F4C732B1B3E6BC3001ACEE0 /* ArtCitySupplementaryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArtCitySupplementaryView.xib; path = Views/ArtCitySupplementaryView.xib; sourceTree = "<group>"; };
+		1F4C732C1B3E6BC3001ACEE0 /* ArtTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtTableHeaderView.swift; path = Views/ArtTableHeaderView.swift; sourceTree = "<group>"; };
+		1F4C732D1B3E6BC3001ACEE0 /* ArtTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArtTableHeaderView.xib; path = Views/ArtTableHeaderView.xib; sourceTree = "<group>"; };
+		1F4C732E1B3E6BC3001ACEE0 /* ArtTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtTableViewCell.swift; path = Views/ArtTableViewCell.swift; sourceTree = "<group>"; };
+		1F4C732F1B3E6BC3001ACEE0 /* ArtTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArtTableViewCell.xib; path = Views/ArtTableViewCell.xib; sourceTree = "<group>"; };
+		1F4C73301B3E6BC3001ACEE0 /* MapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapTableViewCell.swift; path = Views/MapTableViewCell.swift; sourceTree = "<group>"; };
+		1F4C73311B3E6BC3001ACEE0 /* MapTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MapTableViewCell.xib; path = Views/MapTableViewCell.xib; sourceTree = "<group>"; };
+		1F4C73321B3E6BC3001ACEE0 /* SingleArtPhotosCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleArtPhotosCollectionViewCell.swift; path = Views/SingleArtPhotosCollectionViewCell.swift; sourceTree = "<group>"; };
+		1F4C73331B3E6BC3001ACEE0 /* SingleArtPhotosCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SingleArtPhotosCollectionViewCell.xib; path = Views/SingleArtPhotosCollectionViewCell.xib; sourceTree = "<group>"; };
+		1F4C733E1B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleArtPhotosCollectionViewController.swift; path = ViewControllers/SingleArtPhotosCollectionViewController.swift; sourceTree = "<group>"; };
+		1F4C733F1B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleArtPhotosCollectionViewFlowLayout.swift; path = ViewControllers/SingleArtPhotosCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		1F4C73401B3E6E02001ACEE0 /* SingleArtSummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleArtSummaryViewController.swift; path = ViewControllers/SingleArtSummaryViewController.swift; sourceTree = "<group>"; };
+		1F4C73411B3E6E02001ACEE0 /* SingleArtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleArtViewController.swift; path = ViewControllers/SingleArtViewController.swift; sourceTree = "<group>"; };
 		1F8915F61B229ED400E83891 /* MenuModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuModel.swift; path = Models/MenuModel.swift; sourceTree = "<group>"; };
 		1F8916581B23C21D00E83891 /* PublicArtModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PublicArtModel.xcdatamodel; sourceTree = "<group>"; };
 		1F8916911B23D04100E83891 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = CoreData/CoreDataStack.swift; sourceTree = "<group>"; };
@@ -357,8 +399,11 @@
 		1F01D4041B22742800D4B156 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1F4C733E1B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewController.swift */,
+				1F4C733F1B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewFlowLayout.swift */,
+				1F4C73401B3E6E02001ACEE0 /* SingleArtSummaryViewController.swift */,
+				1F4C73411B3E6E02001ACEE0 /* SingleArtViewController.swift */,
 				1F09BB6E1B30A41200E4807C /* ArtPiecesCollectionViewController.swift */,
-				1F09BB5C1B2F8B1600E4807C /* PieceViewController.swift */,
 				1F09BB561B2F79D400E4807C /* CatagoryCollectionViewController.swift */,
 				1F09BB701B30A44C00E4807C /* CategoryPiecesCollectionViewControllerswift.swift */,
 				1F09BB581B2F79D400E4807C /* LocationsCollectionViewController.swift */,
@@ -372,6 +417,16 @@
 		1F01D4091B22783700D4B156 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1F4C732A1B3E6BC3001ACEE0 /* ArtCitySupplementaryView.swift */,
+				1F4C732B1B3E6BC3001ACEE0 /* ArtCitySupplementaryView.xib */,
+				1F4C732C1B3E6BC3001ACEE0 /* ArtTableHeaderView.swift */,
+				1F4C732D1B3E6BC3001ACEE0 /* ArtTableHeaderView.xib */,
+				1F4C732E1B3E6BC3001ACEE0 /* ArtTableViewCell.swift */,
+				1F4C732F1B3E6BC3001ACEE0 /* ArtTableViewCell.xib */,
+				1F4C73301B3E6BC3001ACEE0 /* MapTableViewCell.swift */,
+				1F4C73311B3E6BC3001ACEE0 /* MapTableViewCell.xib */,
+				1F4C73321B3E6BC3001ACEE0 /* SingleArtPhotosCollectionViewCell.swift */,
+				1F4C73331B3E6BC3001ACEE0 /* SingleArtPhotosCollectionViewCell.xib */,
 				1F0E25B51B3C8BF0003DB8AF /* LocationCollectionViewCell.swift */,
 				1F0E25B61B3C8BF0003DB8AF /* LocationCollectionViewCell.xib */,
 				1F09BB781B30BE8100E4807C /* ArtworkCollectionViewCell.swift */,
@@ -524,6 +579,14 @@
 		1F8916801B23CF4D00E83891 /* Transistions */ = {
 			isa = PBXGroup;
 			children = (
+				1F4C731A1B3E6B9F001ACEE0 /* MapAnimatedTransistioningDelegate.swift */,
+				1F4C731B1B3E6B9F001ACEE0 /* MapDismissAnimatedTransistioning.swift */,
+				1F4C731C1B3E6B9F001ACEE0 /* MapPresentAnimatedTransistioning.swift */,
+				1F4C731D1B3E6B9F001ACEE0 /* MapPresentationController.swift */,
+				1F4C731E1B3E6B9F001ACEE0 /* SingleArtPhotosAnimatedTransistioningDelegate.swift */,
+				1F4C731F1B3E6B9F001ACEE0 /* SingleArtPhotosDismissAnimatedTransistioning.swift */,
+				1F4C73201B3E6B9F001ACEE0 /* SingleArtPhotosPresentAnimatedTransistioning.swift */,
+				1F4C73211B3E6B9F001ACEE0 /* SingleArtPhotosPresentationController.swift */,
 			);
 			name = Transistions;
 			sourceTree = "<group>";
@@ -692,11 +755,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F01D3EA1B22713400D4B156 /* Main.storyboard in Resources */,
+				1F4C73351B3E6BC3001ACEE0 /* ArtCitySupplementaryView.xib in Resources */,
+				1F4C73371B3E6BC3001ACEE0 /* ArtTableHeaderView.xib in Resources */,
 				1F09BB7B1B30BE8100E4807C /* ArtworkCollectionViewCell.xib in Resources */,
 				1F01D3EF1B22713400D4B156 /* LaunchScreen.xib in Resources */,
 				1F0E25B81B3C8BF0003DB8AF /* LocationCollectionViewCell.xib in Resources */,
 				1F01D3EC1B22713400D4B156 /* Images.xcassets in Resources */,
 				1F01D4111B227B2000D4B156 /* HomeCollectionViewCell.xib in Resources */,
+				1F4C733B1B3E6BC3001ACEE0 /* MapTableViewCell.xib in Resources */,
+				1F4C733D1B3E6BC3001ACEE0 /* SingleArtPhotosCollectionViewCell.xib in Resources */,
+				1F4C73391B3E6BC3001ACEE0 /* ArtTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,6 +784,7 @@
 			files = (
 				1FC6F81E1B3A4CF500810258 /* Photo.swift in Sources */,
 				1F8916A11B23D1D700E83891 /* ArtFileManager.swift in Sources */,
+				1F4C73361B3E6BC3001ACEE0 /* ArtTableHeaderView.swift in Sources */,
 				1F8916BB1B23D22B00E83891 /* ArtMapAnnotation.swift in Sources */,
 				1F8916BD1B23D22B00E83891 /* ArtUserLocation.swift in Sources */,
 				1F01D3E31B22713400D4B156 /* AppDelegate.swift in Sources */,
@@ -724,13 +793,19 @@
 				1F8916A01B23D1D700E83891 /* ArtDataManager.swift in Sources */,
 				1F8916EE1B23F29800E83891 /* UIImageViewExtension.swift in Sources */,
 				1F8916EC1B23F29800E83891 /* LocationExtension.swift in Sources */,
+				1F4C733C1B3E6BC3001ACEE0 /* SingleArtPhotosCollectionViewCell.swift in Sources */,
 				1FC6F8241B3A510B00810258 /* ParseThumb.swift in Sources */,
 				1F1EE0F51B26472B0087FBBF /* LogInUser.swift in Sources */,
 				1F8916B21B23D20700E83891 /* GeneralIdentifiers.swift in Sources */,
+				1F4C73341B3E6BC3001ACEE0 /* ArtCitySupplementaryView.swift in Sources */,
 				1F8916A41B23D1D700E83891 /* ArtPhotoImages.swift in Sources */,
 				1F09BB821B3102ED00E4807C /* ParsePhoto.swift in Sources */,
+				1F4C73291B3E6B9F001ACEE0 /* SingleArtPhotosPresentationController.swift in Sources */,
 				1FC6F8261B3A515500810258 /* ParseArt.swift in Sources */,
+				1F4C73441B3E6E02001ACEE0 /* SingleArtSummaryViewController.swift in Sources */,
+				1F4C73251B3E6B9F001ACEE0 /* MapPresentationController.swift in Sources */,
 				1FC6F8321B3C782C00810258 /* Location.swift in Sources */,
+				1F4C73381B3E6BC3001ACEE0 /* ArtTableViewCell.swift in Sources */,
 				1F09BB9C1B32886900E4807C /* ArtistExtension.swift in Sources */,
 				1F8916591B23C21D00E83891 /* PublicArtModel.xcdatamodeld in Sources */,
 				1F09BB731B30A4B800E4807C /* LocationPiecesCollectionViewController.swift in Sources */,
@@ -741,11 +816,14 @@
 				1F8915F71B229ED400E83891 /* MenuModel.swift in Sources */,
 				1FC6F8361B3C797100810258 /* LocPhotoExtension.swift in Sources */,
 				1F09BB5B1B2F79D400E4807C /* LocationsCollectionViewController.swift in Sources */,
+				1F4C73231B3E6B9F001ACEE0 /* MapDismissAnimatedTransistioning.swift in Sources */,
 				1F8916F61B23F67A00E83891 /* ArtRefresh.swift in Sources */,
 				1F8916A51B23D1D700E83891 /* ArtPhotosByLocation.swift in Sources */,
 				1F8916A21B23D1D700E83891 /* ArtPhotoCache.swift in Sources */,
 				1FC6F8301B3C776F00810258 /* LocPhoto.swift in Sources */,
 				1F8916BE1B23D22B00E83891 /* MappingIdentifiers.swift in Sources */,
+				1F4C73271B3E6B9F001ACEE0 /* SingleArtPhotosDismissAnimatedTransistioning.swift in Sources */,
+				1F4C73261B3E6B9F001ACEE0 /* SingleArtPhotosAnimatedTransistioningDelegate.swift in Sources */,
 				1F8916CA1B23D59700E83891 /* ImageProcess.swift in Sources */,
 				1F8916A91B23D1D700E83891 /* PhotoFileNames.swift in Sources */,
 				1F8916A81B23D1D700E83891 /* Locations.swift in Sources */,
@@ -753,6 +831,7 @@
 				1F09BB7A1B30BE8100E4807C /* ArtworkCollectionViewCell.swift in Sources */,
 				1F8916BF1B23D22B00E83891 /* MKArtAnnotationView.swift in Sources */,
 				1F8916A31B23D1D700E83891 /* ArtPhotoDownloader.swift in Sources */,
+				1F4C73281B3E6B9F001ACEE0 /* SingleArtPhotosPresentAnimatedTransistioning.swift in Sources */,
 				1FC6F8281B3A52D100810258 /* ThumbExtension.swift in Sources */,
 				1F8916BC1B23D22B00E83891 /* ArtMapPins.swift in Sources */,
 				1F8916F21B23F2F000E83891 /* WebService.swift in Sources */,
@@ -761,23 +840,28 @@
 				1F8916EB1B23F29800E83891 /* ArtExtension.swift in Sources */,
 				1F8916B11B23D20700E83891 /* DbaseIds.swift in Sources */,
 				1F8916CD1B23D76E00E83891 /* ImageProcess.m in Sources */,
+				1F4C733A1B3E6BC3001ACEE0 /* MapTableViewCell.swift in Sources */,
 				1FC6F82A1B3B7F6F00810258 /* ImageDownload.swift in Sources */,
 				1F8916F01B23F2CE00E83891 /* Fetcher.swift in Sources */,
 				1F01D4101B227B2000D4B156 /* HomeCollectionViewCell.swift in Sources */,
 				1FC6F81C1B3A4CF500810258 /* Artist.swift in Sources */,
 				1F09BB591B2F79D400E4807C /* CatagoryCollectionViewController.swift in Sources */,
+				1F4C73451B3E6E02001ACEE0 /* SingleArtViewController.swift in Sources */,
 				1FC6F82C1B3B7FCA00810258 /* ParseWebService.swift in Sources */,
 				1F8916B51B23D21900E83891 /* SwiftyJSON.swift in Sources */,
 				1F0E25B71B3C8BF0003DB8AF /* LocationCollectionViewCell.swift in Sources */,
 				1F8916B31B23D20700E83891 /* StoryboardIdentifiers.swift in Sources */,
+				1F4C73431B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewFlowLayout.swift in Sources */,
+				1F4C73421B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewController.swift in Sources */,
 				1F09BB8E1B31F54B00E4807C /* ParseArtist.swift in Sources */,
 				1F09BB5A1B2F79D400E4807C /* MainMenuSplitViewController.swift in Sources */,
-				1F09BB5D1B2F8B1600E4807C /* PieceViewController.swift in Sources */,
+				1F4C73221B3E6B9F001ACEE0 /* MapAnimatedTransistioningDelegate.swift in Sources */,
 				1FC6F8341B3C78AB00810258 /* ParseLocPhoto.swift in Sources */,
 				1F09BB6F1B30A41200E4807C /* ArtPiecesCollectionViewController.swift in Sources */,
 				1F8916B01B23D20700E83891 /* CoreDataIdentifiers.swift in Sources */,
 				1F8916ED1B23F29800E83891 /* PhotoExtension.swift in Sources */,
 				1FC6F8201B3A4CF500810258 /* Thumb.swift in Sources */,
+				1F4C73241B3E6B9F001ACEE0 /* MapPresentAnimatedTransistioning.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

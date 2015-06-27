@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SingleArtPhotosCollectionViewCell" customModule="ArtCity" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nGu-VZ-K2q">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YDu-tw-vrg">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YDu-tw-vrg" firstAttribute="leading" secondItem="nGu-VZ-K2q" secondAttribute="leading" id="GeM-f8-TV0"/>
+                            <constraint firstAttribute="bottom" secondItem="YDu-tw-vrg" secondAttribute="bottom" id="K7g-yH-vUh"/>
+                            <constraint firstAttribute="trailing" secondItem="YDu-tw-vrg" secondAttribute="trailing" id="URQ-19-Hvo"/>
+                            <constraint firstItem="YDu-tw-vrg" firstAttribute="top" secondItem="nGu-VZ-K2q" secondAttribute="top" id="aKZ-sc-IvQ"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="nGu-VZ-K2q" secondAttribute="trailing" id="aaM-mX-wWT"/>
+                <constraint firstItem="nGu-VZ-K2q" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="fWb-kL-fQc"/>
+                <constraint firstAttribute="bottom" secondItem="nGu-VZ-K2q" secondAttribute="bottom" id="krJ-9a-CDU"/>
+                <constraint firstItem="nGu-VZ-K2q" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="nRs-Qm-bvl"/>
+            </constraints>
+            <connections>
+                <outlet property="imageView" destination="YDu-tw-vrg" id="xeM-BE-hkr"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

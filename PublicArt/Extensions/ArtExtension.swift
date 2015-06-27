@@ -32,6 +32,7 @@ extension Art {
 			art.missing = parseArt.missing ?? false
 			art.tags = parseArt.tags ?? ""
 			art.title = parseArt.title ?? ""
+			art.address = parseArt.address ?? ""
 			
 			var latitude = parseArt.latitude ?? ""
 			var longitude = parseArt.longitude ?? ""
@@ -76,6 +77,7 @@ extension Art {
 		art.missing = parseArt.missing ?? false
 		art.tags = parseArt.tags ?? ""
 		art.title = parseArt.title ?? ""
+		art.address = parseArt.address ?? ""
 		
 		var latitude = parseArt.latitude ?? ""
 		var longitude = parseArt.longitude ?? ""
