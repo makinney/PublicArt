@@ -28,7 +28,7 @@ class MainMenuCollectionViewController: UICollectionViewController {
 	
 		collectionView?.reloadData()
 		
-		self.title = "Main Menu" // TITLE
+		self.title = "Menu" // TITLE
 		
     }
 
@@ -72,27 +72,30 @@ class MainMenuCollectionViewController: UICollectionViewController {
 			var masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
 			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
 			
-			collectionViewFlowLayout.minimumLineSpacing = 2
 			var minimumPhotosPerLine = 0 // ultimately up to flow layout
 			
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
 			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
-				let sectionInset: CGFloat = 2
+				collectionViewFlowLayout.minimumLineSpacing = 2
+				let sectionInset: CGFloat = 1
+				collectionViewFlowLayout.sectionInset.top = sectionInset * 2
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = sectionInset / 2.0
+				let itemSpacing: CGFloat = sectionInset
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
-				
 				
 				minimumPhotosPerLine = 2
 				var maxPhotoWidth = maxCellWidth(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
 				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxPhotoWidth) // TODO: hard constant hack for aspect ratio
 			} else {
-				let sectionInset: CGFloat = 2
+				collectionViewFlowLayout.minimumLineSpacing = 2
+				let sectionInset: CGFloat = 1
+				collectionViewFlowLayout.sectionInset.top = sectionInset * 2
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = sectionInset / 2.0
+				let itemSpacing: CGFloat = sectionInset
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
+				
 				minimumPhotosPerLine = 1
 				var maxPhotoWidth = maxCellWidth(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
 				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxPhotoWidth)
