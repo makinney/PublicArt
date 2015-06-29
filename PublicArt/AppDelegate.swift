@@ -20,8 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
+		self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+		var welcomeViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewControllerWithIdentifier(WelcomeIdentifier.WelcomeViewController.rawValue) as? WelcomeViewController
+		self.window?.rootViewController = welcomeViewController
+		self.window?.makeKeyAndVisible()
+
 		
-	//	artRefreshFromWeb()
+		//
 		Parse.enableLocalDatastore()
 		ParsePhoto.registerSubclass()
 		ParseArtist.registerSubclass()
@@ -36,6 +41,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	
 		return true
+	}
+	
+	func useWelcomeAsRoot() {
+		
+	}
+	
+	func normalWindowRoot(#animate: Bool) {
+		let mainViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.MainViewController.rawValue) as? UITabBarController
+		if animate == false {
+			self.window?.rootViewController = mainViewController
+		} else {
+		
+			UIView.transitionWithView(self.window!,
+									  duration: 0.25,
+									   options: UIViewAnimationOptions.CurveEaseInOut,
+									animations: { () -> Void in
+									
+						self.window!.rootViewController!.view.alpha = 0.0
+				
+				}, completion: { (done) -> Void in
+				
+					mainViewController!.view.alpha = 0.0
+					self.window!.rootViewController = mainViewController!
+			
+					UIView.transitionWithView(self.window!,
+											duration: 0.5,
+											options: UIViewAnimationOptions.CurveEaseInOut,
+										animations: { () -> Void in
+										
+					mainViewController!.view.alpha = 1.0
+					
+					}, completion: { (done) -> Void in
+					
+				})
+			})
+		
+		}
 	}
 
 	func applicationWillResignActive(application: UIApplication) {

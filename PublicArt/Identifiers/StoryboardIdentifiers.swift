@@ -31,23 +31,19 @@ enum SegueIdentifier: String {
 }
 
 enum ViewControllerIdentifier: String { // TODO: make these consistent
+	case MainViewController = "MainTabBarControllerID"
 	case ArtPiecesViewController = "ArtPiecesViewControllerID"
 	case LocationCollectionViewController = "LocationCollectionViewControllerID"
 	case ArtViewController = "ArtViewControllerID"
 	case SingleArtViewController = "SingleArtViewControllerID"
-/*
-	case ArtViewController = "idArtViewController"
-	case ArtNavigationController = "idArtNavigationController"
-	case CityMapsListViewController = "idCityMapsListViewController"
-	case CityMapsViewController = "idCityMapsViewController"
-	case CityMapsNavigationController = "idCityMapsNavigationController"
-	case GridCollectionViewController = "GridCollectionViewController"
-	case MapViewController = "MapViewController"
-	case PhotoCollectionViewController = "PhotoCollectionViewController"
-	case PhotoViewController = "PhotoViewController"
-	case SingleArtViewController = "idSingleArtViewController"
-	case SubTopicListViewController = "idSubTopicListViewController"
-	case TopicListViewController = "idTopicListViewController"
-	*/
+}
+
+enum WelcomeIdentifier: String {
+	case WelcomeViewController = "WelcomeViewControllerID"
+	case PublicViewController = "WelcomePublicViewControllerID"
+	case BrowseViewController = "WelcomeBrowseViewControllerID"
+	case ExploreViewController = "WelcomeExploreViewControllerID"
+	case DiscoverViewController = "WelcomeDiscoverViewControllerID"
+	case ContributeViewController = "WelcomeContributeViewControllerID"
 }
 
