@@ -61,15 +61,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public Art" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGV-3y-yIa">
-                                <rect key="frame" x="16" y="238" width="568" height="70"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="IU8-cz-ec9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="42"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Francisco" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knv-On-Lym">
                                 <rect key="frame" x="16" y="307" width="568" height="64"/>
                                 <constraints>
@@ -89,19 +80,28 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public Art" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGV-3y-yIa">
+                                <rect key="frame" x="16" y="247" width="568" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="IU8-cz-ec9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="42"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="cd6-yU-ONG" secondAttribute="centerX" constant="-0.5" id="8zL-Ka-bKg"/>
+                            <constraint firstAttribute="centerY" secondItem="knv-On-Lym" secondAttribute="centerY" constant="-39" id="6fy-04-hFN"/>
+                            <constraint firstAttribute="centerX" secondItem="cd6-yU-ONG" secondAttribute="centerX" id="8zL-Ka-bKg"/>
                             <constraint firstAttribute="centerX" secondItem="knv-On-Lym" secondAttribute="centerX" id="90z-1C-YPW"/>
                             <constraint firstItem="8Cm-hR-ZbQ" firstAttribute="top" secondItem="cd6-yU-ONG" secondAttribute="bottom" constant="10" id="GZD-P7-pIg"/>
+                            <constraint firstAttribute="centerY" secondItem="dGV-3y-yIa" secondAttribute="centerY" constant="18" id="GwR-yz-TWk"/>
                             <constraint firstAttribute="centerX" secondItem="dGV-3y-yIa" secondAttribute="centerX" id="Lta-8g-Tmh"/>
                             <constraint firstAttribute="trailing" secondItem="knv-On-Lym" secondAttribute="trailing" constant="16" id="RWQ-mi-wLl"/>
                             <constraint firstItem="dGV-3y-yIa" firstAttribute="leading" secondItem="4zj-Xk-WBu" secondAttribute="leading" constant="16" id="UbV-pZ-0PE"/>
                             <constraint firstItem="dGV-3y-yIa" firstAttribute="trailing" secondItem="4zj-Xk-WBu" secondAttribute="trailing" constant="-16" id="efx-pT-hdN"/>
-                            <constraint firstItem="dGV-3y-yIa" firstAttribute="top" secondItem="jBc-XB-5Gz" secondAttribute="bottom" constant="218" id="mwL-T6-6nm"/>
                             <constraint firstItem="knv-On-Lym" firstAttribute="leading" secondItem="4zj-Xk-WBu" secondAttribute="leading" constant="16" id="szx-qV-czn"/>
-                            <constraint firstItem="knv-On-Lym" firstAttribute="top" secondItem="jBc-XB-5Gz" secondAttribute="bottom" constant="287" id="vNM-p7-OF1"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -240,8 +240,8 @@
                                     <constraint firstAttribute="width" constant="314" id="aHB-dQ-Ir9"/>
                                     <constraint firstAttribute="height" constant="42" id="qd6-eL-9tZ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Baskerville-SemiBold" family="Baskerville" pointSize="32"/>
-                                <state key="normal" title="Go App">
+                                <fontDescription key="fontDescription" name="Baskerville-BoldItalic" family="Baskerville" pointSize="32"/>
+                                <state key="normal" title="Start">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>

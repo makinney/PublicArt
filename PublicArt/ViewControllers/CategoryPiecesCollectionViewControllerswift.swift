@@ -11,7 +11,6 @@ import CoreData
 
 
 class CategoryPiecesCollectionViewController: UICollectionViewController, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout {
-	private let artPhotoImages = ArtPhotoImages.sharedInstance
 	private var collapseDetailViewController = true
 	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
 	

@@ -21,11 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
 		self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-		var welcomeViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewControllerWithIdentifier(WelcomeIdentifier.WelcomeViewController.rawValue) as? WelcomeViewController
-		self.window?.rootViewController = welcomeViewController
+//		self.normalWindowRoot(animate:false)
+		self.useWelcomeAsRoot()
 		self.window?.makeKeyAndVisible()
 
-		
+	
 		//
 		Parse.enableLocalDatastore()
 		ParsePhoto.registerSubclass()
@@ -37,14 +37,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			clientKey: "M2nmbAOma1185BZDslTSqnWGmScwGHXkswt5Ea8e")
 		
 		artDataManager = ArtDataManager(coreDataStack: CoreDataStack.sharedInstance)
-		artDataManager!.refresh()
+//		artDataManager!.refresh()
 
 	
 		return true
 	}
 	
 	func useWelcomeAsRoot() {
-		
+		var welcomeViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewControllerWithIdentifier(WelcomeIdentifier.WelcomeViewController.rawValue) as? WelcomeViewController
+		self.window?.rootViewController = welcomeViewController
 	}
 	
 	func normalWindowRoot(#animate: Bool) {

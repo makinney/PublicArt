@@ -18,7 +18,6 @@ class SingleArtSummaryViewController: UIViewController {
 	
 	var art: Art?
 	
-	private let artPhotoImages = ArtPhotoImages.sharedInstance
 	
 	required init(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)

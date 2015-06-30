@@ -35,7 +35,6 @@ class SingleArtViewController: UIViewController {
 		self.navigationController?.navigationBar.topItem?.rightBarButtonItems  = [mapButton, flexibleSpaceBarButtonItem]
 	}
 	
-	let artPhotoImages = ArtPhotoImages.sharedInstance
 	let mapAnimatedTransistioningDelegate = MapAnimatedTransistioningDelegate()
 	let singleArtPhotosAnimatedTransistionDelegate = SingleArtPhotosAnimatedTransistioningDelegate()
 	
@@ -61,7 +60,7 @@ class SingleArtViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupPhotoImage()
-		prepareButtons()
+//		prepareButtons()
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: "contentSizeCategoryDidChange", name: UIContentSizeCategoryDidChangeNotification, object: nil)
 		runAutoPromptTimer()
 	}

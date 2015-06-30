@@ -48,6 +48,7 @@
 		1F456D9B1B40D0C300302DE9 /* WelcomeExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F456D9A1B40D0C300302DE9 /* WelcomeExploreViewController.swift */; };
 		1F456D9D1B40D10A00302DE9 /* WelcomeContributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F456D9C1B40D10A00302DE9 /* WelcomeContributeViewController.swift */; };
 		1F456DA11B41BD1600302DE9 /* WelcomeDiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F456DA01B41BD1600302DE9 /* WelcomeDiscoverViewController.swift */; };
+		1F456DA31B4201F700302DE9 /* CityMapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F456DA21B4201F700302DE9 /* CityMapsViewController.swift */; };
 		1F4C73221B3E6B9F001ACEE0 /* MapAnimatedTransistioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C731A1B3E6B9F001ACEE0 /* MapAnimatedTransistioningDelegate.swift */; };
 		1F4C73231B3E6B9F001ACEE0 /* MapDismissAnimatedTransistioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C731B1B3E6B9F001ACEE0 /* MapDismissAnimatedTransistioning.swift */; };
 		1F4C73241B3E6B9F001ACEE0 /* MapPresentAnimatedTransistioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C731C1B3E6B9F001ACEE0 /* MapPresentAnimatedTransistioning.swift */; };
@@ -227,6 +228,7 @@
 		1F456D9A1B40D0C300302DE9 /* WelcomeExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeExploreViewController.swift; path = Welcome/WelcomeExploreViewController.swift; sourceTree = "<group>"; };
 		1F456D9C1B40D10A00302DE9 /* WelcomeContributeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeContributeViewController.swift; path = Welcome/WelcomeContributeViewController.swift; sourceTree = "<group>"; };
 		1F456DA01B41BD1600302DE9 /* WelcomeDiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeDiscoverViewController.swift; path = Welcome/WelcomeDiscoverViewController.swift; sourceTree = "<group>"; };
+		1F456DA21B4201F700302DE9 /* CityMapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CityMapsViewController.swift; path = ViewControllers/CityMapsViewController.swift; sourceTree = "<group>"; };
 		1F4C731A1B3E6B9F001ACEE0 /* MapAnimatedTransistioningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapAnimatedTransistioningDelegate.swift; path = Transistions/MapAnimatedTransistioningDelegate.swift; sourceTree = "<group>"; };
 		1F4C731B1B3E6B9F001ACEE0 /* MapDismissAnimatedTransistioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapDismissAnimatedTransistioning.swift; path = Transistions/MapDismissAnimatedTransistioning.swift; sourceTree = "<group>"; };
 		1F4C731C1B3E6B9F001ACEE0 /* MapPresentAnimatedTransistioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapPresentAnimatedTransistioning.swift; path = Transistions/MapPresentAnimatedTransistioning.swift; sourceTree = "<group>"; };
@@ -414,13 +416,14 @@
 		1F01D4041B22742800D4B156 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1F09BB6E1B30A41200E4807C /* ArtPiecesCollectionViewController.swift */,
+				1F456DA21B4201F700302DE9 /* CityMapsViewController.swift */,
+				1F09BB561B2F79D400E4807C /* CatagoryCollectionViewController.swift */,
+				1F09BB701B30A44C00E4807C /* CategoryPiecesCollectionViewControllerswift.swift */,
 				1F4C733E1B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewController.swift */,
 				1F4C733F1B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewFlowLayout.swift */,
 				1F4C73401B3E6E02001ACEE0 /* SingleArtSummaryViewController.swift */,
 				1F4C73411B3E6E02001ACEE0 /* SingleArtViewController.swift */,
-				1F09BB6E1B30A41200E4807C /* ArtPiecesCollectionViewController.swift */,
-				1F09BB561B2F79D400E4807C /* CatagoryCollectionViewController.swift */,
-				1F09BB701B30A44C00E4807C /* CategoryPiecesCollectionViewControllerswift.swift */,
 				1F09BB581B2F79D400E4807C /* LocationsCollectionViewController.swift */,
 				1F09BB721B30A4B800E4807C /* LocationPiecesCollectionViewController.swift */,
 				1F09BB571B2F79D400E4807C /* MainMenuSplitViewController.swift */,
@@ -831,6 +834,7 @@
 				1F4C73341B3E6BC3001ACEE0 /* ArtCitySupplementaryView.swift in Sources */,
 				1F8916A41B23D1D700E83891 /* ArtPhotoImages.swift in Sources */,
 				1F09BB821B3102ED00E4807C /* ParsePhoto.swift in Sources */,
+				1F456DA31B4201F700302DE9 /* CityMapsViewController.swift in Sources */,
 				1F4C73291B3E6B9F001ACEE0 /* SingleArtPhotosPresentationController.swift in Sources */,
 				1FC6F8261B3A515500810258 /* ParseArt.swift in Sources */,
 				1F4C73441B3E6E02001ACEE0 /* SingleArtSummaryViewController.swift in Sources */,

@@ -19,7 +19,6 @@ class SingleArtPhotosCollectionViewController: UICollectionViewController {
 		}
 	}
 	
-	var artPhotoImages: ArtPhotoImages = ArtPhotoImages.sharedInstance
 	var photoFileNames: PhotoFileNames?
 	var collectionViewFlowLayout = SingleArtPhotosCollectionViewFlowLayout()
 	
@@ -94,9 +93,9 @@ class SingleArtPhotosCollectionViewController: UICollectionViewController {
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.SingleArtPhotosCollectionViewCell.rawValue, forIndexPath: indexPath) as! SingleArtPhotosCollectionViewCell
 		if let photoFileName = photoFileNames?.getFileName(indexPath.row) {
-			artPhotoImages.getImage(photoFileName, completion: { (image) -> () in
-				cell.imageView.image = image
-			})
+//			artPhotoImages.getImage(photoFileName, completion: { (image) -> () in
+//				cell.imageView.image = image
+//			})
 		} else {
 			cell.imageView.image = nil
 		}
