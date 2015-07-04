@@ -21,11 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
 		self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-//		self.normalWindowRoot(animate:false)
-		self.useWelcomeAsRoot()
+		self.normalWindowRoot(animate:false)
+//		self.useWelcomeAsRoot()
 		self.window?.makeKeyAndVisible()
 
-	
+		setAppearanceProxies()
 		//
 		Parse.enableLocalDatastore()
 		ParsePhoto.registerSubclass()
@@ -103,6 +103,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 	}
 
+	// MARK: Appearance
+	func setAppearanceProxies() {
+	//	UIBarButtonItem.appearance().tintColor = UIColor.blackColor()
+		UINavigationBar.appearance().backgroundColor = UIColor.whiteColor()
+		UITabBar.appearance().backgroundColor = UIColor.whiteColor()
+
+		UIToolbar.appearance().setBackgroundImage(toolbarBackgroundImage(), forToolbarPosition: .Any, barMetrics: .Default)
+	}
+	
+	
+	private func toolbarBackgroundImage() -> UIImage {
+		var transparentBackground: UIImage!
+		UIGraphicsBeginImageContextWithOptions(CGSize(width: 1, height: 1), false, 0.0)
+		var context = UIGraphicsGetCurrentContext()
+		CGContextSetRGBFillColor(context, 1, 1, 1, 0)
+		UIRectFill(CGRect(x: 0.0, y: 0.0, width: 0.0, height: 0.0))
+		transparentBackground = UIGraphicsGetImageFromCurrentImageContext() ?? UIImage()
+		UIGraphicsEndImageContext()
+		return transparentBackground
+		//		toolBar.setBackgroundImage(transparentBackground, forToolbarPosition: .Any, barMetrics: .Default)
+	}
+	
 
 }
 

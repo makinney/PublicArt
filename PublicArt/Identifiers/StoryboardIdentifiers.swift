@@ -35,6 +35,7 @@ enum ViewControllerIdentifier: String { // TODO: make these consistent
 	case ArtPiecesViewController = "ArtPiecesViewControllerID"
 	case CityMapsViewController = "CityMapsViewControllerID"
 	case LocationCollectionViewController = "LocationCollectionViewControllerID"
+	case CatagoryCollectionViewController = "ExploreCollectionViewControllerID"
 	case ArtViewController = "ArtViewControllerID"
 	case SingleArtViewController = "SingleArtViewControllerID"
 }

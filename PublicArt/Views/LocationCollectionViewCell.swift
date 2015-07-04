@@ -9,8 +9,7 @@
 import UIKit
 
 class LocationCollectionViewCell: UICollectionViewCell {
-    
-	@IBOutlet weak var imageView: UIImageView!
+   
 	@IBOutlet weak var title: UILabel!
 	var imageFileName = String()
 		

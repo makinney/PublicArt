@@ -16,22 +16,6 @@
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oIU-lg-fYT">
                         <rect key="frame" x="0.0" y="0.0" width="250" height="347"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tSu-Un-lkv" userLabel="PhotoBorderView">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="347"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4y7-i2-DtZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="250" height="347"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="4y7-i2-DtZ" firstAttribute="top" secondItem="tSu-Un-lkv" secondAttribute="top" id="IP7-GW-gg6"/>
-                                    <constraint firstAttribute="bottom" secondItem="4y7-i2-DtZ" secondAttribute="bottom" id="aqA-0S-jeV"/>
-                                    <constraint firstItem="4y7-i2-DtZ" firstAttribute="leading" secondItem="tSu-Un-lkv" secondAttribute="leading" id="q0v-Qn-mPI"/>
-                                    <constraint firstAttribute="trailing" secondItem="4y7-i2-DtZ" secondAttribute="trailing" id="qLd-Zj-lfQ"/>
-                                </constraints>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUk-dK-TiW">
                                 <rect key="frame" x="0.0" y="142" width="250" height="63"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -46,14 +30,10 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerY" secondItem="OUk-dK-TiW" secondAttribute="centerY" id="4Ol-lV-y1W"/>
                             <constraint firstAttribute="trailing" secondItem="OUk-dK-TiW" secondAttribute="trailing" id="HLn-vJ-z1s"/>
                             <constraint firstItem="OUk-dK-TiW" firstAttribute="leading" secondItem="oIU-lg-fYT" secondAttribute="leading" id="HpK-wf-T6y"/>
-                            <constraint firstItem="tSu-Un-lkv" firstAttribute="leading" secondItem="oIU-lg-fYT" secondAttribute="leading" id="Hzf-zD-YMX"/>
-                            <constraint firstItem="OUk-dK-TiW" firstAttribute="centerY" secondItem="tSu-Un-lkv" secondAttribute="centerY" id="NhD-Ac-dQg"/>
-                            <constraint firstItem="OUk-dK-TiW" firstAttribute="centerX" secondItem="tSu-Un-lkv" secondAttribute="centerX" id="OSD-Vy-aVz"/>
-                            <constraint firstAttribute="bottom" secondItem="tSu-Un-lkv" secondAttribute="bottom" id="TYW-0m-AWh"/>
-                            <constraint firstItem="tSu-Un-lkv" firstAttribute="top" secondItem="oIU-lg-fYT" secondAttribute="top" id="Xkf-mQ-08l"/>
-                            <constraint firstAttribute="trailing" secondItem="tSu-Un-lkv" secondAttribute="trailing" id="v46-4z-w6T"/>
+                            <constraint firstAttribute="centerX" secondItem="OUk-dK-TiW" secondAttribute="centerX" id="spx-Dg-drO"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -68,8 +48,6 @@
             </constraints>
             <size key="customSize" width="239" height="239"/>
             <connections>
-                <outlet property="imageView" destination="4y7-i2-DtZ" id="Xed-ht-s6N"/>
-                <outlet property="photoBorderView" destination="tSu-Un-lkv" id="y6j-fY-jhm"/>
                 <outlet property="title" destination="OUk-dK-TiW" id="sUc-dN-uVv"/>
             </connections>
             <point key="canvasLocation" x="420" y="390.5"/>

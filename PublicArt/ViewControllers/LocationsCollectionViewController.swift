@@ -1,4 +1,4 @@
-//
+ //
 //  LocationsCollectionViewController.Swift
 //  PublicArt
 //
@@ -38,27 +38,16 @@ class LocationsCollectionViewController: UICollectionViewController, UINavigatio
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		navigationController?.interactivePopGestureRecognizer?.enabled = false
-		navigationController?.delegate = self
 		
 		title = "Locations" // TITLE
 		
-		var nibName = UINib(nibName: "LocationCollectionViewCell", bundle: nil) // TODO:
-		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: "LocationCollectionViewCell")
-		//		var subNibName = UINib(nibName: "ArtCitySupplementaryView", bundle: nil) // TODO:
-		//		self.collectionView?.registerNib(subNibName, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ArtCitySupplementaryView")
-		
+		var nibName = UINib(nibName: CellIdentifier.LocationCollectionViewCell.rawValue, bundle: nil) // TODO:
+		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.LocationCollectionViewCell.rawValue)
 		setupLocationPhotosFlowLayout()
 		
 		NSNotificationCenter.defaultCenter().addObserver(self,
 			selector:"newArtCityDatabase:",
 			name: ArtAppNotifications.NewArtCityDatabase.rawValue,
-			object: nil)
-		
-		
-		NSNotificationCenter.defaultCenter().addObserver(self,
-			selector: "contentSizeCategoryDidChange",
-			name: UIContentSizeCategoryDidChangeNotification,
 			object: nil)
 		
 		fetchResultsController.delegate = self
@@ -79,7 +68,6 @@ class LocationsCollectionViewController: UICollectionViewController, UINavigatio
 	
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
-		//		collectionView?.reloadData()
 	}
 	
 //	override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -93,8 +81,6 @@ class LocationsCollectionViewController: UICollectionViewController, UINavigatio
 		collectionView?.reloadData()
 	}
 	
-
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         println("\(__FILE__) \(__FUNCTION__)")
@@ -128,13 +114,6 @@ class LocationsCollectionViewController: UICollectionViewController, UINavigatio
 
 
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-	
 	
 	func setupLocationPhotosFlowLayout() {
 		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
@@ -188,7 +167,6 @@ class LocationsCollectionViewController: UICollectionViewController, UINavigatio
 	
 	
 	
-
     // MARK: UICollectionViewDataSource
 	
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -205,44 +183,8 @@ class LocationsCollectionViewController: UICollectionViewController, UINavigatio
 			cell.backgroundColor = UIColor.lightGrayColor()
 		}
 		
-		cell.imageView.image = nil
-		// TODO add activity indicators
-		if let locPhoto = location.photo {
-//			cell.imageFileName = locPhoto.imageFileName
-//			ImageDownload.downloadLocPhoto(location, complete: { (data, imageFileName) -> () in
-//				if let data = data
-//					where cell.imageFileName == imageFileName {
-//						cell.imageView.image = UIImage(data: data) ?? UIImage()
-//				}
-//			})
-		}
-		
 		return cell
 	}
-	
-	
-	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-		
-		// default square
-		var height: CGFloat = maxPhotoWidth
-		var width: CGFloat = maxPhotoWidth
-		
-		if let location = fetchResultsController.objectAtIndexPath(indexPath) as? Location {
-			if let locPhoto = location.photo {
-				var aspectRatio = locPhoto.imageAspectRatio
-				if aspectRatio > 0 && aspectRatio <= 1 {
-					height = width / CGFloat(aspectRatio.doubleValue)
-				} else if aspectRatio > 1 {
-					//width = width * 2.0  // FIXME fine tune
-					height = width / CGFloat(aspectRatio.doubleValue)
-				}
-			}
-			
-		}
-		
-		return CGSize(width: width, height: height)
-	}
-	
 	
 	override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
 		return fetchResultsController.sections?.count ?? 0
@@ -265,37 +207,40 @@ class LocationsCollectionViewController: UICollectionViewController, UINavigatio
 	}
 	
 
-	
+	// Uncomment this method to specify if the specified item should be selected
+	override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+		let location = fetchResultsController.objectAtIndexPath(indexPath) as! Location
+		if location.artwork.count > 0 {
+			return true
+		}
+		return false
+	}
 
-    /*
+
     // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
+		let location = fetchResultsController.objectAtIndexPath(indexPath) as! Location
+		if location.artwork.count > 0 {
+			return true
+		}
+		return false
     }
-    */
+	
+	override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+		var cell = collectionView.cellForItemAtIndexPath(indexPath) as? LocationCollectionViewCell
+		cell?.backgroundColor = UIColor.blueColor()
+		cell?.title.textColor = UIColor.whiteColor()
+	}
+	
+	override func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+		if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? LocationCollectionViewCell {
+			cell.backgroundColor = UIColor.whiteColor()
+			cell.title.textColor = UIColor.blackColor()
+		} else {
+		}
 
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-    
-    }
-    */
-
+	}
+	
 }
 
 extension LocationsCollectionViewController : NSFetchedResultsControllerDelegate {

@@ -52,7 +52,7 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 		if let location = self.location {
 			title = location.name // TITLE
 		} else {
-			title = "All Public Art"  // TITLE TODO: constant
+			title = "Titles"  // TITLE TODO: constant
 		}
 		
 		

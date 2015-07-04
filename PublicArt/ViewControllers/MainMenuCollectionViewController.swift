@@ -28,7 +28,7 @@ class MainMenuCollectionViewController: UICollectionViewController {
 	
 		collectionView?.reloadData()
 		
-		self.title = "Menu" // TITLE
+		self.title = "Browse" // TITLE
 		
     }
 
@@ -160,7 +160,12 @@ class MainMenuCollectionViewController: UICollectionViewController {
 	
 		switch(row) {
 //		case MainMenuRow.Artists.rawValue:
-//		case MainMenuRow.Catagory.rawValue:
+		case MainMenuRow.Catagory.rawValue:
+			var vc: CatagoryCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.CatagoryCollectionViewController.rawValue) as! CatagoryCollectionViewController
+			showViewController(vc, sender: self)
+			
+
+
 		case MainMenuRow.Neighborhoods.rawValue:
 			var vc: LocationsCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.LocationCollectionViewController.rawValue) as! LocationsCollectionViewController
 			showViewController(vc, sender: self)

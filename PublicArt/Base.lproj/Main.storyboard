@@ -258,7 +258,7 @@
                                     <constraint firstAttribute="width" constant="200" id="yGX-RK-5hD"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -272,7 +272,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CjB-53-rk5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="767" y="2308"/>
+            <point key="canvasLocation" x="595" y="2952"/>
         </scene>
         <!--Share-->
         <scene sceneID="H35-ER-kYp">
@@ -292,7 +292,7 @@
                                     <constraint firstAttribute="width" constant="265" id="Ly8-5z-Rk5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -306,7 +306,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IyS-jG-5DV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="759" y="1520"/>
+            <point key="canvasLocation" x="759" y="2044"/>
         </scene>
         <!--City Maps View Controller-->
         <scene sceneID="AVe-nP-pbv">
