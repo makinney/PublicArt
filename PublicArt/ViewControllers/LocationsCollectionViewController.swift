@@ -174,7 +174,7 @@ class LocationsCollectionViewController: UICollectionViewController, UINavigatio
 		let location = fetchResultsController.objectAtIndexPath(indexPath) as! Location
 	
 		cell.title.text = location.name
-		
+
 		if location.artwork.count > 0 {
 			cell.title.textColor = UIColor.blackColor()
 			cell.backgroundColor = UIColor.whiteColor()
@@ -227,18 +227,21 @@ class LocationsCollectionViewController: UICollectionViewController, UINavigatio
     }
 	
 	override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+		var indexPathsVisible = collectionView.indexPathsForVisibleItems()
+		for path in indexPathsVisible { // hack fix for bug where delected cells still look selected, sometimes
+			if let visiblePath = path as? NSIndexPath {
+				let location = fetchResultsController.objectAtIndexPath(visiblePath) as! Location
+				if location.artwork.count > 0 {
+					var cell = collectionView.cellForItemAtIndexPath(visiblePath) as? LocationCollectionViewCell
+					cell?.backgroundColor = UIColor.whiteColor()
+					cell?.title.textColor = UIColor.blackColor()
+				}
+			}
+		}
+	
 		var cell = collectionView.cellForItemAtIndexPath(indexPath) as? LocationCollectionViewCell
 		cell?.backgroundColor = UIColor.blueColor()
 		cell?.title.textColor = UIColor.whiteColor()
-	}
-	
-	override func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-		if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? LocationCollectionViewCell {
-			cell.backgroundColor = UIColor.whiteColor()
-			cell.title.textColor = UIColor.blackColor()
-		} else {
-		}
-
 	}
 	
 }
