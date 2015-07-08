@@ -11,7 +11,7 @@ import UIKit
 class MapPresentAnimatedTransistioning: NSObject, UIViewControllerAnimatedTransitioning {
 	
 	func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
-		return 1.5 // TODO:
+		return 1.0 // TODO:
 	}
 
 func animateTransition(transitionContext: UIViewControllerContextTransitioning) {

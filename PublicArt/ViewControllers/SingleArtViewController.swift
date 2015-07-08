@@ -15,7 +15,6 @@ class SingleArtViewController: UIViewController {
 	@IBOutlet weak var scrollView: UIScrollView!
 
 	@IBOutlet weak var dimensionsLabel: UILabel!
-	@IBOutlet weak var locationLabel: UILabel!
 	@IBOutlet weak var mediumLabel: UILabel!
 	
 	@IBOutlet weak var artTitleButton: UIButton!
@@ -25,8 +24,7 @@ class SingleArtViewController: UIViewController {
 	@IBOutlet weak var artistInfoImageView: UIImageView!
 	@IBOutlet weak var buttonHeight: NSLayoutConstraint!
 	
-	@IBAction func onTouchMapButton(sender: AnyObject) {
-	}
+	@IBOutlet weak var locationButton: UIButton!
 	
 	let mapAnimatedTransistioningDelegate = MapAnimatedTransistioningDelegate()
 	let singleArtPhotosAnimatedTransistionDelegate = SingleArtPhotosAnimatedTransistioningDelegate()
@@ -150,7 +148,7 @@ class SingleArtViewController: UIViewController {
 			}
 		}
 		
-		locationLabel.text = art?.address
+		locationButton.setTitle(art?.address ?? "", forState: .Normal)
 		
 		if let art = art {
 			ImageDownload.downloadThumb(art, complete: {[weak self] (data, imageFileName) -> () in
@@ -182,7 +180,8 @@ class SingleArtViewController: UIViewController {
 		} else 	if (segue.identifier == SegueIdentifier.ArtistToWebView.rawValue) {
 			var destinationViewController = segue.destinationViewController as! WebViewController
 			destinationViewController.webViewAddress = art?.artistWebLink
-		} else 	if (segue.identifier == SegueIdentifier.ArtToMap.rawValue) {
+		} else 	if (segue.identifier == SegueIdentifier.MapButtonToMap.rawValue) ||
+				   (segue.identifier == SegueIdentifier.LocationButtonToMap.rawValue) {
 			if let singleArtMapViewController = segue.destinationViewController as? SingleArtMapViewController {
 				singleArtMapViewController.transitioningDelegate = mapAnimatedTransistioningDelegate
 				singleArtMapViewController.modalPresentationStyle = .Custom
