@@ -123,6 +123,7 @@
 		1FC6F8361B3C797100810258 /* LocPhotoExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6F8351B3C797100810258 /* LocPhotoExtension.swift */; };
 		1FD0A7C81B4C68BC0086FDB2 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD0A7C71B4C68BC0086FDB2 /* WebViewController.swift */; };
 		1FD0A7CD1B4C98080086FDB2 /* Art.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD0A7CC1B4C98080086FDB2 /* Art.swift */; };
+		1FD0A7CF1B4CC1090086FDB2 /* SingleArtMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD0A7CE1B4CC1090086FDB2 /* SingleArtMapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -306,6 +307,7 @@
 		1FC6F8351B3C797100810258 /* LocPhotoExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocPhotoExtension.swift; path = Extensions/LocPhotoExtension.swift; sourceTree = "<group>"; };
 		1FD0A7C71B4C68BC0086FDB2 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = ViewControllers/WebViewController.swift; sourceTree = "<group>"; };
 		1FD0A7CC1B4C98080086FDB2 /* Art.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Art.swift; path = CoreData/Art.swift; sourceTree = "<group>"; };
+		1FD0A7CE1B4CC1090086FDB2 /* SingleArtMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleArtMapViewController.swift; path = ViewControllers/SingleArtMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -422,6 +424,7 @@
 				1F456DA21B4201F700302DE9 /* CityMapsViewController.swift */,
 				1F09BB561B2F79D400E4807C /* CatagoryCollectionViewController.swift */,
 				1F09BB701B30A44C00E4807C /* CategoryPiecesCollectionViewControllerswift.swift */,
+				1FD0A7CE1B4CC1090086FDB2 /* SingleArtMapViewController.swift */,
 				1F4C733E1B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewController.swift */,
 				1F4C733F1B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewFlowLayout.swift */,
 				1F4C73401B3E6E02001ACEE0 /* SingleArtSummaryViewController.swift */,
@@ -865,6 +868,7 @@
 				1F4C73261B3E6B9F001ACEE0 /* SingleArtPhotosAnimatedTransistioningDelegate.swift in Sources */,
 				1F8916CA1B23D59700E83891 /* ImageProcess.swift in Sources */,
 				1F8916A91B23D1D700E83891 /* PhotoFileNames.swift in Sources */,
+				1FD0A7CF1B4CC1090086FDB2 /* SingleArtMapViewController.swift in Sources */,
 				1F8916A81B23D1D700E83891 /* Locations.swift in Sources */,
 				1F8916921B23D04100E83891 /* CoreDataStack.swift in Sources */,
 				1F456D9D1B40D10A00302DE9 /* WelcomeContributeViewController.swift in Sources */,

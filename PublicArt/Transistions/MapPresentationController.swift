@@ -53,8 +53,8 @@ class MapPresentationController: UIPresentationController {
 	override func frameOfPresentedViewInContainerView() -> CGRect {//
 		var containerBounds:CGRect = self.containerView.bounds
 		var presentedViewFrame = CGRectZero
-		var width:CGFloat = containerBounds.size.width * 0.75
-		var height:CGFloat = containerBounds.size.height  * 0.75 // TODO: hard coded
+		var width:CGFloat = containerBounds.size.width * 0.80
+		var height:CGFloat = containerBounds.size.height  * 0.80 // TODO: hard coded
 //		if self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClass.Compact {
 //			height = 500
 //		} else {

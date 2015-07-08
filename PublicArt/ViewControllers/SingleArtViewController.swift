@@ -17,29 +17,16 @@ class SingleArtViewController: UIViewController {
 	@IBOutlet weak var dimensionsLabel: UILabel!
 	@IBOutlet weak var locationLabel: UILabel!
 	@IBOutlet weak var mediumLabel: UILabel!
-		
+	
 	@IBOutlet weak var artTitleButton: UIButton!
 	@IBOutlet weak var artistNameButton: UIButton!
 	
 	@IBOutlet weak var artTitleInfoImageView: UIImageView!
 	@IBOutlet weak var artistInfoImageView: UIImageView!
+	@IBOutlet weak var buttonHeight: NSLayoutConstraint!
 	
-	var flexibleSpaceBarButtonItem: UIBarButtonItem {
-		return UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+	@IBAction func onTouchMapButton(sender: AnyObject) {
 	}
-	
-	var fixedSpaceBarButtonItem: UIBarButtonItem {
-		return UIBarButtonItem(barButtonSystemItem: .FixedSpace , target: nil, action: nil)
-	}
-	
-	var mapButton:UIBarButtonItem {
-		return UIBarButtonItem(title: "Map", style: .Plain, target: self, action: "mapTapped")
-	}
-	
-	func prepareNavButtons() {
-		self.navigationController?.navigationBar.topItem?.rightBarButtonItems  = [mapButton, flexibleSpaceBarButtonItem]
-	}
-	
 	
 	let mapAnimatedTransistioningDelegate = MapAnimatedTransistioningDelegate()
 	let singleArtPhotosAnimatedTransistionDelegate = SingleArtPhotosAnimatedTransistioningDelegate()
@@ -50,8 +37,20 @@ class SingleArtViewController: UIViewController {
 	private var prevailingColors = [String:UIColor]()
 	private var promptUserTimer: NSTimer?
 	private let promptUserTimerTimeout: NSTimeInterval = 5
+
+	var flexibleSpaceBarButtonItem: UIBarButtonItem {
+		return UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+	}
 	
+	var fixedSpaceBarButtonItem: UIBarButtonItem {
+		return UIBarButtonItem(barButtonSystemItem: .FixedSpace , target: nil, action: nil)
+	}
 	
+//	var mapButton:UIBarButtonItem {
+//		return UIBarButtonItem(title: "Map", style: .Plain, target: self, action: "mapTapped")
+//	}
+	
+
 	required init(coder aDecoder: NSCoder) {
 		super.init(coder:aDecoder)
 	}
@@ -66,6 +65,7 @@ class SingleArtViewController: UIViewController {
 		super.viewDidLoad()
 		setupPhotoImage()
 //		prepareNavButtons()
+		prepareButtons()
 		runAutoPromptTimer()
 	}
 	
@@ -78,6 +78,14 @@ class SingleArtViewController: UIViewController {
 	 override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		hideTouchPrompt()
+	}
+	
+	func prepareNavButtons() {
+//		self.navigationController?.navigationBar.topItem?.rightBarButtonItems  = [mapButton, flexibleSpaceBarButtonItem]
+	}
+	
+	func prepareButtons() {
+// doesn't work to increase touch area..		artTitleButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 50)
 	}
 	
 	func updateArt(art: Art, artBackgroundColor: UIColor?) {
@@ -94,7 +102,21 @@ class SingleArtViewController: UIViewController {
 		self.scrollView?.backgroundColor = UIColor.whiteColor()
 		
 		var artTitle = art?.title ?? ""
+//		artTitle = "A very long title to test word wrapping and button height growth for sure"
+//	artTitle = "A very long title to test word"
 		artTitleButton.setTitle(artTitle, forState: .Normal)
+		artTitleButton.invalidateIntrinsicContentSize()
+
+	//	var leftInset = artTitleButton.titleLabel?.frame.size.width
+//	var label = artTitleButton.titleLabel
+//		var leftInset = artTitleButton.frame.size.width - artTitleButton.imageView!.frame.size.width
+
+//		var rightInset = artTitleButton.titleLabel?.frame.size.width
+//		rightInset! = 0 - rightInset!
+//		rightInset = 0 - leftInset - artTitleButton.imageView!.frame.size.width
+//		artTitleButton.imageEdgeInsets = UIEdgeInsets(top: 0, left:leftInset, bottom: 0, right: rightInset!)
+//		
+		
 		if let artWebLink = art?.artWebLink
 			where count(artWebLink) > 3  { // guard against blank strings
 			var image = UIImage(named: "toolbar-infoButton") ?? UIImage()
@@ -110,8 +132,24 @@ class SingleArtViewController: UIViewController {
 		}
 
 
-		dimensionsLabel.text = art?.dimensions
-		mediumLabel.text = art?.medium
+		if let dimensions = art?.dimensions {
+			if dimensions != "Undefined" {
+				dimensionsLabel.text =  dimensions
+			} else {
+				dimensionsLabel.text = "Dimensions " + "unknown"
+			
+			}
+		}
+
+		if let medium = art?.medium {
+			if medium != "Undefined" {
+				mediumLabel.text =  medium
+			} else {
+				mediumLabel.text = "Medium " + "unknown"
+
+			}
+		}
+		
 		locationLabel.text = art?.address
 		
 		if let art = art {
@@ -141,19 +179,18 @@ class SingleArtViewController: UIViewController {
 		if (segue.identifier == SegueIdentifier.ArtTitleToWebView.rawValue) {
 			var destinationViewController = segue.destinationViewController as! WebViewController
 			destinationViewController.webViewAddress = art?.artWebLink
-		} else
-			if (segue.identifier == SegueIdentifier.ArtistToWebView.rawValue) {
-				var destinationViewController = segue.destinationViewController as! WebViewController
-				destinationViewController.webViewAddress = art?.artistWebLink
+		} else 	if (segue.identifier == SegueIdentifier.ArtistToWebView.rawValue) {
+			var destinationViewController = segue.destinationViewController as! WebViewController
+			destinationViewController.webViewAddress = art?.artistWebLink
+		} else 	if (segue.identifier == SegueIdentifier.ArtToMap.rawValue) {
+			if let singleArtMapViewController = segue.destinationViewController as? SingleArtMapViewController {
+				singleArtMapViewController.transitioningDelegate = mapAnimatedTransistioningDelegate
+				singleArtMapViewController.modalPresentationStyle = .Custom
+				singleArtMapViewController.art = art
+			}
 		}
 		
 		
-		
-//		var destinationViewController = segue.destinationViewController as! UIViewController
-//		if let singleArtMapViewController = destinationViewController as? SingleArtMapViewController {
-//			singleArtMapViewController.transitioningDelegate = mapAnimatedTransistioningDelegate
-//			singleArtMapViewController.modalPresentationStyle = .Custom
-//			singleArtMapViewController.art = art
 //		} else if let singleArtPhotosCollectionViewController = destinationViewController as? SingleArtPhotosCollectionViewController {
 //			singleArtPhotosCollectionViewController.transitioningDelegate = singleArtPhotosAnimatedTransistionDelegate
 //			singleArtPhotosCollectionViewController.modalPresentationStyle = .Custom
