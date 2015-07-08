@@ -23,6 +23,8 @@ enum SegueIdentifier: String {
 	case ArtToPhoto = "idArtToPhoto"
 	case ArtToMap = "idArtToMap"
 	case ArtListToArtNav = "idArtListToArtNav"
+	case ArtTitleToWebView = "ArtTitleToWebViewID"
+	case ArtistToWebView = "ArtistToWebViewID"
 	case CityMapsListToCityMap = "idCityMapsListToCityMap"
 	case CityMapsListToCityMapNavController = "idCityMapsListToCityMapNavController"
 	case SubTopicListToArt = "idSubTopicListToArt"

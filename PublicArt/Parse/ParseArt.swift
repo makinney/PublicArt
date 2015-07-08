@@ -32,8 +32,8 @@ class ParseArt : PFObject, PFSubclassing {
 	@NSManaged var latitude: String?
 	@NSManaged var longitude: String?
 	@NSManaged var address: String?
-	@NSManaged var webLinkName: String?
-	@NSManaged var webLinkURL: String?
+	@NSManaged var artWebLink: String?
+	@NSManaged var artistWebLink: String?
 	@NSManaged var accession: String?
 	@NSManaged var credit: String?
 	@NSManaged var condition: String?

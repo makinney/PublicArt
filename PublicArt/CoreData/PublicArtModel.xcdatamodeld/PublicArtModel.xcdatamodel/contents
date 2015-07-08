@@ -4,6 +4,8 @@
         <attribute name="accession" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
         <attribute name="address" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
         <attribute name="artistName" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
+        <attribute name="artistWebLink" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
+        <attribute name="artWebLink" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
         <attribute name="condition" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="credit" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
@@ -22,8 +24,6 @@
         <attribute name="tags" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="webLinkName" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
-        <attribute name="webLinkURL" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
         <relationship name="artist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artist" inverseName="artwork" inverseEntity="Artist" syncable="YES"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="artwork" inverseEntity="Location" syncable="YES"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="artwork" inverseEntity="Photo" syncable="YES"/>
@@ -82,11 +82,11 @@
         <relationship name="artwork" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Art" inverseName="thumb" inverseEntity="Art" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Art" positionX="-648" positionY="-469" width="128" height="450"/>
+        <element name="Art" positionX="-648" positionY="-469" width="128" height="448"/>
         <element name="Artist" positionX="36" positionY="-477" width="128" height="165"/>
         <element name="Location" positionX="160" positionY="-252" width="128" height="28"/>
+        <element name="LocPhoto" positionX="-234" positionY="-153" width="128" height="165"/>
         <element name="Photo" positionX="108" positionY="-0" width="128" height="180"/>
         <element name="Thumb" positionX="-416" positionY="9" width="128" height="165"/>
-        <element name="LocPhoto" positionX="-234" positionY="-153" width="128" height="165"/>
     </elements>
 </model>

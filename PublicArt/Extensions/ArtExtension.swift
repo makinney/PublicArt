@@ -45,11 +45,11 @@ extension Art {
 				art.descriptionFileURL = descriptionFile.url ?? ""
 			}
 			
-			if let webLinkName = parseArt.webLinkName {
-				art.webLinkName = webLinkName
+			if let artWebLink = parseArt.artWebLink {
+				art.artWebLink = artWebLink
 			}
-			if let webLinkURL = parseArt.webLinkURL {
-				art.webLinkURL = webLinkURL
+			if let artistWebLink = parseArt.artistWebLink {
+				art.artistWebLink = artistWebLink
 			}
 			
 			return art
@@ -90,11 +90,11 @@ extension Art {
 			art.descriptionFileURL = descriptionFile.url ?? ""
 		}
 		
-		if let webLinkName = parseArt.webLinkName {
-			art.webLinkName = webLinkName
+		if let artWebLink = parseArt.artWebLink {
+			art.artWebLink = artWebLink
 		}
-		if let webLinkURL = parseArt.webLinkURL {
-			art.webLinkURL = webLinkURL
+		if let artistWebLink = parseArt.artistWebLink {
+			art.artistWebLink = artistWebLink
 		}
 	}
 	

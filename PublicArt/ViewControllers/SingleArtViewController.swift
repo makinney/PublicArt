@@ -13,12 +13,17 @@ class SingleArtViewController: UIViewController {
 	@IBOutlet weak var artImageView: UIImageView!
 	@IBOutlet weak var touchImagePrompt: UILabel!
 	@IBOutlet weak var scrollView: UIScrollView!
-	@IBOutlet weak var artTitleLabel: UILabel!
-	@IBOutlet weak var artistNameLabel: UILabel!
+
 	@IBOutlet weak var dimensionsLabel: UILabel!
 	@IBOutlet weak var locationLabel: UILabel!
 	@IBOutlet weak var mediumLabel: UILabel!
 		
+	@IBOutlet weak var artTitleButton: UIButton!
+	@IBOutlet weak var artistNameButton: UIButton!
+	
+	@IBOutlet weak var artTitleInfoImageView: UIImageView!
+	@IBOutlet weak var artistInfoImageView: UIImageView!
+	
 	var flexibleSpaceBarButtonItem: UIBarButtonItem {
 		return UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
 	}
@@ -31,9 +36,10 @@ class SingleArtViewController: UIViewController {
 		return UIBarButtonItem(title: "Map", style: .Plain, target: self, action: "mapTapped")
 	}
 	
-	func prepareButtons() {
+	func prepareNavButtons() {
 		self.navigationController?.navigationBar.topItem?.rightBarButtonItems  = [mapButton, flexibleSpaceBarButtonItem]
 	}
+	
 	
 	let mapAnimatedTransistioningDelegate = MapAnimatedTransistioningDelegate()
 	let singleArtPhotosAnimatedTransistionDelegate = SingleArtPhotosAnimatedTransistioningDelegate()
@@ -51,7 +57,6 @@ class SingleArtViewController: UIViewController {
 	}
 	
 	deinit {
-		NSNotificationCenter.defaultCenter().removeObserver(self)
 		promptUserTimer?.invalidate()
 	}
 	
@@ -60,8 +65,7 @@ class SingleArtViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupPhotoImage()
-//		prepareButtons()
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "contentSizeCategoryDidChange", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+//		prepareNavButtons()
 		runAutoPromptTimer()
 	}
 	
@@ -88,10 +92,24 @@ class SingleArtViewController: UIViewController {
 	private func updateArt() {
 		
 		self.scrollView?.backgroundColor = UIColor.whiteColor()
-//		self.title = // displays on nav bar
+		
+		var artTitle = art?.title ?? ""
+		artTitleButton.setTitle(artTitle, forState: .Normal)
+		if let artWebLink = art?.artWebLink
+			where count(artWebLink) > 3  { // guard against blank strings
+			var image = UIImage(named: "toolbar-infoButton") ?? UIImage()
+			artTitleInfoImageView.image = image
+		}
+		
+		var artistName = art?.artistName ?? ""
+		artistNameButton.setTitle(artistName, forState: .Normal)
+		if let artistWebLink = art?.artistWebLink
+			where count(artistWebLink) > 3 { // guard against blank strings
+			var image = UIImage(named: "toolbar-infoButton") ?? UIImage()
+			artistInfoImageView.image = image
+		}
 
-		artTitleLabel.text = art?.title
-		artistNameLabel.text = art?.artistName
+
 		dimensionsLabel.text = art?.dimensions
 		mediumLabel.text = art?.medium
 		locationLabel.text = art?.address
@@ -116,18 +134,21 @@ class SingleArtViewController: UIViewController {
 	
 	// MARK: Dynamic Type
 	
-	func contentSizeCategoryDidChange() {
-		var fontStyle2 = UIFontTextStyleBody
-		artistNameLabel.font = UIFont.preferredFontForTextStyle(fontStyle2)
-		artTitleLabel.font = UIFont.preferredFontForTextStyle(fontStyle2)
-		dimensionsLabel.font = UIFont.preferredFontForTextStyle(fontStyle2)
-		locationLabel.font = UIFont.preferredFontForTextStyle(fontStyle2)
-		mediumLabel.font = UIFont.preferredFontForTextStyle(fontStyle2)
-	}
-	
 	// MARK: seque
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	
+		if (segue.identifier == SegueIdentifier.ArtTitleToWebView.rawValue) {
+			var destinationViewController = segue.destinationViewController as! WebViewController
+			destinationViewController.webViewAddress = art?.artWebLink
+		} else
+			if (segue.identifier == SegueIdentifier.ArtistToWebView.rawValue) {
+				var destinationViewController = segue.destinationViewController as! WebViewController
+				destinationViewController.webViewAddress = art?.artistWebLink
+		}
+		
+		
+		
 //		var destinationViewController = segue.destinationViewController as! UIViewController
 //		if let singleArtMapViewController = destinationViewController as? SingleArtMapViewController {
 //			singleArtMapViewController.transitioningDelegate = mapAnimatedTransistioningDelegate
