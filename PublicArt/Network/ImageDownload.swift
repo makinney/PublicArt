@@ -35,7 +35,27 @@ class ImageDownload {
 		}
 	}
 
+	class func downloadPhoto(photo: Photo, complete:(data: NSData?, imageFileName: String)->()) {
+			let query = PFQuery(className: ParsePhoto.parseClassName())
+			query.fromLocalDatastore()
+			query.getObjectInBackgroundWithId(photo.objectId, block: { (pfObject, error) -> Void in
+				if let pfObject = pfObject {
+					var file = pfObject["imageFile"] as! PFFile
+					file.getDataInBackgroundWithBlock({ (data, error) -> Void in
+						if error == nil {
+							complete(data:data, imageFileName: photo.imageFileName)
+						} else {
+							println("\(__FILE__) \(__FUNCTION__) error \(error?.description)")
+							complete(data:nil, imageFileName: photo.imageFileName)
+							
+						}
+					})
+				}
+			})
 	
+	}
+	
+
 //	class func downloadLocPhoto(location: Location, complete:(data: NSData?, imageFileName: String)->()) {
 //		if let locPhoto = location.photo {
 //			locPhoto.imageFile?.getDataInBackgroundWithBlock({ (data, error) -> Void in

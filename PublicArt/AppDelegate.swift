@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			clientKey: "M2nmbAOma1185BZDslTSqnWGmScwGHXkswt5Ea8e")
 		
 		artDataManager = ArtDataManager(coreDataStack: CoreDataStack.sharedInstance)
-//		artDataManager!.refresh()
+		artDataManager!.refresh()
 
 	
 		return true

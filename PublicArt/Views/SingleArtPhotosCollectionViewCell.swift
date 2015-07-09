@@ -10,6 +10,8 @@ import UIKit
 
 class SingleArtPhotosCollectionViewCell: UICollectionViewCell {
 
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var imageView: UIImageView!
+	var imageFileName = String()
 
 }

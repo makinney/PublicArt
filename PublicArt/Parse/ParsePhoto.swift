@@ -26,5 +26,5 @@ class ParsePhoto : PFObject, PFSubclassing {
 	@NSManaged var idArt: String?
 	@NSManaged var imageFile: PFFile?
 	@NSManaged var imageAspectRatio: Double
-	@NSManaged var tnMarch: Bool
+	@NSManaged var tnMatch: Bool
 }

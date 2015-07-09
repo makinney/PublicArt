@@ -20,7 +20,7 @@ enum CellIdentifier: String {
 }
 
 enum SegueIdentifier: String {
-	case ArtToPhoto = "idArtToPhoto"
+	case SingleImageToImageCollection = "SingleImageToImageCollectionID"
 	case ArtToMap = "idArtToMap"
 	case MapButtonToMap = "MapButtonToMapID"
 	case LocationButtonToMap = "LocationButtonToMapID"

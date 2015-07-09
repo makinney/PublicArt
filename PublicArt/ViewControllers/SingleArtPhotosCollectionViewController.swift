@@ -12,14 +12,38 @@ class SingleArtPhotosCollectionViewController: UICollectionViewController {
  
 	var art: Art? {
 		didSet {
-			if let art = art {
-				photoFileNames = PhotoFileNames(art: art)
+			if let art = art,
+				let photoSet: Set<Photo> = art.photos as? Set {
+				photos = convert(photoSet)
+				photos = sortOnMatchingThumbnailPhoto(photos!)
 				collectionView?.reloadData()
 			}
 		}
 	}
 	
-	var photoFileNames: PhotoFileNames?
+	var photos: [Photo]?
+	
+	func convert(set: Set<Photo>) -> [Photo] {
+		var photos = [Photo]()
+		var sortedPhotoSet = sorted(set, { $0.imageFileName < $1.imageFileName })
+		for photo in sortedPhotoSet {
+			photos.append(photo)
+		}
+		return photos
+	}
+	
+	func sortOnMatchingThumbnailPhoto(photos: [Photo]) -> [Photo] {
+		var photos = photos
+		for (index, photo) in enumerate(photos) {
+			if photo.tnMatch == true {
+				photos.removeAtIndex(index)
+				photos.insert(photo, atIndex: 0)
+				break
+			}
+		}
+		return photos
+	}
+	
 	var collectionViewFlowLayout = SingleArtPhotosCollectionViewFlowLayout()
 	
 	override init(collectionViewLayout: UICollectionViewLayout) {
@@ -92,12 +116,17 @@ class SingleArtPhotosCollectionViewController: UICollectionViewController {
 
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.SingleArtPhotosCollectionViewCell.rawValue, forIndexPath: indexPath) as! SingleArtPhotosCollectionViewCell
-		if let photoFileName = photoFileNames?.getFileName(indexPath.row) {
-//			artPhotoImages.getImage(photoFileName, completion: { (image) -> () in
-//				cell.imageView.image = image
-//			})
-		} else {
-			cell.imageView.image = nil
+		cell.imageView.image = nil
+		if let photo = photos?[indexPath.row] {
+			cell.imageFileName = photo.imageFileName
+			cell.activityIndicator.startAnimating()
+			ImageDownload.downloadPhoto(photo, complete: { (data, imageFileName) -> () in
+				if let data = data
+					where cell.imageFileName == imageFileName {
+						cell.imageView.image = UIImage(data: data) ?? UIImage()
+				}
+				cell.activityIndicator.stopAnimating()
+			})
 		}
 
 		cell.backgroundColor = UIColor.clearColor()
@@ -111,7 +140,7 @@ class SingleArtPhotosCollectionViewController: UICollectionViewController {
 	}
 	
 	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		if let count = photoFileNames?.fileCount() {
+		if let count = photos?.count {
 			return count
 		}
 		return 0

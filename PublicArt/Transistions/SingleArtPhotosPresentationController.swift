@@ -20,7 +20,7 @@ class SingleArtPhotosPresentationController: UIPresentationController {
 	
 	func setupDimmingView() {
 		dimmingView = UIView()
-		var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+		var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
 		visualEffectView.frame = dimmingView.bounds
 		visualEffectView.autoresizingMask = .FlexibleHeight | .FlexibleWidth
 		dimmingView.addSubview(visualEffectView)
@@ -34,25 +34,26 @@ class SingleArtPhotosPresentationController: UIPresentationController {
 		closeButton = (UIButton.buttonWithType(.Custom)  as! UIButton)
 		closeButton?.addTarget(self, action: "closeButtonTapped:", forControlEvents: UIControlEvents.AllTouchEvents)
 
-		let image = UIImage(named: "photo-doneButton")
+		let image = UIImage(named: "photo-doneButton") ?? UIImage()
 		closeButton?.setImage(image, forState: .Normal)
 		
-		let buttonWidth: CGFloat? = closeButton?.currentImage?.size.width
-		let buttonHeight: CGFloat? = closeButton?.currentImage?.size.height
-		
-		var originX = dimmingView.frame.size.width - buttonWidth! - 16.0
+		let buttonWidth: CGFloat? = closeButton?.currentImage?.size.width ?? 44
+		let buttonHeight: CGFloat? = 44 // closeButton?.currentImage?.size.height
+		var presentationView = presentedView()
+		var originX = presentationView.frame.size.width - buttonWidth! - 8.0
 		var originY: CGFloat
 		if dimmingView.traitCollection.verticalSizeClass == .Compact {
-			originY = dimmingView.frame.origin.y  + 16
+			originY = presentationView.frame.origin.y
 		} else {
-			originY = dimmingView.frame.origin.y  + 32
+			originY = presentationView.frame.origin.y  + 20
 		}
 		
 		var origin = CGPoint(x: originX, y: originY)
 		var size = CGSize(width: buttonWidth!, height: buttonHeight!)
 		var frame = CGRect(origin: origin, size: size)
 		closeButton?.frame = frame
-		dimmingView.addSubview(closeButton!)
+		presentedView().addSubview(closeButton!)
+
 	}
 	
 	func dimmingViewTapped(tapRecognizer: UITapGestureRecognizer) {
@@ -76,8 +77,8 @@ class SingleArtPhotosPresentationController: UIPresentationController {
 	override func frameOfPresentedViewInContainerView() -> CGRect {//
 		var containerBounds:CGRect = self.containerView.bounds
 		var presentedViewFrame = CGRectZero
-		var width:CGFloat = containerBounds.size.width * 0.80
-		var height:CGFloat = containerBounds.size.height  * 0.80 // TODO: hard coded
+		var width:CGFloat = containerBounds.size.width * 1.0
+		var height:CGFloat = containerBounds.size.height  * 1.0 // TODO: hard coded
 
 		presentedViewFrame.size = CGSizeMake(width,height)
 		presentedViewFrame.origin = CGPointMake(containerBounds.size.width / 2.0, containerBounds.size.height / 2.0) // TODO: can use to locate initial frame postion
@@ -88,7 +89,6 @@ class SingleArtPhotosPresentationController: UIPresentationController {
 
 	override func presentationTransitionWillBegin() {
 //		super.presentationTransitionWillBegin()
-//		configureViews()
 		self.dimmingView.alpha = 0.0 // TODO:
 
 		let containerView = self.containerView

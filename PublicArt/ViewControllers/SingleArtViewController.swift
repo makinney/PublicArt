@@ -187,24 +187,23 @@ class SingleArtViewController: UIViewController {
 				singleArtMapViewController.modalPresentationStyle = .Custom
 				singleArtMapViewController.art = art
 			}
+		} else 	if (segue.identifier == SegueIdentifier.SingleImageToImageCollection.rawValue) {
+				if let singleArtPhotosCollectionViewController = segue.destinationViewController as? SingleArtPhotosCollectionViewController {
+					singleArtPhotosCollectionViewController.transitioningDelegate = singleArtPhotosAnimatedTransistionDelegate
+					singleArtPhotosCollectionViewController.modalPresentationStyle = .Custom
+					singleArtPhotosCollectionViewController.art = art
+				}
 		}
-		
-		
-//		} else if let singleArtPhotosCollectionViewController = destinationViewController as? SingleArtPhotosCollectionViewController {
-//			singleArtPhotosCollectionViewController.transitioningDelegate = singleArtPhotosAnimatedTransistionDelegate
-//			singleArtPhotosCollectionViewController.modalPresentationStyle = .Custom
-//			singleArtPhotosCollectionViewController.art = art
-//		}
 	}
 	
 	// MARK: Actions
 	
 	func artImageTapped(tapRecognizer: UITapGestureRecognizer) {
-//		performSegueWithIdentifier(SegueIdentifier.ArtToPhoto.rawValue, sender: nil)
-//		if !photoTouchedAtLeastOnce {
-//			photoTouchedAtLeastOnce = true
-//			hideTouchPrompt() // just in case
-//		}
+		performSegueWithIdentifier(SegueIdentifier.SingleImageToImageCollection.rawValue, sender: nil)
+		if !photoTouchedAtLeastOnce {
+			photoTouchedAtLeastOnce = true
+			hideTouchPrompt() // just in case
+		}
 	}
 	
 	func mapTapped() {

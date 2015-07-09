@@ -23,10 +23,16 @@
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="326"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="vfz-K7-e2S">
+                                        <rect key="frame" x="107" y="144" width="37" height="37"/>
+                                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="vfz-K7-e2S" firstAttribute="centerX" secondItem="4y7-i2-DtZ" secondAttribute="centerX" id="6Xo-w8-FQf"/>
                                     <constraint firstItem="4y7-i2-DtZ" firstAttribute="top" secondItem="tSu-Un-lkv" secondAttribute="top" id="IP7-GW-gg6"/>
+                                    <constraint firstItem="vfz-K7-e2S" firstAttribute="centerY" secondItem="4y7-i2-DtZ" secondAttribute="centerY" id="Uyx-8o-w4U"/>
                                     <constraint firstAttribute="bottom" secondItem="4y7-i2-DtZ" secondAttribute="bottom" id="aqA-0S-jeV"/>
                                     <constraint firstItem="4y7-i2-DtZ" firstAttribute="leading" secondItem="tSu-Un-lkv" secondAttribute="leading" id="q0v-Qn-mPI"/>
                                     <constraint firstAttribute="trailing" secondItem="4y7-i2-DtZ" secondAttribute="trailing" id="qLd-Zj-lfQ"/>
@@ -64,6 +70,7 @@
             </constraints>
             <size key="customSize" width="239" height="239"/>
             <connections>
+                <outlet property="activityIndicator" destination="vfz-K7-e2S" id="PHk-5E-FVU"/>
                 <outlet property="imageView" destination="4y7-i2-DtZ" id="Xed-ht-s6N"/>
                 <outlet property="photoBorderView" destination="tSu-Un-lkv" id="y6j-fY-jhm"/>
                 <outlet property="title" destination="OUk-dK-TiW" id="sUc-dN-uVv"/>

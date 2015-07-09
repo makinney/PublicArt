@@ -215,12 +215,14 @@ class ArtPiecesCollectionViewController: UICollectionViewController, UINavigatio
 		cell.imageView.image = nil
 		// TODO add activity indicators
 		if let thumb = art.thumb {
+			cell.activityIndicator.startAnimating()
 			cell.imageFileName = thumb.imageFileName
 			ImageDownload.downloadThumb(art, complete: { (data, imageFileName) -> () in
 				if let data = data
 				   where cell.imageFileName == imageFileName {
 					cell.imageView.image = UIImage(data: data) ?? UIImage()
 				}
+				cell.activityIndicator.stopAnimating()
 			})
 		}
 		

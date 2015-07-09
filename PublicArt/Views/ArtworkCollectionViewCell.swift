@@ -10,6 +10,7 @@ import UIKit
 
 class ArtworkCollectionViewCell: UICollectionViewCell {
     
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var title: UILabel!
 	var imageFileName = String()
