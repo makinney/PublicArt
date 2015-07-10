@@ -21,7 +21,7 @@ extension Photo {
 			photo.tnMatch = parsePhoto.tnMatch ?? false
 
 			if let imageFile = parsePhoto.imageFile {
-				photo.imageFileName = imageFile.name
+				photo.imageFileName = extractImageFileName(imageFile.name)
 				photo.imageFileURL = imageFile.url ?? ""
 			}
 	
@@ -39,7 +39,7 @@ extension Photo {
 			photo.tnMatch = parsePhoto.tnMatch ?? false
 
 			if let imageFile = parsePhoto.imageFile {
-				photo.imageFileName = imageFile.name
+				photo.imageFileName = extractImageFileName(imageFile.name)
 				photo.imageFileURL = imageFile.url ?? ""
 
 			}

@@ -58,21 +58,12 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		
 		var nibName = UINib(nibName: "ArtworkCollectionViewCell", bundle: nil) // TODO:
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: "ArtworkCollectionViewCell")
-//		var subNibName = UINib(nibName: "ArtCitySupplementaryView", bundle: nil) // TODO:
-//		self.collectionView?.registerNib(subNibName, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ArtCitySupplementaryView")
-		
 		setupArtCityPhotosFlowLayout()
 		
 		NSNotificationCenter.defaultCenter().addObserver(self,
 			selector:"newArtCityDatabase:",
 			name: ArtAppNotifications.NewArtCityDatabase.rawValue,
-			object: nil)
-		
-		
-		NSNotificationCenter.defaultCenter().addObserver(self,
-			selector: "contentSizeCategoryDidChange",
-			name: UIContentSizeCategoryDidChangeNotification,
-			object: nil)
+			object: nil)		
 		
 		fetchResultsController.delegate = self
 		fetchResultsController.performFetch(&error)
@@ -248,7 +239,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 			}
 			
 		}
-		
 		return CGSize(width: width, height: height)
 	}
 	
@@ -270,31 +260,13 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 			var singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as! SingleArtViewController
 			singleArtViewController.updateArt(art, artBackgroundColor: nil)
 			showViewController(singleArtViewController, sender: self)
-			
-//			if let singleArtViewController = artNavController.viewControllers.last as? SingleArtViewController {
-//				singleArtViewController.updateArt(art, artBackgroundColor: nil)
-//				showDetailViewController(artNavController, sender: self)
-//			}
 		}
 	}
 
 	// MARK: Notification handlers
 	
-//	func contentSizeCategoryDidChange() {
-//		collectionView?.reloadData()
-//	}
-	
 	func newArtCityDatabase(notification: NSNotification) {
 		collectionView?.reloadData()
-	}
-	
-	// MARK: Misc
-	func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
-		//		self.collectionView?.alpha = 0.0
-	}
-	
-	func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
-		//		self.collectionView?.alpha = 1.0
 	}
 	
 	//	override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
@@ -331,38 +303,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 //		}
 //	}
 	
-
-	
-	// MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-    
-    }
-    */
 
 }
 

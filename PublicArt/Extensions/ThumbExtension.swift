@@ -21,7 +21,7 @@ extension Thumb {
 			thumb.imageAspectRatio = parseThumb.imageAspectRatio
 			
 			if let imageFile = parseThumb.imageFile {
-				thumb.imageFileName = imageFile.name
+				thumb.imageFileName = extractImageFileName(imageFile.name)
 				thumb.imageFileURL = imageFile.url ?? ""
 			}
 			
@@ -39,10 +39,21 @@ extension Thumb {
 		thumb.imageAspectRatio = parseThumb.imageAspectRatio
 		
 		if let imageFile = parseThumb.imageFile {
-			thumb.imageFileName = imageFile.name
+			thumb.imageFileName = extractImageFileName(imageFile.name)
 			thumb.imageFileURL = imageFile.url ?? ""
 			
 		}
 	}
+	
+	class private func extractImageFileName(source: String) -> String {
+		var imageFileName = ""
+		let delimiter = "-"
+		if let lastDelimiter = source.rangeOfString(delimiter, options: NSStringCompareOptions.BackwardsSearch) {
+			imageFileName = source[lastDelimiter.endIndex..<source.endIndex]
+		}
+		// println("extracted image file name \(imageFileName)")
+		return imageFileName
+	}
+
 	
 }
