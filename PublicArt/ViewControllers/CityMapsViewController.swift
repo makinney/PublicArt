@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 import MapKit
 
-class CityMapsViewController: UIViewController, NSFetchedResultsControllerDelegate {
+final class CityMapsViewController: UIViewController, NSFetchedResultsControllerDelegate {
 
 	@IBOutlet weak var mapView: MKMapView!
 	@IBOutlet weak var toolbar: UIToolbar!

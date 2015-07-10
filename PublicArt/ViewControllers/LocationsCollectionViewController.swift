@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class LocationsCollectionViewController: UICollectionViewController, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout {
+final class LocationsCollectionViewController: UICollectionViewController, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout {
 
 	// MARK: Properties
 	private var collapseDetailViewController = true

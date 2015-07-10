@@ -10,7 +10,7 @@
 import UIKit
 import MapKit
 
-class SingleArtMapViewController : UIViewController {
+final class SingleArtMapViewController : UIViewController {
 	
 	@IBOutlet weak var bottomToolbar: UIToolbar!
 	@IBOutlet weak var containerView: UIView!

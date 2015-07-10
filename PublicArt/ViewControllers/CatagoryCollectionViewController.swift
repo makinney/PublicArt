@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CatagoryCollectionViewController: UICollectionViewController {
+final class CatagoryCollectionViewController: UICollectionViewController {
 
 	// MARK: Properties
 	

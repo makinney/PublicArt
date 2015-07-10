@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SingleArtPhotosCollectionViewController: UICollectionViewController {
+final class SingleArtPhotosCollectionViewController: UICollectionViewController, UIScrollViewDelegate {
  
 	var art: Art? {
 		didSet {
@@ -21,30 +21,8 @@ class SingleArtPhotosCollectionViewController: UICollectionViewController {
 		}
 	}
 	
-	var photos: [Photo]?
-	
-	func convert(set: Set<Photo>) -> [Photo] {
-		var photos = [Photo]()
-		var sortedPhotoSet = sorted(set, { $0.imageFileName < $1.imageFileName })
-		for photo in sortedPhotoSet {
-			photos.append(photo)
-		}
-		return photos
-	}
-	
-	func sortOnMatchingThumbnailPhoto(photos: [Photo]) -> [Photo] {
-		var photos = photos
-		for (index, photo) in enumerate(photos) {
-			if photo.tnMatch == true {
-				photos.removeAtIndex(index)
-				photos.insert(photo, atIndex: 0)
-				break
-			}
-		}
-		return photos
-	}
-	
 	var collectionViewFlowLayout = SingleArtPhotosCollectionViewFlowLayout()
+	var photos: [Photo]?
 	
 	override init(collectionViewLayout: UICollectionViewLayout) {
 		super.init(collectionViewLayout: collectionViewLayout)
@@ -58,6 +36,7 @@ class SingleArtPhotosCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 		var nibName = UINib(nibName: "SingleArtPhotosCollectionViewCell", bundle: nil) // TODO:
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: "SingleArtPhotosCollectionViewCell")
+//		self.collectionView?.delegate = self
 		self.view.backgroundColor = UIColor.clearColor()
 		collectionView?.backgroundColor = UIColor.clearColor()
 		collectionView?.reloadData() // required to prevent Assertion failure in -[UICollectionViewData numberOfItemsBeforeSection:]
@@ -82,6 +61,29 @@ class SingleArtPhotosCollectionViewController: UICollectionViewController {
 		println("\(__FILE__) did receive memory warning")
     }
 	
+	
+	func convert(set: Set<Photo>) -> [Photo] {
+		var photos = [Photo]()
+		var sortedPhotoSet = sorted(set, { $0.imageFileName < $1.imageFileName })
+		for photo in sortedPhotoSet {
+			photos.append(photo)
+		}
+		return photos
+	}
+	
+	func sortOnMatchingThumbnailPhoto(photos: [Photo]) -> [Photo] {
+		var photos = photos
+		for (index, photo) in enumerate(photos) {
+			if photo.tnMatch == true {
+				photos.removeAtIndex(index)
+				photos.insert(photo, atIndex: 0)
+				break
+			}
+		}
+		return photos
+	}
+	
+
 
 	override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
 		super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
@@ -145,4 +147,19 @@ class SingleArtPhotosCollectionViewController: UICollectionViewController {
 		}
 		return 0
 	}
+	
+//	override func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+//		if let selectedIndex = self.collectionView?.indexPathsForVisibleItems().last as? NSIndexPath
+//		{
+//	//		self.collectionViewFlowLayout.invalidateLayout()
+//			let cell = self.collectionView?.cellForItemAtIndexPath(selectedIndex)
+//			return cell
+//		}
+//		return nil
+////		return self.collectionView
+//	}
+//	
+//	override func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView!, atScale scale: CGFloat) {
+//
+//	}
 }

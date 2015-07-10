@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainMenuCollectionViewController: UICollectionViewController {
+final class MainMenuCollectionViewController: UICollectionViewController {
 
 	// MARK: Properties
 	

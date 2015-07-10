@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SingleArtViewController: UIViewController {
+final class SingleArtViewController: UIViewController {
 	@IBOutlet weak var infoView: UIView!
 	@IBOutlet weak var artImageView: UIImageView!
 	@IBOutlet weak var touchImagePrompt: UILabel!
