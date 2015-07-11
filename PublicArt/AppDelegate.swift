@@ -34,12 +34,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		ParseLocation.registerSubclass()
 		
 		Parse.setApplicationId("SL4Z3PKg3yQMNDgiZOWzO6QYdrfSXaiyefVnesqS",
-			clientKey: "M2nmbAOma1185BZDslTSqnWGmScwGHXkswt5Ea8e")
+			         clientKey: "M2nmbAOma1185BZDslTSqnWGmScwGHXkswt5Ea8e")
 		
-		artDataManager = ArtDataManager(coreDataStack: CoreDataStack.sharedInstance)
-		artDataManager!.refresh()
-
-	
+		ArtRefresh.artRefreshFromServerRequired {[weak self] (required, clientLastRefreshed, serverLastRefreshed) -> () in
+			if required {
+				self!.artDataManager = ArtDataManager(coreDataStack: CoreDataStack.sharedInstance)
+				if let clientLastRefreshed = clientLastRefreshed,
+				   let serverLastRefreshed = serverLastRefreshed {
+					 self!.artDataManager!.refresh(clientLastRefreshed, endingAtDate: serverLastRefreshed)
+				} else if let serverLastRefreshed = serverLastRefreshed {
+					var initialUpdate: NSDate = NSDate.distantPast() as! NSDate // make sure to get everything
+					self!.artDataManager!.refresh(initialUpdate, endingAtDate: serverLastRefreshed)
+			    }
+			}
+		}
 		return true
 	}
 	

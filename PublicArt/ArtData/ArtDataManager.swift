@@ -31,22 +31,15 @@ class ArtDataManager : NSObject {
 	deinit {
 	}
 	
-	// MARK: refresh
-	
-	func refresh() {
-		var lastUpdate = NSDate() // TODO has to come from parse server
-		
-			refreshFromWeb(lastUpdate, complete: {[weak self] (art, artists, locations, photos, thumbs, locPhotos) -> () in
-			// bind everything up
-			self!.updatePhotoToArtBindings(photos) // TODO .. test for nil self ?
+	func refresh(beginningAtDate: NSDate, endingAtDate: NSDate) {
+			refreshFromWeb(beginningAtDate, complete: {[weak self] (art, artists, locations, photos, thumbs, locPhotos) -> () in
+			self!.updatePhotoToArtBindings(photos)
 			self!.updateArtToLocationBindings(art)
 			self!.updateThumbToArtBindings(thumbs)
 			self!.updateLocPhotoToLocationBindings(locPhotos)
-			// save it
-			self!.coreDataStack.saveContext()
-
-//			self!.checkForRequiredNotifications()
-		
+			if self!.coreDataStack.saveContext() == true {
+				ArtRefresh.clientRefreshed(endingAtDate)
+			}
 		})
 	}
 	

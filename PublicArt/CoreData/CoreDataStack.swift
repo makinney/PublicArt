@@ -22,14 +22,17 @@ public class CoreDataStack {
 		return Singleton.instance
 	}
 	
-	public func saveContext () {
+	public func saveContext () ->  Bool {
 		if let moc = self.managedObjectContext {
 			var error: NSError? = nil
 			if moc.hasChanges && !moc.save(&error) {
-				// TODO: Replace this implementation with code to handle the error appropriately.
 				NSLog("Unresolved error in cored data save \(error), \(error!.userInfo)")
+				return false
+			} else {
+				return true
 			}
 		}
+		return false
 	}
 	
 	lazy var applicationDocumentsDirectory: NSURL = {

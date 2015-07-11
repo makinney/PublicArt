@@ -16,7 +16,7 @@ class ParseWebService {
 	class func getAllArtSince(date: NSDate, complete:(parseArt: [ParseArt]) -> Void) -> Void {
 		var query = PFQuery(className: ParseArt.parseClassName())
 		query.whereKey("hasThumb", equalTo: NSNumber(bool: true))
-//		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
+		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
 		query.limit = 999 // max per parse
 		query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error: NSError?) -> Void in
 			if error == nil {
@@ -34,7 +34,7 @@ class ParseWebService {
 	
 	class func getAllPhotosSince(date: NSDate, complete:(parsePhotos: [ParsePhoto]) -> Void) -> Void {
 		var query = PFQuery(className: ParsePhoto.parseClassName())
-		//		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
+		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
 		query.limit = 999 // max per parse
 		query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error: NSError?) -> Void in
 			if error == nil {
@@ -52,7 +52,7 @@ class ParseWebService {
 	
 	class func getAllThumbsSince(date: NSDate, complete:(parseThumbs: [ParseThumb]) -> Void) -> Void {
 		var query = PFQuery(className: ParseThumb.parseClassName())
-		//		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
+		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
 		query.limit = 999 // max per parse
 		query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error: NSError?) -> Void in
 			if error == nil {
@@ -71,7 +71,7 @@ class ParseWebService {
 	
 	class func getAllLocationsSince(date: NSDate, complete:(parseLocations: [ParseLocation]) -> Void) -> Void {
 		var query = PFQuery(className: ParseLocation.parseClassName())
-		//		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
+		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
 		query.limit = 999 // max per parse
 		query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error: NSError?) -> Void in
 			if error == nil {
@@ -89,7 +89,7 @@ class ParseWebService {
 	
 	class func getAllLocPhotosSince(date: NSDate, complete:(parseLocPhotos: [ParseLocPhoto]) -> Void) -> Void {
 		var query = PFQuery(className: ParseLocPhoto.parseClassName())
-		//		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
+		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
 		query.limit = 999 // max per parse
 		query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error: NSError?) -> Void in
 			if error == nil {
@@ -105,14 +105,10 @@ class ParseWebService {
 		}
 	}
 	
-
-	
-
 	
 	class func getAllArtistSince(date: NSDate, complete:(parseArtist: [ParseArtist]) -> Void) -> Void {
 		var query = PFQuery(className: ParseArtist.parseClassName())
-		//		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
-
+		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
 		query.limit = 999 // max per parse
 		query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error: NSError?) -> Void in
 			if error == nil {
@@ -127,6 +123,24 @@ class ParseWebService {
 			}
 		}
 	}
+	
+	class func getPublicArtRefresh(complete:(parseRefresh: [ParseRefresh]?) -> Void) -> Void {
+		var query = PFQuery(className: ParseRefresh.parseClassName())
+		query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error: NSError?) -> Void in
+			if error == nil {
+				if let parseRefresh: [ParseRefresh] = objects as? [ParseRefresh] {
+					complete(parseRefresh: parseRefresh)
+				} else {
+					complete(parseRefresh: nil)
+				}
+			} else {
+				println("\(__FILE__) \(__FUNCTION__) \(error?.description)")
+				complete(parseRefresh: nil)
+			}
+		}
+	}
+	
+
 
 	
 }

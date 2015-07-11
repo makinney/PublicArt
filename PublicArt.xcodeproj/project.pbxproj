@@ -91,7 +91,6 @@
 		1F8916A91B23D1D700E83891 /* PhotoFileNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F89169E1B23D1D700E83891 /* PhotoFileNames.swift */; };
 		1F8916AB1B23D1F700E83891 /* CityArtFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916AA1B23D1F700E83891 /* CityArtFunctions.swift */; };
 		1F8916B01B23D20700E83891 /* CoreDataIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916AC1B23D20700E83891 /* CoreDataIdentifiers.swift */; };
-		1F8916B11B23D20700E83891 /* DbaseIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916AD1B23D20700E83891 /* DbaseIds.swift */; };
 		1F8916B21B23D20700E83891 /* GeneralIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916AE1B23D20700E83891 /* GeneralIdentifiers.swift */; };
 		1F8916B31B23D20700E83891 /* StoryboardIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916AF1B23D20700E83891 /* StoryboardIdentifiers.swift */; };
 		1F8916B51B23D21900E83891 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916B41B23D21900E83891 /* SwiftyJSON.swift */; };
@@ -124,6 +123,7 @@
 		1FD0A7C81B4C68BC0086FDB2 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD0A7C71B4C68BC0086FDB2 /* WebViewController.swift */; };
 		1FD0A7CD1B4C98080086FDB2 /* Art.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD0A7CC1B4C98080086FDB2 /* Art.swift */; };
 		1FD0A7CF1B4CC1090086FDB2 /* SingleArtMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD0A7CE1B4CC1090086FDB2 /* SingleArtMapViewController.swift */; };
+		1FD0A7D11B50732B0086FDB2 /* ParseRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD0A7D01B50732B0086FDB2 /* ParseRefresh.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -273,7 +273,6 @@
 		1F89169E1B23D1D700E83891 /* PhotoFileNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoFileNames.swift; path = ArtData/PhotoFileNames.swift; sourceTree = "<group>"; };
 		1F8916AA1B23D1F700E83891 /* CityArtFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CityArtFunctions.swift; path = Functions/CityArtFunctions.swift; sourceTree = "<group>"; };
 		1F8916AC1B23D20700E83891 /* CoreDataIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataIdentifiers.swift; path = Identifiers/CoreDataIdentifiers.swift; sourceTree = "<group>"; };
-		1F8916AD1B23D20700E83891 /* DbaseIds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DbaseIds.swift; path = Identifiers/DbaseIds.swift; sourceTree = "<group>"; };
 		1F8916AE1B23D20700E83891 /* GeneralIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeneralIdentifiers.swift; path = Identifiers/GeneralIdentifiers.swift; sourceTree = "<group>"; };
 		1F8916AF1B23D20700E83891 /* StoryboardIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoryboardIdentifiers.swift; path = Identifiers/StoryboardIdentifiers.swift; sourceTree = "<group>"; };
 		1F8916B41B23D21900E83891 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = JSON/SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -308,6 +307,7 @@
 		1FD0A7C71B4C68BC0086FDB2 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = ViewControllers/WebViewController.swift; sourceTree = "<group>"; };
 		1FD0A7CC1B4C98080086FDB2 /* Art.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Art.swift; path = CoreData/Art.swift; sourceTree = "<group>"; };
 		1FD0A7CE1B4CC1090086FDB2 /* SingleArtMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleArtMapViewController.swift; path = ViewControllers/SingleArtMapViewController.swift; sourceTree = "<group>"; };
+		1FD0A7D01B50732B0086FDB2 /* ParseRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseRefresh.swift; path = Parse/ParseRefresh.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -471,6 +471,7 @@
 				1F09BB8F1B31F5D200E4807C /* ParseLocation.swift */,
 				1FC6F8331B3C78AB00810258 /* ParseLocPhoto.swift */,
 				1FC6F8231B3A510B00810258 /* ParseThumb.swift */,
+				1FD0A7D01B50732B0086FDB2 /* ParseRefresh.swift */,
 			);
 			name = Parse;
 			sourceTree = "<group>";
@@ -585,7 +586,6 @@
 			isa = PBXGroup;
 			children = (
 				1F8916AC1B23D20700E83891 /* CoreDataIdentifiers.swift */,
-				1F8916AD1B23D20700E83891 /* DbaseIds.swift */,
 				1F8916AE1B23D20700E83891 /* GeneralIdentifiers.swift */,
 				1F8916AF1B23D20700E83891 /* StoryboardIdentifiers.swift */,
 			);
@@ -832,6 +832,7 @@
 				1F8916A01B23D1D700E83891 /* ArtDataManager.swift in Sources */,
 				1F8916EE1B23F29800E83891 /* UIImageViewExtension.swift in Sources */,
 				1F8916EC1B23F29800E83891 /* LocationExtension.swift in Sources */,
+				1FD0A7D11B50732B0086FDB2 /* ParseRefresh.swift in Sources */,
 				1F4C733C1B3E6BC3001ACEE0 /* SingleArtPhotosCollectionViewCell.swift in Sources */,
 				1FC6F8241B3A510B00810258 /* ParseThumb.swift in Sources */,
 				1F1EE0F51B26472B0087FBBF /* LogInUser.swift in Sources */,
@@ -883,7 +884,6 @@
 				1F4C73531B40B17A001ACEE0 /* WelcomeViewController.swift in Sources */,
 				1F8916A71B23D1D700E83891 /* LocationData.swift in Sources */,
 				1F8916EB1B23F29800E83891 /* ArtExtension.swift in Sources */,
-				1F8916B11B23D20700E83891 /* DbaseIds.swift in Sources */,
 				1F8916CD1B23D76E00E83891 /* ImageProcess.m in Sources */,
 				1F4C733A1B3E6BC3001ACEE0 /* MapTableViewCell.swift in Sources */,
 				1FC6F82A1B3B7F6F00810258 /* ImageDownload.swift in Sources */,

@@ -9,21 +9,38 @@
 import Foundation
 import CoreData
 
-var artDataManager: ArtDataManager?
-
-func artRefreshFromWeb() {
-	let webService:WebService = WebService()
-	// TODO: logging in this way just for development
-	if webService.loggedIn {
-		artDataManager = ArtDataManager(coreDataStack: CoreDataStack.sharedInstance)
-		artDataManager!.refresh()
-	} else {
-		webService.logInUser("mike", password:"12345678" , completion: { (success) -> () in
-			if success == true {
-				artDataManager = ArtDataManager(coreDataStack: CoreDataStack.sharedInstance)
-				artDataManager!.refresh()
+class ArtRefresh {
+	
+	class func artRefreshFromServerRequired(complete:(required: Bool, clientLastRefreshed: NSDate?, serverLastRefreshed: NSDate?) ->() ) {
+		var clientLastRefreshed: NSDate? = ArtRefresh.clientLastRefreshed()
+		ParseWebService.getPublicArtRefresh {(parseRefresh) -> Void in
+			if let serverLastRefreshed = parseRefresh?.last?.lastRefresh {
+				if let clientLastRefreshed = clientLastRefreshed {
+					if clientLastRefreshed != serverLastRefreshed{
+						complete(required: true, clientLastRefreshed: clientLastRefreshed, serverLastRefreshed: serverLastRefreshed)
+					} else {
+						complete(required: false, clientLastRefreshed: clientLastRefreshed, serverLastRefreshed: serverLastRefreshed)
+					}
+				} else {
+					// first time app's art has every been refreshed
+					complete(required: true, clientLastRefreshed: nil, serverLastRefreshed: serverLastRefreshed)
+				}
+			} else { // nothing back from query
+				complete(required: false, clientLastRefreshed: nil, serverLastRefreshed: nil)
 			}
-		})
+		}
+	}
+	
+	class func clientLastRefreshed() -> NSDate? {
+		var lastRefresh: NSDate?
+		if let date: NSDate? = NSUserDefaults.standardUserDefaults().valueForKey(UserDefaultKeys.LastPublicArtUpdateKey.rawValue) as? NSDate {
+			lastRefresh = date
+		}
+		return lastRefresh
+	}
+	
+	class func clientRefreshed(date: NSDate) {
+		NSUserDefaults.standardUserDefaults().setValue(date, forKey: UserDefaultKeys.LastPublicArtUpdateKey.rawValue)
+		NSUserDefaults.standardUserDefaults().synchronize()
 	}
 }
-

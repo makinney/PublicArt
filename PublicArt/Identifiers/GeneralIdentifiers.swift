@@ -25,3 +25,9 @@ public enum ArtAppNotifications: String {
 	case NewArtCityDatabase = "NewArtCityDatabase"
 }
 
+enum UserDefaultKeys: String {
+	case LastPublicArtUpdateKey = "LastPublicArtUpdateKey"
+}
+
+
+
