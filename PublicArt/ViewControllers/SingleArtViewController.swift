@@ -74,7 +74,9 @@ final class SingleArtViewController: UIViewController {
 	}
 	
 	var fixedSpaceBarButtonItem: UIBarButtonItem {
-		return UIBarButtonItem(barButtonSystemItem: .FixedSpace , target: nil, action: nil)
+		var fixedSpaceBarButtonItem = UIBarButtonItem(barButtonSystemItem: .FixedSpace , target: nil, action: nil)
+		fixedSpaceBarButtonItem.width = 20
+		return fixedSpaceBarButtonItem
 	}
 	
 	var actionButton: UIBarButtonItem {
@@ -85,13 +87,9 @@ final class SingleArtViewController: UIViewController {
 		return UIBarButtonItem(barButtonSystemItem: .Bookmarks , target: self, action: "favoriteButtonTouched:")
 	}
 	
-	var routeButton: UIBarButtonItem {
-		return UIBarButtonItem(barButtonSystemItem: .Add , target: self, action: "routeButtonTouched:")
-	}
-	
 	
 	func prepareNavButtons() {
-		self.navigationItem.rightBarButtonItems  = [actionButton, favoritesButton, routeButton, flexibleSpaceBarButtonItem]
+		self.navigationItem.rightBarButtonItems  = [actionButton, fixedSpaceBarButtonItem, favoritesButton, flexibleSpaceBarButtonItem]
 	}
 	
 	func prepareButtons() {

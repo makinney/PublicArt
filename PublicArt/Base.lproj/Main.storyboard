@@ -602,7 +602,7 @@
         <!--Explore-->
         <scene sceneID="0mG-7l-uTL">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nBu-ce-fRo" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsWhenVerticallyCompact="YES" id="nBu-ce-fRo" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Explore" image="tab-map" id="J3O-Vs-Evl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hhr-y3-ii9">

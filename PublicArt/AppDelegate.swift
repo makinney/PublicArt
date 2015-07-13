@@ -117,15 +117,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		UINavigationBar.appearance().backgroundColor = UIColor.whiteColor()
 		UITabBar.appearance().backgroundColor = UIColor.whiteColor()
 		UIToolbar.appearance().barTintColor = UIColor.whiteColor()
-//		UIToolbar.appearance().setBackgroundImage(toolbarBackgroundImage(), forToolbarPosition: .Any, barMetrics: .Default)
+		UIToolbar.appearance().translucent = true
+	//	UIToolbar.appearance().setBackgroundImage(toolbarBackgroundImage(), forToolbarPosition: .Any, barMetrics: .Default)
 	}
 	
 	
 	private func toolbarBackgroundImage() -> UIImage {
 		var transparentBackground: UIImage!
-		UIGraphicsBeginImageContextWithOptions(CGSize(width: 1, height: 1), true, 0.0)
+		UIGraphicsBeginImageContextWithOptions(CGSize(width: 1, height: 1), true, 1.0)
 		var context = UIGraphicsGetCurrentContext()
-		CGContextSetRGBFillColor(context, 255, 1, 1, 0)
+		CGContextSetRGBFillColor(context, 1, 1, 1, 0)
 		UIRectFill(CGRect(x: 0.0, y: 0.0, width: 0.0, height: 0.0))
 		transparentBackground = UIGraphicsGetImageFromCurrentImageContext() ?? UIImage()
 		UIGraphicsEndImageContext()

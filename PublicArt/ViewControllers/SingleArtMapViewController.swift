@@ -38,11 +38,15 @@ final class SingleArtMapViewController : UIViewController {
 		return userLocation
 	}()
 	
-	var closeBarButtonItem: UIBarButtonItem {
-		let image = UIImage(named: "toolbar-closeButton")
-		return UIBarButtonItem(image:image, style: .Plain, target:self, action: "onCloseButton:")
+	var doneBarButtonItem: UIBarButtonItem {
+		return UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "onDoneButton:")
 	}
 	
+	var routeBarButtonItem: UIBarButtonItem {
+		var barButtonItem = UIBarButtonItem(title: "Route", style: .Plain, target: self, action: "onRouteButton:")
+		return barButtonItem
+
+	}
 	var flexibleSpaceBarButtonItem: UIBarButtonItem {
 		return UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
 	}
@@ -91,7 +95,7 @@ final class SingleArtMapViewController : UIViewController {
 		locateMeBarButtonItem = UIBarButtonItem(image:image, style: .Plain, target:self, action: "onLocateMeButton:")
 		let bottomItems = [locateMeBarButtonItem!, flexibleSpaceBarButtonItem, infoBarButtonItem]
 		bottomToolbar.items = bottomItems
-		let topItems = [flexibleSpaceBarButtonItem, closeBarButtonItem]
+		let topItems = [routeBarButtonItem, flexibleSpaceBarButtonItem, doneBarButtonItem]
 		topToolbar.items = topItems
 	}
 
@@ -117,9 +121,14 @@ final class SingleArtMapViewController : UIViewController {
 
 	// MARK: button actions
 
-	func onCloseButton(barbuttonItem: UIBarButtonItem) {
+	func onDoneButton(barbuttonItem: UIBarButtonItem) {
 		dismiss()
 	}
+	
+	func onRouteButton(barbuttonItem: UIBarButtonItem) {
+		println("route")
+	}
+
 	func onLocateMeButton(barbuttonItem: UIBarButtonItem ) {
 		artUserLocation.toggleShowUserLocation()
 	}

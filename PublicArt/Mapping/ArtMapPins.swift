@@ -48,12 +48,14 @@ class ArtMapPins {
 				}
 			}
 		}
-		if imageIndex < imageNames.count {
-			imageName = imageNames[imageIndex]
-//			println("imageName is \(imageName) letter \(letter) text \(text)")
-		} else {
-//			println("using default letter")
-		}
+//		if imageIndex < imageNames.count {
+//			imageName = imageNames[imageIndex]
+////			println("imageName is \(imageName) letter \(letter) text \(text)")
+//		} else {
+////			println("using default letter")
+//		}
+		
+		imageName = "map-letter3"
 		return imageName
 	}
 	
