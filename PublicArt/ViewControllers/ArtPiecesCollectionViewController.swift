@@ -139,7 +139,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 //				if let singleArtViewController = artNavController.viewControllers.last as? SingleArtViewController {
 //						artPhotoImages.getImage(art.thumbFile, completion: { [weak self] (image) -> () in
 //						if let image = image {
-//							singleArtViewController.updateArt(art, artBackgroundColor: nil)
+//							singleArtViewController.update(art, artBackgroundColor: nil)
 //						}
 //					})
 //					showDetailViewController(artNavController, sender: self)
@@ -258,7 +258,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
 		
 			var singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as! SingleArtViewController
-			singleArtViewController.updateArt(art, artBackgroundColor: nil)
+			singleArtViewController.update(art, artBackgroundColor: nil)
 			showViewController(singleArtViewController, sender: self)
 		}
 	}

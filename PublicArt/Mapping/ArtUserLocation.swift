@@ -48,6 +48,12 @@ class ArtUserLocation: NSObject {
 	}
 	
 	func toggleShowUserLocation() {
+	
+		if !havePermission() {
+			promptForPermissionPermitted()
+			return
+		}
+		
 		if !trackingUserLocation {
 				self.startUpdating()
 			} else {

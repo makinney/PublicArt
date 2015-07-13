@@ -26,7 +26,8 @@ public enum ArtAppNotifications: String {
 }
 
 enum UserDefaultKeys: String {
-	case LastPublicArtUpdateKey = "LastPublicArtUpdateKey"
+	case LastPublicArtUpdate = "LastPublicArtUpdateKey"
+	case SingleArtViewPhotoTouchedAtLeastOnce = "KeySingleArtViewPhotoTouchedAtLeastOnce"
 }
 
 

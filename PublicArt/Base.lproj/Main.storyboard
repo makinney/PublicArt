@@ -537,7 +537,11 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="iDf-Rh-oBO">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="nhc-db-Oov"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="nhc-db-Oov">
+                            <connections>
+                                <action selector="actionButtonTouched:" destination="7LR-GA-vD2" id="9Xu-eP-iXG"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="artImageView" destination="poq-xo-sc2" id="xkl-zo-Ykw"/>

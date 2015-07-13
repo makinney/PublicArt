@@ -9,45 +9,34 @@
 import UIKit
 
 final class SingleArtViewController: UIViewController {
-	@IBOutlet weak var infoView: UIView!
+
+	
+	@IBOutlet weak var artTitleButton: UIButton!
+	@IBOutlet weak var artistNameButton: UIButton!
+	@IBOutlet weak var locationButton: UIButton!
+
 	@IBOutlet weak var artImageView: UIImageView!
-	@IBOutlet weak var touchImagePrompt: UILabel!
+	@IBOutlet weak var artTitleInfoImageView: UIImageView!
+	@IBOutlet weak var artistInfoImageView: UIImageView!
+	@IBOutlet weak var infoView: UIView!
 	@IBOutlet weak var scrollView: UIScrollView!
 
 	@IBOutlet weak var dimensionsLabel: UILabel!
 	@IBOutlet weak var mediumLabel: UILabel!
-	
-	@IBOutlet weak var artTitleButton: UIButton!
-	@IBOutlet weak var artistNameButton: UIButton!
-	
-	@IBOutlet weak var artTitleInfoImageView: UIImageView!
-	@IBOutlet weak var artistInfoImageView: UIImageView!
+	@IBOutlet weak var touchImagePrompt: UILabel!
+
 	@IBOutlet weak var buttonHeight: NSLayoutConstraint!
-	
-	@IBOutlet weak var locationButton: UIButton!
-	
+
 	let mapAnimatedTransistioningDelegate = MapAnimatedTransistioningDelegate()
 	let singleArtPhotosAnimatedTransistionDelegate = SingleArtPhotosAnimatedTransistioningDelegate()
 	
 	private var art: Art?
 	private var artBackgroundColor: UIColor?
 	private var firstViewAppearance = true
-	private var prevailingColors = [String:UIColor]()
 	private var promptUserTimer: NSTimer?
 	private let promptUserTimerTimeout: NSTimeInterval = 5
 
-	var flexibleSpaceBarButtonItem: UIBarButtonItem {
-		return UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
-	}
-	
-	var fixedSpaceBarButtonItem: UIBarButtonItem {
-		return UIBarButtonItem(barButtonSystemItem: .FixedSpace , target: nil, action: nil)
-	}
-	
-//	var mapButton:UIBarButtonItem {
-//		return UIBarButtonItem(title: "Map", style: .Plain, target: self, action: "mapTapped")
-//	}
-	
+	// MARK: Lifecycles
 
 	required init(coder aDecoder: NSCoder) {
 		super.init(coder:aDecoder)
@@ -56,11 +45,10 @@ final class SingleArtViewController: UIViewController {
 	deinit {
 		promptUserTimer?.invalidate()
 	}
-	
-	// MARK: Lifecycles
-	
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		self.scrollView?.backgroundColor = UIColor.whiteColor()
 		setupPhotoImage()
 //		prepareNavButtons()
 		prepareButtons()
@@ -70,7 +58,7 @@ final class SingleArtViewController: UIViewController {
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		hideTouchPrompt()
-		updateArt()
+		update()
 	}
 	
 	 override func viewDidAppear(animated: Bool) {
@@ -78,55 +66,68 @@ final class SingleArtViewController: UIViewController {
 		hideTouchPrompt()
 	}
 	
+	// MARK setups and prepares
+	
+	var flexibleSpaceBarButtonItem: UIBarButtonItem {
+		return UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+	}
+	
+	var fixedSpaceBarButtonItem: UIBarButtonItem {
+		return UIBarButtonItem(barButtonSystemItem: .FixedSpace , target: nil, action: nil)
+	}
+	
 	func prepareNavButtons() {
-//		self.navigationController?.navigationBar.topItem?.rightBarButtonItems  = [mapButton, flexibleSpaceBarButtonItem]
+			//		self.navigationController?.navigationBar.topItem?.rightBarButtonItems  = [mapButton, flexibleSpaceBarButtonItem]
 	}
 	
 	func prepareButtons() {
-// doesn't work to increase touch area..		artTitleButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 50)
+			// doesn't work to increase touch area..		artTitleButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 50)
 	}
 	
-	func updateArt(art: Art, artBackgroundColor: UIColor?) {
+	func setupPhotoImage() {
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: "artImageTapped:")
+		artImageView.addGestureRecognizer(tapRecognizer)
+	}
+	
+	// MARK: update
+	
+	func update(art: Art, artBackgroundColor: UIColor?) {
 		hideTouchPrompt() // split view expanded
 		self.art = art
 		self.artBackgroundColor = artBackgroundColor
 		if self.isViewLoaded() {
-			updateArt()
+			update()
 		}
 	}
 	
-	private func updateArt() {
+	private func update() {
 		
-		self.scrollView?.backgroundColor = UIColor.whiteColor()
-		
-		var artTitle = art?.title ?? ""
-//		artTitle = "A very long title to test word wrapping and button height growth for sure"
-//	artTitle = "A very long title to test word"
-		artTitleButton.setTitle(artTitle, forState: .Normal)
-		artTitleButton.invalidateIntrinsicContentSize()
-
-	//	var leftInset = artTitleButton.titleLabel?.frame.size.width
-//	var label = artTitleButton.titleLabel
-//		var leftInset = artTitleButton.frame.size.width - artTitleButton.imageView!.frame.size.width
-
-//		var rightInset = artTitleButton.titleLabel?.frame.size.width
-//		rightInset! = 0 - rightInset!
-//		rightInset = 0 - leftInset - artTitleButton.imageView!.frame.size.width
-//		artTitleButton.imageEdgeInsets = UIEdgeInsets(top: 0, left:leftInset, bottom: 0, right: rightInset!)
-//		
-		
-		if let artWebLink = art?.artWebLink
-			where count(artWebLink) > 3  { // guard against blank strings
-			var image = UIImage(named: "toolbar-infoButton") ?? UIImage()
-			artTitleInfoImageView.image = image
+		if let art = art {
+			ImageDownload.downloadThumb(art, complete: {[weak self] (data, imageFileName) -> () in
+				if let data = data	{
+					var image = UIImage(data: data) ?? UIImage()
+					self?.artImageView.image = image
+					self?.artImageView.hidden = false
+				}
+				})
 		}
 		
 		var artistName = art?.artistName ?? ""
 		artistNameButton.setTitle(artistName, forState: .Normal)
 		if let artistWebLink = art?.artistWebLink
 			where count(artistWebLink) > 3 { // guard against blank strings
-			var image = UIImage(named: "toolbar-infoButton") ?? UIImage()
-			artistInfoImageView.image = image
+				var image = UIImage(named: "toolbar-infoButton") ?? UIImage()
+				artistInfoImageView.image = image
+		}
+
+		var artTitle = art?.title ?? ""
+		artTitleButton.setTitle(artTitle, forState: .Normal)
+		artTitleButton.invalidateIntrinsicContentSize()
+
+		if let artWebLink = art?.artWebLink
+			where count(artWebLink) > 3  { // guard against blank strings
+				var image = UIImage(named: "toolbar-infoButton") ?? UIImage()
+				artTitleInfoImageView.image = image
 		}
 
 
@@ -139,33 +140,27 @@ final class SingleArtViewController: UIViewController {
 			}
 		}
 
+		locationButton.setTitle(art?.address ?? "", forState: .Normal)
+		
 		if let medium = art?.medium {
 			if medium != "Undefined" {
 				mediumLabel.text =  medium
 			} else {
 				mediumLabel.text = "Medium " + "unknown"
-
+				
 			}
 		}
 		
-		locationButton.setTitle(art?.address ?? "", forState: .Normal)
+		//	var leftInset = artTitleButton.titleLabel?.frame.size.width
+		//	var label = artTitleButton.titleLabel
+		//		var leftInset = artTitleButton.frame.size.width - artTitleButton.imageView!.frame.size.width
 		
-		if let art = art {
-			ImageDownload.downloadThumb(art, complete: {[weak self] (data, imageFileName) -> () in
-				if let data = data	{
-						var image = UIImage(data: data) ?? UIImage()
-					self?.artImageView.image = image
-					self?.artImageView.hidden = false
-				}
-			})
+		//		var rightInset = artTitleButton.titleLabel?.frame.size.width
+		//		rightInset! = 0 - rightInset!
+		//		rightInset = 0 - leftInset - artTitleButton.imageView!.frame.size.width
+		//		artTitleButton.imageEdgeInsets = UIEdgeInsets(top: 0, left:leftInset, bottom: 0, right: rightInset!)
+		//
 		
-		}
-
-	}
-	
-	func setupPhotoImage() {
-		let tapRecognizer = UITapGestureRecognizer(target: self, action: "artImageTapped:")
-		artImageView.addGestureRecognizer(tapRecognizer)
 	}
 	
 	// MARK: Dynamic Type
@@ -173,31 +168,61 @@ final class SingleArtViewController: UIViewController {
 	// MARK: seque
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-	
 		if (segue.identifier == SegueIdentifier.ArtTitleToWebView.rawValue) {
 			var destinationViewController = segue.destinationViewController as! WebViewController
 			destinationViewController.webViewAddress = art?.artWebLink
-		} else 	if (segue.identifier == SegueIdentifier.ArtistToWebView.rawValue) {
+		} else if (segue.identifier == SegueIdentifier.ArtistToWebView.rawValue) {
 			var destinationViewController = segue.destinationViewController as! WebViewController
 			destinationViewController.webViewAddress = art?.artistWebLink
-		} else 	if (segue.identifier == SegueIdentifier.MapButtonToMap.rawValue) ||
-				   (segue.identifier == SegueIdentifier.LocationButtonToMap.rawValue) {
+		} else if (segue.identifier == SegueIdentifier.MapButtonToMap.rawValue) || (segue.identifier == SegueIdentifier.LocationButtonToMap.rawValue) {
 			if let singleArtMapViewController = segue.destinationViewController as? SingleArtMapViewController {
 				singleArtMapViewController.transitioningDelegate = mapAnimatedTransistioningDelegate
 				singleArtMapViewController.modalPresentationStyle = .Custom
 				singleArtMapViewController.art = art
 			}
-		} else 	if (segue.identifier == SegueIdentifier.SingleImageToImageCollection.rawValue) {
-				if let singleArtPhotosCollectionViewController = segue.destinationViewController as? SingleArtPhotosCollectionViewController {
-					singleArtPhotosCollectionViewController.transitioningDelegate = singleArtPhotosAnimatedTransistionDelegate
-					singleArtPhotosCollectionViewController.modalPresentationStyle = .Custom
-					singleArtPhotosCollectionViewController.art = art
-				}
+		} else if (segue.identifier == SegueIdentifier.SingleImageToImageCollection.rawValue) {
+			if let singleArtPhotosCollectionViewController = segue.destinationViewController as? SingleArtPhotosCollectionViewController {
+				singleArtPhotosCollectionViewController.transitioningDelegate = singleArtPhotosAnimatedTransistionDelegate
+				singleArtPhotosCollectionViewController.modalPresentationStyle = .Custom
+				singleArtPhotosCollectionViewController.art = art
+			}
 		}
 	}
 	
-	// MARK: Actions
+	// MARK: Share
 	
+	@IBAction func actionButtonTouched(sender: UIBarButtonItem) {
+		shareArtwork()
+	}
+
+	func shareArtwork() {
+		let msg = (art?.title ?? "" ) + "\n"
+		var image = artImageView.image ?? UIImage()
+		var url: NSURL = NSURL(string: "https://www.facebook.com/pages/Public-Art-San-Francisco/360818354113241")!
+		var activityItems = [image,msg, url]
+		var avc = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+		avc.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList,
+			UIActivityTypeAirDrop, UIActivityTypePostToFlickr]
+		
+		var userInterfaceIdion = traitCollection.userInterfaceIdiom
+		if userInterfaceIdion == .Phone {
+			// TODO iphone versus iPad
+			avc.modalTransitionStyle = .CoverVertical
+			presentViewController(avc, animated: true, completion: nil)
+		} else {
+		// TODO FIXME popover for iPad
+//			avc.modalPresentationStyle = .Popover
+//			presentViewController(avc, animated: true, completion: nil)
+
+//			presentViewController(popover, animated: true, completion: nil)
+		}
+		
+	}
+	
+	
+	// MARK: Help
+	// TODO somethings not working not pickup on touch...
+
 	func artImageTapped(tapRecognizer: UITapGestureRecognizer) {
 		performSegueWithIdentifier(SegueIdentifier.SingleImageToImageCollection.rawValue, sender: nil)
 		if !photoTouchedAtLeastOnce {
@@ -206,22 +231,17 @@ final class SingleArtViewController: UIViewController {
 		}
 	}
 	
-	func mapTapped() {
-		performSegueWithIdentifier(SegueIdentifier.ArtToMap.rawValue, sender: nil)
-	}
-	
-	// MARK: image tapp prompting
-	
 	func showTouchPrompt() {
-//		artImageView.addSubview(touchImagePrompt)
-//		UIView.animateWithDuration(2.0, animations: { [weak self] () -> Void in
-//			self?.touchImagePrompt?.alpha = 0.75
-//		})
+		artImageView.addSubview(touchImagePrompt)
+		UIView.animateWithDuration(2.0, animations: { [weak self] () -> Void in
+			self?.touchImagePrompt?.alpha = 0.75
+			})
 	}
-
+	
 	private func hideTouchPrompt() {
 		touchImagePrompt?.alpha = 0.0
 	}
+
 	
 	private func runAutoPromptTimer() {
 		if !photoTouchedAtLeastOnce {
@@ -239,7 +259,7 @@ final class SingleArtViewController: UIViewController {
 	var photoTouchedAtLeastOnce: Bool {
 		get {
 			var userDefaults = NSUserDefaults.standardUserDefaults
-			if let touched = userDefaults().objectForKey("KeySingleArtViewPhotoTouchedAtLeastOnce") as? Bool { // TODO: define key
+			if let touched = userDefaults().objectForKey(UserDefaultKeys.SingleArtViewPhotoTouchedAtLeastOnce.rawValue) as? Bool { // TODO: define key
 				if touched {
 					return true
 				} else {
@@ -250,8 +270,8 @@ final class SingleArtViewController: UIViewController {
 			}
 		}
 		
-		set(newUserTouchedImage) { // not a 'new' user, but 'new' as newValue per Swift
-			NSUserDefaults.standardUserDefaults().setObject(newUserTouchedImage, forKey: "KeySingleArtViewPhotoTouchedAtLeastOnce") // TODO define key
+		set(newValue) {
+			NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: UserDefaultKeys.SingleArtViewPhotoTouchedAtLeastOnce.rawValue) // TODO define key
 		}
 	}
 	

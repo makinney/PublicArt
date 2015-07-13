@@ -33,14 +33,14 @@ class ArtRefresh {
 	
 	class func clientLastRefreshed() -> NSDate? {
 		var lastRefresh: NSDate?
-		if let date: NSDate? = NSUserDefaults.standardUserDefaults().valueForKey(UserDefaultKeys.LastPublicArtUpdateKey.rawValue) as? NSDate {
+		if let date: NSDate? = NSUserDefaults.standardUserDefaults().valueForKey(UserDefaultKeys.LastPublicArtUpdate.rawValue) as? NSDate {
 			lastRefresh = date
 		}
 		return lastRefresh
 	}
 	
 	class func clientRefreshed(date: NSDate) {
-		NSUserDefaults.standardUserDefaults().setValue(date, forKey: UserDefaultKeys.LastPublicArtUpdateKey.rawValue)
+		NSUserDefaults.standardUserDefaults().setValue(date, forKey: UserDefaultKeys.LastPublicArtUpdate.rawValue)
 		NSUserDefaults.standardUserDefaults().synchronize()
 	}
 }

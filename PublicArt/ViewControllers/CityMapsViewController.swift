@@ -306,7 +306,7 @@ extension CityMapsViewController : MKMapViewDelegate, UIPopoverPresentationContr
 				if let rightCalloutAccessoryView = view.rightCalloutAccessoryView {
 	//				displayArtSummaryViewControllerAt(view.rightCalloutAccessoryView, art: art)
 					var singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as! SingleArtViewController
-					singleArtViewController.updateArt(art, artBackgroundColor: nil)
+					singleArtViewController.update(art, artBackgroundColor: nil)
 					showViewController(singleArtViewController, sender: self)
 				}
 			}
