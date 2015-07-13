@@ -15,7 +15,22 @@ class SingleArtPhotosPresentationController: UIPresentationController {
 	
 	override init(presentedViewController: UIViewController!, presentingViewController: UIViewController!) {
 		super.init(presentedViewController: presentedViewController, presentingViewController: presentingViewController)
+		
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: "viewTapped:")
+		presentedViewController.view.addGestureRecognizer(tapRecognizer)
+		
+		
+		let dblLapRecognizer = UITapGestureRecognizer(target: self, action: "dblViewTapped:")
+		dblLapRecognizer.numberOfTapsRequired = 2
+		presentedViewController.view.addGestureRecognizer(dblLapRecognizer)
+		
+
+
 		setupDimmingView()
+	}
+	
+	
+	func dblViewTapped(tapRecognizer: UITapGestureRecognizer) {
 	}
 	
 	func setupDimmingView() {
@@ -24,39 +39,36 @@ class SingleArtPhotosPresentationController: UIPresentationController {
 		visualEffectView.frame = dimmingView.bounds
 		visualEffectView.autoresizingMask = .FlexibleHeight | .FlexibleWidth
 		dimmingView.addSubview(visualEffectView)
-		
-		let tapRecognizer = UITapGestureRecognizer(target: self, action: "dimmingViewTapped:")
-		dimmingView.addGestureRecognizer(tapRecognizer)
 	}
 	
-	func setupCloseButton() {
-		closeButton?.removeFromSuperview()
-		closeButton = (UIButton.buttonWithType(.Custom)  as! UIButton)
-		closeButton?.addTarget(self, action: "closeButtonTapped:", forControlEvents: UIControlEvents.AllTouchEvents)
-
-		let image = UIImage(named: "photo-doneButton") ?? UIImage()
-		closeButton?.setImage(image, forState: .Normal)
-		
-		let buttonWidth: CGFloat? = closeButton?.currentImage?.size.width ?? 44
-		let buttonHeight: CGFloat? = 44 // closeButton?.currentImage?.size.height
-		var presentationView = presentedView()
-		var originX = presentationView.frame.size.width - buttonWidth! - 8.0
-		var originY: CGFloat
-		if dimmingView.traitCollection.verticalSizeClass == .Compact {
-			originY = presentationView.frame.origin.y
-		} else {
-			originY = presentationView.frame.origin.y  + 20
-		}
-		
-		var origin = CGPoint(x: originX, y: originY)
-		var size = CGSize(width: buttonWidth!, height: buttonHeight!)
-		var frame = CGRect(origin: origin, size: size)
-		closeButton?.frame = frame
-		presentedView().addSubview(closeButton!)
-
-	}
+//	func setupCloseButton() {
+//		closeButton?.removeFromSuperview()
+//		closeButton = (UIButton.buttonWithType(.Custom)  as! UIButton)
+//		closeButton?.addTarget(self, action: "closeButtonTapped:", forControlEvents: UIControlEvents.AllTouchEvents)
+//
+//		let image = UIImage(named: "photo-doneButton") ?? UIImage()
+//		closeButton?.setImage(image, forState: .Normal)
+//		
+//		let buttonWidth: CGFloat? = closeButton?.currentImage?.size.width ?? 44
+//		let buttonHeight: CGFloat? = 44 // closeButton?.currentImage?.size.height
+//		var presentationView = presentedView()
+//		var originX = presentationView.frame.size.width - buttonWidth! - 8.0
+//		var originY: CGFloat
+//		if dimmingView.traitCollection.verticalSizeClass == .Compact {
+//			originY = presentationView.frame.origin.y
+//		} else {
+//			originY = presentationView.frame.origin.y  + 20
+//		}
+//		
+//		var origin = CGPoint(x: originX, y: originY)
+//		var size = CGSize(width: buttonWidth!, height: buttonHeight!)
+//		var frame = CGRect(origin: origin, size: size)
+//		closeButton?.frame = frame
+//		presentedView().addSubview(closeButton!)
+//
+//	}
 	
-	func dimmingViewTapped(tapRecognizer: UITapGestureRecognizer) {
+	func viewTapped(tapRecognizer: UITapGestureRecognizer) {
 		dismiss()
 	}
 	
@@ -71,7 +83,7 @@ class SingleArtPhotosPresentationController: UIPresentationController {
 	override func containerViewWillLayoutSubviews() {
 		dimmingView.frame = containerView.bounds
 		presentedView().frame = frameOfPresentedViewInContainerView()
-		setupCloseButton()
+//		setupCloseButton()
 	}
 	
 	override func frameOfPresentedViewInContainerView() -> CGRect {//

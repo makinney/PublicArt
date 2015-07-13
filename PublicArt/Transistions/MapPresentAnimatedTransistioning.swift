@@ -19,8 +19,8 @@ func animateTransition(transitionContext: UIViewControllerContextTransitioning) 
 		var animatingView = animatingViewController.view
 		animatingView.frame = transitionContext.finalFrameForViewController(animatingViewController)
 		animatingView.layer.shadowOpacity = 0.5 // affects toolbar tranparency
-		animatingView.layer.cornerRadius = 5
-		animatingView.clipsToBounds = true
+//		animatingView.layer.cornerRadius = 5
+//		animatingView.clipsToBounds = true
 
 		var containerView = transitionContext.containerView()
 		containerView.addSubview(animatingView)

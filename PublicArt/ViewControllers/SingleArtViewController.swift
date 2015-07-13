@@ -50,9 +50,9 @@ final class SingleArtViewController: UIViewController {
 		super.viewDidLoad()
 		self.scrollView?.backgroundColor = UIColor.whiteColor()
 		setupPhotoImage()
-//		prepareNavButtons()
-		prepareButtons()
+		prepareNavButtons()
 		runAutoPromptTimer()
+		title = "single"
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -63,6 +63,7 @@ final class SingleArtViewController: UIViewController {
 	
 	 override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
+		var navBar = navigationController?.navigationBar
 		hideTouchPrompt()
 	}
 	
@@ -76,8 +77,21 @@ final class SingleArtViewController: UIViewController {
 		return UIBarButtonItem(barButtonSystemItem: .FixedSpace , target: nil, action: nil)
 	}
 	
+	var actionButton: UIBarButtonItem {
+		return UIBarButtonItem(barButtonSystemItem: .Action , target: self, action: "actionButtonTouched:")
+	}
+	
+	var favoritesButton: UIBarButtonItem {
+		return UIBarButtonItem(barButtonSystemItem: .Bookmarks , target: self, action: "favoriteButtonTouched:")
+	}
+	
+	var routeButton: UIBarButtonItem {
+		return UIBarButtonItem(barButtonSystemItem: .Add , target: self, action: "routeButtonTouched:")
+	}
+	
+	
 	func prepareNavButtons() {
-			//		self.navigationController?.navigationBar.topItem?.rightBarButtonItems  = [mapButton, flexibleSpaceBarButtonItem]
+		self.navigationItem.rightBarButtonItems  = [actionButton, favoritesButton, routeButton, flexibleSpaceBarButtonItem]
 	}
 	
 	func prepareButtons() {
@@ -191,11 +205,21 @@ final class SingleArtViewController: UIViewController {
 	
 	// MARK: Share
 	
-	@IBAction func actionButtonTouched(sender: UIBarButtonItem) {
-		shareArtwork()
+	
+	
+	func routeButtonTouched(sender: UIBarButtonItem) {
+		println("route")
+	}
+	
+	func favoriteButtonTouched(sender: UIBarButtonItem) {
+		println("favorites")
+	}
+	
+	func actionButtonTouched(sender: UIBarButtonItem) {
+		shareArtwork(sender)
 	}
 
-	func shareArtwork() {
+	func shareArtwork(barButtonItem: UIBarButtonItem) {
 		let msg = (art?.title ?? "" ) + "\n"
 		var image = artImageView.image ?? UIImage()
 		var url: NSURL = NSURL(string: "https://www.facebook.com/pages/Public-Art-San-Francisco/360818354113241")!
@@ -206,22 +230,17 @@ final class SingleArtViewController: UIViewController {
 		
 		var userInterfaceIdion = traitCollection.userInterfaceIdiom
 		if userInterfaceIdion == .Phone {
-			// TODO iphone versus iPad
 			avc.modalTransitionStyle = .CoverVertical
 			presentViewController(avc, animated: true, completion: nil)
 		} else {
-		// TODO FIXME popover for iPad
-//			avc.modalPresentationStyle = .Popover
-//			presentViewController(avc, animated: true, completion: nil)
-
-//			presentViewController(popover, animated: true, completion: nil)
+			avc.modalPresentationStyle = .Popover
+			avc.popoverPresentationController?.barButtonItem = barButtonItem
+			presentViewController(avc, animated: true, completion: nil)
 		}
-		
 	}
 	
 	
 	// MARK: Help
-	// TODO somethings not working not pickup on touch...
 
 	func artImageTapped(tapRecognizer: UITapGestureRecognizer) {
 		performSegueWithIdentifier(SegueIdentifier.SingleImageToImageCollection.rawValue, sender: nil)

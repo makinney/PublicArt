@@ -20,7 +20,7 @@ class MapPresentationController: UIPresentationController {
 	func setupDimmingView() {
 		dimmingView = UIView()
 //		dimmingView.backgroundColor = UIColor.greenColor().colorWithAlphaComponent(0.1)
-		var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+		var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
 		visualEffectView.frame = dimmingView.bounds
 		visualEffectView.autoresizingMask = .FlexibleHeight | .FlexibleWidth
 		dimmingView.addSubview(visualEffectView)
@@ -44,9 +44,9 @@ class MapPresentationController: UIPresentationController {
 		dimmingView.frame = containerView.bounds
 		presentedView().frame = frameOfPresentedViewInContainerView()
 		
-		presentedView().layer.borderColor = UIColor.lightGrayColor().CGColor
-		presentedView().layer.borderWidth = 1.0
-		presentedView().layer.cornerRadius = 10.0
+//		presentedView().layer.borderColor = UIColor.lightGrayColor().CGColor
+//		presentedView().layer.borderWidth = 2.0
+//		presentedView().layer.cornerRadius = 10.0
 	}
 	
 	
