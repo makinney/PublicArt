@@ -34,11 +34,6 @@ class SingleArtSummaryViewController: UIViewController {
 			medium.text = art.medium
 			dimensions.text = art.dimensions
 			imageView.image = nil
-//			if !art.thumbFile.isEmpty {
-//				if let thumbNail = self.artPhotoImages.getThumbNailWith(art.thumbFile, size: imageView.frame.size) {
-//					imageView.image = thumbNail.image
-//				}
-//			}
 		}
 	}
  }

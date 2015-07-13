@@ -55,11 +55,6 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		
 		collectionView?.reloadData()
 		
-		userInterfaceIdion = traitCollection.userInterfaceIdiom
-		if userInterfaceIdion == .Pad {
-			displayDefaultArt()
-		}
-		
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -96,23 +91,6 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		return frc
 		}()
 	
-	func displayDefaultArt() {
-		if fetchResultsController.fetchedObjects?.count > 0 {
-			var indexPath = NSIndexPath(forItem: 0, inSection: 0)
-			if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
-				//				if let singleArtViewController = artNavController.viewControllers.last as? SingleArtViewController {
-				//						artPhotoImages.getImage(art.thumbFile, completion: { [weak self] (image) -> () in
-				//						if let image = image {
-				//							singleArtViewController.update(art, artBackgroundColor: nil)
-				//						}
-				//					})
-				//					showDetailViewController(artNavController, sender: self)
-				//				}
-			}
-		}
-	}
-
-
     // MARK: - Navigation
 	
 	func setupLocationPhotosFlowLayout() {

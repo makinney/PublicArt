@@ -8,24 +8,24 @@
 //  TODO: Error handling and recovery
 //
 import Foundation
-import Alamofire
+//import Alamofire
 //import UIKit
-
-struct WebServices {
-	struct EndPoints {
-		static let art = "/classes/art"
-		static let latestUpdateTime = "/update" 
-		static let login = "/login"
-		static let locations = "/classes/locations"
-		static let locationPhotos = "/classes/locationPhotos"
-		static let photos = "/classes/photos"
-		static let userMe = "/user/me"
-		static let testObject = "/classes/TestObject"
-	}
-}
+//
+//struct WebServices {
+//	struct EndPoints {
+//		static let art = "/classes/art"
+//		static let latestUpdateTime = "/update" 
+//		static let login = "/login"
+//		static let locations = "/classes/locations"
+//		static let locationPhotos = "/classes/locationPhotos"
+//		static let photos = "/classes/photos"
+//		static let userMe = "/user/me"
+//		static let testObject = "/classes/TestObject"
+//	}
+//}
 
 class WebService {
-
+/*
 	struct WebService {
 		static let baseURL = "https:api.parse.com/1"
 	}
@@ -142,5 +142,5 @@ class WebService {
 		headers[Headers.sessionTokenKey] = sessionToken
 		
 	}
-	
+*/
 }

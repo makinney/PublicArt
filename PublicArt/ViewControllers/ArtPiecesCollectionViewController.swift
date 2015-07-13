@@ -137,7 +137,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 			var indexPath = NSIndexPath(forItem: 0, inSection: 0)
 			if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
 //				if let singleArtViewController = artNavController.viewControllers.last as? SingleArtViewController {
-//						artPhotoImages.getImage(art.thumbFile, completion: { [weak self] (image) -> () in
 //						if let image = image {
 //							singleArtViewController.update(art, artBackgroundColor: nil)
 //						}

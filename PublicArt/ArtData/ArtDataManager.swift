@@ -19,13 +19,13 @@ class ArtDataManager : NSObject {
 	let artDataCreator: ArtDataCreator
 	let coreDataStack: CoreDataStack
 	let fetcher: Fetcher
-	let importer: Importer
+//	let importer: Importer
 	
 	 init(coreDataStack: CoreDataStack) {
 		self.coreDataStack = coreDataStack
 		artDataCreator = ArtDataCreator(managedObjectContext: coreDataStack.managedObjectContext!)
 		fetcher = Fetcher(managedObjectContext: coreDataStack.managedObjectContext!)
-		importer = Importer(webService: WebService(), managedObjectContext: coreDataStack.managedObjectContext!)
+//		importer = Importer(webService: WebService(), managedObjectContext: coreDataStack.managedObjectContext!)
 	}
 	
 	deinit {

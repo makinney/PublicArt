@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 class Importer {
-
+/*
 	let webService:WebService
 	let moc:NSManagedObjectContext
 	
@@ -85,6 +85,6 @@ class Importer {
 			}
 		})
 	}
-
+*/
 	
 }

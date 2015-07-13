@@ -81,14 +81,7 @@
 		1F89169F1B23D1D700E83891 /* ArtDataCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916941B23D1D700E83891 /* ArtDataCreator.swift */; };
 		1F8916A01B23D1D700E83891 /* ArtDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916951B23D1D700E83891 /* ArtDataManager.swift */; };
 		1F8916A11B23D1D700E83891 /* ArtFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916961B23D1D700E83891 /* ArtFileManager.swift */; };
-		1F8916A21B23D1D700E83891 /* ArtPhotoCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916971B23D1D700E83891 /* ArtPhotoCache.swift */; };
-		1F8916A31B23D1D700E83891 /* ArtPhotoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916981B23D1D700E83891 /* ArtPhotoDownloader.swift */; };
-		1F8916A41B23D1D700E83891 /* ArtPhotoImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916991B23D1D700E83891 /* ArtPhotoImages.swift */; };
-		1F8916A51B23D1D700E83891 /* ArtPhotosByLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F89169A1B23D1D700E83891 /* ArtPhotosByLocation.swift */; };
 		1F8916A61B23D1D700E83891 /* Importer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F89169B1B23D1D700E83891 /* Importer.swift */; };
-		1F8916A71B23D1D700E83891 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F89169C1B23D1D700E83891 /* LocationData.swift */; };
-		1F8916A81B23D1D700E83891 /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F89169D1B23D1D700E83891 /* Locations.swift */; };
-		1F8916A91B23D1D700E83891 /* PhotoFileNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F89169E1B23D1D700E83891 /* PhotoFileNames.swift */; };
 		1F8916AB1B23D1F700E83891 /* CityArtFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916AA1B23D1F700E83891 /* CityArtFunctions.swift */; };
 		1F8916B01B23D20700E83891 /* CoreDataIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916AC1B23D20700E83891 /* CoreDataIdentifiers.swift */; };
 		1F8916B21B23D20700E83891 /* GeneralIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916AE1B23D20700E83891 /* GeneralIdentifiers.swift */; };
@@ -263,14 +256,7 @@
 		1F8916941B23D1D700E83891 /* ArtDataCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtDataCreator.swift; path = ArtData/ArtDataCreator.swift; sourceTree = "<group>"; };
 		1F8916951B23D1D700E83891 /* ArtDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtDataManager.swift; path = ArtData/ArtDataManager.swift; sourceTree = "<group>"; };
 		1F8916961B23D1D700E83891 /* ArtFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtFileManager.swift; path = ArtData/ArtFileManager.swift; sourceTree = "<group>"; };
-		1F8916971B23D1D700E83891 /* ArtPhotoCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtPhotoCache.swift; path = ArtData/ArtPhotoCache.swift; sourceTree = "<group>"; };
-		1F8916981B23D1D700E83891 /* ArtPhotoDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtPhotoDownloader.swift; path = ArtData/ArtPhotoDownloader.swift; sourceTree = "<group>"; };
-		1F8916991B23D1D700E83891 /* ArtPhotoImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtPhotoImages.swift; path = ArtData/ArtPhotoImages.swift; sourceTree = "<group>"; };
-		1F89169A1B23D1D700E83891 /* ArtPhotosByLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtPhotosByLocation.swift; path = ArtData/ArtPhotosByLocation.swift; sourceTree = "<group>"; };
 		1F89169B1B23D1D700E83891 /* Importer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Importer.swift; path = ArtData/Importer.swift; sourceTree = "<group>"; };
-		1F89169C1B23D1D700E83891 /* LocationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationData.swift; path = ArtData/LocationData.swift; sourceTree = "<group>"; };
-		1F89169D1B23D1D700E83891 /* Locations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Locations.swift; path = ArtData/Locations.swift; sourceTree = "<group>"; };
-		1F89169E1B23D1D700E83891 /* PhotoFileNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoFileNames.swift; path = ArtData/PhotoFileNames.swift; sourceTree = "<group>"; };
 		1F8916AA1B23D1F700E83891 /* CityArtFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CityArtFunctions.swift; path = Functions/CityArtFunctions.swift; sourceTree = "<group>"; };
 		1F8916AC1B23D20700E83891 /* CoreDataIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataIdentifiers.swift; path = Identifiers/CoreDataIdentifiers.swift; sourceTree = "<group>"; };
 		1F8916AE1B23D20700E83891 /* GeneralIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeneralIdentifiers.swift; path = Identifiers/GeneralIdentifiers.swift; sourceTree = "<group>"; };
@@ -650,15 +636,8 @@
 				1F8916941B23D1D700E83891 /* ArtDataCreator.swift */,
 				1F8916951B23D1D700E83891 /* ArtDataManager.swift */,
 				1F8916961B23D1D700E83891 /* ArtFileManager.swift */,
-				1F8916971B23D1D700E83891 /* ArtPhotoCache.swift */,
-				1F8916981B23D1D700E83891 /* ArtPhotoDownloader.swift */,
-				1F8916991B23D1D700E83891 /* ArtPhotoImages.swift */,
-				1F89169A1B23D1D700E83891 /* ArtPhotosByLocation.swift */,
 				1F8916F51B23F67A00E83891 /* ArtRefresh.swift */,
 				1F89169B1B23D1D700E83891 /* Importer.swift */,
-				1F89169C1B23D1D700E83891 /* LocationData.swift */,
-				1F89169D1B23D1D700E83891 /* Locations.swift */,
-				1F89169E1B23D1D700E83891 /* PhotoFileNames.swift */,
 			);
 			name = ArtDataControl;
 			sourceTree = "<group>";
@@ -838,7 +817,6 @@
 				1F1EE0F51B26472B0087FBBF /* LogInUser.swift in Sources */,
 				1F8916B21B23D20700E83891 /* GeneralIdentifiers.swift in Sources */,
 				1F4C73341B3E6BC3001ACEE0 /* ArtCitySupplementaryView.swift in Sources */,
-				1F8916A41B23D1D700E83891 /* ArtPhotoImages.swift in Sources */,
 				1F09BB821B3102ED00E4807C /* ParsePhoto.swift in Sources */,
 				1F456DA31B4201F700302DE9 /* CityMapsViewController.swift in Sources */,
 				1F4C73291B3E6B9F001ACEE0 /* SingleArtPhotosPresentationController.swift in Sources */,
@@ -860,29 +838,23 @@
 				1F09BB5B1B2F79D400E4807C /* LocationsCollectionViewController.swift in Sources */,
 				1F4C73231B3E6B9F001ACEE0 /* MapDismissAnimatedTransistioning.swift in Sources */,
 				1F8916F61B23F67A00E83891 /* ArtRefresh.swift in Sources */,
-				1F8916A51B23D1D700E83891 /* ArtPhotosByLocation.swift in Sources */,
 				1F456DA11B41BD1600302DE9 /* WelcomeDiscoverViewController.swift in Sources */,
-				1F8916A21B23D1D700E83891 /* ArtPhotoCache.swift in Sources */,
 				1FC6F8301B3C776F00810258 /* LocPhoto.swift in Sources */,
 				1F8916BE1B23D22B00E83891 /* MappingIdentifiers.swift in Sources */,
 				1F4C73271B3E6B9F001ACEE0 /* SingleArtPhotosDismissAnimatedTransistioning.swift in Sources */,
 				1F4C73261B3E6B9F001ACEE0 /* SingleArtPhotosAnimatedTransistioningDelegate.swift in Sources */,
 				1F8916CA1B23D59700E83891 /* ImageProcess.swift in Sources */,
-				1F8916A91B23D1D700E83891 /* PhotoFileNames.swift in Sources */,
 				1FD0A7CF1B4CC1090086FDB2 /* SingleArtMapViewController.swift in Sources */,
-				1F8916A81B23D1D700E83891 /* Locations.swift in Sources */,
 				1F8916921B23D04100E83891 /* CoreDataStack.swift in Sources */,
 				1F456D9D1B40D10A00302DE9 /* WelcomeContributeViewController.swift in Sources */,
 				1F09BB7A1B30BE8100E4807C /* ArtworkCollectionViewCell.swift in Sources */,
 				1F8916BF1B23D22B00E83891 /* MKArtAnnotationView.swift in Sources */,
-				1F8916A31B23D1D700E83891 /* ArtPhotoDownloader.swift in Sources */,
 				1F4C73281B3E6B9F001ACEE0 /* SingleArtPhotosPresentAnimatedTransistioning.swift in Sources */,
 				1FC6F8281B3A52D100810258 /* ThumbExtension.swift in Sources */,
 				1F8916BC1B23D22B00E83891 /* ArtMapPins.swift in Sources */,
 				1F8916F21B23F2F000E83891 /* WebService.swift in Sources */,
 				1F09BB711B30A44C00E4807C /* CategoryPiecesCollectionViewControllerswift.swift in Sources */,
 				1F4C73531B40B17A001ACEE0 /* WelcomeViewController.swift in Sources */,
-				1F8916A71B23D1D700E83891 /* LocationData.swift in Sources */,
 				1F8916EB1B23F29800E83891 /* ArtExtension.swift in Sources */,
 				1F8916CD1B23D76E00E83891 /* ImageProcess.m in Sources */,
 				1F4C733A1B3E6BC3001ACEE0 /* MapTableViewCell.swift in Sources */,
