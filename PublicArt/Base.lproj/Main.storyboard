@@ -80,11 +80,12 @@
                     <connections>
                         <segue destination="f8G-4b-S0O" kind="show" identifier="MainMenuToCatagorySegueID" id="s3z-Q0-BZr"/>
                         <segue destination="Rlu-bl-K4j" kind="show" identifier="MainMenuToNeighborhoodSegueID" id="4Wf-dO-N3w"/>
+                        <segue destination="3KP-EB-LU6" kind="show" identifier="MainMenuToMediaSegueID" id="w2O-2f-nXq"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rtt-St-hAh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2281" y="-333"/>
+            <point key="canvasLocation" x="2325" y="-1018"/>
         </scene>
         <!--Art Pieces Collection View Controller-->
         <scene sceneID="3OF-YD-2vk">
@@ -169,7 +170,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="3023" y="-339"/>
+            <point key="canvasLocation" x="3023" y="-267"/>
         </scene>
         <!--Locations Collection View Controller-->
         <scene sceneID="3Uf-oY-7C4">
@@ -205,6 +206,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dtn-d0-Ghk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3023" y="-1018"/>
+        </scene>
+        <!--Media Collection View Controller-->
+        <scene sceneID="VO1-ur-NQS">
+            <objects>
+                <collectionViewController storyboardIdentifier="MediaCollectionViewControllerID" id="3KP-EB-LU6" customClass="MediaCollectionViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Q8V-Tr-INc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.45098039220000002" green="0.62745098040000002" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Hye-N6-FPA">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MediaCollectionViewCell" id="8AN-mB-s12" customClass="MediaCollectionViewCell" customModule="PublicArt" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="3KP-EB-LU6" id="5jp-Zk-pM5"/>
+                            <outlet property="delegate" destination="3KP-EB-LU6" id="xy1-wI-sJw"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GfT-yP-0hY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3023" y="-1691"/>
         </scene>
         <!--Browse-->
         <scene sceneID="dq0-1X-0iD">

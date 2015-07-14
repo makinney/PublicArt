@@ -9,26 +9,30 @@
 import UIKit
 import CoreData
 
+protocol ArtPiecesCollectionViewControllerDataFilterProtocol {
+	var fetchFilterKey: String {get set}
+	var fetchFilterValue: String {get set}
+	var pageTitle: String {get set}
+}
 
 final class ArtPiecesCollectionViewController: UICollectionViewController, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout {
 	private var collapseDetailViewController = true
 	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
 	private var maxPhotoWidth: CGFloat = 0.0
+	private let moc: NSManagedObjectContext?
+	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
 
 	private var error:NSError?
-	private let moc: NSManagedObjectContext?
 	
-	var location: Location?
+	var fetchFilterKey: String?
+	var fetchFilterValue: String?
+	var pageTitle: String?
 	
-//	private lazy var artNavController:UINavigationController = {
-//		var navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtNavigationController.rawValue) as! UINavigationController
-//		var vc = navigationController.viewControllers.last as! UIViewController!
-//		vc.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-//		vc.navigationItem.leftItemsSupplementBackButton = true
-//		return navigationController
-//		}()
-
-	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
+	func fetchFilter(filter: ArtPiecesCollectionViewControllerDataFilterProtocol) {
+		fetchFilterKey = filter.fetchFilterKey
+		fetchFilterValue = filter.fetchFilterValue
+		pageTitle = filter.pageTitle
+	}
 	
 	override init(collectionViewLayout: UICollectionViewLayout) {
 		moc = CoreDataStack.sharedInstance.managedObjectContext
@@ -48,16 +52,9 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		super.viewDidLoad()
 		navigationController?.interactivePopGestureRecognizer?.enabled = false
 		navigationController?.delegate = self
-		
-		if let location = self.location {
-			title = location.name // TITLE
-		} else {
-			title = "Titles"  // TITLE TODO: constant
-		}
-		
-		
-		var nibName = UINib(nibName: "ArtworkCollectionViewCell", bundle: nil) // TODO:
-		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: "ArtworkCollectionViewCell")
+	
+		var nibName = UINib(nibName: CellIdentifier.ArtworkCollectionViewCell.rawValue, bundle: nil) // TODO:
+		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.ArtworkCollectionViewCell.rawValue)
 		setupArtCityPhotosFlowLayout()
 		
 		NSNotificationCenter.defaultCenter().addObserver(self,
@@ -67,16 +64,15 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		
 		fetchResultsController.delegate = self
 		fetchResultsController.performFetch(&error)
-		
-		userInterfaceIdion = traitCollection.userInterfaceIdiom
-		if userInterfaceIdion == .Pad {
-			displayDefaultArt()
-		}
-
 	}
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
+		if let value = self.pageTitle {
+			title = value
+		} else {
+			title = "Titles"  // TITLE TODO: constant
+		}
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -84,7 +80,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 //		collectionView?.reloadData()
 	}
 	
-	// TODO: fix rotations - note may have to pass transition to size to setupArtCityViewController
 	override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
 //		if self.view.frame.size.width != size.width ||
 //			self.view.frame.size.height != size.height {
@@ -96,7 +91,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 //			displayDefaultArt()
 //		}
 	}
-	// TODO: fix for rotation
+
 	override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
 		if let previousTraitCollection = previousTraitCollection {
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
@@ -122,8 +117,9 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	lazy var fetchResultsController:NSFetchedResultsController = {
 		let fetchRequest = NSFetchRequest(entityName:ModelEntity.art)
 		
-		if let location = self.location {
-			fetchRequest.predicate = NSPredicate(format:"%K == %@", "idLocation", location.idLocation) // TODO: define
+		if let key = self.fetchFilterKey,
+		   let value = self.fetchFilterValue {
+			fetchRequest.predicate = NSPredicate(format:"%K == %@", key,value)
 		}
 
 		let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.artworkTitle, ascending:true, selector: "localizedStandardCompare:")]
@@ -132,20 +128,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		return frc
 	}()
 	
-	func displayDefaultArt() {
-		if fetchResultsController.fetchedObjects?.count > 0 {
-			var indexPath = NSIndexPath(forItem: 0, inSection: 0)
-			if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
-//				if let singleArtViewController = artNavController.viewControllers.last as? SingleArtViewController {
-//						if let image = image {
-//							singleArtViewController.update(art, artBackgroundColor: nil)
-//						}
-//					})
-//					showDetailViewController(artNavController, sender: self)
-//				}
-			}
-		}
-	}
 	
 	func setupArtCityPhotosFlowLayout() {
 		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
@@ -203,7 +185,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		let art = fetchResultsController.objectAtIndexPath(indexPath) as! Art
 		cell.title.text = art.title
 		cell.imageView.image = nil
-		// TODO add activity indicators
 		if let thumb = art.thumb {
 			cell.activityIndicator.startAnimating()
 			cell.imageFileName = thumb.imageFileName
@@ -221,7 +202,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		
 	
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-		
 		// default square
 		var height: CGFloat = maxPhotoWidth
 		var width: CGFloat = maxPhotoWidth
@@ -235,8 +215,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 					width = width * 2.0  // FIXME fine tune
 					height = width / CGFloat(aspectRatio.doubleValue) + 21.0 // FIXME: hack based on label height
 				}
-			}
-			
+			}			
 		}
 		return CGSize(width: width, height: height)
 	}
@@ -263,46 +242,9 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	}
 
 	// MARK: Notification handlers
-	
 	func newArtCityDatabase(notification: NSNotification) {
 		collectionView?.reloadData()
 	}
-	
-	//	override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-	//		var supplementaryView: UICollectionReusableView = UICollectionReusableView()
-	//		if kind == UICollectionElementKindSectionHeader {
-	//			supplementaryView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "ArtCitySupplementaryView", forIndexPath: indexPath) as! UICollectionReusableView // TODO:
-	//			if let supplementaryView = supplementaryView as? ArtCitySupplementaryView {
-	//				if let sections = fetchResultsController.sections {
-	//					var tableSections = sections as NSArray
-	//					var locationSection = tableSections[indexPath.section] as! NSFetchedResultsSectionInfo
-	//					supplementaryView.label.text = locationSection.name ?? ""
-	//					supplementaryView.label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody) // TODO: has to be a better way
-	//				}
-	//			}
-	//
-	//		}
-	//		return supplementaryView
-	//	}
-
-//	override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-//		super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-//		
-//		if let artPhotoCollectionViewFlowLayout = self.artPhotoCollectionViewFlowLayout {
-//			artPhotoCollectionViewFlowLayout.currentPage = collectionView!.contentOffset.x / collectionView!.bounds.width
-//		}
-//		
-//		coordinator.animateAlongsideTransitionInView(view, animation: { (context) -> Void in
-//			if let artPhotoCollectionViewFlowLayout = self.artPhotoCollectionViewFlowLayout {
-//				self.setupArtPhotosFullScreenItemSize(artPhotoCollectionViewFlowLayout)
-//			}
-//			
-//			}) { (context) -> Void in
-//				var i = 0.0
-//		}
-//	}
-	
-
 }
 
 extension ArtPiecesCollectionViewController : NSFetchedResultsControllerDelegate {

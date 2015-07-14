@@ -1,27 +1,23 @@
- //
-//  LocationsCollectionViewController.Swift
+//
+//  MediaCollectionViewController.swift
 //  PublicArt
 //
-//  Created by Michael Kinney on 6/5/15.
+//  Created by Michael Kinney on 7/13/15.
 //  Copyright (c) 2015 makinney. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-
-final class LocationsCollectionViewController: UICollectionViewController, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout {
+final class MediaCollectionViewController: UICollectionViewController {
 
 	// MARK: Properties
 	private var collapseDetailViewController = true
 	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
-	
+	private var maxCellWidth: CGFloat = 0.0
 	private var error:NSError?
 	private let moc: NSManagedObjectContext?
-	
-	var fetchFilterKey: String?
-	var fetchFilterValue: String?
-	
+	private var media = [String]()
 	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
 	
 	override init(collectionViewLayout: UICollectionViewLayout) {
@@ -40,17 +36,30 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		title = "Locations" // TITLE
+		title = "Medium" // TITLE
 		
-		var nibName = UINib(nibName: CellIdentifier.LocationCollectionViewCell.rawValue, bundle: nil) // TODO:
-		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.LocationCollectionViewCell.rawValue)
-		setupFlowLayout()
+		var nibName = UINib(nibName: CellIdentifier.MediaCollectionViewCell.rawValue, bundle: nil) // TODO:
+		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue)
+		setupMediaFlowLayout()
 		
 		fetchResultsController.delegate = self
 		fetchResultsController.performFetch(&error)
-		
+		var art = fetchResultsController.fetchedObjects as! [Art]
+		media = createMediaNameList(art)
 		collectionView?.reloadData()
 		
+	}
+	
+	func createMediaNameList(artwork: [Art]) -> [String] {
+		var mediaName = [String]()
+		var lastMedium = String()
+		for art in artwork {
+			if art.medium != lastMedium {
+				mediaName.append(art.medium)
+				lastMedium = art.medium
+			}
+		}
+		return mediaName
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -61,43 +70,36 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		super.viewDidAppear(animated)
 	}
 	
-//	override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-//		if initialHorizontalSizeClass == .Compact {
-//			displayDefaultArt()
-//		}
-//	}
-	
 	override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
-		setupFlowLayout()
+		setupMediaFlowLayout()
 		collectionView?.reloadData()
 	}
 	
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        println("\(__FILE__) \(__FUNCTION__)")
-    }
-
+	override func didReceiveMemoryWarning() {
+		super.didReceiveMemoryWarning()
+		println("\(__FILE__) \(__FUNCTION__)")
+	}
+	
 	// MARK: Fetch Results Controller
 	//
 	lazy var fetchResultsController:NSFetchedResultsController = {
-		let fetchRequest = NSFetchRequest(entityName:ModelEntity.location)
-		let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.locationName, ascending:true, selector: "localizedStandardCompare:")]
+		let fetchRequest = NSFetchRequest(entityName:ModelEntity.art)
+		let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.medium, ascending:true, selector: "localizedStandardCompare:")]
 		fetchRequest.sortDescriptors = sortDescriptor
 		let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc!, sectionNameKeyPath: nil, cacheName: nil)
 		return frc
 		}()
 	
-    // MARK: - Navigation
+	// MARK: - Navigation
 	
-	func setupFlowLayout() {
+	func setupMediaFlowLayout() {
 		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
 			collectionViewFlowLayout.scrollDirection = .Vertical
 			var masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
 			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
-			var maxCellWidth: CGFloat = 0.0
-
+			
 			collectionViewFlowLayout.minimumLineSpacing = 5
-			var minimumNumberCellsPerLine = 2 // ultimately up to flow layout
+			var minimumCellsPerLine = 2 // ultimately up to flow layout
 			
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
 			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
@@ -106,119 +108,102 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 				collectionViewFlowLayout.sectionInset.right = sectionInset
 				let itemSpacing: CGFloat = sectionInset / 2.0
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
-				minimumNumberCellsPerLine = 3
-				maxCellWidth = cellWidthAvailable(masterViewsWidth, cellsPerLine: minimumNumberCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
-				collectionViewFlowLayout.itemSize = CGSize(width: maxCellWidth, height: maxCellWidth) 
+				
+				
+				minimumCellsPerLine = 1
+				maxCellWidth = cellWidthToUse(masterViewsWidth, cellsPerLine: minimumCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
+				collectionViewFlowLayout.itemSize = CGSize(width: maxCellWidth, height: maxCellWidth / 8.0) // TODO: hard constant hack for aspect ratio
 			} else {
 				let sectionInset: CGFloat = 5.0
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
 				let itemSpacing: CGFloat = sectionInset / 2.0
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
-				minimumNumberCellsPerLine = 3
-				maxCellWidth = cellWidthAvailable(masterViewsWidth, cellsPerLine: minimumNumberCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
-				collectionViewFlowLayout.itemSize = CGSize(width: maxCellWidth, height: maxCellWidth)
+				minimumCellsPerLine = 1
+				maxCellWidth = cellWidthToUse(masterViewsWidth, cellsPerLine: minimumCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
+				collectionViewFlowLayout.itemSize = CGSize(width: maxCellWidth, height: (maxCellWidth / 8.0))
 			}
 		}
 	}
 	
-	func cellWidthAvailable(screenWidth: CGFloat, cellsPerLine: Int, itemSpacing: CGFloat, flowLayout:UICollectionViewFlowLayout ) -> CGFloat {
+	func cellWidthToUse(screenWidth: CGFloat, cellsPerLine: Int, itemSpacing: CGFloat, flowLayout:UICollectionViewFlowLayout ) -> CGFloat {
 		let numCells: CGFloat = CGFloat(cellsPerLine)
 		var totalInterItemSpacing: CGFloat = 0.0
 		var totalInsetSpacing: CGFloat = 0.0
 		var totalSpacing: CGFloat = 0.0
 		var spaceLeftForCells: CGFloat = 0.0
-		var cell: CGFloat = 0.0
+		var cellWidth: CGFloat = 0.0
 		
 		totalInterItemSpacing = numCells * itemSpacing
 		totalInsetSpacing = flowLayout.sectionInset.left + flowLayout.sectionInset.right
 		totalSpacing = totalInterItemSpacing + totalInsetSpacing
 		spaceLeftForCells = screenWidth - totalSpacing
-		cell = spaceLeftForCells / numCells
-		return cell
+		cellWidth = spaceLeftForCells / numCells
+		return cellWidth
 	}
 	
 	
 	
-    // MARK: UICollectionViewDataSource
+	// MARK: UICollectionViewDataSource
 	
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.LocationCollectionViewCell.rawValue, forIndexPath: indexPath) as! LocationCollectionViewCell
-		let location = fetchResultsController.objectAtIndexPath(indexPath) as! Location
-	
-		cell.title.text = location.name
-
-		if location.artwork.count > 0 {
-			cell.backgroundColor = UIColor.whiteColor()
-			cell.title.textColor = UIColor.blackColor()
-		} else if location.name != "All" {
-			cell.backgroundColor = UIColor.lightGrayColor()
-			cell.title.textColor =  UIColor.grayColor()
-		}
-		
+		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.MediaCollectionViewCell.rawValue, forIndexPath: indexPath) as! MediaCollectionViewCell
+		var mediumName = media[indexPath.row] as String
+		cell.title.text = mediumName
 		return cell
 	}
 	
 	override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-		return fetchResultsController.sections?.count ?? 0
+		return 1
 	}
 	
 	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		let sectionInfo = fetchResultsController.sections![section] as! NSFetchedResultsSectionInfo
-		return sectionInfo.numberOfObjects
+		return media.count
 	}
 	
-    // MARK: UICollectionViewDelegate
+	// MARK: UICollectionViewDelegate
 	
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		if let location = fetchResultsController.objectAtIndexPath(indexPath) as? Location {
 			var navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as! UINavigationController
 			var vc: ArtPiecesCollectionViewController = navigationController.viewControllers.last as! ArtPiecesCollectionViewController
-			let filter = ArtPiecesCollectionViewDataFilter(key: "idLocation", value: location.idLocation, title: location.name)
+			var mediumName = media[indexPath.row] as String
+			let filter = ArtPiecesCollectionViewDataFilter(key: "medium", value: mediumName, title: mediumName)
 			vc.fetchFilter(filter)
 			showDetailViewController(navigationController, sender: self)
-		}
 	}
 	
+	
 	override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-		let location = fetchResultsController.objectAtIndexPath(indexPath) as! Location
-		if location.artwork.count > 0 {
-			return true
-		}
-		return false
+		return true
 	}
-
-    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-		let location = fetchResultsController.objectAtIndexPath(indexPath) as! Location
-		if location.artwork.count > 0 {
-			return true
-		}
-		return false
-    }
+	
+	
+	override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+		return true
+	}
 	
 	override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
 		var indexPathsVisible = collectionView.indexPathsForVisibleItems()
-		for path in indexPathsVisible { // hack fix for bug where delected cells still look selected, sometimes
+		for path in indexPathsVisible {
 			if let visiblePath = path as? NSIndexPath {
-				let location = fetchResultsController.objectAtIndexPath(visiblePath) as! Location
-				if location.artwork.count > 0 {
-					var cell = collectionView.cellForItemAtIndexPath(visiblePath) as? LocationCollectionViewCell
+					var cell = collectionView.cellForItemAtIndexPath(visiblePath) as? MediaCollectionViewCell
 					cell?.backgroundColor = UIColor.whiteColor()
 					cell?.title.textColor = UIColor.blackColor()
-				}
 			}
 		}
-	
-		var cell = collectionView.cellForItemAtIndexPath(indexPath) as? LocationCollectionViewCell
+		
+		var cell = collectionView.cellForItemAtIndexPath(indexPath) as? MediaCollectionViewCell
 		cell?.backgroundColor = UIColor.blackColor()
 		cell?.title.textColor = UIColor.whiteColor()
 	}
 	
 }
 
-extension LocationsCollectionViewController : NSFetchedResultsControllerDelegate {
+extension MediaCollectionViewController : NSFetchedResultsControllerDelegate {
 	
 	func controllerDidChangeContent(controller: NSFetchedResultsController) {
+		var art = fetchResultsController.fetchedObjects as! [Art]
+		media = createMediaNameList(art)
 		collectionView?.reloadData()
 	}
 }

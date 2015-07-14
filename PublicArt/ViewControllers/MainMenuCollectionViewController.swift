@@ -165,19 +165,21 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 			showViewController(vc, sender: self)
 			
 
-
 		case MainMenuRow.Neighborhoods.rawValue:
 			var vc: LocationsCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.LocationCollectionViewController.rawValue) as! LocationsCollectionViewController
 			showViewController(vc, sender: self)
 
 		
 		case MainMenuRow.Titles.rawValue:
-		
 			var navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as! UINavigationController
 			var vc: ArtPiecesCollectionViewController = navigationController.viewControllers.last as! ArtPiecesCollectionViewController
 			showDetailViewController(navigationController, sender: self)
 			
-//		case MainMenuRow.Medium.rawValue:
+		case MainMenuRow.Medium.rawValue:
+			var vc: MediaCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.MediaCollectionViewController.rawValue) as! MediaCollectionViewController
+			showViewController(vc, sender: self)
+
+		
 //		case MainMenuRow.Favorites.rawValue:
 		default:
 			println("\(__FILE__) \(__FUNCTION__) menu row not defined for row \(row)")

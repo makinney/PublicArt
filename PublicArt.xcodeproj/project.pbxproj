@@ -19,8 +19,12 @@
 		1F09BB5A1B2F79D400E4807C /* MainMenuSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB571B2F79D400E4807C /* MainMenuSplitViewController.swift */; };
 		1F09BB5B1B2F79D400E4807C /* LocationsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB581B2F79D400E4807C /* LocationsCollectionViewController.swift */; };
 		1F09BB6F1B30A41200E4807C /* ArtPiecesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB6E1B30A41200E4807C /* ArtPiecesCollectionViewController.swift */; };
+		1F09BB701B54BEF000191100 /* MediaCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB6F1B54BEF000191100 /* MediaCollectionViewController.swift */; };
 		1F09BB711B30A44C00E4807C /* CategoryPiecesCollectionViewControllerswift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB701B30A44C00E4807C /* CategoryPiecesCollectionViewControllerswift.swift */; };
 		1F09BB731B30A4B800E4807C /* LocationPiecesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB721B30A4B800E4807C /* LocationPiecesCollectionViewController.swift */; };
+		1F09BB731B54D42700191100 /* MediaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB711B54D42700191100 /* MediaCollectionViewCell.swift */; };
+		1F09BB741B54D42700191100 /* MediaCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F09BB721B54D42700191100 /* MediaCollectionViewCell.xib */; };
+		1F09BB761B555FE900191100 /* ArtPiecesCollectionViewDataFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB751B555FE900191100 /* ArtPiecesCollectionViewDataFilter.swift */; };
 		1F09BB7A1B30BE8100E4807C /* ArtworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB781B30BE8100E4807C /* ArtworkCollectionViewCell.swift */; };
 		1F09BB7B1B30BE8100E4807C /* ArtworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F09BB791B30BE8100E4807C /* ArtworkCollectionViewCell.xib */; };
 		1F09BB821B3102ED00E4807C /* ParsePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB811B3102ED00E4807C /* ParsePhoto.swift */; };
@@ -195,8 +199,12 @@
 		1F09BB571B2F79D400E4807C /* MainMenuSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = MainMenuSplitViewController.swift; path = ViewControllers/MainMenuSplitViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1F09BB581B2F79D400E4807C /* LocationsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationsCollectionViewController.swift; path = ViewControllers/LocationsCollectionViewController.swift; sourceTree = "<group>"; };
 		1F09BB6E1B30A41200E4807C /* ArtPiecesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtPiecesCollectionViewController.swift; path = ViewControllers/ArtPiecesCollectionViewController.swift; sourceTree = "<group>"; };
+		1F09BB6F1B54BEF000191100 /* MediaCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaCollectionViewController.swift; path = ViewControllers/MediaCollectionViewController.swift; sourceTree = "<group>"; };
 		1F09BB701B30A44C00E4807C /* CategoryPiecesCollectionViewControllerswift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CategoryPiecesCollectionViewControllerswift.swift; path = ViewControllers/CategoryPiecesCollectionViewControllerswift.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		1F09BB711B54D42700191100 /* MediaCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaCollectionViewCell.swift; path = Views/MediaCollectionViewCell.swift; sourceTree = "<group>"; };
 		1F09BB721B30A4B800E4807C /* LocationPiecesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationPiecesCollectionViewController.swift; path = ViewControllers/LocationPiecesCollectionViewController.swift; sourceTree = "<group>"; };
+		1F09BB721B54D42700191100 /* MediaCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MediaCollectionViewCell.xib; path = Views/MediaCollectionViewCell.xib; sourceTree = "<group>"; };
+		1F09BB751B555FE900191100 /* ArtPiecesCollectionViewDataFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtPiecesCollectionViewDataFilter.swift; path = Models/ArtPiecesCollectionViewDataFilter.swift; sourceTree = "<group>"; };
 		1F09BB781B30BE8100E4807C /* ArtworkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtworkCollectionViewCell.swift; path = Views/ArtworkCollectionViewCell.swift; sourceTree = "<group>"; };
 		1F09BB791B30BE8100E4807C /* ArtworkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArtworkCollectionViewCell.xib; path = Views/ArtworkCollectionViewCell.xib; sourceTree = "<group>"; };
 		1F09BB811B3102ED00E4807C /* ParsePhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParsePhoto.swift; path = Parse/ParsePhoto.swift; sourceTree = "<group>"; };
@@ -410,15 +418,16 @@
 				1F456DA21B4201F700302DE9 /* CityMapsViewController.swift */,
 				1F09BB561B2F79D400E4807C /* CatagoryCollectionViewController.swift */,
 				1F09BB701B30A44C00E4807C /* CategoryPiecesCollectionViewControllerswift.swift */,
+				1F09BB581B2F79D400E4807C /* LocationsCollectionViewController.swift */,
+				1F09BB721B30A4B800E4807C /* LocationPiecesCollectionViewController.swift */,
+				1F09BB571B2F79D400E4807C /* MainMenuSplitViewController.swift */,
+				1F01D4051B22745A00D4B156 /* MainMenuCollectionViewController.swift */,
+				1F09BB6F1B54BEF000191100 /* MediaCollectionViewController.swift */,
 				1FD0A7CE1B4CC1090086FDB2 /* SingleArtMapViewController.swift */,
 				1F4C733E1B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewController.swift */,
 				1F4C733F1B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewFlowLayout.swift */,
 				1F4C73401B3E6E02001ACEE0 /* SingleArtSummaryViewController.swift */,
 				1F4C73411B3E6E02001ACEE0 /* SingleArtViewController.swift */,
-				1F09BB581B2F79D400E4807C /* LocationsCollectionViewController.swift */,
-				1F09BB721B30A4B800E4807C /* LocationPiecesCollectionViewController.swift */,
-				1F09BB571B2F79D400E4807C /* MainMenuSplitViewController.swift */,
-				1F01D4051B22745A00D4B156 /* MainMenuCollectionViewController.swift */,
 				1FD0A7C71B4C68BC0086FDB2 /* WebViewController.swift */,
 			);
 			name = ViewControllers;
@@ -437,6 +446,8 @@
 				1F4C732F1B3E6BC3001ACEE0 /* ArtTableViewCell.xib */,
 				1F4C73301B3E6BC3001ACEE0 /* MapTableViewCell.swift */,
 				1F4C73311B3E6BC3001ACEE0 /* MapTableViewCell.xib */,
+				1F09BB711B54D42700191100 /* MediaCollectionViewCell.swift */,
+				1F09BB721B54D42700191100 /* MediaCollectionViewCell.xib */,
 				1F4C73321B3E6BC3001ACEE0 /* SingleArtPhotosCollectionViewCell.swift */,
 				1F4C73331B3E6BC3001ACEE0 /* SingleArtPhotosCollectionViewCell.xib */,
 				1F0E25B51B3C8BF0003DB8AF /* LocationCollectionViewCell.swift */,
@@ -511,6 +522,7 @@
 			isa = PBXGroup;
 			children = (
 				1F8915F61B229ED400E83891 /* MenuModel.swift */,
+				1F09BB751B555FE900191100 /* ArtPiecesCollectionViewDataFilter.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -775,6 +787,7 @@
 				1F4C73351B3E6BC3001ACEE0 /* ArtCitySupplementaryView.xib in Resources */,
 				1F4C73371B3E6BC3001ACEE0 /* ArtTableHeaderView.xib in Resources */,
 				1F09BB7B1B30BE8100E4807C /* ArtworkCollectionViewCell.xib in Resources */,
+				1F09BB741B54D42700191100 /* MediaCollectionViewCell.xib in Resources */,
 				1F01D3EF1B22713400D4B156 /* LaunchScreen.xib in Resources */,
 				1F4C73511B40B14D001ACEE0 /* Welcome.storyboard in Resources */,
 				1F0E25B81B3C8BF0003DB8AF /* LocationCollectionViewCell.xib in Resources */,
@@ -870,7 +883,9 @@
 				1F0E25B71B3C8BF0003DB8AF /* LocationCollectionViewCell.swift in Sources */,
 				1F8916B31B23D20700E83891 /* StoryboardIdentifiers.swift in Sources */,
 				1F4C73431B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewFlowLayout.swift in Sources */,
+				1F09BB761B555FE900191100 /* ArtPiecesCollectionViewDataFilter.swift in Sources */,
 				1F4C73421B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewController.swift in Sources */,
+				1F09BB701B54BEF000191100 /* MediaCollectionViewController.swift in Sources */,
 				1F09BB8E1B31F54B00E4807C /* ParseArtist.swift in Sources */,
 				1F456D9B1B40D0C300302DE9 /* WelcomeExploreViewController.swift in Sources */,
 				1F09BB5A1B2F79D400E4807C /* MainMenuSplitViewController.swift in Sources */,
@@ -878,6 +893,7 @@
 				1FC6F8341B3C78AB00810258 /* ParseLocPhoto.swift in Sources */,
 				1F09BB6F1B30A41200E4807C /* ArtPiecesCollectionViewController.swift in Sources */,
 				1FD0A7CD1B4C98080086FDB2 /* Art.swift in Sources */,
+				1F09BB731B54D42700191100 /* MediaCollectionViewCell.swift in Sources */,
 				1F8916B01B23D20700E83891 /* CoreDataIdentifiers.swift in Sources */,
 				1F8916ED1B23F29800E83891 /* PhotoExtension.swift in Sources */,
 				1FC6F8201B3A4CF500810258 /* Thumb.swift in Sources */,
