@@ -232,7 +232,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		}
 	
 		var cell = collectionView.cellForItemAtIndexPath(indexPath) as? LocationCollectionViewCell
-		cell?.backgroundColor = UIColor.blackColor()
+		cell?.backgroundColor = UIColor.selectionBackgroundHighlite()
 		cell?.title.textColor = UIColor.whiteColor()
 	}
 	

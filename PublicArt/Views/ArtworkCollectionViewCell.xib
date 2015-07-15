@@ -48,7 +48,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="OUk-dK-TiW" firstAttribute="top" secondItem="tSu-Un-lkv" secondAttribute="bottom" id="2ks-d1-WYM"/>
                             <constraint firstAttribute="trailing" secondItem="OUk-dK-TiW" secondAttribute="trailing" id="HLn-vJ-z1s"/>

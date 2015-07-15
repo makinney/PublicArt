@@ -29,6 +29,7 @@
 		1F09BB7A1B30BE8100E4807C /* ArtworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB781B30BE8100E4807C /* ArtworkCollectionViewCell.swift */; };
 		1F09BB7A1B55C30B00191100 /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F09BB781B55C30B00191100 /* CategoryCollectionViewCell.xib */; };
 		1F09BB7B1B30BE8100E4807C /* ArtworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F09BB791B30BE8100E4807C /* ArtworkCollectionViewCell.xib */; };
+		1F09BB7C1B56BA4400191100 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB7B1B56BA4400191100 /* ColorExtension.swift */; };
 		1F09BB821B3102ED00E4807C /* ParsePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB811B3102ED00E4807C /* ParsePhoto.swift */; };
 		1F09BB8E1B31F54B00E4807C /* ParseArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB8D1B31F54B00E4807C /* ParseArtist.swift */; };
 		1F09BB901B31F5D200E4807C /* ParseLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB8F1B31F5D200E4807C /* ParseLocation.swift */; };
@@ -211,6 +212,7 @@
 		1F09BB781B30BE8100E4807C /* ArtworkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtworkCollectionViewCell.swift; path = Views/ArtworkCollectionViewCell.swift; sourceTree = "<group>"; };
 		1F09BB781B55C30B00191100 /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CategoryCollectionViewCell.xib; path = Views/CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		1F09BB791B30BE8100E4807C /* ArtworkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArtworkCollectionViewCell.xib; path = Views/ArtworkCollectionViewCell.xib; sourceTree = "<group>"; };
+		1F09BB7B1B56BA4400191100 /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorExtension.swift; path = Extensions/ColorExtension.swift; sourceTree = "<group>"; };
 		1F09BB811B3102ED00E4807C /* ParsePhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParsePhoto.swift; path = Parse/ParsePhoto.swift; sourceTree = "<group>"; };
 		1F09BB8D1B31F54B00E4807C /* ParseArtist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseArtist.swift; path = Parse/ParseArtist.swift; sourceTree = "<group>"; };
 		1F09BB8F1B31F5D200E4807C /* ParseLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseLocation.swift; path = Parse/ParseLocation.swift; sourceTree = "<group>"; };
@@ -574,6 +576,7 @@
 				1FC6F8271B3A52D100810258 /* ThumbExtension.swift */,
 				1F8916EA1B23F29800E83891 /* UIImageViewExtension.swift */,
 				1FC6F8351B3C797100810258 /* LocPhotoExtension.swift */,
+				1F09BB7B1B56BA4400191100 /* ColorExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -889,6 +892,7 @@
 				1F8916B51B23D21900E83891 /* SwiftyJSON.swift in Sources */,
 				1F4C73551B40B316001ACEE0 /* WelcomePublicViewController.swift in Sources */,
 				1F0E25B71B3C8BF0003DB8AF /* LocationCollectionViewCell.swift in Sources */,
+				1F09BB7C1B56BA4400191100 /* ColorExtension.swift in Sources */,
 				1F8916B31B23D20700E83891 /* StoryboardIdentifiers.swift in Sources */,
 				1F4C73431B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewFlowLayout.swift in Sources */,
 				1F09BB761B555FE900191100 /* ArtPiecesCollectionViewDataFilter.swift in Sources */,

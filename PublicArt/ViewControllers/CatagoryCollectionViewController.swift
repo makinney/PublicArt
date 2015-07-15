@@ -23,6 +23,8 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 				
 		setupFlowLayout()
 		collectionView?.reloadData()
+		
+		title = "Catagories"
     }
 
     override func didReceiveMemoryWarning() {
@@ -193,7 +195,7 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 		}
 		
 		var cell = collectionView.cellForItemAtIndexPath(indexPath) as? CategoryCollectionViewCell
-		cell?.backgroundColor = UIColor.blackColor()
+		cell?.backgroundColor = UIColor.selectionBackgroundHighlite()
 		cell?.menuItemName.textColor = UIColor.whiteColor()
 	}
 }

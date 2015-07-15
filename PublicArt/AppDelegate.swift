@@ -114,9 +114,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	// MARK: Appearance
 	func setAppearanceProxies() {
 	//	UIBarButtonItem.appearance().tintColor = UIColor.blackColor()
-		UINavigationBar.appearance().backgroundColor = UIColor.whiteColor()
-		UITabBar.appearance().backgroundColor = UIColor.whiteColor()
-		UIToolbar.appearance().barTintColor = UIColor.whiteColor()
+	//	UINavigationBar.appearance().backgroundColor = UIColor.blackColor()
+		UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+		UINavigationBar.appearance().barTintColor = UIColor.blackColor()
+		UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+		
+		UITabBar.appearance().barTintColor = UIColor.blackColor()
+		UITabBar.appearance().tintColor = UIColor.whiteColor()
+		UITabBar.appearance().translucent = true
+		
+		UIToolbar.appearance().barTintColor = UIColor.blackColor()
+		UIToolbar.appearance().tintColor = UIColor.whiteColor()
+
 		UIToolbar.appearance().translucent = true
 	//	UIToolbar.appearance().setBackgroundImage(toolbarBackgroundImage(), forToolbarPosition: .Any, barMetrics: .Default)
 	}

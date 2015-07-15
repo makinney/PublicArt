@@ -37,7 +37,7 @@ final class MediaCollectionViewController: UICollectionViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		title = "Medium" // TITLE
+		title = "Media" // TITLE
 		
 		var nibName = UINib(nibName: CellIdentifier.MediaCollectionViewCell.rawValue, bundle: nil) // TODO:
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue)
@@ -204,7 +204,7 @@ final class MediaCollectionViewController: UICollectionViewController {
 		}
 		
 		var cell = collectionView.cellForItemAtIndexPath(indexPath) as? MediaCollectionViewCell
-		cell?.backgroundColor = UIColor.blackColor()
+		cell?.backgroundColor = UIColor.selectionBackgroundHighlite()
 		cell?.title.textColor = UIColor.whiteColor()
 	}
 	

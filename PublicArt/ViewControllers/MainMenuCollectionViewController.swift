@@ -28,7 +28,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 	
 		collectionView?.reloadData()
 		
-		self.title = "Browse" // TITLE
+		self.title = "Public Art" // TITLE
 		
     }
 
