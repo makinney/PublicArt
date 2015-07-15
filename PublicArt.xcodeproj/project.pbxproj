@@ -25,7 +25,9 @@
 		1F09BB731B54D42700191100 /* MediaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB711B54D42700191100 /* MediaCollectionViewCell.swift */; };
 		1F09BB741B54D42700191100 /* MediaCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F09BB721B54D42700191100 /* MediaCollectionViewCell.xib */; };
 		1F09BB761B555FE900191100 /* ArtPiecesCollectionViewDataFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB751B555FE900191100 /* ArtPiecesCollectionViewDataFilter.swift */; };
+		1F09BB791B55C30B00191100 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB771B55C30B00191100 /* CategoryCollectionViewCell.swift */; };
 		1F09BB7A1B30BE8100E4807C /* ArtworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB781B30BE8100E4807C /* ArtworkCollectionViewCell.swift */; };
+		1F09BB7A1B55C30B00191100 /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F09BB781B55C30B00191100 /* CategoryCollectionViewCell.xib */; };
 		1F09BB7B1B30BE8100E4807C /* ArtworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F09BB791B30BE8100E4807C /* ArtworkCollectionViewCell.xib */; };
 		1F09BB821B3102ED00E4807C /* ParsePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB811B3102ED00E4807C /* ParsePhoto.swift */; };
 		1F09BB8E1B31F54B00E4807C /* ParseArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F09BB8D1B31F54B00E4807C /* ParseArtist.swift */; };
@@ -205,7 +207,9 @@
 		1F09BB721B30A4B800E4807C /* LocationPiecesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationPiecesCollectionViewController.swift; path = ViewControllers/LocationPiecesCollectionViewController.swift; sourceTree = "<group>"; };
 		1F09BB721B54D42700191100 /* MediaCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MediaCollectionViewCell.xib; path = Views/MediaCollectionViewCell.xib; sourceTree = "<group>"; };
 		1F09BB751B555FE900191100 /* ArtPiecesCollectionViewDataFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtPiecesCollectionViewDataFilter.swift; path = Models/ArtPiecesCollectionViewDataFilter.swift; sourceTree = "<group>"; };
+		1F09BB771B55C30B00191100 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryCollectionViewCell.swift; path = Views/CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		1F09BB781B30BE8100E4807C /* ArtworkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtworkCollectionViewCell.swift; path = Views/ArtworkCollectionViewCell.swift; sourceTree = "<group>"; };
+		1F09BB781B55C30B00191100 /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CategoryCollectionViewCell.xib; path = Views/CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		1F09BB791B30BE8100E4807C /* ArtworkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArtworkCollectionViewCell.xib; path = Views/ArtworkCollectionViewCell.xib; sourceTree = "<group>"; };
 		1F09BB811B3102ED00E4807C /* ParsePhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParsePhoto.swift; path = Parse/ParsePhoto.swift; sourceTree = "<group>"; };
 		1F09BB8D1B31F54B00E4807C /* ParseArtist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseArtist.swift; path = Parse/ParseArtist.swift; sourceTree = "<group>"; };
@@ -436,6 +440,8 @@
 		1F01D4091B22783700D4B156 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1F09BB771B55C30B00191100 /* CategoryCollectionViewCell.swift */,
+				1F09BB781B55C30B00191100 /* CategoryCollectionViewCell.xib */,
 				1F09BB781B30BE8100E4807C /* ArtworkCollectionViewCell.swift */,
 				1F09BB791B30BE8100E4807C /* ArtworkCollectionViewCell.xib */,
 				1F4C732A1B3E6BC3001ACEE0 /* ArtCitySupplementaryView.swift */,
@@ -791,6 +797,7 @@
 				1F01D3EF1B22713400D4B156 /* LaunchScreen.xib in Resources */,
 				1F4C73511B40B14D001ACEE0 /* Welcome.storyboard in Resources */,
 				1F0E25B81B3C8BF0003DB8AF /* LocationCollectionViewCell.xib in Resources */,
+				1F09BB7A1B55C30B00191100 /* CategoryCollectionViewCell.xib in Resources */,
 				1F01D3EC1B22713400D4B156 /* Images.xcassets in Resources */,
 				1F01D4111B227B2000D4B156 /* HomeCollectionViewCell.xib in Resources */,
 				1F4C733B1B3E6BC3001ACEE0 /* MapTableViewCell.xib in Resources */,
@@ -869,6 +876,7 @@
 				1F09BB711B30A44C00E4807C /* CategoryPiecesCollectionViewControllerswift.swift in Sources */,
 				1F4C73531B40B17A001ACEE0 /* WelcomeViewController.swift in Sources */,
 				1F8916EB1B23F29800E83891 /* ArtExtension.swift in Sources */,
+				1F09BB791B55C30B00191100 /* CategoryCollectionViewCell.swift in Sources */,
 				1F8916CD1B23D76E00E83891 /* ImageProcess.m in Sources */,
 				1F4C733A1B3E6BC3001ACEE0 /* MapTableViewCell.swift in Sources */,
 				1FC6F82A1B3B7F6F00810258 /* ImageDownload.swift in Sources */,

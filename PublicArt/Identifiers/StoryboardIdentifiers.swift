@@ -12,6 +12,7 @@ import Foundation
 enum CellIdentifier: String {
 	case ArtworkCollectionViewCell = "ArtworkCollectionViewCell"
 	case LocationCollectionViewCell = "LocationCollectionViewCell"
+	case CategoryCollectionViewCell = "CategoryCollectionViewCell"
 	case MediaCollectionViewCell = "MediaCollectionViewCell"
 	case ArtTableViewCellID = "ArtTableViewCell"
 	case MapTableViewCellID = "MapTableViewCell"

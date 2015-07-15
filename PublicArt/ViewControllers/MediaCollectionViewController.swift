@@ -12,6 +12,7 @@ import CoreData
 final class MediaCollectionViewController: UICollectionViewController {
 
 	// MARK: Properties
+	private var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
 	private var collapseDetailViewController = true
 	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
 	private var maxCellWidth: CGFloat = 0.0
@@ -164,19 +165,29 @@ final class MediaCollectionViewController: UICollectionViewController {
 	// MARK: UICollectionViewDelegate
 	
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-			var navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as! UINavigationController
-			var vc: ArtPiecesCollectionViewController = navigationController.viewControllers.last as! ArtPiecesCollectionViewController
-			var mediumName = media[indexPath.row] as String
-			let filter = ArtPiecesCollectionViewDataFilter(key: "medium", value: mediumName, title: mediumName)
-			vc.fetchFilter(filter)
-			showDetailViewController(navigationController, sender: self)
-	}
+		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
+			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
+			if artPiecesCollectionViewController != nil {
+				var mediumName = media[indexPath.row] as String
+				let filter = ArtPiecesCollectionViewDataFilter(key: "medium", value: mediumName, title: mediumName)
+				artPiecesCollectionViewController!.fetchFilter(filter)
+				showDetailViewController(artPiecesCollectionViewController!, sender: self)
+			}
+		} else {
 	
+			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
+				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
+					var mediumName = media[indexPath.row] as String
+					let filter = ArtPiecesCollectionViewDataFilter(key: "medium", value: mediumName, title: mediumName)
+					artPiecesCollectionViewController.fetchFilter(filter)
+					showDetailViewController(navigationController, sender: self)
+			}
+		}
+	}
 	
 	override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
 		return true
 	}
-	
 	
 	override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
 		return true

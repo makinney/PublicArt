@@ -12,9 +12,9 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 
 	// MARK: Properties
 	
-	
 	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
 	private var mainMenu = MainMenu()
+	private var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
 	
 	// MARK: Life Cycle
 
@@ -160,21 +160,31 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 	
 		switch(row) {
 //		case MainMenuRow.Artists.rawValue:
+
 		case MainMenuRow.Catagory.rawValue:
-			var vc: CatagoryCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.CatagoryCollectionViewController.rawValue) as! CatagoryCollectionViewController
-			showViewController(vc, sender: self)
-			
-
-		case MainMenuRow.Neighborhoods.rawValue:
-			var vc: LocationsCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.LocationCollectionViewController.rawValue) as! LocationsCollectionViewController
-			showViewController(vc, sender: self)
-
 		
-		case MainMenuRow.Titles.rawValue:
-			var navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as! UINavigationController
-			var vc: ArtPiecesCollectionViewController = navigationController.viewControllers.last as! ArtPiecesCollectionViewController
-			showDetailViewController(navigationController, sender: self)
+			if let catagoryCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.CatagoryCollectionViewController.rawValue) as? CatagoryCollectionViewController {
+				showViewController(catagoryCollectionViewController, sender: self)
+			}
 			
+		case MainMenuRow.Neighborhoods.rawValue:
+			if let locationsCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.LocationCollectionViewController.rawValue) as? LocationsCollectionViewController {
+				showViewController(locationsCollectionViewController, sender: self)
+			}
+			
+		case MainMenuRow.Titles.rawValue:
+		
+			if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
+				artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
+				if artPiecesCollectionViewController != nil {
+					showDetailViewController(artPiecesCollectionViewController!, sender: self)
+				}
+			} else {
+				if let navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController {
+					showDetailViewController(navigationController, sender: self)
+				}
+			}
+
 		case MainMenuRow.Medium.rawValue:
 			var vc: MediaCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.MediaCollectionViewController.rawValue) as! MediaCollectionViewController
 			showViewController(vc, sender: self)

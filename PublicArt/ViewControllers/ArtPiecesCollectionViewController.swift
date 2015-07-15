@@ -60,7 +60,13 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		NSNotificationCenter.defaultCenter().addObserver(self,
 			selector:"newArtCityDatabase:",
 			name: ArtAppNotifications.NewArtCityDatabase.rawValue,
-			object: nil)		
+			object: nil)
+		
+		if let value = self.pageTitle {
+			title = value
+		} else {
+			title = "Titles"  // TITLE TODO: constant
+		}
 		
 		fetchResultsController.delegate = self
 		fetchResultsController.performFetch(&error)
@@ -68,11 +74,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-		if let value = self.pageTitle {
-			title = value
-		} else {
-			title = "Titles"  // TITLE TODO: constant
-		}
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -118,8 +119,13 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		let fetchRequest = NSFetchRequest(entityName:ModelEntity.art)
 		
 		if let key = self.fetchFilterKey,
-		   let value = self.fetchFilterValue {
-			fetchRequest.predicate = NSPredicate(format:"%K == %@", key,value)
+		   let value = self.fetchFilterValue
+		   where key != "tags" {
+				fetchRequest.predicate = NSPredicate(format:"%K == %@", key,value)
+		} else if let key = self.fetchFilterKey,
+			      let value = self.fetchFilterValue
+			      where key == "tags" {
+				fetchRequest.predicate = NSPredicate(format:"%K CONTAINS[cd] %@", key,value)
 		}
 
 		let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.artworkTitle, ascending:true, selector: "localizedStandardCompare:")]
@@ -233,9 +239,8 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	// MARK: ArtPhotos Navigation
 	
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
-		
-			var singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as! SingleArtViewController
+		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art,
+			let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as?  SingleArtViewController {
 			singleArtViewController.update(art, artBackgroundColor: nil)
 			showViewController(singleArtViewController, sender: self)
 		}

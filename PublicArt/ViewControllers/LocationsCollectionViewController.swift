@@ -13,6 +13,7 @@ import CoreData
 final class LocationsCollectionViewController: UICollectionViewController, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout {
 
 	// MARK: Properties
+	private var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
 	private var collapseDetailViewController = true
 	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
 	
@@ -172,13 +173,34 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 		if let location = fetchResultsController.objectAtIndexPath(indexPath) as? Location {
-			var navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as! UINavigationController
-			var vc: ArtPiecesCollectionViewController = navigationController.viewControllers.last as! ArtPiecesCollectionViewController
-			let filter = ArtPiecesCollectionViewDataFilter(key: "idLocation", value: location.idLocation, title: location.name)
-			vc.fetchFilter(filter)
-			showDetailViewController(navigationController, sender: self)
+			if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
+				artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
+				if artPiecesCollectionViewController != nil {
+					let filter = ArtPiecesCollectionViewDataFilter(key: "idLocation", value: location.idLocation, title: location.name)
+					artPiecesCollectionViewController!.fetchFilter(filter)
+					showDetailViewController(artPiecesCollectionViewController!, sender: self)
+				}
+			} else {
+				if let navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
+					let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
+					let filter = ArtPiecesCollectionViewDataFilter(key: "idLocation", value: location.idLocation, title: location.name)
+					artPiecesCollectionViewController.fetchFilter(filter)
+					showDetailViewController(navigationController, sender: self)
+				}
+			
+			}
 		}
 	}
+	
+//	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+//		if let location = fetchResultsController.objectAtIndexPath(indexPath) as? Location,
+//			let navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
+//			let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
+//				let filter = ArtPiecesCollectionViewDataFilter(key: "idLocation", value: location.idLocation, title: location.name)
+//				artPiecesCollectionViewController.fetchFilter(filter)
+//				showDetailViewController(navigationController, sender: self)
+//		}
+//	}
 	
 	override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
 		let location = fetchResultsController.objectAtIndexPath(indexPath) as! Location

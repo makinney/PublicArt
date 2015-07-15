@@ -52,7 +52,6 @@ final class SingleArtViewController: UIViewController {
 		setupPhotoImage()
 		prepareNavButtons()
 		runAutoPromptTimer()
-		title = "single"
 	}
 	
 	override func viewWillAppear(animated: Bool) {

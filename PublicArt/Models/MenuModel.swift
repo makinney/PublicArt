@@ -12,52 +12,63 @@ import UIKit
 // MARK: Catagory
 
 enum CatagoryType {
-	case All
 	case Monuments
 	case Murals
 	case Plagues
 	case Sculpture
+	case Site
 	case Statues
 	case StreetArt
 }
 
 enum CatagoryMenuOrder: Int {
-	case All = 0
-	case Monuments = 1
-	case Murals = 2
-	case Plagues = 3
-	case Sculpture = 4
-	case Statues = 5
-	case StreetArt = 6
+	case Monuments = 0
+	case Murals
+	case Plagues
+	case Sculpture
+	case Site
+	case Statues
+	case StreetArt
 	case CountRows = 7
 }
 
-struct CatagoryMenuTitles {
+struct CatagoryMenuItem {
 	
-	func title(catagoryType: CatagoryType) -> String {
+	func value(catagoryMenuOrder: CatagoryMenuOrder) -> (title: String, tag: String) {
 		var title = ""
-		switch(catagoryType) {
-		case .All:
-			title = "All"
+		var tag = ""
+		switch(catagoryMenuOrder) {
 		case .Monuments:
 			title = "Monuments"
+			tag = "Monument"
 		case .Murals:
 			title = "Murals"
+			tag = "Mural"
 		case .Plagues:
 			title = "Plagues"
+			tag = "Plague"
 		case .Sculpture:
 			title = "Sculpture"
+			tag = "Sculpture"
+		case .Site:
+			title = "Site Specfic"
+			tag = "Site"
 		case .Statues:
 			title = "Statues"
+			tag = "Statue"
 		case .StreetArt:
 			title = "StreetArt"
+			tag = "StreetArt"
 		default:
 			title = ""
+			tag = ""
 		}
-		return title
+		return (title, tag)
 	}
 	
 }
+
+
 
 // MARK: Discover
 
@@ -71,11 +82,11 @@ enum MainMenuType {
 }
 
 enum MainMenuRow: Int {
-	case Artists = 3
+	case Artists = 4
 	case Catagory = 2
 	case Neighborhoods = 1
 	case Titles = 0
-	case Medium = 4
+	case Medium = 3
 	case Favorites = 5
 	case CountRows = 6
 }
