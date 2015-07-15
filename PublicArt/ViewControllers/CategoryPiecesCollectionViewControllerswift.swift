@@ -203,7 +203,6 @@ class CategoryPiecesCollectionViewController: UICollectionViewController, UINavi
 //						cell.title.text = art.title
 //						cell.title.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody) // TODO: has to be a better way
 //						// FIXME: this should be done one time somehow as it can slow scrolling down
-//	//					cell.photoBorderView.backgroundColor = self?.prevailingColor(thumbNail.image, cacheKey: thumbNail.fileName)
 //						})
 //				} else {
 //	//				cell.imageView.image = nil

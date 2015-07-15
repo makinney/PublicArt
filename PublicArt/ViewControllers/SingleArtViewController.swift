@@ -25,6 +25,8 @@ final class SingleArtViewController: UIViewController {
 	@IBOutlet weak var mediumLabel: UILabel!
 	@IBOutlet weak var touchImagePrompt: UILabel!
 
+	@IBOutlet weak var artImageViewTopToTop: NSLayoutConstraint!
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var buttonHeight: NSLayoutConstraint!
 
 	let mapAnimatedTransistioningDelegate = MapAnimatedTransistioningDelegate()
@@ -96,6 +98,12 @@ final class SingleArtViewController: UIViewController {
 	}
 	
 	func setupPhotoImage() {
+		if traitCollection.userInterfaceIdiom == .Phone {
+			artImageViewTopToTop.constant = 4
+		} else {
+			artImageViewTopToTop.constant = 4
+			
+		}
 		let tapRecognizer = UITapGestureRecognizer(target: self, action: "artImageTapped:")
 		artImageView.addGestureRecognizer(tapRecognizer)
 	}
@@ -114,13 +122,27 @@ final class SingleArtViewController: UIViewController {
 	private func update() {
 		
 		if let art = art {
-			ImageDownload.downloadThumb(art, complete: {[weak self] (data, imageFileName) -> () in
+			if let highResPhoto = thumbNailsHighResolutionVersionIn(art) {
+				activityIndicator.startAnimating()
+				ImageDownload.downloadPhoto(highResPhoto, complete: {[weak self] (data, imageFileName) -> () in
+					if let data = data	{
+						var image = UIImage(data: data) ?? UIImage()
+						self?.artImageView.image = image
+						self?.artImageView.hidden = false
+					}
+					self?.activityIndicator.stopAnimating()
+				})
+			} else {
+				activityIndicator.startAnimating()
+				ImageDownload.downloadThumb(art, complete: {[weak self] (data, imageFileName) -> () in
 				if let data = data	{
 					var image = UIImage(data: data) ?? UIImage()
 					self?.artImageView.image = image
 					self?.artImageView.hidden = false
 				}
+					self?.activityIndicator.stopAnimating()
 				})
+			}
 		}
 		
 		var artistName = art?.artistName ?? ""
@@ -219,7 +241,7 @@ final class SingleArtViewController: UIViewController {
 	func shareArtwork(barButtonItem: UIBarButtonItem) {
 		let msg = (art?.title ?? "" ) + "\n"
 		var image = artImageView.image ?? UIImage()
-		var url: NSURL = NSURL(string: "https://www.facebook.com/pages/Public-Art-San-Francisco/360818354113241")!
+		var url: NSURL = NSURL(string: "https://www.facebook.com/pages/Public-Art-San-Francisco/360818354113241")! // TODO
 		var activityItems = [image,msg, url]
 		var avc = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
 		avc.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList,

@@ -14,8 +14,8 @@ final class SingleArtPhotosCollectionViewController: UICollectionViewController,
 		didSet {
 			if let art = art,
 				let photoSet: Set<Photo> = art.photos as? Set {
-				photos = convert(photoSet)
-				photos = sortOnMatchingThumbnailPhoto(photos!)
+				photos = convertToSortedArray(photoSet)
+				photos = sortThumbnailPhotoToFirstPositionIn(photos!)
 				collectionView?.reloadData()
 			}
 		}
@@ -62,27 +62,7 @@ final class SingleArtPhotosCollectionViewController: UICollectionViewController,
     }
 	
 	
-	func convert(set: Set<Photo>) -> [Photo] {
-		var photos = [Photo]()
-		var sortedPhotoSet = sorted(set, { $0.imageFileName < $1.imageFileName })
-		for photo in sortedPhotoSet {
-			photos.append(photo)
-		}
-		return photos
-	}
-	
-	func sortOnMatchingThumbnailPhoto(photos: [Photo]) -> [Photo] {
-		var photos = photos
-		for (index, photo) in enumerate(photos) {
-			if photo.tnMatch == true {
-				photos.removeAtIndex(index)
-				photos.insert(photo, atIndex: 0)
-				break
-			}
-		}
-		return photos
-	}
-	
+
 
 
 	override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {

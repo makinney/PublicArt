@@ -6,4 +6,3 @@
 //  Copyright (c) 2015 makinney. All rights reserved.
 //
 
-#import "ImageProcess.h"
