@@ -24,8 +24,7 @@ enum CellIdentifier: String {
 enum SegueIdentifier: String {
 	case SingleImageToImageCollection = "SingleImageToImageCollectionID"
 	case ArtToMap = "idArtToMap"
-	case MapButtonToMap = "MapButtonToMapID"
-	case LocationButtonToMap = "LocationButtonToMapID"
+	case ButtonToMap = "ButtonToMapID"
 	case MainMenuToMediaSegue = "MainMenuToMediaSegueID"
 	case ArtListToArtNav = "idArtListToArtNav"
 	case ArtTitleToWebView = "ArtTitleToWebViewID"

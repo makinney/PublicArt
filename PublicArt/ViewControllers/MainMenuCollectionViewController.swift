@@ -78,7 +78,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
 				collectionViewFlowLayout.minimumLineSpacing = 2
 				let sectionInset: CGFloat = 1
-				collectionViewFlowLayout.sectionInset.top = sectionInset * 2
+				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
 				let itemSpacing: CGFloat = sectionInset
@@ -88,9 +88,9 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 				var maxPhotoWidth = maxCellWidth(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
 				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxPhotoWidth) // TODO: hard constant hack for aspect ratio
 			} else {
-				collectionViewFlowLayout.minimumLineSpacing = 2
-				let sectionInset: CGFloat = 1
-				collectionViewFlowLayout.sectionInset.top = sectionInset * 2
+				collectionViewFlowLayout.minimumLineSpacing = 4
+				let sectionInset: CGFloat = 4
+				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
 				let itemSpacing: CGFloat = sectionInset

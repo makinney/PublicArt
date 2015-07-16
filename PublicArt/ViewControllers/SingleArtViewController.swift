@@ -88,9 +88,15 @@ final class SingleArtViewController: UIViewController {
 		return UIBarButtonItem(barButtonSystemItem: .Bookmarks , target: self, action: "favoriteButtonTouched:")
 	}
 	
+	var mapButton: UIBarButtonItem {
+		let image = UIImage(named: "tab-map")
+		return UIBarButtonItem(image:image, style: .Plain, target:self, action:"mapButtonTouched:")
+	}
+
+	
 	
 	func prepareNavButtons() {
-		self.navigationItem.rightBarButtonItems  = [actionButton, fixedSpaceBarButtonItem, favoritesButton, flexibleSpaceBarButtonItem]
+		self.navigationItem.rightBarButtonItems  = [actionButton, fixedSpaceBarButtonItem, mapButton, flexibleSpaceBarButtonItem]
 	}
 	
 	func prepareButtons() {
@@ -207,7 +213,7 @@ final class SingleArtViewController: UIViewController {
 		} else if (segue.identifier == SegueIdentifier.ArtistToWebView.rawValue) {
 			var destinationViewController = segue.destinationViewController as! WebViewController
 			destinationViewController.webViewAddress = art?.artistWebLink
-		} else if (segue.identifier == SegueIdentifier.MapButtonToMap.rawValue) || (segue.identifier == SegueIdentifier.LocationButtonToMap.rawValue) {
+		} else if (segue.identifier == SegueIdentifier.ButtonToMap.rawValue) {
 			if let singleArtMapViewController = segue.destinationViewController as? SingleArtMapViewController {
 				singleArtMapViewController.transitioningDelegate = mapAnimatedTransistioningDelegate
 				singleArtMapViewController.modalPresentationStyle = .Custom
@@ -226,8 +232,8 @@ final class SingleArtViewController: UIViewController {
 	
 	
 	
-	func routeButtonTouched(sender: UIBarButtonItem) {
-		println("route")
+	func mapButtonTouched(sender: UIBarButtonItem) {
+		performSegueWithIdentifier(SegueIdentifier.ButtonToMap.rawValue, sender: nil)
 	}
 	
 	func favoriteButtonTouched(sender: UIBarButtonItem) {
