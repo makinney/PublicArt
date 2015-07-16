@@ -29,13 +29,14 @@ class ArtDataManager : NSObject {
 	deinit {
 	}
 	
+	
 	func refresh(beginningAtDate: NSDate, endingAtDate: NSDate) {
-			refreshFromWeb(beginningAtDate, complete: {[weak self] (art, artists, locations, photos, thumbs, locPhotos) -> () in
-			self!.updatePhotoToArtBindings(photos)
-			self!.updateArtToLocationBindings(art)
-			self!.updateThumbToArtBindings(thumbs)
-			self!.updateLocPhotoToLocationBindings(locPhotos)
-			if self!.coreDataStack.saveContext() == true {
+		refreshFromWeb(beginningAtDate, complete: {[weak self] (art, artists, locations, photos, thumbs, locPhotos) -> () in
+			self?.updatePhotoToArtBindings(photos)
+			self?.updateArtToLocationBindings(art)
+			self?.updateThumbToArtBindings(thumbs)
+			self?.updateLocPhotoToLocationBindings(locPhotos)
+			if self?.coreDataStack.saveContext() == true {
 				ArtRefresh.clientRefreshed(endingAtDate)
 			}
 		})
@@ -64,25 +65,30 @@ class ArtDataManager : NSObject {
 	
 	private func refreshArtFromWeb(date: NSDate, complete:(art: [Art]) ->()) {
 		ParseWebService.getAllArtSince(date) {[weak self] (parseArt) -> Void in
-			var crud = self!.artDataCreator.createOrUpdateArt(parseArt)
-			var art = crud.created + crud.updated
+			var art = [Art]()
+			if let crud = self?.artDataCreator.createOrUpdateArt(parseArt) {
+				art = crud.created + crud.updated
+			}
 			complete(art: art)
 		}
 	}
 	
 	private func refreshArtistsFromWeb(date: NSDate, complete:(artists: [Artist]) ->()) {
 		ParseWebService.getAllArtistSince(date) {[weak self] (parseArtists) -> Void in
-			var crud = self!.artDataCreator.createOrUpdateArtist(parseArtists)
-			var artists = crud.created + crud.updated
+			var artists = [Artist]()
+			if let crud = self?.artDataCreator.createOrUpdateArtist(parseArtists) {
+				artists = crud.created + crud.updated
+			}
 			complete(artists: artists)
 		}
 	}
-
 	
 	private func refreshPhotosFromWeb(date: NSDate, complete:(photos: [Photo]) ->()) {
 		ParseWebService.getAllPhotosSince(date) {[weak self] (parsePhotos) -> Void in
-			var crud = self!.artDataCreator.createOrUpdatePhotos(parsePhotos)
-			var photos = crud.created + crud.updated
+			var photos = [Photo]()
+			if let crud = self?.artDataCreator.createOrUpdatePhotos(parsePhotos) {
+				photos = crud.created + crud.updated
+			}
 			PFObject.pinAllInBackground(parsePhotos) // saving the PFFile image reference
 			complete(photos: photos)
 		}
@@ -90,16 +96,20 @@ class ArtDataManager : NSObject {
 	
 	private func refreshLocationsFromWeb(date: NSDate, complete:(locations: [Location]) ->()) {
 		ParseWebService.getAllLocationsSince(date) {[weak self] (parseLocations) -> Void in
-			var crud = self!.artDataCreator.createOrUpdateLocations(parseLocations)
-			var locations = crud.created + crud.updated
+			var locations = [Location]()
+			if let crud = self?.artDataCreator.createOrUpdateLocations(parseLocations) {
+				locations = crud.created + crud.updated
+			}
 			complete(locations: locations)
 		}
 	}
 	
 	private func refreshThumbsFromWeb(date: NSDate, complete:(thumbs: [Thumb]) ->()) {
 		ParseWebService.getAllThumbsSince(date) {[weak self] (parseThumbs) -> Void in
-			var crud = self!.artDataCreator.createOrUpdateThumbs(parseThumbs)
-			var thumbs = crud.created + crud.updated
+			var thumbs = [Thumb]()
+			if let crud = self?.artDataCreator.createOrUpdateThumbs(parseThumbs) {
+				thumbs = crud.created + crud.updated
+			}
 			PFObject.pinAllInBackground(parseThumbs) // saving the PFFile image reference
 			complete(thumbs: thumbs)
 		}
@@ -107,8 +117,10 @@ class ArtDataManager : NSObject {
 	
 	private func refreshLocPhotosFromWeb(date: NSDate, complete:(locPhotos: [LocPhoto]) ->()) {
 		ParseWebService.getAllLocPhotosSince(date) {[weak self] (parseLocPhotos) -> Void in
-			var crud = self!.artDataCreator.createOrUpdateLocPhotos(parseLocPhotos)
-			var locPhotos = crud.created + crud.updated
+			var locPhotos = [LocPhoto]()
+			if let crud = self?.artDataCreator.createOrUpdateLocPhotos(parseLocPhotos) {
+				locPhotos = crud.created + crud.updated
+			}
 			PFObject.pinAllInBackground(parseLocPhotos) // saving the PFFile image reference
 			complete(locPhotos: locPhotos)
 		}

@@ -38,14 +38,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		ArtRefresh.artRefreshFromServerRequired {[weak self] (required, clientLastRefreshed, serverLastRefreshed) -> () in
 			if required {
-				self!.artDataManager = ArtDataManager(coreDataStack: CoreDataStack.sharedInstance)
+				self?.artDataManager = ArtDataManager(coreDataStack: CoreDataStack.sharedInstance)
 				if let clientLastRefreshed = clientLastRefreshed,
-				   let serverLastRefreshed = serverLastRefreshed {
-					 self!.artDataManager!.refresh(clientLastRefreshed, endingAtDate: serverLastRefreshed)
+					let serverLastRefreshed = serverLastRefreshed {
+					 self?.artDataManager!.refresh(clientLastRefreshed, endingAtDate: serverLastRefreshed)
 				} else if let serverLastRefreshed = serverLastRefreshed {
 					var initialUpdate: NSDate = NSDate.distantPast() as! NSDate // make sure to get everything
-					self!.artDataManager!.refresh(initialUpdate, endingAtDate: serverLastRefreshed)
-			    }
+					self?.artDataManager!.refresh(initialUpdate, endingAtDate: serverLastRefreshed)
+				}
 			}
 		}
 		return true
