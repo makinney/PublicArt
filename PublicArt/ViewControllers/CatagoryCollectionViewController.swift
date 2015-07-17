@@ -102,54 +102,32 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.CategoryCollectionViewCell.rawValue, forIndexPath: indexPath) as! CategoryCollectionViewCell
-		cell.menuItemName.text = menuItemTitle(indexPath.row)
+		cell.menuItemName.text = menuItem(indexPath.row).title
         return cell
     }
 	
-	func menuItemTitle(row: Int) -> String {
+	func menuItem(row: Int) -> (title: String, tag: String) {
 		var title: String
 		switch(row) {
 		case CatagoryMenuOrder.Monuments.rawValue:
-			return categoryMenuItem.value(.Monuments).title
+			return (title: categoryMenuItem.value(.Monuments).title, tag: categoryMenuItem.value(.Monuments).tag)
 		case CatagoryMenuOrder.Murals.rawValue:
-			return categoryMenuItem.value(.Murals).title
+			return (title: categoryMenuItem.value(.Murals).title, tag: categoryMenuItem.value(.Murals).tag)
 		case CatagoryMenuOrder.Plagues.rawValue:
-			return categoryMenuItem.value(.Plagues).title
+			return (title: categoryMenuItem.value(.Plagues).title, tag: categoryMenuItem.value(.Plagues).tag)
 		case CatagoryMenuOrder.Sculpture.rawValue:
-			return categoryMenuItem.value(.Sculpture).title
+			return (title: categoryMenuItem.value(.Sculpture).title, tag: categoryMenuItem.value(.Sculpture).tag)
 		case CatagoryMenuOrder.Site.rawValue:
-			return categoryMenuItem.value(.Site).title
+			return (title: categoryMenuItem.value(.Site).title, tag: categoryMenuItem.value(.Site).tag)
 		case CatagoryMenuOrder.Statues.rawValue:
-			return categoryMenuItem.value(.Statues).title
-		case CatagoryMenuOrder.StreetArt.rawValue:
-			return categoryMenuItem.value(.StreetArt).title
-		default:
-			return ""
-		}
-	}
-	
-	func menuItemTag(row: Int) -> String {
-		var title: String
-		switch(row) {
-		case CatagoryMenuOrder.Monuments.rawValue:
-			return categoryMenuItem.value(.Monuments).tag
-		case CatagoryMenuOrder.Murals.rawValue:
-			return categoryMenuItem.value(.Murals).tag
-		case CatagoryMenuOrder.Plagues.rawValue:
-			return categoryMenuItem.value(.Plagues).tag
-		case CatagoryMenuOrder.Sculpture.rawValue:
-			return categoryMenuItem.value(.Sculpture).tag
-		case CatagoryMenuOrder.Site.rawValue:
-			return categoryMenuItem.value(.Site).tag
-		case CatagoryMenuOrder.Statues.rawValue:
-			return categoryMenuItem.value(.Statues).tag
-		case CatagoryMenuOrder.StreetArt.rawValue:
-			return categoryMenuItem.value(.StreetArt).tag
-		default:
-			return ""
-		}
-	}
+			return (title: categoryMenuItem.value(.Statues).title, tag: categoryMenuItem.value(.Statues).tag)
 
+//		case CatagoryMenuOrder.StreetArt.rawValue:
+//			return (title: categoryMenuItem.value(.StreetArt).title, tag: categoryMenuItem.value(.StreetArt).tag)
+		default:
+			return (title: "", tag: "")
+		}
+	}
     // MARK: UICollectionViewDelegate
 	
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -157,8 +135,7 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
 			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
 			if artPiecesCollectionViewController != nil {
-				var tag = menuItemTag(indexPath.row)
-				var title = menuItemTitle(indexPath.row)
+				var (title, tag) = menuItem(indexPath.row)
 				let filter = ArtPiecesCollectionViewDataFilter(key: "tags", value: tag, title: title)
 				artPiecesCollectionViewController!.fetchFilter(filter)
 				showDetailViewController(artPiecesCollectionViewController!, sender: self)
@@ -166,8 +143,7 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 		} else {
 			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
 				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
-					var tag = menuItemTag(indexPath.row)
-					var title = menuItemTitle(indexPath.row)
+					var (title, tag) = menuItem(indexPath.row)
 					let filter = ArtPiecesCollectionViewDataFilter(key: "tags", value: tag, title: title)
 					artPiecesCollectionViewController.fetchFilter(filter)
 					showDetailViewController(navigationController, sender: self)

@@ -76,7 +76,7 @@ final class SingleArtViewController: UIViewController {
 	
 	var fixedSpaceBarButtonItem: UIBarButtonItem {
 		var fixedSpaceBarButtonItem = UIBarButtonItem(barButtonSystemItem: .FixedSpace , target: nil, action: nil)
-		fixedSpaceBarButtonItem.width = 20
+		fixedSpaceBarButtonItem.width = 10
 		return fixedSpaceBarButtonItem
 	}
 	
@@ -89,7 +89,7 @@ final class SingleArtViewController: UIViewController {
 	}
 	
 	var mapButton: UIBarButtonItem {
-		let image = UIImage(named: "tab-map")
+		let image = UIImage(named: "tool-map")
 		return UIBarButtonItem(image:image, style: .Plain, target:self, action:"mapButtonTouched:")
 	}
 
@@ -149,47 +149,52 @@ final class SingleArtViewController: UIViewController {
 					self?.activityIndicator.stopAnimating()
 				})
 			}
-		}
-		
-		var artistName = art?.artistName ?? ""
-		artistNameButton.setTitle(artistName, forState: .Normal)
-		if let artistWebLink = art?.artistWebLink
-			where count(artistWebLink) > 3 { // guard against blank strings
-				var image = UIImage(named: "toolbar-infoButton") ?? UIImage()
-				artistInfoImageView.image = image
-		}
 
-		var artTitle = art?.title ?? ""
-		artTitleButton.setTitle(artTitle, forState: .Normal)
-		artTitleButton.invalidateIntrinsicContentSize()
-
-		if let artWebLink = art?.artWebLink
-			where count(artWebLink) > 3  { // guard against blank strings
+			// art title
+			var artTitle = art.title ?? ""
+			artTitleButton.setTitle(artTitle, forState: .Normal)
+			artTitleButton.invalidateIntrinsicContentSize()
+			
+			if count(art.artWebLink) > 3  {
 				var image = UIImage(named: "toolbar-infoButton") ?? UIImage()
 				artTitleInfoImageView.image = image
-		}
+				artTitleButton.enabled = true
+			} else {
+				artTitleButton.enabled = false
+			}
 
+			// artist
+			var artistName = art.artistName ?? ""
+			artistNameButton.setTitle(artistName, forState: .Normal)
+		
+			if count(art.artistWebLink) > 3 { // guard against blank strings
+				var image = UIImage(named: "toolbar-infoButton") ?? UIImage()
+				artistInfoImageView.image = image
+				artistNameButton.enabled = true
+			} else {
+				artistNameButton.enabled = false
 
-		if let dimensions = art?.dimensions {
-			if dimensions != "Undefined" {
-				dimensionsLabel.text =  dimensions
+			}
+			
+			// dimensions
+			if art.dimensions != "Undefined" {
+				dimensionsLabel.text =  art.dimensions
 			} else {
 				dimensionsLabel.text = "Dimensions " + "unknown"
-			
 			}
-		}
 
-		locationButton.setTitle(art?.address ?? "", forState: .Normal)
-		
-		if let medium = art?.medium {
-			if medium != "Undefined" {
-				mediumLabel.text =  medium
+			// location
+			locationButton.setTitle(art.address ?? "", forState: .Normal)
+			
+			// medium
+			if art.medium != "Undefined" {
+				mediumLabel.text =  art.medium
 			} else {
 				mediumLabel.text = "Medium " + "unknown"
-				
 			}
-		}
 		
+		}
+	}
 		//	var leftInset = artTitleButton.titleLabel?.frame.size.width
 		//	var label = artTitleButton.titleLabel
 		//		var leftInset = artTitleButton.frame.size.width - artTitleButton.imageView!.frame.size.width
@@ -200,7 +205,7 @@ final class SingleArtViewController: UIViewController {
 		//		artTitleButton.imageEdgeInsets = UIEdgeInsets(top: 0, left:leftInset, bottom: 0, right: rightInset!)
 		//
 		
-	}
+	
 	
 	// MARK: Dynamic Type
 	

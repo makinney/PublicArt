@@ -115,6 +115,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func setAppearanceProxies() {
 	//	UIBarButtonItem.appearance().tintColor = UIColor.blackColor()
 	//	UINavigationBar.appearance().backgroundColor = UIColor.blackColor()
+  
 		UINavigationBar.appearance().tintColor = UIColor.whiteColor()
 		UINavigationBar.appearance().barTintColor = UIColor.blackColor()
 		UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]

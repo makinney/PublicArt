@@ -20,18 +20,20 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
 		var nibName = UINib(nibName: "HomeCollectionViewCell", bundle: nil)
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: "HomeCollectionViewCellID")
-				
 		setupFlowLayout()
-	
 		collectionView?.reloadData()
-		
 		self.title = "Public Art" // TITLE
 		
+		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
+			showDefaultDetailViewController()
+		}
     }
 
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+	}
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         println("\(__FILE__) \(__FUNCTION__)")
@@ -177,10 +179,13 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 			if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
 				artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
 				if artPiecesCollectionViewController != nil {
+					artPiecesCollectionViewController?.pageTitle = "Titles"
 					showDetailViewController(artPiecesCollectionViewController!, sender: self)
 				}
 			} else {
-				if let navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController {
+				if let navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
+					let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
+					artPiecesCollectionViewController.pageTitle = "Titles"
 					showDetailViewController(navigationController, sender: self)
 				}
 			}
@@ -200,6 +205,21 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 //		showViewController(exploreCollectionViewController, sender: self)
 	}
 
+	func showDefaultDetailViewController() {
+		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
+			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
+			if artPiecesCollectionViewController != nil {
+				artPiecesCollectionViewController?.pageTitle = "San Francisco"
+				showDetailViewController(artPiecesCollectionViewController!, sender: self)
+			}
+		} else {
+			if let navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
+				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
+					artPiecesCollectionViewController.pageTitle = "San Francisco"
+					showDetailViewController(navigationController, sender: self)
+			}
+		}
+	}
 
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking

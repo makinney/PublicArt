@@ -149,10 +149,10 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	
 		cell.title.text = location.name
 
-		if location.artwork.count > 0 {
+		if location.artwork.count > 0 || location.name == "All" {
 			cell.backgroundColor = UIColor.whiteColor()
 			cell.title.textColor = UIColor.blackColor()
-		} else if location.name != "All" {
+		} else  {
 			cell.backgroundColor = UIColor.lightGrayColor()
 			cell.title.textColor =  UIColor.grayColor()
 		}
@@ -174,37 +174,43 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 		if let location = fetchResultsController.objectAtIndexPath(indexPath) as? Location {
 			if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
-				artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
-				if artPiecesCollectionViewController != nil {
-					let filter = ArtPiecesCollectionViewDataFilter(key: "idLocation", value: location.idLocation, title: location.name)
-					artPiecesCollectionViewController!.fetchFilter(filter)
-					showDetailViewController(artPiecesCollectionViewController!, sender: self)
-				}
+				showArtPiecesWithoutNavController(location)
 			} else {
-				if let navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
-					let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
-					let filter = ArtPiecesCollectionViewDataFilter(key: "idLocation", value: location.idLocation, title: location.name)
-					artPiecesCollectionViewController.fetchFilter(filter)
-					showDetailViewController(navigationController, sender: self)
-				}
-			
+				showArtPiecesFromNavController(location)
 			}
 		}
 	}
 	
-//	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-//		if let location = fetchResultsController.objectAtIndexPath(indexPath) as? Location,
-//			let navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
-//			let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
-//				let filter = ArtPiecesCollectionViewDataFilter(key: "idLocation", value: location.idLocation, title: location.name)
-//				artPiecesCollectionViewController.fetchFilter(filter)
-//				showDetailViewController(navigationController, sender: self)
-//		}
-//	}
+	func showArtPiecesFromNavController(location: Location) {
+		if let navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
+			let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
+				if location.name != "All" {
+					let filter = ArtPiecesCollectionViewDataFilter(key: "idLocation", value: location.idLocation, title: location.name)
+					artPiecesCollectionViewController.fetchFilter(filter)
+				} else {
+					artPiecesCollectionViewController.pageTitle = "San Francisco"
+				}
+				
+				showDetailViewController(navigationController, sender: self)
+		}
+	}
+	
+	func showArtPiecesWithoutNavController(location: Location) {
+		if let artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController {
+			if location.name != "All" {
+				let filter = ArtPiecesCollectionViewDataFilter(key: "idLocation", value: location.idLocation, title: location.name)
+				artPiecesCollectionViewController.fetchFilter(filter)
+			} else {
+				artPiecesCollectionViewController.pageTitle = "San Francisco"
+			}
+			showDetailViewController(artPiecesCollectionViewController, sender: self)
+		}
+	}
+	
 	
 	override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
 		let location = fetchResultsController.objectAtIndexPath(indexPath) as! Location
-		if location.artwork.count > 0 {
+		if location.artwork.count > 0 || location.name == "All" {
 			return true
 		}
 		return false
@@ -212,7 +218,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 
     override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
 		let location = fetchResultsController.objectAtIndexPath(indexPath) as! Location
-		if location.artwork.count > 0 {
+		if location.artwork.count > 0 || location.name == "All" {
 			return true
 		}
 		return false
@@ -223,7 +229,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		for path in indexPathsVisible { // hack fix for bug where delected cells still look selected, sometimes
 			if let visiblePath = path as? NSIndexPath {
 				let location = fetchResultsController.objectAtIndexPath(visiblePath) as! Location
-				if location.artwork.count > 0 {
+				if location.artwork.count > 0 || location.name == "All"{
 					var cell = collectionView.cellForItemAtIndexPath(visiblePath) as? LocationCollectionViewCell
 					cell?.backgroundColor = UIColor.whiteColor()
 					cell?.title.textColor = UIColor.blackColor()

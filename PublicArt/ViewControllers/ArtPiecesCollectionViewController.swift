@@ -62,18 +62,15 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 			name: ArtAppNotifications.NewArtCityDatabase.rawValue,
 			object: nil)
 		
-		if let value = self.pageTitle {
-			title = value
-		} else {
-			title = "Titles"  // TITLE TODO: constant
-		}
-		
 		fetchResultsController.delegate = self
 		fetchResultsController.performFetch(&error)
 	}
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
+		if let pageTitle = pageTitle {
+			title = pageTitle
+		}
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -119,13 +116,12 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		let fetchRequest = NSFetchRequest(entityName:ModelEntity.art)
 		
 		if let key = self.fetchFilterKey,
-		   let value = self.fetchFilterValue
-		   where key != "tags" {
+			let value = self.fetchFilterValue {
+			if key != "tags" {
 				fetchRequest.predicate = NSPredicate(format:"%K == %@", key,value)
-		} else if let key = self.fetchFilterKey,
-			      let value = self.fetchFilterValue
-			      where key == "tags" {
+			} else {
 				fetchRequest.predicate = NSPredicate(format:"%K CONTAINS[cd] %@", key,value)
+			}
 		}
 
 		let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.artworkTitle, ascending:true, selector: "localizedStandardCompare:")]

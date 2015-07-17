@@ -18,8 +18,8 @@
                     <connections>
                         <segue destination="WVx-oo-7dW" kind="relationship" relationship="viewControllers" id="a9x-ue-DhU"/>
                         <segue destination="nBu-ce-fRo" kind="relationship" relationship="viewControllers" id="FAu-ae-QXJ"/>
-                        <segue destination="Mda-a7-bbJ" kind="relationship" relationship="viewControllers" id="V8R-AK-5fk"/>
                         <segue destination="Vjy-jA-tFQ" kind="relationship" relationship="viewControllers" id="ikp-Cm-5GA"/>
+                        <segue destination="Mda-a7-bbJ" kind="relationship" relationship="viewControllers" id="V8R-AK-5fk"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -30,6 +30,7 @@
         <scene sceneID="Pbb-6U-D4K">
             <objects>
                 <navigationController id="rMD-Y1-dPa" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="J9D-hH-VjQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -239,11 +240,11 @@
             </objects>
             <point key="canvasLocation" x="3023" y="-1691"/>
         </scene>
-        <!--Public Art-->
+        <!--Discover-->
         <scene sceneID="dq0-1X-0iD">
             <objects>
                 <splitViewController storyboardIdentifier="DiscoverSplitViewControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WVx-oo-7dW" customClass="MainMenuSplitViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Public Art" image="tab-art" id="SQI-A7-PA2"/>
+                    <tabBarItem key="tabBarItem" title="Discover" image="tab-art" id="SQI-A7-PA2"/>
                     <connections>
                         <segue destination="rMD-Y1-dPa" kind="relationship" relationship="masterViewController" id="Z5V-aP-0PQ"/>
                         <segue destination="b9c-af-Gjq" kind="relationship" relationship="detailViewController" id="4WO-9G-Pv0"/>
@@ -308,7 +309,7 @@
             </objects>
             <point key="canvasLocation" x="595" y="2952"/>
         </scene>
-        <!--Share-->
+        <!--Contribute-->
         <scene sceneID="H35-ER-kYp">
             <objects>
                 <viewController id="Mda-a7-bbJ" sceneMemberID="viewController">
@@ -336,7 +337,7 @@
                             <constraint firstItem="ISh-Kn-bSJ" firstAttribute="centerX" secondItem="vb4-2h-rN0" secondAttribute="centerX" id="pnP-II-PYk"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Share" image="tab-photos" id="HeF-bZ-orP"/>
+                    <tabBarItem key="tabBarItem" title="Contribute" image="tab-photos" id="HeF-bZ-orP"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IyS-jG-5DV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

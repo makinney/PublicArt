@@ -28,8 +28,8 @@ enum CatagoryMenuOrder: Int {
 	case Sculpture
 	case Site
 	case Statues
-	case StreetArt
-	case CountRows = 7
+//	case StreetArt
+	case CountRows = 6
 }
 
 struct CatagoryMenuItem {
@@ -56,9 +56,9 @@ struct CatagoryMenuItem {
 		case .Statues:
 			title = "Statues"
 			tag = "Statue"
-		case .StreetArt:
-			title = "StreetArt"
-			tag = "StreetArt"
+//		case .StreetArt:
+//			title = "StreetArt"
+//			tag = "StreetArt"
 		default:
 			title = ""
 			tag = ""
@@ -83,10 +83,10 @@ enum MainMenuType {
 
 enum MainMenuRow: Int {
 	case Artists = 4
-	case Catagory = 2
-	case Neighborhoods = 1
-	case Titles = 0
-	case Medium = 3
+	case Catagory = 1
+	case Neighborhoods = 0
+	case Titles = 3
+	case Medium = 2
 	case Favorites = 5
 	case CountRows = 6
 }
