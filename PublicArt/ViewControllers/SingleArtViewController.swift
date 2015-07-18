@@ -164,10 +164,10 @@ final class SingleArtViewController: UIViewController {
 			}
 
 			// artist
-			var artistName = art.artistName ?? ""
+			var artistName = art.artist?.name
 			artistNameButton.setTitle(artistName, forState: .Normal)
-		
-			if count(art.artistWebLink) > 3 { // guard against blank strings
+			if let artist = art.artist
+			   where count(artist.webLink) > 3  { // guard against blank strings
 				var image = UIImage(named: "toolbar-infoButton") ?? UIImage()
 				artistInfoImageView.image = image
 				artistNameButton.enabled = true
@@ -217,7 +217,7 @@ final class SingleArtViewController: UIViewController {
 			destinationViewController.webViewAddress = art?.artWebLink
 		} else if (segue.identifier == SegueIdentifier.ArtistToWebView.rawValue) {
 			var destinationViewController = segue.destinationViewController as! WebViewController
-			destinationViewController.webViewAddress = art?.artistWebLink
+			destinationViewController.webViewAddress = art?.artist?.webLink
 		} else if (segue.identifier == SegueIdentifier.ButtonToMap.rawValue) {
 			if let singleArtMapViewController = segue.destinationViewController as? SingleArtMapViewController {
 				singleArtMapViewController.transitioningDelegate = mapAnimatedTransistioningDelegate

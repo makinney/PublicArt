@@ -37,7 +37,7 @@ extension ArtMapAnnotation : MKAnnotation {
 
 	
 	var subtitle: String! {
-		if let subtitle = art?.artistName {
+		if let subtitle = art?.artist?.name {
 			return subtitle
 		}
 		return ""

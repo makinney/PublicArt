@@ -16,16 +16,9 @@ extension Artist {
 			artist.objectId = parseArtist.objectId!
 			artist.createdAt = parseArtist.createdAt!
 			artist.updatedAt = parseArtist.updatedAt!
-
 			artist.idArtist = parseArtist.idArtist ?? ""
 			artist.name = parseArtist.name ?? ""
-			if let webLinkName = parseArtist.webLinkName {
-				artist.webLinkName = webLinkName
-			}
-			if let webLinkURL = parseArtist.webLinkURL {
-				artist.webLinkURL = webLinkURL
-			}
-		
+			artist.webLink = parseArtist.webLink ?? ""
 			return artist
 		}
 		return nil
@@ -36,15 +29,9 @@ extension Artist {
 		artist.objectId = parseArtist.objectId!
 		artist.createdAt = parseArtist.createdAt!
 		artist.updatedAt = parseArtist.updatedAt!
-		
 		artist.idArtist = parseArtist.idArtist ?? ""
 		artist.name = parseArtist.name ?? ""
-		if let webLinkName = parseArtist.webLinkName {
-			artist.webLinkName = webLinkName
-		}
-		if let webLinkURL = parseArtist.webLinkURL {
-			artist.webLinkURL = webLinkURL
-		}
+		artist.webLink = parseArtist.webLink ?? ""
 	}
 
 }

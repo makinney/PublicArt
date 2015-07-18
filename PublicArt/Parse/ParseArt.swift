@@ -24,16 +24,15 @@ class ParseArt : PFObject, PFSubclassing {
 	}
 	
 	@NSManaged var idArt: String?
+	@NSManaged var idArtist: String?
 	@NSManaged var idLocation: String?
 	@NSManaged var tags: String?
 	@NSManaged var title: String?
-	@NSManaged var artistName: String?
 	@NSManaged var descriptionFile: PFFile?
 	@NSManaged var latitude: String?
 	@NSManaged var longitude: String?
 	@NSManaged var address: String?
 	@NSManaged var artWebLink: String?
-	@NSManaged var artistWebLink: String?
 	@NSManaged var accession: String?
 	@NSManaged var credit: String?
 	@NSManaged var condition: String?

@@ -34,6 +34,7 @@ class ArtDataManager : NSObject {
 		refreshFromWeb(beginningAtDate, complete: {[weak self] (art, artists, locations, photos, thumbs, locPhotos) -> () in
 			self?.updatePhotoToArtBindings(photos)
 			self?.updateArtToLocationBindings(art)
+			self?.updateArtToArtistBindings(art)
 			self?.updateThumbToArtBindings(thumbs)
 			self?.updateLocPhotoToLocationBindings(locPhotos)
 			if self?.coreDataStack.saveContext() == true {
@@ -134,6 +135,16 @@ class ArtDataManager : NSObject {
 				var artSet:NSMutableSet = location.artwork.mutableCopy() as! NSMutableSet
 				artSet.addObject(art)
 				location.artwork = artSet.copy() as! NSSet
+			}
+		}
+	}
+	
+	private func updateArtToArtistBindings(art:[Art]) {
+		for art in art {
+			if let artist = self.fetcher.fetchArtist(art.idArtist) {
+				var artistArtworkSet:NSMutableSet = artist.artwork.mutableCopy() as! NSMutableSet
+				artistArtworkSet.addObject(art)
+				artist.artwork = artistArtworkSet.copy() as! NSSet
 			}
 		}
 	}

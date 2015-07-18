@@ -109,6 +109,25 @@ class Fetcher {
 		return art
 	}
 	
+	func fetchArtist(idArtist:String) -> (Artist?) {
+		var artist:Artist?
+		let fetchRequest = NSFetchRequest()
+		fetchRequest.entity = NSEntityDescription.entityForName(ModelEntity.artist, inManagedObjectContext:moc)
+		fetchRequest.predicate = NSPredicate(format:"%K == %@", "idArtist", idArtist)
+		
+		var error:NSError? = nil
+		var fetchedObjects = moc.executeFetchRequest(fetchRequest, error:&error)
+		if(error == nil) {
+			if fetchedObjects?.count > 0 {
+				artist = fetchedObjects?.last as? Artist
+			}
+		} else {
+			DLog(error!.description)
+		}
+		return artist
+	}
+
+	
 	func fetchLocation(idLocation:String) -> (Location?) {
 		var location:Location?
 		let fetchRequest = NSFetchRequest()

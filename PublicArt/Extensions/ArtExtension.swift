@@ -20,13 +20,13 @@ extension Art {
 			art.updatedAt = parseArt.updatedAt!
 
 			art.accession = parseArt.accession ?? ""
-			art.artistName = parseArt.artistName ?? ""
 			art.condition = parseArt.condition ?? ""
 			art.credit = parseArt.credit ?? ""
 		
 			art.dimensions = parseArt.dimensions ?? ""
 			art.hasThumb = parseArt.hasThumb ?? false
 			art.idArt = parseArt.idArt ?? ""
+			art.idArtist = parseArt.idArtist ?? ""
 			art.idLocation = parseArt.idLocation ?? ""
 			art.medium = parseArt.medium ?? ""
 			art.missing = parseArt.missing ?? false
@@ -39,17 +39,11 @@ extension Art {
 			var coordinates = mapCoordinates(latitude: latitude, longitude: longitude)
 			art.longitude = coordinates.longitude
 			art.latitude = coordinates.latitude
+			art.artWebLink = parseArt.artWebLink ?? ""
 			
 			if let descriptionFile = parseArt.descriptionFile {
 				art.descriptionFileName = descriptionFile.name
 				art.descriptionFileURL = descriptionFile.url ?? ""
-			}
-			
-			if let artWebLink = parseArt.artWebLink {
-				art.artWebLink = artWebLink
-			}
-			if let artistWebLink = parseArt.artistWebLink {
-				art.artistWebLink = artistWebLink
 			}
 			
 			return art
@@ -65,13 +59,13 @@ extension Art {
 		art.updatedAt = parseArt.updatedAt!
 		
 		art.accession = parseArt.accession ?? ""
-		art.artistName = parseArt.artistName ?? ""
 		art.condition = parseArt.condition ?? ""
 		art.credit = parseArt.credit ?? ""
 		
 		art.dimensions = parseArt.dimensions ?? ""
 		art.hasThumb = parseArt.hasThumb ?? false
 		art.idArt = parseArt.idArt ?? ""
+		art.idArtist = parseArt.idArtist ?? ""
 		art.idLocation = parseArt.idLocation ?? ""
 		art.medium = parseArt.medium ?? ""
 		art.missing = parseArt.missing ?? false
@@ -84,18 +78,13 @@ extension Art {
 		var coordinates = mapCoordinates(latitude: latitude, longitude: longitude)
 		art.longitude = coordinates.longitude
 		art.latitude = coordinates.latitude
+		art.artWebLink = parseArt.artWebLink ?? ""
 		
 		if let descriptionFile = parseArt.descriptionFile {
 			art.descriptionFileName = descriptionFile.name
 			art.descriptionFileURL = descriptionFile.url ?? ""
 		}
-		
-		if let artWebLink = parseArt.artWebLink {
-			art.artWebLink = artWebLink
-		}
-		if let artistWebLink = parseArt.artistWebLink {
-			art.artistWebLink = artistWebLink
-		}
+
 	}
 	
 }

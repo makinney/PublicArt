@@ -26,7 +26,6 @@ class ParseArtist : PFObject, PFSubclassing {
 	
 	@NSManaged var name: String?
 	@NSManaged var idArtist: String?
-	@NSManaged var webLinkName: String?
-	@NSManaged var webLinkURL: String?
+	@NSManaged var webLink: String?
 	
 }
