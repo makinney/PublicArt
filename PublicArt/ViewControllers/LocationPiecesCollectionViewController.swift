@@ -217,41 +217,6 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 	}
 		
 	
-//	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//		var height = 100
-//		var width = 160
-//		
-//		var row = indexPath.row % 5
-//		
-//		switch(row) {
-//		case 0:
-//		 height = 100
-//		 width = 160
-//		 
-//		case 1:
-//		 height = 200
-//		width = 160
-//		
-//		case 2:
-//		 height = 175
-//		width = 160
-//		
-//		case 3:
-//		 height = 250
-//		width = 160
-//		
-//		case 4:
-//		 height = 75
-//		width = 160
-//			
-//		default:
-//		 height = 100
-//		 width = 160
-//		 
-//		}
-//		return CGSize(width: width, height: height)
-//	}
-//	
 	
 //	override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
 //		var supplementaryView: UICollectionReusableView = UICollectionReusableView()

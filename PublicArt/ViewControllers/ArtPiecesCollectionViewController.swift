@@ -55,7 +55,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	
 		var nibName = UINib(nibName: CellIdentifier.ArtworkCollectionViewCell.rawValue, bundle: nil) // TODO:
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.ArtworkCollectionViewCell.rawValue)
-		setupArtCityPhotosFlowLayout()
+		setupArtPiecesPhotosFlowLayout()
 		
 		NSNotificationCenter.defaultCenter().addObserver(self,
 			selector:"newArtCityDatabase:",
@@ -94,11 +94,11 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		if let previousTraitCollection = previousTraitCollection {
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
 			if userInterfaceIdion == .Pad {
-				setupArtCityPhotosFlowLayout()
+				setupArtPiecesPhotosFlowLayout()
 				collectionView?.reloadData()
 			} else if traitCollection.horizontalSizeClass != previousTraitCollection.horizontalSizeClass ||
 				traitCollection.verticalSizeClass != previousTraitCollection.verticalSizeClass {
-				setupArtCityPhotosFlowLayout()
+				setupArtPiecesPhotosFlowLayout()
 				collectionView?.reloadData()
 			}
 		}
@@ -131,7 +131,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	}()
 	
 	
-	func setupArtCityPhotosFlowLayout() {
+	func setupArtPiecesPhotosFlowLayout() {
 		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
 			collectionViewFlowLayout.scrollDirection = .Vertical
 			var masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
@@ -186,9 +186,12 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.ArtworkCollectionViewCell.rawValue, forIndexPath: indexPath) as! ArtworkCollectionViewCell
 		let art = fetchResultsController.objectAtIndexPath(indexPath) as! Art
 		cell.title.text = art.title
-		cell.imageView.image = nil
 		if let thumb = art.thumb {
-			cell.activityIndicator.startAnimating()
+			if cell.imageView.image == nil { // prevents spinning over existing images
+				cell.activityIndicator.startAnimating()
+			} else {
+				cell.imageView.image = nil //
+			}
 			cell.imageFileName = thumb.imageFileName
 			ImageDownload.downloadThumb(art, complete: { (data, imageFileName) -> () in
 				if let data = data

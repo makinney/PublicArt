@@ -161,7 +161,10 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 	
 	
 		switch(row) {
-//		case MainMenuRow.Artists.rawValue:
+		case MainMenuRow.Artists.rawValue:
+		
+			var vc: ArtistCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtistCollectionViewController.rawValue) as! ArtistCollectionViewController
+			showViewController(vc, sender: self)
 
 		case MainMenuRow.Catagory.rawValue:
 		
@@ -176,19 +179,9 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 			
 		case MainMenuRow.Titles.rawValue:
 		
-			if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
-				artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
-				if artPiecesCollectionViewController != nil {
-					artPiecesCollectionViewController?.pageTitle = "Titles"
-					showDetailViewController(artPiecesCollectionViewController!, sender: self)
-				}
-			} else {
-				if let navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
-					let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
-					artPiecesCollectionViewController.pageTitle = "Titles"
-					showDetailViewController(navigationController, sender: self)
-				}
-			}
+			var vc: TitlesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.TitlesCollectionViewController.rawValue) as! TitlesCollectionViewController
+			showViewController(vc, sender: self)
+
 
 		case MainMenuRow.Medium.rawValue:
 			var vc: MediaCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.MediaCollectionViewController.rawValue) as! MediaCollectionViewController
