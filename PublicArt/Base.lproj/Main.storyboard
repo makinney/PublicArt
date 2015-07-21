@@ -487,7 +487,6 @@
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="fill" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="w3O-IE-Dub" userLabel="Art Title Button">
                                                         <rect key="frame" x="32" y="610" width="72" height="33"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="YjY-VI-3jA"/>
                                                         </constraints>
@@ -502,11 +501,11 @@
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="xjK-Hn-Sxv" userLabel="Artist Name Button">
                                                         <rect key="frame" x="32" y="643" width="92" height="31"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="21" id="2aq-Ho-BaP"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="16"/>
+                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <state key="normal" title="Artist Name">
                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -533,20 +532,6 @@
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GAf-hg-gN0" userLabel="artTitleInfoView">
-                                                        <rect key="frame" x="108" y="616" width="22" height="22"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="22" id="XIN-Pj-S4Z"/>
-                                                            <constraint firstAttribute="height" constant="22" id="gpm-ai-Yhf"/>
-                                                        </constraints>
-                                                    </imageView>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e4F-uZ-ISZ" userLabel="artistInfoView">
-                                                        <rect key="frame" x="128" y="648" width="22" height="22"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="22" id="YNe-Gy-cCO"/>
-                                                            <constraint firstAttribute="width" constant="22" id="ppx-xM-DYy"/>
-                                                        </constraints>
-                                                    </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="hxv-6W-p0P" userLabel="locationButton">
                                                         <rect key="frame" x="32" y="740" width="51" height="31"/>
                                                         <fontDescription key="fontDescription" name="Baskerville-SemiBold" family="Baskerville" pointSize="16"/>
@@ -577,17 +562,13 @@
                                                 <constraints>
                                                     <constraint firstItem="hxv-6W-p0P" firstAttribute="top" secondItem="sdV-Pl-et5" secondAttribute="bottom" constant="8" id="0L9-j8-ucc"/>
                                                     <constraint firstItem="Mbz-b0-SPa" firstAttribute="centerY" secondItem="poq-xo-sc2" secondAttribute="centerY" constant="8.5" id="1WM-9d-J0V"/>
-                                                    <constraint firstItem="GAf-hg-gN0" firstAttribute="leading" secondItem="w3O-IE-Dub" secondAttribute="trailing" constant="4" id="5Od-MF-3uq"/>
                                                     <constraint firstItem="w3O-IE-Dub" firstAttribute="leading" secondItem="xjK-Hn-Sxv" secondAttribute="leading" id="6Y0-4g-oYj"/>
                                                     <constraint firstItem="hxv-6W-p0P" firstAttribute="leading" secondItem="sdV-Pl-et5" secondAttribute="leading" id="6qJ-Mp-Epe"/>
                                                     <constraint firstItem="xjK-Hn-Sxv" firstAttribute="top" secondItem="w3O-IE-Dub" secondAttribute="bottom" id="7dt-GQ-v90"/>
                                                     <constraint firstItem="VDp-Vs-vO4" firstAttribute="top" secondItem="xjK-Hn-Sxv" secondAttribute="bottom" constant="8" id="BSr-LG-cvd"/>
-                                                    <constraint firstItem="e4F-uZ-ISZ" firstAttribute="centerY" secondItem="xjK-Hn-Sxv" secondAttribute="centerY" id="DSt-QD-fpB"/>
                                                     <constraint firstAttribute="trailing" secondItem="poq-xo-sc2" secondAttribute="trailing" id="Guv-uH-fOf"/>
                                                     <constraint firstItem="w3O-IE-Dub" firstAttribute="leading" secondItem="jWh-d9-GTp" secondAttribute="leading" constant="32" id="JBx-Zl-rXY"/>
-                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GAf-hg-gN0" secondAttribute="trailing" constant="16" id="N2B-JJ-di5"/>
                                                     <constraint firstItem="w3O-IE-Dub" firstAttribute="top" secondItem="poq-xo-sc2" secondAttribute="bottom" constant="8" id="W67-em-bq4"/>
-                                                    <constraint firstItem="e4F-uZ-ISZ" firstAttribute="leading" secondItem="xjK-Hn-Sxv" secondAttribute="trailing" constant="4" id="Ykm-yX-yQR"/>
                                                     <constraint firstItem="VDp-Vs-vO4" firstAttribute="leading" secondItem="w3O-IE-Dub" secondAttribute="leading" id="Zds-ag-QC1"/>
                                                     <constraint firstItem="Mbz-b0-SPa" firstAttribute="centerX" secondItem="poq-xo-sc2" secondAttribute="centerX" constant="8.5" id="ZeH-7i-p0I"/>
                                                     <constraint firstItem="poq-xo-sc2" firstAttribute="leading" secondItem="jWh-d9-GTp" secondAttribute="leading" id="crN-0p-9e1"/>
@@ -599,8 +580,6 @@
                                                     <constraint firstItem="VDp-Vs-vO4" firstAttribute="width" secondItem="sdV-Pl-et5" secondAttribute="width" id="vaE-18-bvg"/>
                                                     <constraint firstAttribute="bottom" secondItem="hxv-6W-p0P" secondAttribute="bottom" id="w5E-7k-xbp"/>
                                                     <constraint firstItem="3Cm-oA-eUa" firstAttribute="centerY" secondItem="poq-xo-sc2" secondAttribute="centerY" id="yUZ-GC-Wip"/>
-                                                    <constraint firstItem="w3O-IE-Dub" firstAttribute="centerY" secondItem="GAf-hg-gN0" secondAttribute="centerY" id="yzl-8Y-jgl"/>
-                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="e4F-uZ-ISZ" secondAttribute="trailing" constant="16" id="zTQ-KZ-jfv"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -636,8 +615,6 @@
                         <outlet property="artImageView" destination="poq-xo-sc2" id="xkl-zo-Ykw"/>
                         <outlet property="artImageViewTopToTop" destination="g5h-Rw-Wyn" id="3fu-0X-BC8"/>
                         <outlet property="artTitleButton" destination="w3O-IE-Dub" id="vOU-lA-H95"/>
-                        <outlet property="artTitleInfoImageView" destination="GAf-hg-gN0" id="Sem-od-Acf"/>
-                        <outlet property="artistInfoImageView" destination="e4F-uZ-ISZ" id="T4r-Q8-uKa"/>
                         <outlet property="artistNameButton" destination="xjK-Hn-Sxv" id="siO-AR-VbZ"/>
                         <outlet property="buttonHeight" destination="YjY-VI-3jA" id="Lkk-nU-FC6"/>
                         <outlet property="dimensionsLabel" destination="sdV-Pl-et5" id="k2o-NM-TgW"/>

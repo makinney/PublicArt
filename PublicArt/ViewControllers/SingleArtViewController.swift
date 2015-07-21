@@ -125,6 +125,8 @@ final class SingleArtViewController: UIViewController {
 		}
 	}
 	
+
+	
 	private func update() {
 		
 		if let art = art {
@@ -153,11 +155,11 @@ final class SingleArtViewController: UIViewController {
 			// art title
 			var artTitle = art.title ?? ""
 			artTitleButton.setTitle(artTitle, forState: .Normal)
-			artTitleButton.invalidateIntrinsicContentSize()
-			
 			if count(art.artWebLink) > 3  {
-				var image = UIImage(named: "toolbar-infoButton") ?? UIImage()
-				artTitleInfoImageView.image = image
+				var image = UIImage(named: "disclosureIndicator") ?? UIImage()
+				artTitleButton.setImage(image, forState: UIControlState.Normal)
+				artTitleButton?.imageView?.contentMode = .ScaleAspectFit // has to come before setting position
+				setImagePostion(artTitleButton)
 				artTitleButton.enabled = true
 			} else {
 				artTitleButton.enabled = false
@@ -168,8 +170,10 @@ final class SingleArtViewController: UIViewController {
 			artistNameButton.setTitle(artistName, forState: .Normal)
 			if let artist = art.artist
 			   where count(artist.webLink) > 3  { // guard against blank strings
-				var image = UIImage(named: "toolbar-infoButton") ?? UIImage()
-				artistInfoImageView.image = image
+				var image = UIImage(named: "disclosureIndicator") ?? UIImage()
+				artistNameButton.setImage(image, forState: UIControlState.Normal)
+				artistNameButton?.imageView?.contentMode = .ScaleAspectFit // has to come before setting position
+				setImagePostion(artistNameButton)
 				artistNameButton.enabled = true
 			} else {
 				artistNameButton.enabled = false
@@ -195,17 +199,15 @@ final class SingleArtViewController: UIViewController {
 		
 		}
 	}
-		//	var leftInset = artTitleButton.titleLabel?.frame.size.width
-		//	var label = artTitleButton.titleLabel
-		//		var leftInset = artTitleButton.frame.size.width - artTitleButton.imageView!.frame.size.width
-		
-		//		var rightInset = artTitleButton.titleLabel?.frame.size.width
-		//		rightInset! = 0 - rightInset!
-		//		rightInset = 0 - leftInset - artTitleButton.imageView!.frame.size.width
-		//		artTitleButton.imageEdgeInsets = UIEdgeInsets(top: 0, left:leftInset, bottom: 0, right: rightInset!)
-		//
-		
 	
+	private func setImagePostion(button: UIButton) {
+		var buttonWidth = button.frame.width
+		var imageViewWidth = button.imageView?.frame.width ?? 0.0
+		var imageInset = (buttonWidth - imageViewWidth)
+		button.imageEdgeInsets = UIEdgeInsets(top: 0, left: imageInset, bottom: 0, right: -imageInset)
+		button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -imageViewWidth, bottom: 0, right: imageViewWidth)
+		buttonWidth = button.frame.width
+	}
 	
 	// MARK: Dynamic Type
 	
