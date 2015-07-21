@@ -30,8 +30,9 @@
     </entity>
     <entity name="Artist" representedClassName="Artist" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
         <attribute name="idArtist" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectId" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="webLink" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
@@ -81,7 +82,7 @@
     </entity>
     <elements>
         <element name="Art" positionX="-648" positionY="-469" width="128" height="433"/>
-        <element name="Artist" positionX="-288" positionY="-444" width="128" height="148"/>
+        <element name="Artist" positionX="-288" positionY="-444" width="128" height="165"/>
         <element name="Location" positionX="196" positionY="-298" width="128" height="73"/>
         <element name="LocPhoto" positionX="144" positionY="-666" width="128" height="165"/>
         <element name="Photo" positionX="205" positionY="-36" width="128" height="180"/>

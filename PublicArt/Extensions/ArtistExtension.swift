@@ -17,7 +17,8 @@ extension Artist {
 			artist.createdAt = parseArtist.createdAt!
 			artist.updatedAt = parseArtist.updatedAt!
 			artist.idArtist = parseArtist.idArtist ?? ""
-			artist.name = parseArtist.name ?? ""
+			artist.firstName = parseArtist.firstName ?? ""
+			artist.lastName = parseArtist.lastName ?? ""
 			artist.webLink = parseArtist.webLink ?? ""
 			return artist
 		}
@@ -30,7 +31,8 @@ extension Artist {
 		artist.createdAt = parseArtist.createdAt!
 		artist.updatedAt = parseArtist.updatedAt!
 		artist.idArtist = parseArtist.idArtist ?? ""
-		artist.name = parseArtist.name ?? ""
+		artist.firstName = parseArtist.firstName ?? ""
+		artist.lastName = parseArtist.lastName ?? ""
 		artist.webLink = parseArtist.webLink ?? ""
 	}
 

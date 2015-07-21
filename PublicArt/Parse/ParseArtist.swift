@@ -24,7 +24,8 @@ class ParseArtist : PFObject, PFSubclassing {
 		return "artist"
 	}
 	
-	@NSManaged var name: String?
+	@NSManaged var firstName: String?
+	@NSManaged var lastName: String?
 	@NSManaged var idArtist: String?
 	@NSManaged var webLink: String?
 	

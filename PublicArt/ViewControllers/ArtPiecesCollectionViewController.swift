@@ -213,12 +213,12 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	
 		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
 			if let thumb = art.thumb {
-				var aspectRatio = thumb.imageAspectRatio
+				var aspectRatio = thumb.imageAspectRatio as Double
 				if aspectRatio > 0 && aspectRatio <= 1 {
-					height = width / CGFloat(aspectRatio.doubleValue) + 21.0 // FIXME: hack based on label height
+					height = width / CGFloat(aspectRatio) + 21.0 // FIXME: hack based on label height
 				} else if aspectRatio > 1 {
 					width = width * 2.0  // FIXME fine tune
-					height = width / CGFloat(aspectRatio.doubleValue) + 21.0 // FIXME: hack based on label height
+					height = width / CGFloat(aspectRatio) + 21.0 // FIXME: hack based on label height
 				}
 			}			
 		}

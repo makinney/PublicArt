@@ -19,21 +19,18 @@ final class ArtistCollectionViewController: UICollectionViewController {
 	private var maxCellWidth: CGFloat = 0.0
 	private var error:NSError?
 	private let moc: NSManagedObjectContext?
-	private var artistIDs = [String]()
-	private var artists: [Artist]
+	private var artists = [Artist]()
 	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
 	
 	override init(collectionViewLayout: UICollectionViewLayout) {
 		moc = CoreDataStack.sharedInstance.managedObjectContext
 		fetcher = Fetcher(managedObjectContext: moc!)
-		artists = fetcher.fetchAllArtist()
 		super.init(collectionViewLayout: collectionViewLayout)
 	}
 	
 	required init(coder aDecoder: NSCoder) {
 		moc = CoreDataStack.sharedInstance.managedObjectContext
 		fetcher = Fetcher(managedObjectContext: moc!)
-		artists = fetcher.fetchAllArtist()
 		super.init(coder:aDecoder)
 	}
 	
@@ -51,22 +48,25 @@ final class ArtistCollectionViewController: UICollectionViewController {
 		
 		fetchResultsController.delegate = self
 		fetchResultsController.performFetch(&error)
-		var art = fetchResultsController.fetchedObjects as! [Art]
-		artistIDs = createArtistIdList(art)
+		if let art = fetchResultsController.fetchedObjects as? [Art] {
+			self.artists = getArtistsFrom(art)
+		}
 		collectionView?.reloadData()
 		
 	}
 	
-	func createArtistIdList(artwork: [Art]) -> [String] {
-		var artistIds = [String]()
-		var lastArtistId = String()
+	func getArtistsFrom(artwork: [Art]) -> [Artist] {
+		var artists = [Artist]()
+		var lastName = String()
 		for art in artwork {
-			if art.idArtist != lastArtistId {
-				artistIds.append(art.idArtist)
-				lastArtistId = art.idArtist
+			if let artist = art.artist {
+				if artist.lastName != lastName {
+						artists.append(art.artist!)
+						lastName = artist.lastName
+				}
 			}
 		}
-		return artistIds
+		return artists
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -91,7 +91,7 @@ final class ArtistCollectionViewController: UICollectionViewController {
 	//
 	lazy var fetchResultsController:NSFetchedResultsController = {
 		let fetchRequest = NSFetchRequest(entityName:ModelEntity.art)
-		let sortDescriptor = [NSSortDescriptor(key:"artist.name", ascending:true, selector: "localizedStandardCompare:")]
+		let sortDescriptor = [NSSortDescriptor(key:"artist.lastName", ascending:true, selector: "localizedStandardCompare:")]
 		fetchRequest.sortDescriptors = sortDescriptor
 		let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc!, sectionNameKeyPath: nil, cacheName: nil)
 		return frc
@@ -155,8 +155,8 @@ final class ArtistCollectionViewController: UICollectionViewController {
 	
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.MediaCollectionViewCell.rawValue, forIndexPath: indexPath) as! MediaCollectionViewCell
-		var artist = artists[indexPath.row] as Artist
-		cell.title.text = artist.name
+		var artist = self.artists[indexPath.row]
+		cell.title.text = artistFullName(artist)
 		return cell
 	}
 	
@@ -165,7 +165,7 @@ final class ArtistCollectionViewController: UICollectionViewController {
 	}
 	
 	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return artists.count
+		return artists.count ?? 0
 	}
 	
 	// MARK: UICollectionViewDelegate
@@ -174,8 +174,9 @@ final class ArtistCollectionViewController: UICollectionViewController {
 		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
 			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
 			if artPiecesCollectionViewController != nil {
-				var artist = artists[indexPath.row] as Artist
-				let filter = ArtPiecesCollectionViewDataFilter(key: "idArtist", value: artist.idArtist, title: artist.name)
+				var artist = self.artists[indexPath.row]
+				var artistName = artistFullName(artist)
+				let filter = ArtPiecesCollectionViewDataFilter(key: "idArtist", value: artist.idArtist, title: artistName)
 				artPiecesCollectionViewController!.fetchFilter(filter)
 				showDetailViewController(artPiecesCollectionViewController!, sender: self)
 			}
@@ -183,8 +184,9 @@ final class ArtistCollectionViewController: UICollectionViewController {
 	
 			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
 				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
-					var artist = artists[indexPath.row] as Artist
-					let filter = ArtPiecesCollectionViewDataFilter(key: "idArtist", value: artist.idArtist, title: artist.name)
+					var artist = self.artists[indexPath.row]
+					var artistName = artistFullName(artist)
+					let filter = ArtPiecesCollectionViewDataFilter(key: "idArtist", value: artist.idArtist, title: artistName)
 					artPiecesCollectionViewController.fetchFilter(filter)
 					showDetailViewController(navigationController, sender: self)
 			}
@@ -219,8 +221,9 @@ final class ArtistCollectionViewController: UICollectionViewController {
 extension ArtistCollectionViewController : NSFetchedResultsControllerDelegate {
 	
 	func controllerDidChangeContent(controller: NSFetchedResultsController) {
-		var art = fetchResultsController.fetchedObjects as! [Art]
-		artistIDs = createArtistIdList(art)
+		if let art = fetchResultsController.fetchedObjects as? [Art] {
+			artists = getArtistsFrom(art)
+		}
 		collectionView?.reloadData()
 	}
 }

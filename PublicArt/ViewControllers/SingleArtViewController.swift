@@ -166,7 +166,10 @@ final class SingleArtViewController: UIViewController {
 			}
 
 			// artist
-			var artistName = art.artist?.name
+			var artistName = ""
+			if let artist = art.artist {
+				artistName = artistFullName(artist)
+			}
 			artistNameButton.setTitle(artistName, forState: .Normal)
 			if let artist = art.artist
 			   where count(artist.webLink) > 3  { // guard against blank strings

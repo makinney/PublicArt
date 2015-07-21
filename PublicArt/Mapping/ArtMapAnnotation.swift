@@ -37,10 +37,11 @@ extension ArtMapAnnotation : MKAnnotation {
 
 	
 	var subtitle: String! {
-		if let subtitle = art?.artist?.name {
-			return subtitle
+		var subtitle = String()
+		if let artist = art?.artist {
+			subtitle = artistFullName(artist)
 		}
-		return ""
+		return subtitle
 	}
 	
 	var coordinate: CLLocationCoordinate2D {

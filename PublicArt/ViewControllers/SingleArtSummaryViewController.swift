@@ -30,7 +30,11 @@ class SingleArtSummaryViewController: UIViewController {
 	override func viewWillAppear(animated: Bool) {
 		if let art = art {
 			artTitle.text = art.title
-			artistName.text = art.artist?.name
+			if let artist = art.artist {
+				artistName.text = artistFullName(artist)
+			} else {
+				artistName.text = ""
+			}
 			medium.text = art.medium
 			dimensions.text = art.dimensions
 			imageView.image = nil
