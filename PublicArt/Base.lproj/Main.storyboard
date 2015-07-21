@@ -392,7 +392,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISh-Kn-bSJ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Share" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISh-Kn-bSJ">
                                 <rect key="frame" x="168" y="289" width="265" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="265" id="Ly8-5z-Rk5"/>
@@ -409,6 +409,10 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Contribute" image="tab-photos" id="HeF-bZ-orP"/>
+                    <toolbarItems>
+                        <barButtonItem systemItem="pageCurl" id="cgu-Jw-c1S"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IyS-jG-5DV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

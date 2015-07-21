@@ -44,8 +44,8 @@ final class SingleArtMapViewController : UIViewController {
 	}
 	
 	var routeBarButtonItem: UIBarButtonItem {
-		var barButtonItem = UIBarButtonItem(title: "Route", style: .Plain, target: self, action: "onRouteButton:")
-		return barButtonItem
+		let image = UIImage(named: "DirectionsArrow")
+		return UIBarButtonItem(image:image, style: .Plain, target:self, action: "onRouteButton:")
 
 	}
 	var flexibleSpaceBarButtonItem: UIBarButtonItem {

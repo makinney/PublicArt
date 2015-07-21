@@ -35,6 +35,7 @@ final class SingleArtViewController: UIViewController {
 	private var art: Art?
 	private var artBackgroundColor: UIColor?
 	private var firstViewAppearance = true
+	private var mapRouting: MapRouting?
 	private var promptUserTimer: NSTimer?
 	private let promptUserTimerTimeout: NSTimeInterval = 5
 
@@ -76,12 +77,17 @@ final class SingleArtViewController: UIViewController {
 	
 	var fixedSpaceBarButtonItem: UIBarButtonItem {
 		var fixedSpaceBarButtonItem = UIBarButtonItem(barButtonSystemItem: .FixedSpace , target: nil, action: nil)
-		fixedSpaceBarButtonItem.width = 10
+		fixedSpaceBarButtonItem.width = 0
 		return fixedSpaceBarButtonItem
 	}
 	
 	var actionButton: UIBarButtonItem {
 		return UIBarButtonItem(barButtonSystemItem: .Action , target: self, action: "actionButtonTouched:")
+	}
+	
+	var directionsButton: UIBarButtonItem {
+		let image = UIImage(named: "DirectionsArrow")
+		return UIBarButtonItem(image:image, style: .Plain, target:self, action:"directionsButtonTouched:")
 	}
 	
 	var favoritesButton: UIBarButtonItem {
@@ -90,13 +96,14 @@ final class SingleArtViewController: UIViewController {
 	
 	var mapButton: UIBarButtonItem {
 		let image = UIImage(named: "tool-map")
+
 		return UIBarButtonItem(image:image, style: .Plain, target:self, action:"mapButtonTouched:")
 	}
+	
 
 	
-	
 	func prepareNavButtons() {
-		self.navigationItem.rightBarButtonItems  = [actionButton, fixedSpaceBarButtonItem, mapButton, flexibleSpaceBarButtonItem]
+		self.navigationItem.rightBarButtonItems  = [actionButton, fixedSpaceBarButtonItem, mapButton, fixedSpaceBarButtonItem, directionsButton, flexibleSpaceBarButtonItem ]
 	}
 	
 	func prepareButtons() {
@@ -239,20 +246,28 @@ final class SingleArtViewController: UIViewController {
 	}
 	
 	// MARK: Share
-	
-	
-	
-	func mapButtonTouched(sender: UIBarButtonItem) {
-		performSegueWithIdentifier(SegueIdentifier.ButtonToMap.rawValue, sender: nil)
+	func actionButtonTouched(sender: UIBarButtonItem) {
+		shareArtwork(sender)
 	}
+	
+	func directionsButtonTouched(sender: UIBarButtonItem) {
+		if let art = self.art {
+			mapRouting = MapRouting(art: art)
+			mapRouting?.showAvailableAppsSheet(self, barButtonItem: sender)
+		}
+	}
+
 	
 	func favoriteButtonTouched(sender: UIBarButtonItem) {
 		println("favorites")
 	}
 	
-	func actionButtonTouched(sender: UIBarButtonItem) {
-		shareArtwork(sender)
+	func mapButtonTouched(sender: UIBarButtonItem) {
+		performSegueWithIdentifier(SegueIdentifier.ButtonToMap.rawValue, sender: nil)
 	}
+	
+	
+	
 
 	func shareArtwork(barButtonItem: UIBarButtonItem) {
 		let msg = (art?.title ?? "" ) + "\n"

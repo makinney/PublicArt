@@ -43,7 +43,7 @@ final class MapRouting {
 	
 	
 	func showAvailableAppsSheet(viewController: UIViewController, barButtonItem: UIBarButtonItem) {
-		var appsSheet = UIAlertController(title: "Show Routing Directions", message: "Select App", preferredStyle: .ActionSheet)
+		var appsSheet = UIAlertController(title: "Directions to Art", message: "Select App", preferredStyle: .ActionSheet)
 		appsSheet.popoverPresentationController?.barButtonItem = barButtonItem
 		
 		var cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (alert) -> Void in
