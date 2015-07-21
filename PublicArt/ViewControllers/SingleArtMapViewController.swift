@@ -19,6 +19,7 @@ final class SingleArtMapViewController : UIViewController {
 
 	private let annotationViewId = "annotationViewId"
 	var art:Art?
+	private var mapRouting: MapRouting?
 	
 	lazy var artMapAnnotation:ArtMapAnnotation = {
 			ArtMapAnnotation(art: self.art!)
@@ -125,8 +126,11 @@ final class SingleArtMapViewController : UIViewController {
 		dismiss()
 	}
 	
-	func onRouteButton(barbuttonItem: UIBarButtonItem) {
-		println("route")
+	func onRouteButton(barButtonItem: UIBarButtonItem) {
+		if let art = self.art {
+			mapRouting = MapRouting(art: art)
+			mapRouting?.showAvailableAppsSheet(self, barButtonItem: barButtonItem)
+		}
 	}
 
 	func onLocateMeButton(barbuttonItem: UIBarButtonItem ) {
