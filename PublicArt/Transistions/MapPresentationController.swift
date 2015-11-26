@@ -12,7 +12,7 @@ class MapPresentationController: UIPresentationController {
 
 	var dimmingView: UIView!
 
-	override init(presentedViewController: UIViewController!, presentingViewController: UIViewController!) {
+	override init(presentedViewController: UIViewController, presentingViewController: UIViewController) {
 		super.init(presentedViewController: presentedViewController, presentingViewController: presentingViewController)
 		setupDimmingView()
 	}
@@ -20,9 +20,9 @@ class MapPresentationController: UIPresentationController {
 	func setupDimmingView() {
 		dimmingView = UIView()
 //		dimmingView.backgroundColor = UIColor.greenColor().colorWithAlphaComponent(0.1)
-		var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
+		let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
 		visualEffectView.frame = dimmingView.bounds
-		visualEffectView.autoresizingMask = .FlexibleHeight | .FlexibleWidth
+		visualEffectView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
 		dimmingView.addSubview(visualEffectView)
 		
 		let tapRecognizer = UITapGestureRecognizer(target: self, action: "dimmingViewTapped:")
@@ -41,8 +41,9 @@ class MapPresentationController: UIPresentationController {
 //
 	
 	override func containerViewWillLayoutSubviews() {
-		dimmingView.frame = containerView.bounds
-		presentedView().frame = frameOfPresentedViewInContainerView()
+	
+		dimmingView.frame = containerView?.bounds ?? CGRect()
+		presentedView()!.frame = frameOfPresentedViewInContainerView()
 		
 //		presentedView().layer.borderColor = UIColor.lightGrayColor().CGColor
 //		presentedView().layer.borderWidth = 2.0
@@ -51,10 +52,10 @@ class MapPresentationController: UIPresentationController {
 	
 	
 	override func frameOfPresentedViewInContainerView() -> CGRect {//
-		var containerBounds:CGRect = self.containerView.bounds
+		let containerBounds:CGRect = self.containerView!.bounds
 		var presentedViewFrame = CGRectZero
-		var width:CGFloat = containerBounds.size.width * 0.80
-		var height:CGFloat = containerBounds.size.height  * 0.80 // TODO: hard coded
+		let width:CGFloat = containerBounds.size.width * 0.80
+		let height:CGFloat = containerBounds.size.height  * 0.80 // TODO: hard coded
 //		if self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClass.Compact {
 //			height = 500
 //		} else {
@@ -76,9 +77,9 @@ class MapPresentationController: UIPresentationController {
 		self.dimmingView.alpha = 0.0 // TODO:
 
 		let containerView = self.containerView
-		dimmingView.frame = containerView.bounds
+		dimmingView.frame = containerView!.bounds
 		dimmingView.alpha = 0.0
-		containerView.insertSubview(dimmingView, atIndex: 0)
+		containerView!.insertSubview(dimmingView, atIndex: 0)
 
 		presentedViewController.transitionCoordinator()?.animateAlongsideTransition({ (context) -> Void in
 			self.dimmingView.alpha = 1.0

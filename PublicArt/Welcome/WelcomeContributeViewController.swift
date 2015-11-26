@@ -12,7 +12,7 @@ class WelcomeContributeViewController: UIViewController {
 
 	@IBAction func onContinueButton(sender: AnyObject) {
 	
-	 var app =	UIApplication.sharedApplication().delegate as! AppDelegate
+	 let app =	UIApplication.sharedApplication().delegate as! AppDelegate
 	 app.normalWindowRoot(animate: true)
 	 
 

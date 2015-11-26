@@ -14,8 +14,8 @@ class SingleArtPhotosCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
 	override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint) -> CGPoint {
 		var contentOffset = CGPoint(x: 0.0,y: proposedContentOffset.y)
-		if let collectionView = collectionView {
-			var xPosition  = currentPage * itemSize.width
+		if let _ = collectionView {
+			let xPosition  = currentPage * itemSize.width
 			contentOffset = CGPoint(x: xPosition, y: proposedContentOffset.y)
 		}
 		return contentOffset

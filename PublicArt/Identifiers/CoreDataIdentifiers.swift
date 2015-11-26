@@ -11,6 +11,7 @@ import Foundation
 struct ModelEntity {
 	static let art = "Art"
 	static let artist = "Artist"
+	static let appCommon = "AppCommon"
 	static let location = "Location"
 	static let locPhoto = "LocPhoto"
 	static let photo = "Photo"

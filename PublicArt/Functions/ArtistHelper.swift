@@ -10,10 +10,10 @@ import Foundation
 
 func artistFullName(artist: Artist) -> String {
 	var name = String()
-	if count(artist.firstName) > 1 {
+	if artist.firstName.characters.count > 1 {
 		name = artist.firstName + " "
 	}
-	if count(artist.lastName) > 1 {
+	if artist.lastName.characters.count > 1 {
 		name += artist.lastName
 	}
 	return name

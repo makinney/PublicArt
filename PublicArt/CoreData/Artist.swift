@@ -2,7 +2,7 @@
 //  Artist.swift
 //  PublicArt
 //
-//  Created by Michael Kinney on 7/21/15.
+//  Created by Michael Kinney on 7/22/15.
 //  Copyright (c) 2015 makinney. All rights reserved.
 //
 
@@ -20,6 +20,9 @@ class Artist: NSManagedObject {
     @NSManaged var updatedAt: NSDate
     @NSManaged var webLink: String
     @NSManaged var lastName: String
+    @NSManaged var spareOne: String
+    @NSManaged var spareTwo: String
+    @NSManaged var spareThree: NSNumber
     @NSManaged var artwork: NSSet
 
 }

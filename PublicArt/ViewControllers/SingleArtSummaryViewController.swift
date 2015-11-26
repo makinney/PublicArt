@@ -19,7 +19,7 @@ class SingleArtSummaryViewController: UIViewController {
 	var art: Art?
 	
 	
-	required init(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
 

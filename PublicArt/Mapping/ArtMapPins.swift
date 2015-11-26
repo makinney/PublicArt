@@ -36,18 +36,18 @@ class ArtMapPins {
 	
 	func imageNameFor(text: String) -> String {
 		var imageName = defaultImageName
-		var imageIndex = 0
-		var letter = getFirstLetterAsLowerCase(text)
-		for letterGroupIndex in 0..<letterGroups.count {
-			var letterGroup:[String] = letterGroups[letterGroupIndex]
-			for (letterIndex,groupLetter) in enumerate(letterGroup){
-				if groupLetter == letter {
-					imageIndex = letterGroupIndex
-//					println("letter is \(letter)")
-					break
-				}
-			}
-		}
+//		var imageIndex = 0
+//		let letter = getFirstLetterAsLowerCase(text)
+//		for letterGroupIndex in 0..<letterGroups.count {
+//			let letterGroup:[String] = letterGroups[letterGroupIndex]
+//			for (letterIndex,groupLetter) in letterGroup.enumerate(){
+//				if groupLetter == letter {
+//					imageIndex = letterIndex
+////					println("letter is \(letter)")
+//					break
+//				}
+//			}
+//		}
 //		if imageIndex < imageNames.count {
 //			imageName = imageNames[imageIndex]
 ////			println("imageName is \(imageName) letter \(letter) text \(text)")
@@ -60,7 +60,7 @@ class ArtMapPins {
 	}
 	
 	func getFirstLetterAsLowerCase(text: String) -> String {
-		var first: String = String(text[text.startIndex])
+		let first: String = String(text[text.startIndex])
 		return first.lowercaseString
 	}
 	

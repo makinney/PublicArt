@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
 		self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-		self.normalWindowRoot(animate:false)
-//		self.useWelcomeAsRoot()
+//		self.normalWindowRoot(animate:false)
+		self.useWelcomeAsRoot()
 		self.window?.makeKeyAndVisible()
 
 		setAppearanceProxies()
@@ -42,8 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				if let clientLastRefreshed = clientLastRefreshed,
 					let serverLastRefreshed = serverLastRefreshed {
 					 self?.artDataManager!.refresh(clientLastRefreshed, endingAtDate: serverLastRefreshed)
-				} else if let serverLastRefreshed = serverLastRefreshed {
-					var initialUpdate: NSDate = NSDate.distantPast() as! NSDate // make sure to get everything
+				} else if let serverLastRefreshed = serverLastRefreshed { // no client refresh, very first data download
+					let initialUpdate: NSDate = NSDate.distantPast() // make sure to get everything
 					self?.artDataManager!.refresh(initialUpdate, endingAtDate: serverLastRefreshed)
 				}
 			}
@@ -52,11 +52,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 	
 	func useWelcomeAsRoot() {
-		var welcomeViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewControllerWithIdentifier(WelcomeIdentifier.WelcomeViewController.rawValue) as? WelcomeViewController
+		let welcomeViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewControllerWithIdentifier(WelcomeIdentifier.WelcomeViewController.rawValue) as? WelcomeViewController
 		self.window?.rootViewController = welcomeViewController
 	}
 	
-	func normalWindowRoot(#animate: Bool) {
+	func normalWindowRoot(animate animate: Bool) {
 		let mainViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.MainViewController.rawValue) as? UITabBarController
 		if animate == false {
 			self.window?.rootViewController = mainViewController
@@ -135,7 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	private func toolbarBackgroundImage() -> UIImage {
 		var transparentBackground: UIImage!
 		UIGraphicsBeginImageContextWithOptions(CGSize(width: 1, height: 1), true, 1.0)
-		var context = UIGraphicsGetCurrentContext()
+		let context = UIGraphicsGetCurrentContext()
 		CGContextSetRGBFillColor(context, 1, 1, 1, 0)
 		UIRectFill(CGRect(x: 0.0, y: 0.0, width: 0.0, height: 0.0))
 		transparentBackground = UIGraphicsGetImageFromCurrentImageContext() ?? UIImage()

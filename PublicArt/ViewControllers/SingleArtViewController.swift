@@ -41,7 +41,7 @@ final class SingleArtViewController: UIViewController {
 
 	// MARK: Lifecycles
 
-	required init(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		super.init(coder:aDecoder)
 	}
 	
@@ -65,7 +65,7 @@ final class SingleArtViewController: UIViewController {
 	
 	 override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
-		var navBar = navigationController?.navigationBar
+		_ = navigationController?.navigationBar
 		hideTouchPrompt()
 	}
 	
@@ -76,7 +76,7 @@ final class SingleArtViewController: UIViewController {
 	}
 	
 	var fixedSpaceBarButtonItem: UIBarButtonItem {
-		var fixedSpaceBarButtonItem = UIBarButtonItem(barButtonSystemItem: .FixedSpace , target: nil, action: nil)
+		let fixedSpaceBarButtonItem = UIBarButtonItem(barButtonSystemItem: .FixedSpace , target: nil, action: nil)
 		fixedSpaceBarButtonItem.width = 0
 		return fixedSpaceBarButtonItem
 	}
@@ -141,7 +141,7 @@ final class SingleArtViewController: UIViewController {
 				activityIndicator.startAnimating()
 				ImageDownload.downloadPhoto(highResPhoto, complete: {[weak self] (data, imageFileName) -> () in
 					if let data = data	{
-						var image = UIImage(data: data) ?? UIImage()
+						let image = UIImage(data: data) ?? UIImage()
 						self?.artImageView.image = image
 						self?.artImageView.hidden = false
 					}
@@ -151,7 +151,7 @@ final class SingleArtViewController: UIViewController {
 				activityIndicator.startAnimating()
 				ImageDownload.downloadThumb(art, complete: {[weak self] (data, imageFileName) -> () in
 				if let data = data	{
-					var image = UIImage(data: data) ?? UIImage()
+					let image = UIImage(data: data) ?? UIImage()
 					self?.artImageView.image = image
 					self?.artImageView.hidden = false
 				}
@@ -160,10 +160,10 @@ final class SingleArtViewController: UIViewController {
 			}
 
 			// art title
-			var artTitle = art.title ?? ""
+			let artTitle = art.title ?? ""
 			artTitleButton.setTitle(artTitle, forState: .Normal)
-			if count(art.artWebLink) > 3  {
-				var image = UIImage(named: "disclosureIndicator") ?? UIImage()
+			if art.artWebLink.characters.count > 3  {
+				let image = UIImage(named: "disclosureIndicator") ?? UIImage()
 				artTitleButton.setImage(image, forState: UIControlState.Normal)
 				artTitleButton?.imageView?.contentMode = .ScaleAspectFit // has to come before setting position
 				setImagePostion(artTitleButton)
@@ -179,8 +179,8 @@ final class SingleArtViewController: UIViewController {
 			}
 			artistNameButton.setTitle(artistName, forState: .Normal)
 			if let artist = art.artist
-			   where count(artist.webLink) > 3  { // guard against blank strings
-				var image = UIImage(named: "disclosureIndicator") ?? UIImage()
+			   where artist.webLink.characters.count > 3  { // guard against blank strings
+				let image = UIImage(named: "disclosureIndicator") ?? UIImage()
 				artistNameButton.setImage(image, forState: UIControlState.Normal)
 				artistNameButton?.imageView?.contentMode = .ScaleAspectFit // has to come before setting position
 				setImagePostion(artistNameButton)
@@ -212,8 +212,8 @@ final class SingleArtViewController: UIViewController {
 	
 	private func setImagePostion(button: UIButton) {
 		var buttonWidth = button.frame.width
-		var imageViewWidth = button.imageView?.frame.width ?? 0.0
-		var imageInset = (buttonWidth - imageViewWidth)
+		let imageViewWidth = button.imageView?.frame.width ?? 0.0
+		let imageInset = (buttonWidth - imageViewWidth)
 		button.imageEdgeInsets = UIEdgeInsets(top: 0, left: imageInset, bottom: 0, right: -imageInset)
 		button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -imageViewWidth, bottom: 0, right: imageViewWidth)
 		buttonWidth = button.frame.width
@@ -225,10 +225,10 @@ final class SingleArtViewController: UIViewController {
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if (segue.identifier == SegueIdentifier.ArtTitleToWebView.rawValue) {
-			var destinationViewController = segue.destinationViewController as! WebViewController
+			let destinationViewController = segue.destinationViewController as! WebViewController
 			destinationViewController.webViewAddress = art?.artWebLink
 		} else if (segue.identifier == SegueIdentifier.ArtistToWebView.rawValue) {
-			var destinationViewController = segue.destinationViewController as! WebViewController
+			let destinationViewController = segue.destinationViewController as! WebViewController
 			destinationViewController.webViewAddress = art?.artist?.webLink
 		} else if (segue.identifier == SegueIdentifier.ButtonToMap.rawValue) {
 			if let singleArtMapViewController = segue.destinationViewController as? SingleArtMapViewController {
@@ -259,7 +259,7 @@ final class SingleArtViewController: UIViewController {
 
 	
 	func favoriteButtonTouched(sender: UIBarButtonItem) {
-		println("favorites")
+		print("favorites")
 	}
 	
 	func mapButtonTouched(sender: UIBarButtonItem) {
@@ -270,15 +270,22 @@ final class SingleArtViewController: UIViewController {
 	
 
 	func shareArtwork(barButtonItem: UIBarButtonItem) {
+		let moc = CoreDataStack.sharedInstance.managedObjectContext
+		let fetcher = Fetcher(managedObjectContext: moc!)
 		let msg = (art?.title ?? "" ) + "\n"
-		var image = artImageView.image ?? UIImage()
-		var url: NSURL = NSURL(string: "https://www.facebook.com/pages/Public-Art-San-Francisco/360818354113241")! // TODO
-		var activityItems = [image,msg, url]
-		var avc = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+		let image = artImageView.image ?? UIImage()
+		var activityItems = [image,msg]
+		if let appCommon = fetcher.fetchAppCommon() {
+			let facebookPage = appCommon.facebookPublicArtPage
+			if let facebookPageURL = NSURL(string: facebookPage) {
+				activityItems.append(facebookPageURL)
+			}
+		}
+		let avc = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
 		avc.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList,
 			UIActivityTypeAirDrop, UIActivityTypePostToFlickr]
 		
-		var userInterfaceIdion = traitCollection.userInterfaceIdiom
+		let userInterfaceIdion = traitCollection.userInterfaceIdiom
 		if userInterfaceIdion == .Phone {
 			avc.modalTransitionStyle = .CoverVertical
 			presentViewController(avc, animated: true, completion: nil)
@@ -327,7 +334,7 @@ final class SingleArtViewController: UIViewController {
 	
 	var photoTouchedAtLeastOnce: Bool {
 		get {
-			var userDefaults = NSUserDefaults.standardUserDefaults
+			let userDefaults = NSUserDefaults.standardUserDefaults
 			if let touched = userDefaults().objectForKey(UserDefaultKeys.SingleArtViewPhotoTouchedAtLeastOnce.rawValue) as? Bool { // TODO: define key
 				if touched {
 					return true

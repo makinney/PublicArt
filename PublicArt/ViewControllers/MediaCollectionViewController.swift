@@ -26,7 +26,7 @@ final class MediaCollectionViewController: UICollectionViewController {
 		super.init(collectionViewLayout: collectionViewLayout)
 	}
 	
-	required init(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		moc = CoreDataStack.sharedInstance.managedObjectContext
 		super.init(coder:aDecoder)
 	}
@@ -39,13 +39,17 @@ final class MediaCollectionViewController: UICollectionViewController {
 		
 		title = "Media" // TITLE
 		
-		var nibName = UINib(nibName: CellIdentifier.MediaCollectionViewCell.rawValue, bundle: nil) // TODO:
+		let nibName = UINib(nibName: CellIdentifier.MediaCollectionViewCell.rawValue, bundle: nil) // TODO:
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue)
 		setupMediaFlowLayout()
 		
 		fetchResultsController.delegate = self
-		fetchResultsController.performFetch(&error)
-		var art = fetchResultsController.fetchedObjects as! [Art]
+		do {
+			try fetchResultsController.performFetch()
+		} catch let error1 as NSError {
+			error = error1
+		}
+		let art = fetchResultsController.fetchedObjects as! [Art]
 		media = createMediaNameList(art)
 		collectionView?.reloadData()
 		
@@ -78,7 +82,7 @@ final class MediaCollectionViewController: UICollectionViewController {
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
-		println("\(__FILE__) \(__FUNCTION__)")
+		print("\(__FILE__) \(__FUNCTION__)")
 	}
 	
 	// MARK: Fetch Results Controller
@@ -96,7 +100,7 @@ final class MediaCollectionViewController: UICollectionViewController {
 	func setupMediaFlowLayout() {
 		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
 			collectionViewFlowLayout.scrollDirection = .Vertical
-			var masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
+			let masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
 			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
 			
 			collectionViewFlowLayout.minimumLineSpacing = 5
@@ -149,7 +153,7 @@ final class MediaCollectionViewController: UICollectionViewController {
 	
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.MediaCollectionViewCell.rawValue, forIndexPath: indexPath) as! MediaCollectionViewCell
-		var mediumName = media[indexPath.row] as String
+		let mediumName = media[indexPath.row] as String
 		cell.title.text = mediumName
 		return cell
 	}
@@ -168,7 +172,7 @@ final class MediaCollectionViewController: UICollectionViewController {
 		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
 			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
 			if artPiecesCollectionViewController != nil {
-				var mediumName = media[indexPath.row] as String
+				let mediumName = media[indexPath.row] as String
 				let filter = ArtPiecesCollectionViewDataFilter(key: "medium", value: mediumName, title: mediumName)
 				artPiecesCollectionViewController!.fetchFilter(filter)
 				showDetailViewController(artPiecesCollectionViewController!, sender: self)
@@ -177,7 +181,7 @@ final class MediaCollectionViewController: UICollectionViewController {
 	
 			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
 				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
-					var mediumName = media[indexPath.row] as String
+					let mediumName = media[indexPath.row] as String
 					let filter = ArtPiecesCollectionViewDataFilter(key: "medium", value: mediumName, title: mediumName)
 					artPiecesCollectionViewController.fetchFilter(filter)
 					showDetailViewController(navigationController, sender: self)
@@ -194,16 +198,14 @@ final class MediaCollectionViewController: UICollectionViewController {
 	}
 	
 	override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-		var indexPathsVisible = collectionView.indexPathsForVisibleItems()
+		let indexPathsVisible = collectionView.indexPathsForVisibleItems()
 		for path in indexPathsVisible {
-			if let visiblePath = path as? NSIndexPath {
-					var cell = collectionView.cellForItemAtIndexPath(visiblePath) as? MediaCollectionViewCell
+					let cell = collectionView.cellForItemAtIndexPath(path) as? MediaCollectionViewCell
 					cell?.backgroundColor = UIColor.whiteColor()
 					cell?.title.textColor = UIColor.blackColor()
-			}
 		}
 		
-		var cell = collectionView.cellForItemAtIndexPath(indexPath) as? MediaCollectionViewCell
+		let cell = collectionView.cellForItemAtIndexPath(indexPath) as? MediaCollectionViewCell
 		cell?.backgroundColor = UIColor.selectionBackgroundHighlite()
 		cell?.title.textColor = UIColor.whiteColor()
 	}
@@ -213,7 +215,7 @@ final class MediaCollectionViewController: UICollectionViewController {
 extension MediaCollectionViewController : NSFetchedResultsControllerDelegate {
 	
 	func controllerDidChangeContent(controller: NSFetchedResultsController) {
-		var art = fetchResultsController.fetchedObjects as! [Art]
+		let art = fetchResultsController.fetchedObjects as! [Art]
 		media = createMediaNameList(art)
 		collectionView?.reloadData()
 	}

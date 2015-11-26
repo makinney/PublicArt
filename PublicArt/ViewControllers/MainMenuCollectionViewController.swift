@@ -20,7 +20,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		var nibName = UINib(nibName: "HomeCollectionViewCell", bundle: nil)
+		let nibName = UINib(nibName: "HomeCollectionViewCell", bundle: nil)
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: "HomeCollectionViewCellID")
 		setupFlowLayout()
 		collectionView?.reloadData()
@@ -36,7 +36,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 	}
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        println("\(__FILE__) \(__FUNCTION__)")
+        print("\(__FILE__) \(__FUNCTION__)")
     }
 
 	
@@ -68,10 +68,9 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 	
 	
 	func setupFlowLayout() {
-		let maxCellHeight: CGFloat = 100.0
 		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
 			collectionViewFlowLayout.scrollDirection = .Vertical
-			var masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
+			let masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
 			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
 			
 			var minimumPhotosPerLine = 0 // ultimately up to flow layout
@@ -87,7 +86,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				
 				minimumPhotosPerLine = 2
-				var maxPhotoWidth = maxCellWidth(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
+				let maxPhotoWidth = maxCellWidth(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
 				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxPhotoWidth) // TODO: hard constant hack for aspect ratio
 			} else {
 				collectionViewFlowLayout.minimumLineSpacing = 4
@@ -99,7 +98,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				
 				minimumPhotosPerLine = 1
-				var maxPhotoWidth = maxCellWidth(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
+				let maxPhotoWidth = maxCellWidth(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
 				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxPhotoWidth)
 			}
 		}
@@ -127,7 +126,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("HomeCollectionViewCellID", forIndexPath: indexPath) as! HomeCollectionViewCell
 		cell.imageView.image = UIImage()
 		
-		var row = indexPath.row
+		let row = indexPath.row
 		var mainMenuItem: MainMenuItem?
 		
 		switch(row) {
@@ -144,7 +143,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		case MainMenuRow.Favorites.rawValue:
 			 mainMenuItem = mainMenu.item(.Favorites)
 		default:
-			println("\(__FILE__) \(__FUNCTION__) menu row not defined for row \(row)")
+			print("\(__FILE__) \(__FUNCTION__) menu row not defined for row \(row)")
 		}
 		
 		if let mainMenuItem = mainMenuItem {
@@ -157,13 +156,13 @@ final class MainMenuCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDelegate
 	
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		var row = indexPath.row
+		let row = indexPath.row
 	
 	
 		switch(row) {
 		case MainMenuRow.Artists.rawValue:
 		
-			var vc: ArtistCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtistCollectionViewController.rawValue) as! ArtistCollectionViewController
+			let vc: ArtistCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtistCollectionViewController.rawValue) as! ArtistCollectionViewController
 			showViewController(vc, sender: self)
 
 		case MainMenuRow.Catagory.rawValue:
@@ -179,18 +178,18 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 			
 		case MainMenuRow.Titles.rawValue:
 		
-			var vc: TitlesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.TitlesCollectionViewController.rawValue) as! TitlesCollectionViewController
+			let vc: TitlesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.TitlesCollectionViewController.rawValue) as! TitlesCollectionViewController
 			showViewController(vc, sender: self)
 
 
 		case MainMenuRow.Medium.rawValue:
-			var vc: MediaCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.MediaCollectionViewController.rawValue) as! MediaCollectionViewController
+			let vc: MediaCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.MediaCollectionViewController.rawValue) as! MediaCollectionViewController
 			showViewController(vc, sender: self)
 
 		
 //		case MainMenuRow.Favorites.rawValue:
 		default:
-			println("\(__FILE__) \(__FUNCTION__) menu row not defined for row \(row)")
+			print("\(__FILE__) \(__FUNCTION__) menu row not defined for row \(row)")
 		}
 		
 	

@@ -39,7 +39,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		super.init(collectionViewLayout: collectionViewLayout)
 	}
 	
-	required init(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		moc = CoreDataStack.sharedInstance.managedObjectContext
 		super.init(coder:aDecoder)
 	}
@@ -53,7 +53,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		navigationController?.interactivePopGestureRecognizer?.enabled = false
 		navigationController?.delegate = self
 	
-		var nibName = UINib(nibName: CellIdentifier.ArtworkCollectionViewCell.rawValue, bundle: nil) // TODO:
+		let nibName = UINib(nibName: CellIdentifier.ArtworkCollectionViewCell.rawValue, bundle: nil) // TODO:
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.ArtworkCollectionViewCell.rawValue)
 		setupArtPiecesPhotosFlowLayout()
 		
@@ -63,7 +63,11 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 			object: nil)
 		
 		fetchResultsController.delegate = self
-		fetchResultsController.performFetch(&error)
+		do {
+			try fetchResultsController.performFetch()
+		} catch let error1 as NSError {
+			error = error1
+		}
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -106,7 +110,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning() // TODO: FIXME this happens when rotating and trying different images
-		println("\(__FILE__) did receive memory warning")
+		print("\(__FILE__) did receive memory warning")
 
 	}
 
@@ -134,7 +138,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	func setupArtPiecesPhotosFlowLayout() {
 		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
 			collectionViewFlowLayout.scrollDirection = .Vertical
-			var masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
+			let masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
 			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
 			
 			collectionViewFlowLayout.minimumLineSpacing = 5
@@ -213,7 +217,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	
 		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
 			if let thumb = art.thumb {
-				var aspectRatio = thumb.imageAspectRatio as Double
+				let aspectRatio = thumb.imageAspectRatio as Double
 				if aspectRatio > 0 && aspectRatio <= 1 {
 					height = width / CGFloat(aspectRatio) + 21.0 // FIXME: hack based on label height
 				} else if aspectRatio > 1 {
@@ -231,7 +235,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	}
 	
 	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		let sectionInfo = fetchResultsController.sections![section] as! NSFetchedResultsSectionInfo
+		let sectionInfo = fetchResultsController.sections![section] 
 		return sectionInfo.numberOfObjects
 	}
 	

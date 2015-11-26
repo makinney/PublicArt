@@ -121,8 +121,6 @@ struct MainMenu {
 		case .Favorites:
 			image = UIImage(named: "SixteenthAveTiledStepsCropped") ?? image
 			title =  "Favorites"
-		default:
-			title = ""
 		}
 		
 		return MainMenuItem(title: title, image: image)

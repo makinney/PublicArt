@@ -11,7 +11,7 @@ import Foundation
 
 func convertToSortedArray(set: Set<Photo>) -> [Photo] {
 	var photos = [Photo]()
-	var sortedPhotoSet = sorted(set, { $0.imageFileName < $1.imageFileName })
+	let sortedPhotoSet = set.sort({ $0.imageFileName < $1.imageFileName })
 	for photo in sortedPhotoSet {
 		photos.append(photo)
 	}
@@ -20,7 +20,7 @@ func convertToSortedArray(set: Set<Photo>) -> [Photo] {
 
 func sortThumbnailPhotoToFirstPositionIn(photos: [Photo]) -> [Photo] {
 	var photos = photos
-	for (index, photo) in enumerate(photos) {
+	for (index, photo) in photos.enumerate() {
 		if photo.tnMatch == true {
 			photos.removeAtIndex(index)
 			photos.insert(photo, atIndex: 0)
@@ -46,8 +46,8 @@ func thumbNailsHighResolutionVersionIn(art: Art) -> Photo? {
 
 func thumbNailsHighResolutionVersionIn(photos: [Photo]) -> Photo? {
 	var highResPhoto: Photo?
-	var photos = photos
-	for (index, photo) in enumerate(photos) {
+	let photos = photos
+	for photo in photos {
 		if photo.tnMatch == true {
 			highResPhoto = photo
 			break

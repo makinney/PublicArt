@@ -44,7 +44,7 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 	}
 	
 	var fixedSpaceBarButtonItem: UIBarButtonItem {
-		var item = UIBarButtonItem(barButtonSystemItem: .FixedSpace , target: nil, action: nil)
+		let item = UIBarButtonItem(barButtonSystemItem: .FixedSpace , target: nil, action: nil)
 		item.width = 30
 		return item
 	}
@@ -64,7 +64,7 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 	}
 
 	
-	required init(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		moc = CoreDataStack.sharedInstance.managedObjectContext
 		super.init(coder: aDecoder)
 	}
@@ -78,7 +78,11 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 		self.title = "Explore"
 		
 		fetchResultsController.delegate = self
-		fetchResultsController.performFetch(&error)
+		do {
+			try fetchResultsController.performFetch()
+		} catch let error1 as NSError {
+			error = error1
+		}
 		self.art = fetchResultsController.fetchedObjects as? [Art]
 	}
 	
@@ -133,7 +137,7 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 	override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
 		super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
 		if traitCollection.userInterfaceIdiom == .Phone {
-			var hidden = self.toolbar?.hidden ?? true
+			let hidden = self.toolbar?.hidden ?? true
 			self.toolbar?.hidden = !hidden // prevent flash on size class change
 		}
 		coordinator.animateAlongsideTransitionInView(view, animation: { (context) -> Void in
@@ -163,17 +167,17 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 		var coordinates = CLLocationCoordinate2D(latitude: ArtCityMap.centerLatitude , longitude: ArtCityMap.centerLongitude )
 		// TODO tweak location for art city center
 		if let location = location {
-			var latitude = location.latitude.doubleValue
-			var longitude = location.longitude.doubleValue
+			let latitude = location.latitude.doubleValue
+			let longitude = location.longitude.doubleValue
 			coordinates = CLLocationCoordinate2D(latitude:latitude, longitude: longitude)
 		}
 		return coordinates
 	}
 	
 	private func updateMapAnnotations() {
-		var oldAnnotations = mapView.annotations
+		let oldAnnotations = mapView.annotations
 		mapView.removeAnnotations(oldAnnotations)
-		var newAnnotations = buildAnnotations()
+		let newAnnotations = buildAnnotations()
 		mapView.addAnnotations(newAnnotations)
 	}
 	
@@ -185,10 +189,10 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 
 	func zoomToRegion() {
 		if !zoomed {
-			var coordinates = mapCoordinates()
+			let coordinates = mapCoordinates()
 			mapView.setCenterCoordinate(coordinates, animated: true)
-			var span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1) // TODO:
-			var region = MKCoordinateRegion(center:coordinates, span:span)
+			let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1) // TODO:
+			let region = MKCoordinateRegion(center:coordinates, span:span)
 			mapView?.setRegion(region, animated: false)
 			zoomed = true;
 		}
@@ -206,20 +210,20 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 	}
 	
 	func showInfoSheet(barButtonItem: UIBarButtonItem) {
-		var infoSheet = UIAlertController(title: "Select Map Type", message: "", preferredStyle: .ActionSheet)
+		let infoSheet = UIAlertController(title: "Select Map Type", message: "", preferredStyle: .ActionSheet)
 		infoSheet.popoverPresentationController?.barButtonItem = barButtonItem
 		
-		var cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (alert) -> Void in
+		let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (alert) -> Void in
 		}
-		var mapStandardAction = UIAlertAction(title: "Standard", style: .Default) { (alert) -> Void in
+		let mapStandardAction = UIAlertAction(title: "Standard", style: .Default) { (alert) -> Void in
 			self.mapView.mapType = .Standard
 			self.saveMapType(self.mapView.mapType)
 		}
-		var mapHybridAction = UIAlertAction(title: "Hybrid", style: .Default) { (alert) -> Void in
+		let mapHybridAction = UIAlertAction(title: "Hybrid", style: .Default) { (alert) -> Void in
 			self.mapView.mapType = .Hybrid
 			self.saveMapType(self.mapView.mapType)
 		}
-		var mapSatelliteAction = UIAlertAction(title: "Satellite", style: .Default) { (alert) -> Void in
+		let mapSatelliteAction = UIAlertAction(title: "Satellite", style: .Default) { (alert) -> Void in
 			self.mapView.mapType = .Satellite
 			self.saveMapType(self.mapView.mapType)
 		}
@@ -252,7 +256,7 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 	
 	func getSavedMapType() -> MKMapType {
 		var mapType: MKMapType = .Standard
-		var userDefaults = NSUserDefaults.standardUserDefaults
+		let userDefaults = NSUserDefaults.standardUserDefaults
 		if let codedType = userDefaults().objectForKey("CityMapsType") as? String {
 			switch (codedType) {
 			case "Standard":
@@ -273,7 +277,7 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
-		println("\(__FILE__) did receive memory warning")
+		print("\(__FILE__) did receive memory warning")
 	}
 }
 
@@ -285,7 +289,7 @@ extension CityMapsViewController : MKMapViewDelegate, UIPopoverPresentationContr
 	}
 
 	func displayArtSummaryViewControllerAt(popoverAnchor: UIView, art: Art) {
-		var singleArtSummaryViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SingleArtSummaryViewController") as! SingleArtSummaryViewController
+		let singleArtSummaryViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SingleArtSummaryViewController") as! SingleArtSummaryViewController
 		singleArtSummaryViewController.modalPresentationStyle = .Popover
 		singleArtSummaryViewController.art = art
 		if let popoverPresentationController = singleArtSummaryViewController.popoverPresentationController {
@@ -300,20 +304,20 @@ extension CityMapsViewController : MKMapViewDelegate, UIPopoverPresentationContr
 		}
 	}
 
-	func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+	func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
 		if let annotation = view.annotation as? ArtMapAnnotation {
 			if let art = annotation.art {
-				if let rightCalloutAccessoryView = view.rightCalloutAccessoryView {
+	//			if let rightCalloutAccessoryView = view.rightCalloutAccessoryView {
 	//				displayArtSummaryViewControllerAt(view.rightCalloutAccessoryView, art: art)
-					var singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as! SingleArtViewController
+					let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as! SingleArtViewController
 					singleArtViewController.update(art, artBackgroundColor: nil)
 					showViewController(singleArtViewController, sender: self)
-				}
+	//			}
 			}
 		}		
 	}
 	
-	func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+	func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
 		if  let imageView = view.leftCalloutAccessoryView as? UIImageView,
 		    let annotation = view.annotation as? ArtMapAnnotation,
 			let art = annotation.art {
@@ -325,8 +329,8 @@ extension CityMapsViewController : MKMapViewDelegate, UIPopoverPresentationContr
 		}
 	}
 
-	func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-		if let annotation = annotation as? MKUserLocation {
+	func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+		if let _  = annotation as? MKUserLocation {
 			return nil
 		}
 		
@@ -335,9 +339,9 @@ extension CityMapsViewController : MKMapViewDelegate, UIPopoverPresentationContr
 			annotationView.updateImage()
 			return annotationView
 		} else {
-			var annotationView = MKArtAnnotationView(annotation: annotation, reuseIdentifier: annotationViewId)
+			let annotationView = MKArtAnnotationView(annotation: annotation, reuseIdentifier: annotationViewId)
 			annotationView.canShowCallout = true
-			annotationView.rightCalloutAccessoryView = UIButton.buttonWithType(.DetailDisclosure) as! UIButton
+			annotationView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
 			// TODO: TAP ON IMAGE TO SHOW POPOVER
 			annotationView.leftCalloutAccessoryView = UIImageView(frame: CGRect(origin: CGPointZero, size: CGSize(width:40, height:40)))
 			return annotationView

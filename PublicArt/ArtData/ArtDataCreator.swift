@@ -21,10 +21,26 @@ class ArtDataCreator {
 	
 	// MARK: create
 	
+	func createOrUpdateAppCommon(parseAppCommon: ParseAppCommon) ->(created: [AppCommon], updated: [AppCommon]) {
+		var created = [AppCommon]()
+		var updated = [AppCommon]()
+		
+		if let objectId = parseAppCommon.objectId,
+			let appCommon = self.fetcher.fetchManagedObjWithId(objectId, inEntityNamed: ModelEntity.appCommon, moc: moc) as? AppCommon {
+				AppCommon.update(appCommon, parseAppCommon: parseAppCommon)
+				updated.append(appCommon)
+		} else {
+			if let appCommon = AppCommon.create(parseAppCommon, moc: moc) {
+				created.append(appCommon)
+			}
+		}
+		return (created, updated)
+	}
+
+	
 	func createOrUpdateArt(parseArt: [ParseArt]) ->(created: [Art], updated: [Art]) {
 		var created = [Art]()
 		var updated = [Art]()
-		var managedObject: NSManagedObject?
 		
 		for parseArt in parseArt {
 			if let objectId = parseArt.objectId,
@@ -43,7 +59,6 @@ class ArtDataCreator {
 	func createOrUpdateArtist(parseArtist: [ParseArtist]) ->(created: [Artist], updated: [Artist]) {
 		var created = [Artist]()
 		var updated = [Artist]()
-		var managedObject: NSManagedObject?
 		
 		for parseArtist in parseArtist {
 			if let objectId = parseArtist.objectId,
@@ -63,7 +78,6 @@ class ArtDataCreator {
 	func createOrUpdatePhotos(parsePhoto: [ParsePhoto]) ->(created: [Photo], updated: [Photo]) {
 		var created = [Photo]()
 		var updated = [Photo]()
-		var managedObject: NSManagedObject?
 		
 		for parsePhoto in parsePhoto {
 			if let objectId = parsePhoto.objectId,
@@ -83,7 +97,6 @@ class ArtDataCreator {
 	func createOrUpdateThumbs(parseThumb: [ParseThumb]) ->(created: [Thumb], updated: [Thumb]) {
 		var created = [Thumb]()
 		var updated = [Thumb]()
-			var managedObject: NSManagedObject?
 		
 		for parseThumb in parseThumb {
 			if let objectId = parseThumb.objectId,
@@ -103,7 +116,6 @@ class ArtDataCreator {
 	func createOrUpdateLocations(parseLocation: [ParseLocation]) ->(created: [Location], updated: [Location]) {
 		var created = [Location]()
 		var updated = [Location]()
-		var managedObject: NSManagedObject?
 		
 		for parseLocation in parseLocation {
 			if let objectId = parseLocation.objectId,
@@ -122,7 +134,6 @@ class ArtDataCreator {
 	func createOrUpdateLocPhotos(parseLocPhoto: [ParseLocPhoto]) ->(created: [LocPhoto], updated: [LocPhoto]) {
 		var created = [LocPhoto]()
 		var updated = [LocPhoto]()
-		var managedObject: NSManagedObject?
 		
 		for parseLocPhoto in parseLocPhoto {
 			if let objectId = parseLocPhoto.objectId,

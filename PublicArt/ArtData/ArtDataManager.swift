@@ -6,12 +6,9 @@
 //  Copyright (c) 2014 mkinney. All rights reserved.
 //
 // TODO: Parse - Security - data should be read only..and more...
-// TODO: test that this binds new photos
-// TODO: test that it works if art has been deleted, without and with photo concurrently added.
 
 import Foundation
 import CoreData
-import UIKit // TODO: remove
 import Parse
 
 class ArtDataManager : NSObject {
@@ -31,7 +28,7 @@ class ArtDataManager : NSObject {
 	
 	
 	func refresh(beginningAtDate: NSDate, endingAtDate: NSDate) {
-		refreshFromWeb(beginningAtDate, complete: {[weak self] (art, artists, locations, photos, thumbs, locPhotos) -> () in
+		refreshFromWeb(beginningAtDate, complete: {[weak self] (art, artists, locations, photos, thumbs, locPhotos, appCommon) -> () in
 			self?.updatePhotoToArtBindings(photos)
 			self?.updateArtToLocationBindings(art)
 			self?.updateArtToArtistBindings(art)
@@ -45,7 +42,7 @@ class ArtDataManager : NSObject {
 	
 	// TODO: needs error handling !!!
 	//
-	private func refreshFromWeb(beginningDate: NSDate, complete:(art: [Art], artists: [Artist], locations: [Location], photos: [Photo], thumbs: [Thumb], locPhotos: [LocPhoto]) ->()) {
+	private func refreshFromWeb(beginningDate: NSDate, complete:(art: [Art], artists: [Artist], locations: [Location], photos: [Photo], thumbs: [Thumb], locPhotos: [LocPhoto], appCommon: [AppCommon]) ->()) {
 		// get art and create or update
 		refreshArtFromWeb(beginningDate, complete: {[weak self] (art) -> () in
 			self!.refreshPhotosFromWeb(beginningDate, complete: { (photos) -> () in
@@ -53,7 +50,9 @@ class ArtDataManager : NSObject {
 					self!.refreshArtistsFromWeb(beginningDate, complete: { (artists) -> () in
 						self!.refreshThumbsFromWeb(beginningDate, complete: { (thumbs) -> () in
 							self!.refreshLocPhotosFromWeb(beginningDate, complete: { (locPhotos) -> () in
-								complete(art: art, artists: artists, locations: locations, photos: photos, thumbs: thumbs, locPhotos: locPhotos)
+								self!.refreshAppCommonFromWeb(beginningDate, complete: { (appCommon) -> () in
+									complete(art: art, artists: artists, locations: locations, photos: photos, thumbs: thumbs, locPhotos: locPhotos, appCommon: appCommon)
+								})
 							})
 						})
 					})
@@ -63,6 +62,16 @@ class ArtDataManager : NSObject {
 	}
 	
 	// MARK: get latest from web --- refactor to other class ?
+	
+	private func refreshAppCommonFromWeb(date: NSDate, complete:(appCommon: [AppCommon]) ->()) {
+		ParseWebService.getAppCommonSince(date) {[weak self] (parseAppCommon) -> Void in
+			var appCommon = [AppCommon]()
+			if let crud = self?.artDataCreator.createOrUpdateAppCommon(parseAppCommon) {
+				appCommon = crud.created + crud.updated
+			}
+			complete(appCommon: appCommon)
+		}
+	}
 	
 	private func refreshArtFromWeb(date: NSDate, complete:(art: [Art]) ->()) {
 		ParseWebService.getAllArtSince(date) {[weak self] (parseArt) -> Void in
@@ -132,7 +141,7 @@ class ArtDataManager : NSObject {
 	private func updateArtToLocationBindings(art:[Art]) {
 		for art in art {
 			if let location = self.fetcher.fetchLocation(art.idLocation) {
-				var artSet:NSMutableSet = location.artwork.mutableCopy() as! NSMutableSet
+				let artSet:NSMutableSet = location.artwork.mutableCopy() as! NSMutableSet
 				artSet.addObject(art)
 				location.artwork = artSet.copy() as! NSSet
 			}
@@ -142,7 +151,7 @@ class ArtDataManager : NSObject {
 	private func updateArtToArtistBindings(art:[Art]) {
 		for art in art {
 			if let artist = self.fetcher.fetchArtist(art.idArtist) {
-				var artistArtworkSet:NSMutableSet = artist.artwork.mutableCopy() as! NSMutableSet
+				let artistArtworkSet:NSMutableSet = artist.artwork.mutableCopy() as! NSMutableSet
 				artistArtworkSet.addObject(art)
 				artist.artwork = artistArtworkSet.copy() as! NSSet
 			}
@@ -152,7 +161,7 @@ class ArtDataManager : NSObject {
 	private func updatePhotoToArtBindings(photos:[Photo]) {
 		for photo in photos {
 			if let art = self.fetcher.fetchArt(photo.idArt) {
-				var relationSet: NSMutableSet = art.photos.mutableCopy() as! NSMutableSet
+				let relationSet: NSMutableSet = art.photos.mutableCopy() as! NSMutableSet
 				relationSet.addObject(photo)
 				art.photos = relationSet.copy() as! NSSet
 			

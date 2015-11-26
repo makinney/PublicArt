@@ -32,7 +32,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		super.init(collectionViewLayout: collectionViewLayout)
 	}
 	
-	required init(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		moc = CoreDataStack.sharedInstance.managedObjectContext
 		super.init(coder:aDecoder)
 	}
@@ -45,12 +45,16 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		
 		title = "Locations" // TITLE
 		
-		var nibName = UINib(nibName: CellIdentifier.LocationCollectionViewCell.rawValue, bundle: nil) // TODO:
+		let nibName = UINib(nibName: CellIdentifier.LocationCollectionViewCell.rawValue, bundle: nil) // TODO:
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.LocationCollectionViewCell.rawValue)
 		setupFlowLayout()
 		
 		fetchResultsController.delegate = self
-		fetchResultsController.performFetch(&error)
+		do {
+			try fetchResultsController.performFetch()
+		} catch let error1 as NSError {
+			error = error1
+		}
 		
 		//
 //		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
@@ -93,7 +97,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        println("\(__FILE__) \(__FUNCTION__)")
+        print("\(__FILE__) \(__FUNCTION__)")
     }
 
 	// MARK: Fetch Results Controller
@@ -111,7 +115,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	func setupFlowLayout() {
 		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
 			collectionViewFlowLayout.scrollDirection = .Vertical
-			var masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
+			let masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
 			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
 			var maxCellWidth: CGFloat = 0.0
 
@@ -183,7 +187,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	}
 	
 	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		let sectionInfo = fetchResultsController.sections![section] as! NSFetchedResultsSectionInfo
+		let sectionInfo = fetchResultsController.sections![section] 
 		return sectionInfo.numberOfObjects
 	}
 	
@@ -256,19 +260,17 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
     }
 	
 	override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-		var indexPathsVisible = collectionView.indexPathsForVisibleItems()
-		for path in indexPathsVisible { // hack fix for bug where delected cells still look selected, sometimes
-			if let visiblePath = path as? NSIndexPath {
-				let location = fetchResultsController.objectAtIndexPath(visiblePath) as! Location
+		let indexPathsVisible = collectionView.indexPathsForVisibleItems()
+		for path in indexPathsVisible { // hack fix for bug where deselected cells still look selected, sometimes
+				let location = fetchResultsController.objectAtIndexPath(path) as! Location
 				if location.artwork.count > 0 || location.name == "All"{
-					var cell = collectionView.cellForItemAtIndexPath(visiblePath) as? LocationCollectionViewCell
+					let cell = collectionView.cellForItemAtIndexPath(path) as? LocationCollectionViewCell
 					cell?.backgroundColor = UIColor.whiteColor()
 					cell?.title.textColor = UIColor.blackColor()
 				}
-			}
 		}
 	
-		var cell = collectionView.cellForItemAtIndexPath(indexPath) as? LocationCollectionViewCell
+		let cell = collectionView.cellForItemAtIndexPath(indexPath) as? LocationCollectionViewCell
 		cell?.backgroundColor = UIColor.selectionBackgroundHighlite()
 		cell?.title.textColor = UIColor.whiteColor()
 	}

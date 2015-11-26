@@ -21,9 +21,9 @@ extension Location {
 			location.name = parseLocation.name ?? ""
 			location.idLocation	= parseLocation.idLocation ?? ""
 		
-			var latitude = parseLocation.latitude ?? ""
-			var longitude = parseLocation.longitude ?? ""
-			var coordinates = mapCoordinates(latitude: latitude, longitude: longitude)
+			let latitude = parseLocation.latitude ?? ""
+			let longitude = parseLocation.longitude ?? ""
+			let coordinates = mapCoordinates(latitude: latitude, longitude: longitude)
 			location.longitude = coordinates.longitude
 			location.latitude = coordinates.latitude
 			
@@ -42,9 +42,9 @@ extension Location {
 		location.name = parseLocation.name ?? ""
 		location.idLocation	= parseLocation.idLocation ?? ""
 		
-		var latitude = parseLocation.latitude ?? ""
-		var longitude = parseLocation.longitude ?? ""
-		var coordinates = mapCoordinates(latitude: latitude, longitude: longitude)
+		let latitude = parseLocation.latitude ?? ""
+		let longitude = parseLocation.longitude ?? ""
+		let coordinates = mapCoordinates(latitude: latitude, longitude: longitude)
 		location.longitude = coordinates.longitude
 		location.latitude = coordinates.latitude
 	}

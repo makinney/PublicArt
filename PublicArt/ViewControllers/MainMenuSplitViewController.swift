@@ -48,8 +48,8 @@ extension MainMenuSplitViewController : UISplitViewControllerDelegate {
 	
 	
 	func splitViewController(splitViewController: UISplitViewController,
-		collapseSecondaryViewController secondaryViewController: UIViewController!,
-		ontoPrimaryViewController primaryViewController: UIViewController!) -> Bool {
+		collapseSecondaryViewController secondaryViewController: UIViewController,
+		ontoPrimaryViewController primaryViewController: UIViewController) -> Bool {
 			return true
 	}
 	//

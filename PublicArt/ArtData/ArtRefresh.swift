@@ -12,7 +12,7 @@ import CoreData
 class ArtRefresh {
 	
 	class func artRefreshFromServerRequired(complete:(required: Bool, clientLastRefreshed: NSDate?, serverLastRefreshed: NSDate?) ->() ) {
-		var clientLastRefreshed: NSDate? = ArtRefresh.clientLastRefreshed()
+		let clientLastRefreshed: NSDate? = ArtRefresh.clientLastRefreshed()
 		ParseWebService.getPublicArtRefresh {(parseRefresh) -> Void in
 			if let serverLastRefreshed = parseRefresh?.last?.lastRefresh {
 				if let clientLastRefreshed = clientLastRefreshed {

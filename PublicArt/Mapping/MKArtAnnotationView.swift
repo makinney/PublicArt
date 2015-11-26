@@ -11,18 +11,18 @@ import MapKit
 
 class MKArtAnnotationView : MKAnnotationView {
 
-	override init(annotation: MKAnnotation!, reuseIdentifier: String!) {
+	override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
 		super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-		if let subtitle = annotation.subtitle {
-			image = UIImage(named: ArtMapPins().imageNameFor(subtitle))
+		if let subtitle = annotation?.subtitle {
+			image = UIImage(named: ArtMapPins().imageNameFor(subtitle!))
 		} else {
 			image = UIImage(named: ArtMapPins().imageNameFor("a")) // any letter's good
 		}
 	}
 	
 	func updateImage(){
-		if let subtitle = annotation.subtitle {
-			image = UIImage(named: ArtMapPins().imageNameFor(subtitle))
+		if let subtitle = annotation?.subtitle {
+			image = UIImage(named: ArtMapPins().imageNameFor(subtitle!))
 		} else {
 			image = UIImage(named: ArtMapPins().imageNameFor("a")) // any letter's good
 		}
@@ -32,7 +32,7 @@ class MKArtAnnotationView : MKAnnotationView {
 		super.init(frame:frame)
 	}
 
-	required init(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 	    fatalError("init(coder:) has not been implemented")
 	}
 	

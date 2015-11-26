@@ -82,7 +82,7 @@ class ArtUserLocation: NSObject {
 	
 	func havePermission() -> Bool {
 		var permission = false
-		var status =  CLLocationManager.authorizationStatus()
+		let status =  CLLocationManager.authorizationStatus()
 		if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
 			permission = true
 		}
@@ -95,8 +95,8 @@ class ArtUserLocation: NSObject {
 	
 	func zoomUser(coordinates: CLLocationCoordinate2D) {
 		mapView?.setCenterCoordinate(coordinates, animated: true)
-		var span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01) // TODO:
-		var region = MKCoordinateRegion(center:coordinates, span:span)
+		let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01) // TODO:
+		let region = MKCoordinateRegion(center:coordinates, span:span)
 		mapView?.setRegion(region, animated: true)
 	}
 	
@@ -104,7 +104,7 @@ class ArtUserLocation: NSObject {
 
 extension ArtUserLocation: CLLocationManagerDelegate {
 
-	 func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+	 func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		if let userLocation = mapView?.userLocation {
 			if userLocation.coordinate.latitude != 0.0 && userLocation.coordinate.longitude != 0.0 {
 				if checkZoomRequired { // && mapView?.userLocationVisible == false   {
@@ -115,7 +115,7 @@ extension ArtUserLocation: CLLocationManagerDelegate {
 		}
 	}
 	
-	func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+	func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
 		if error.domain == kCLErrorDomain {
 			if error.code == CLError.Denied.rawValue {
 				stopUpdating()

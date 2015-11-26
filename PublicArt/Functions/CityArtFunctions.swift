@@ -13,8 +13,8 @@ func ascending(s1: String, s2: String) -> Bool {
 	return s1 < s2
 }
 
-func outsideArtCityMapBoundaries(#latitude: Double, #longitude: Double) -> Bool {
-	var withInBoundaries = false
+func outsideArtCityMapBoundaries(latitude latitude: Double, longitude: Double) -> Bool {
+	let withInBoundaries = false
 	if latitude < ArtCityMap.minlatitude || latitude > ArtCityMap.maxlatitude {
 		return true
 	}

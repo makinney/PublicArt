@@ -34,9 +34,9 @@ extension Art {
 			art.title = parseArt.title ?? ""
 			art.address = parseArt.address ?? ""
 			
-			var latitude = parseArt.latitude ?? ""
-			var longitude = parseArt.longitude ?? ""
-			var coordinates = mapCoordinates(latitude: latitude, longitude: longitude)
+			let latitude = parseArt.latitude ?? ""
+			let longitude = parseArt.longitude ?? ""
+			let coordinates = mapCoordinates(latitude: latitude, longitude: longitude)
 			art.longitude = coordinates.longitude
 			art.latitude = coordinates.latitude
 			art.artWebLink = parseArt.artWebLink ?? ""
@@ -73,9 +73,9 @@ extension Art {
 		art.title = parseArt.title ?? ""
 		art.address = parseArt.address ?? ""
 		
-		var latitude = parseArt.latitude ?? ""
-		var longitude = parseArt.longitude ?? ""
-		var coordinates = mapCoordinates(latitude: latitude, longitude: longitude)
+		let latitude = parseArt.latitude ?? ""
+		let longitude = parseArt.longitude ?? ""
+		let coordinates = mapCoordinates(latitude: latitude, longitude: longitude)
 		art.longitude = coordinates.longitude
 		art.latitude = coordinates.latitude
 		art.artWebLink = parseArt.artWebLink ?? ""

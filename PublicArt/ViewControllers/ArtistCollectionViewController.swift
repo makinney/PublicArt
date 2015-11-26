@@ -28,7 +28,7 @@ final class ArtistCollectionViewController: UICollectionViewController {
 		super.init(collectionViewLayout: collectionViewLayout)
 	}
 	
-	required init(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		moc = CoreDataStack.sharedInstance.managedObjectContext
 		fetcher = Fetcher(managedObjectContext: moc!)
 		super.init(coder:aDecoder)
@@ -42,12 +42,16 @@ final class ArtistCollectionViewController: UICollectionViewController {
 		
 		title = "Artists" // TITLE
 		
-		var nibName = UINib(nibName: CellIdentifier.MediaCollectionViewCell.rawValue, bundle: nil) // TODO:
+		let nibName = UINib(nibName: CellIdentifier.MediaCollectionViewCell.rawValue, bundle: nil) // TODO:
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue)
 		setupArtistsFlowLayout()
 		
 		fetchResultsController.delegate = self
-		fetchResultsController.performFetch(&error)
+		do {
+			try fetchResultsController.performFetch()
+		} catch let error1 as NSError {
+			error = error1
+		}
 		if let art = fetchResultsController.fetchedObjects as? [Art] {
 			self.artists = getArtistsFrom(art)
 		}
@@ -84,7 +88,7 @@ final class ArtistCollectionViewController: UICollectionViewController {
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
-		println("\(__FILE__) \(__FUNCTION__)")
+		print("\(__FILE__) \(__FUNCTION__)")
 	}
 	
 	// MARK: Fetch Results Controller
@@ -102,7 +106,7 @@ final class ArtistCollectionViewController: UICollectionViewController {
 	func setupArtistsFlowLayout() {
 		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
 			collectionViewFlowLayout.scrollDirection = .Vertical
-			var masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
+			let masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
 			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
 			
 			collectionViewFlowLayout.minimumLineSpacing = 5
@@ -155,7 +159,7 @@ final class ArtistCollectionViewController: UICollectionViewController {
 	
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.MediaCollectionViewCell.rawValue, forIndexPath: indexPath) as! MediaCollectionViewCell
-		var artist = self.artists[indexPath.row]
+		let artist = self.artists[indexPath.row]
 		cell.title.text = artistFullName(artist)
 		return cell
 	}
@@ -174,8 +178,8 @@ final class ArtistCollectionViewController: UICollectionViewController {
 		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
 			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
 			if artPiecesCollectionViewController != nil {
-				var artist = self.artists[indexPath.row]
-				var artistName = artistFullName(artist)
+				let artist = self.artists[indexPath.row]
+				let artistName = artistFullName(artist)
 				let filter = ArtPiecesCollectionViewDataFilter(key: "idArtist", value: artist.idArtist, title: artistName)
 				artPiecesCollectionViewController!.fetchFilter(filter)
 				showDetailViewController(artPiecesCollectionViewController!, sender: self)
@@ -184,8 +188,8 @@ final class ArtistCollectionViewController: UICollectionViewController {
 	
 			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
 				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
-					var artist = self.artists[indexPath.row]
-					var artistName = artistFullName(artist)
+					let artist = self.artists[indexPath.row]
+					let artistName = artistFullName(artist)
 					let filter = ArtPiecesCollectionViewDataFilter(key: "idArtist", value: artist.idArtist, title: artistName)
 					artPiecesCollectionViewController.fetchFilter(filter)
 					showDetailViewController(navigationController, sender: self)
@@ -202,16 +206,14 @@ final class ArtistCollectionViewController: UICollectionViewController {
 	}
 	
 	override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-		var indexPathsVisible = collectionView.indexPathsForVisibleItems()
+		let indexPathsVisible = collectionView.indexPathsForVisibleItems()
 		for path in indexPathsVisible {
-			if let visiblePath = path as? NSIndexPath {
-					var cell = collectionView.cellForItemAtIndexPath(visiblePath) as? MediaCollectionViewCell
+					let cell = collectionView.cellForItemAtIndexPath(path) as? MediaCollectionViewCell
 					cell?.backgroundColor = UIColor.whiteColor()
 					cell?.title.textColor = UIColor.blackColor()
-			}
 		}
 		
-		var cell = collectionView.cellForItemAtIndexPath(indexPath) as? MediaCollectionViewCell
+		let cell = collectionView.cellForItemAtIndexPath(indexPath) as? MediaCollectionViewCell
 		cell?.backgroundColor = UIColor.selectionBackgroundHighlite()
 		cell?.title.textColor = UIColor.whiteColor()
 	}

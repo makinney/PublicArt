@@ -2,7 +2,7 @@
 //  Art.swift
 //  PublicArt
 //
-//  Created by Michael Kinney on 7/17/15.
+//  Created by Michael Kinney on 7/22/15.
 //  Copyright (c) 2015 makinney. All rights reserved.
 //
 
@@ -25,6 +25,7 @@ class Art: NSManagedObject {
     @NSManaged var favorite: NSNumber
     @NSManaged var hasThumb: NSNumber
     @NSManaged var idArt: String
+    @NSManaged var idArtist: String
     @NSManaged var idLocation: String
     @NSManaged var latitude: NSNumber
     @NSManaged var longitude: NSNumber
@@ -34,7 +35,10 @@ class Art: NSManagedObject {
     @NSManaged var tags: String
     @NSManaged var title: String
     @NSManaged var updatedAt: NSDate
-    @NSManaged var idArtist: String
+    @NSManaged var spareOne: String
+    @NSManaged var spareTwo: NSNumber
+    @NSManaged var spareThree: NSNumber
+    @NSManaged var spareFour: String
     @NSManaged var artist: Artist?
     @NSManaged var location: Location
     @NSManaged var photos: NSSet

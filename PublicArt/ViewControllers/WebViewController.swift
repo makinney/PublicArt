@@ -25,7 +25,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
 		super.viewWillAppear(animated)
 		if let webViewAddress = webViewAddress,
 			let url = NSURL.init(string: webViewAddress) {
-				var urlRequest = NSURLRequest(URL:url)
+				let urlRequest = NSURLRequest(URL:url)
 				webView.loadRequest(urlRequest)
 				activityIndicator.startAnimating()
 		}

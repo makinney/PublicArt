@@ -18,12 +18,12 @@ class ImageDownload {
 			query.fromLocalDatastore()
 			query.getObjectInBackgroundWithId(thumb.objectId, block: { (pfObject, error) -> Void in
 				if let pfObject = pfObject {
-					var file = pfObject["imageFile"] as! PFFile
+					let file = pfObject["imageFile"] as! PFFile
 					file.getDataInBackgroundWithBlock({ (data, error) -> Void in
 						if error == nil {
 							complete(data:data, imageFileName: thumb.imageFileName)
 						} else {
-							println("\(__FILE__) \(__FUNCTION__) error \(error?.description)")
+							print("\(__FILE__) \(__FUNCTION__) error \(error?.description)")
 							complete(data:nil, imageFileName: thumb.imageFileName)
 							
 						}
@@ -40,12 +40,12 @@ class ImageDownload {
 			query.fromLocalDatastore()
 			query.getObjectInBackgroundWithId(photo.objectId, block: { (pfObject, error) -> Void in
 				if let pfObject = pfObject {
-					var file = pfObject["imageFile"] as! PFFile
+					let file = pfObject["imageFile"] as! PFFile
 					file.getDataInBackgroundWithBlock({ (data, error) -> Void in
 						if error == nil {
 							complete(data:data, imageFileName: photo.imageFileName)
 						} else {
-							println("\(__FILE__) \(__FUNCTION__) error \(error?.description)")
+							print("\(__FILE__) \(__FUNCTION__) error \(error?.description)")
 							complete(data:nil, imageFileName: photo.imageFileName)
 							
 						}

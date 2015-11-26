@@ -33,7 +33,7 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 		super.init(collectionViewLayout: collectionViewLayout)
 	}
 	
-	required init(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		moc = CoreDataStack.sharedInstance.managedObjectContext
 		super.init(coder:aDecoder)
 	}
@@ -49,7 +49,7 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 		
 		
 		
-		var nibName = UINib(nibName: "ArtworkCollectionViewCell", bundle: nil) // TODO:
+		let nibName = UINib(nibName: "ArtworkCollectionViewCell", bundle: nil) // TODO:
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: "ArtworkCollectionViewCell")
 //		var subNibName = UINib(nibName: "ArtCitySupplementaryView", bundle: nil) // TODO:
 //		self.collectionView?.registerNib(subNibName, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ArtCitySupplementaryView")
@@ -68,7 +68,11 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 			object: nil)
 		
 		fetchResultsController.delegate = self
-		fetchResultsController.performFetch(&error)
+		do {
+			try fetchResultsController.performFetch()
+		} catch let error1 as NSError {
+			error = error1
+		}
 		
 		collectionView?.reloadData()
 		
@@ -102,7 +106,7 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning() // TODO: FIXME this happens when rotating and trying different images
-		println("\(__FILE__) did receive memory warning")
+		print("\(__FILE__) did receive memory warning")
 
 	}
 
@@ -124,8 +128,8 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 	
 	func displayDefaultArt() {
 		if fetchResultsController.fetchedObjects?.count > 0 {
-			var indexPath = NSIndexPath(forItem: 0, inSection: 0)
-			if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
+//			let indexPath = NSIndexPath(forItem: 0, inSection: 0)
+//			if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
 //				if let singleArtViewController = artNavController.viewControllers.last as? SingleArtViewController {
 //						artPhotoImages.getImage(art.thumbFile, completion: { [weak self] (image) -> () in
 //						if let image = image {
@@ -134,14 +138,14 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 //					})
 //					showDetailViewController(artNavController, sender: self)
 //				}
-			}
+//			}
 		}
 	}
 	
 	func setupArtCityPhotosFlowLayout() {
 		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
 			collectionViewFlowLayout.scrollDirection = .Vertical
-			var masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
+			let masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
 			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
 			
 			collectionViewFlowLayout.minimumLineSpacing = 5
@@ -157,7 +161,7 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 
 				
 				minimumPhotosPerLine = 2
-				var maxPhotoWidth = photoWidthAvailable(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
+				let maxPhotoWidth = photoWidthAvailable(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
 				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: 1.33 * maxPhotoWidth) // TODO: hard constant hack for aspect ratio
 			} else {
 				let sectionInset: CGFloat = 5.0
@@ -166,7 +170,7 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 				let itemSpacing: CGFloat = sectionInset / 2.0
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				minimumPhotosPerLine = 2
-				var maxPhotoWidth = photoWidthAvailable(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
+				let maxPhotoWidth = photoWidthAvailable(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
 				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: 1.33 * maxPhotoWidth)
 			}
 		}
@@ -191,7 +195,7 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 		
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.ArtworkCollectionViewCell.rawValue, forIndexPath: indexPath) as! ArtworkCollectionViewCell
-		let art = fetchResultsController.objectAtIndexPath(indexPath) as! Art
+//		let art = fetchResultsController.objectAtIndexPath(indexPath) as! Art
 //		cell.imageUrl = art.thumbFile
 		cell.imageView.image = nil
 //		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
@@ -240,19 +244,19 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 	}
 	
 	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		let sectionInfo = fetchResultsController.sections![section] as! NSFetchedResultsSectionInfo
+		let sectionInfo = fetchResultsController.sections![section] 
 		return sectionInfo.numberOfObjects
 	}
 	
 	// MARK: ArtPhotos Navigation
 	
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
+//		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
 //			if let singleArtViewController = artNavController.viewControllers.last as? SingleArtViewController {
 //				singleArtViewController.update(art, artBackgroundColor: nil)
 //				showDetailViewController(artNavController, sender: self)
 //			}
-		}
+//		}
 	}
 
 	

@@ -67,7 +67,7 @@ final class SingleArtMapViewController : UIViewController {
 //		super.init()
 //	}
 	
-	required init(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
 	
@@ -105,17 +105,17 @@ final class SingleArtMapViewController : UIViewController {
 	private func mapCoordinates() -> CLLocationCoordinate2D {
 		var coordinates = CLLocationCoordinate2D(latitude: ArtCityMap.centerLatitude , longitude: ArtCityMap.centerLongitude )
 		if let art = art {
-			var latitude = art.latitude.doubleValue
-			var longitude = art.longitude.doubleValue
+			let latitude = art.latitude.doubleValue
+			let longitude = art.longitude.doubleValue
 			coordinates = CLLocationCoordinate2D(latitude:latitude, longitude: longitude)
 		}
 		return coordinates
 	}
 	
 	func zoomToRegion() {
-		if let art = art {
-			var span = MKCoordinateSpan(latitudeDelta: 0.010, longitudeDelta: 0.010) // TODO:
-			var region = MKCoordinateRegion(center:mapCoordinates(), span:span)
+		if let _ = art {
+			let span = MKCoordinateSpan(latitudeDelta: 0.010, longitudeDelta: 0.010) // TODO:
+			let region = MKCoordinateRegion(center:mapCoordinates(), span:span)
 			mapView?.setRegion(region, animated: false)
 		}
 	}
@@ -142,20 +142,20 @@ final class SingleArtMapViewController : UIViewController {
 	}
 	
 	func showInfoSheet(barButtonItem: UIBarButtonItem) {
-		var infoSheet = UIAlertController(title: "Select Map Type", message: "", preferredStyle: .ActionSheet)
+		let infoSheet = UIAlertController(title: "Select Map Type", message: "", preferredStyle: .ActionSheet)
 		infoSheet.popoverPresentationController?.barButtonItem = barButtonItem
 	
-		var cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (alert) -> Void in
+		let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (alert) -> Void in
 		}
-		var mapStandardAction = UIAlertAction(title: "Standard", style: .Default) { (alert) -> Void in
+		let mapStandardAction = UIAlertAction(title: "Standard", style: .Default) { (alert) -> Void in
 			self.mapView.mapType = .Standard
 			self.saveMapType(self.mapView.mapType)
 		}
-		var mapHybridAction = UIAlertAction(title: "Hybrid", style: .Default) { (alert) -> Void in
+		let mapHybridAction = UIAlertAction(title: "Hybrid", style: .Default) { (alert) -> Void in
 			self.mapView.mapType = .Hybrid
 			self.saveMapType(self.mapView.mapType)
 		}
-		var mapSatelliteAction = UIAlertAction(title: "Satellite", style: .Default) { (alert) -> Void in
+		let mapSatelliteAction = UIAlertAction(title: "Satellite", style: .Default) { (alert) -> Void in
 			self.mapView.mapType = .Satellite
 			self.saveMapType(self.mapView.mapType)
 		}
@@ -188,7 +188,7 @@ final class SingleArtMapViewController : UIViewController {
 	
 	func getSavedMapType() -> MKMapType {
 		var mapType: MKMapType = .Standard
-		var userDefaults = NSUserDefaults.standardUserDefaults
+		let userDefaults = NSUserDefaults.standardUserDefaults
 		if let codedType = userDefaults().objectForKey("SingleArtMapType") as? String {
 			switch (codedType) {
 			case "Standard":
@@ -208,16 +208,16 @@ final class SingleArtMapViewController : UIViewController {
 
 extension SingleArtMapViewController : MKMapViewDelegate {
 
-	func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+	func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
 		if let annotation = view.annotation as? ArtMapAnnotation {
 			if let art = annotation.art {
-				println("art name is \(art.title)")
+				print("art name is \(art.title)")
 			}
 		}
 	}
 	
-	func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-		if let annotation = annotation as? MKUserLocation {
+	func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+		if let _ = annotation as? MKUserLocation {
 			return nil
 		}
 	
@@ -225,7 +225,7 @@ extension SingleArtMapViewController : MKMapViewDelegate {
 			annotationView.annotation = annotation
 			return annotationView
 		} else {
-			var annotationView = MKArtAnnotationView(annotation: annotation, reuseIdentifier: annotationViewId)
+			let annotationView = MKArtAnnotationView(annotation: annotation, reuseIdentifier: annotationViewId)
 			annotationView.canShowCallout = true
 			// annotationView.rightCalloutAccessoryView = UIButton.buttonWithType(.DetailDisclosure) as UIButton
 			return annotationView

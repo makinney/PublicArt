@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SingleArtPhotosCollectionViewController: UICollectionViewController, UIScrollViewDelegate {
+final class SingleArtPhotosCollectionViewController: UICollectionViewController {
  
 	var art: Art? {
 		didSet {
@@ -28,13 +28,13 @@ final class SingleArtPhotosCollectionViewController: UICollectionViewController,
 		super.init(collectionViewLayout: collectionViewLayout)
 	}
 
-	required init(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		super.init(coder:aDecoder)
 	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		var nibName = UINib(nibName: "SingleArtPhotosCollectionViewCell", bundle: nil) // TODO:
+		let nibName = UINib(nibName: "SingleArtPhotosCollectionViewCell", bundle: nil) // TODO:
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: "SingleArtPhotosCollectionViewCell")
 //		self.collectionView?.delegate = self
 		self.view.backgroundColor = UIColor.clearColor()
@@ -58,7 +58,7 @@ final class SingleArtPhotosCollectionViewController: UICollectionViewController,
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-		println("\(__FILE__) did receive memory warning")
+		print("\(__FILE__) did receive memory warning")
     }
 	
 	
@@ -79,10 +79,10 @@ final class SingleArtPhotosCollectionViewController: UICollectionViewController,
 	}
 	
 	func updateItemSize() {
-		var navBarHeight = navigationController?.navigationBar.frame.size.height ?? 0
-		var tabBarHeight = tabBarController?.tabBar.frame.size.height ?? 0
-		var statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height ?? 0
-		var collectionViewHeight = collectionView?.frame.height ?? 0
+		let navBarHeight = navigationController?.navigationBar.frame.size.height ?? 0
+		let tabBarHeight = tabBarController?.tabBar.frame.size.height ?? 0
+		let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height ?? 0
+		//var collectionViewHeight = collectionView?.frame.height ?? 0
 		
 			if let collectionView = self.collectionView {
 				var presentedViewHeight = collectionView.frame.size.height
@@ -91,7 +91,7 @@ final class SingleArtPhotosCollectionViewController: UICollectionViewController,
 					presentedViewHeight = presentationController.frameOfPresentedViewInContainerView().height  - navBarHeight - tabBarHeight - statusBarHeight
 					presentedViewWidth = presentationController.frameOfPresentedViewInContainerView().width
 				}
-				var height : CGFloat = presentedViewHeight  - collectionViewFlowLayout.sectionInset.top - collectionViewFlowLayout.sectionInset.bottom + 20 // FIXME: adding 20 allows vertical paging to line up,why ?
+				let height : CGFloat = presentedViewHeight  - collectionViewFlowLayout.sectionInset.top - collectionViewFlowLayout.sectionInset.bottom + 20 // FIXME: adding 20 allows vertical paging to line up,why ?
 				collectionViewFlowLayout.itemSize = CGSize(width: presentedViewWidth, height: height)
 			}
 	}

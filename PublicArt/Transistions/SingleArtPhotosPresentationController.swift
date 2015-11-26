@@ -13,7 +13,7 @@ class SingleArtPhotosPresentationController: UIPresentationController {
 	var dimmingView: UIView!
 	var closeButton: UIButton?
 	
-	override init(presentedViewController: UIViewController!, presentingViewController: UIViewController!) {
+	override init(presentedViewController: UIViewController, presentingViewController: UIViewController) {
 		super.init(presentedViewController: presentedViewController, presentingViewController: presentingViewController)
 		
 		let tapRecognizer = UITapGestureRecognizer(target: self, action: "viewTapped:")
@@ -35,9 +35,9 @@ class SingleArtPhotosPresentationController: UIPresentationController {
 	
 	func setupDimmingView() {
 		dimmingView = UIView()
-		var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
+		let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
 		visualEffectView.frame = dimmingView.bounds
-		visualEffectView.autoresizingMask = .FlexibleHeight | .FlexibleWidth
+		visualEffectView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
 		dimmingView.addSubview(visualEffectView)
 	}
 	
@@ -81,16 +81,19 @@ class SingleArtPhotosPresentationController: UIPresentationController {
 	}
 	
 	override func containerViewWillLayoutSubviews() {
-		dimmingView.frame = containerView.bounds
-		presentedView().frame = frameOfPresentedViewInContainerView()
+		if let containerView = containerView {
+			dimmingView.frame = containerView.bounds
+		}
+// TODO: Swift 2.0 what is this form ?		dimmingView.frame = (containerView?.bounds)!
+		presentedView()?.frame = frameOfPresentedViewInContainerView()
 //		setupCloseButton()
 	}
 	
 	override func frameOfPresentedViewInContainerView() -> CGRect {//
-		var containerBounds:CGRect = self.containerView.bounds
+		let containerBounds:CGRect = self.containerView?.bounds ?? CGRect()
 		var presentedViewFrame = CGRectZero
-		var width:CGFloat = containerBounds.size.width * 1.0
-		var height:CGFloat = containerBounds.size.height  * 1.0 // TODO: hard coded
+		let width:CGFloat = containerBounds.size.width * 1.0
+		let height:CGFloat = containerBounds.size.height  * 1.0 // TODO: hard coded
 
 		presentedViewFrame.size = CGSizeMake(width,height)
 		presentedViewFrame.origin = CGPointMake(containerBounds.size.width / 2.0, containerBounds.size.height / 2.0) // TODO: can use to locate initial frame postion
@@ -104,9 +107,9 @@ class SingleArtPhotosPresentationController: UIPresentationController {
 		self.dimmingView.alpha = 0.0 // TODO:
 
 		let containerView = self.containerView
-		dimmingView.frame = containerView.bounds
+		dimmingView.frame = containerView?.bounds ?? CGRect()
 		dimmingView.alpha = 0.0
-		containerView.insertSubview(dimmingView, atIndex: 0)
+		containerView?.insertSubview(dimmingView, atIndex: 0)
 
 		presentedViewController.transitionCoordinator()?.animateAlongsideTransition({ (context) -> Void in
 			self.dimmingView.alpha = 1.0

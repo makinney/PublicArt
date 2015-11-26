@@ -10,25 +10,26 @@ import UIKit
 
 class SingleArtPhotosPresentAnimatedTransistioning: NSObject, UIViewControllerAnimatedTransitioning {
 	
-	func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+	func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
 		return 0.2 // TODO:
 	}
 	
 	func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-		var animatingViewController:UIViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
-		var animatingView = animatingViewController.view
+		let animatingViewController:UIViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
+		let animatingView = animatingViewController.view
 		animatingView.frame = transitionContext.finalFrameForViewController(animatingViewController)
 //		animatingView.layer.shadowOpacity = 0.5 // affects toolbar tranparency
 //		animatingView.layer.cornerRadius = 5
 		animatingView.clipsToBounds = true
 		
-		var containerView = transitionContext.containerView()
-		containerView.addSubview(animatingView)
+		if let containerView = transitionContext.containerView() {
+			containerView.addSubview(animatingView)
+		}
 		
-		var presentedTransform = CGAffineTransformIdentity
-		var scale = CGAffineTransformMakeScale(0.001,0.001) // TODO:
+		let presentedTransform = CGAffineTransformIdentity
+		let scale = CGAffineTransformMakeScale(0.001,0.001) // TODO:
 	//	var rotation = CGAffineTransformMakeRotation(5 * CGFloat(M_PI)) // TODO:
-		var dismissedTransform = scale
+		let dismissedTransform = scale
 		
 		animatingView.transform = dismissedTransform
 		

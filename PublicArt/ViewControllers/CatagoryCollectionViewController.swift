@@ -18,7 +18,7 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		var nibName = UINib(nibName: CellIdentifier.CategoryCollectionViewCell.rawValue, bundle: nil)
+		let nibName = UINib(nibName: CellIdentifier.CategoryCollectionViewCell.rawValue, bundle: nil)
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.CategoryCollectionViewCell.rawValue)
 				
 		setupFlowLayout()
@@ -29,7 +29,7 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        println("\(__FILE__) \(__FUNCTION__)")
+        print("\(__FILE__) \(__FUNCTION__)")
     }
 
 
@@ -37,7 +37,7 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 		let maxCellHeight: CGFloat = 75.0
 		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
 			collectionViewFlowLayout.scrollDirection = .Vertical
-			var masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
+			let masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
 			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
 			collectionViewFlowLayout.minimumLineSpacing = 5
 			var minimumCellsPerLine = 0
@@ -51,7 +51,7 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				
 				minimumCellsPerLine = 1
-				var maxPhotoWidth = maxCellWidth(masterViewsWidth, cellsPerLine: minimumCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
+				let maxPhotoWidth = maxCellWidth(masterViewsWidth, cellsPerLine: minimumCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
 				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxCellHeight) // TODO: hard constant hack for aspect ratio
 			} else {
 				let sectionInset: CGFloat = 10.0
@@ -60,7 +60,7 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 				let itemSpacing: CGFloat = sectionInset / 2.0
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				minimumCellsPerLine = 1
-				var maxPhotoWidth = maxCellWidth(masterViewsWidth, cellsPerLine: minimumCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
+				let maxPhotoWidth = maxCellWidth(masterViewsWidth, cellsPerLine: minimumCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
 				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxCellHeight)
 			}
 		}
@@ -107,7 +107,6 @@ final class CatagoryCollectionViewController: UICollectionViewController {
     }
 	
 	func menuItem(row: Int) -> (title: String, tag: String) {
-		var title: String
 		switch(row) {
 		case CatagoryMenuOrder.Monuments.rawValue:
 			return (title: categoryMenuItem.value(.Monuments).title, tag: categoryMenuItem.value(.Monuments).tag)
@@ -135,7 +134,7 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
 			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
 			if artPiecesCollectionViewController != nil {
-				var (title, tag) = menuItem(indexPath.row)
+				let (title, tag) = menuItem(indexPath.row)
 				let filter = ArtPiecesCollectionViewDataFilter(key: "tags", value: tag, title: title)
 				artPiecesCollectionViewController!.fetchFilter(filter)
 				showDetailViewController(artPiecesCollectionViewController!, sender: self)
@@ -143,7 +142,7 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 		} else {
 			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
 				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
-					var (title, tag) = menuItem(indexPath.row)
+					let (title, tag) = menuItem(indexPath.row)
 					let filter = ArtPiecesCollectionViewDataFilter(key: "tags", value: tag, title: title)
 					artPiecesCollectionViewController.fetchFilter(filter)
 					showDetailViewController(navigationController, sender: self)
@@ -161,16 +160,14 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 	}
 	
 	override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-		var indexPathsVisible = collectionView.indexPathsForVisibleItems()
+		let indexPathsVisible = collectionView.indexPathsForVisibleItems()
 		for path in indexPathsVisible {
-			if let visiblePath = path as? NSIndexPath {
-				var cell = collectionView.cellForItemAtIndexPath(visiblePath) as? CategoryCollectionViewCell
+				let cell = collectionView.cellForItemAtIndexPath(path) as? CategoryCollectionViewCell
 				cell?.backgroundColor = UIColor.whiteColor()
 				cell?.menuItemName.textColor = UIColor.blackColor()
-			}
 		}
 		
-		var cell = collectionView.cellForItemAtIndexPath(indexPath) as? CategoryCollectionViewCell
+		let cell = collectionView.cellForItemAtIndexPath(indexPath) as? CategoryCollectionViewCell
 		cell?.backgroundColor = UIColor.selectionBackgroundHighlite()
 		cell?.menuItemName.textColor = UIColor.whiteColor()
 	}

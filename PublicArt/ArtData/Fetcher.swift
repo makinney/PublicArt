@@ -17,17 +17,43 @@ class Fetcher {
 		self.moc = moc
 	}
 	
+	func fetchAppCommon() -> (AppCommon?) {
+		var appCommon:AppCommon?
+		let fetchRequest = NSFetchRequest()
+		fetchRequest.entity = NSEntityDescription.entityForName(ModelEntity.appCommon, inManagedObjectContext:moc)
+		
+		var error:NSError? = nil
+		var fetchedObjects: [AnyObject]?
+		do {
+			fetchedObjects = try moc.executeFetchRequest(fetchRequest)
+		} catch let error1 as NSError {
+			error = error1
+			fetchedObjects = nil
+		}
+		if(error == nil) {
+			if fetchedObjects?.count > 0 {
+				appCommon = fetchedObjects?.last as? AppCommon
+			}
+		} else {
+			DLog(error!.description)
+		}
+		return appCommon
+	}
+	
+	
 	func fetchAllArt() -> [Art] {
 		var art = [Art]()
 		let fetchRequest = NSFetchRequest()
 		fetchRequest.entity = NSEntityDescription.entityForName(ModelEntity.art, inManagedObjectContext:moc)
-		var error:NSError? = nil
-		var fetchedObjects = moc.executeFetchRequest(fetchRequest, error:&error)
-		if(error == nil) {
+		var fetchedObjects: [AnyObject]?
+		
+		do {
+			fetchedObjects = try moc.executeFetchRequest(fetchRequest)
 			art = fetchedObjects as! [Art]
-		} else {
-			DLog(error!.description)
+		} catch let error as NSError {
+			print("__FUNCTION__ \(error.description)")
 		}
+		
 		return art
 	}
 	
@@ -38,7 +64,13 @@ class Fetcher {
 		fetchRequest.predicate = NSPredicate(format:"%K != %@", "imageFileName", "")
 
 		var error:NSError? = nil
-		var fetchedObjects = moc.executeFetchRequest(fetchRequest, error:&error)
+		var fetchedObjects: [AnyObject]?
+		do {
+			fetchedObjects = try moc.executeFetchRequest(fetchRequest)
+		} catch let error1 as NSError {
+			error = error1
+			fetchedObjects = nil
+		}
 		if(error == nil) {
 			art = fetchedObjects as! [Art]
 		} else {
@@ -54,7 +86,13 @@ class Fetcher {
 		fetchRequest.predicate = NSPredicate(format:"%K == %@", "idArt", idArt) // TODO: define
 		
 		var error:NSError? = nil
-		var fetchedObjects = moc.executeFetchRequest(fetchRequest, error:&error)
+		var fetchedObjects: [AnyObject]?
+		do {
+			fetchedObjects = try moc.executeFetchRequest(fetchRequest)
+		} catch let error1 as NSError {
+			error = error1
+			fetchedObjects = nil
+		}
 		if(error == nil) {
 			if fetchedObjects?.count > 0 {
 				art = fetchedObjects?.last as? Art
@@ -72,7 +110,13 @@ class Fetcher {
 		fetchRequest.predicate = NSPredicate(format:"%K == %@", "idLocation", idLocation) // TODO: define
 		
 		var error:NSError? = nil
-		var fetchedObjects = moc.executeFetchRequest(fetchRequest, error:&error)
+		var fetchedObjects: [AnyObject]?
+		do {
+			fetchedObjects = try moc.executeFetchRequest(fetchRequest)
+		} catch let error1 as NSError {
+			error = error1
+			fetchedObjects = nil
+		}
 		if(error == nil) {
 			if fetchedObjects?.count > 0 {
 				art = fetchedObjects as? [Art]
@@ -92,13 +136,19 @@ class Fetcher {
 			fetchRequest.sortDescriptors = [sortDescriptor]
 		}
 		
-		var locationPredicate = NSPredicate(format:"%K == %@", "idLocation", idLocation)
-		var thumbPredicate = NSPredicate(format:"%K != %@", "imageFileName", "")
-		var predicateArray = [locationPredicate, thumbPredicate]
-		var compound = NSCompoundPredicate.andPredicateWithSubpredicates(predicateArray)
+		let locationPredicate = NSPredicate(format:"%K == %@", "idLocation", idLocation)
+		let thumbPredicate = NSPredicate(format:"%K != %@", "imageFileName", "")
+		let predicateArray = [locationPredicate, thumbPredicate]
+		let compound = NSCompoundPredicate(andPredicateWithSubpredicates:predicateArray)
 		fetchRequest.predicate = compound
 		var error:NSError? = nil
-		var fetchedObjects = moc.executeFetchRequest(fetchRequest, error:&error)
+		var fetchedObjects: [AnyObject]?
+		do {
+			fetchedObjects = try moc.executeFetchRequest(fetchRequest)
+		} catch let error1 as NSError {
+			error = error1
+			fetchedObjects = nil
+		}
 		if(error == nil) {
 			if fetchedObjects?.count > 0 {
 				art = fetchedObjects as? [Art]
@@ -116,7 +166,13 @@ class Fetcher {
 		fetchRequest.predicate = NSPredicate(format:"%K == %@", "idArtist", idArtist)
 		
 		var error:NSError? = nil
-		var fetchedObjects = moc.executeFetchRequest(fetchRequest, error:&error)
+		var fetchedObjects: [AnyObject]?
+		do {
+			fetchedObjects = try moc.executeFetchRequest(fetchRequest)
+		} catch let error1 as NSError {
+			error = error1
+			fetchedObjects = nil
+		}
 		if(error == nil) {
 			if fetchedObjects?.count > 0 {
 				artist = fetchedObjects?.last as? Artist
@@ -133,7 +189,13 @@ class Fetcher {
 		fetchRequest.entity = NSEntityDescription.entityForName(ModelEntity.artist, inManagedObjectContext:moc)
 		
 		var error:NSError? = nil
-		var fetchedObjects = moc.executeFetchRequest(fetchRequest, error:&error)
+		var fetchedObjects: [AnyObject]?
+		do {
+			fetchedObjects = try moc.executeFetchRequest(fetchRequest)
+		} catch let error1 as NSError {
+			error = error1
+			fetchedObjects = nil
+		}
 		if(error == nil) {
 			if let fetchedObjects = fetchedObjects {
 				if fetchedObjects.count > 0 {
@@ -155,7 +217,13 @@ class Fetcher {
 		fetchRequest.predicate = NSPredicate(format:"%K == %@", "idLocation", idLocation) // TODO: define
 		
 		var error:NSError? = nil
-		var fetchedObjects = moc.executeFetchRequest(fetchRequest, error:&error)
+		var fetchedObjects: [AnyObject]?
+		do {
+			fetchedObjects = try moc.executeFetchRequest(fetchRequest)
+		} catch let error1 as NSError {
+			error = error1
+			fetchedObjects = nil
+		}
 		if(error == nil) {
 			if fetchedObjects?.count > 0 {
 				location = fetchedObjects?.last as? Location
@@ -175,7 +243,13 @@ class Fetcher {
 			fetchRequest.sortDescriptors = [sortDescriptor]
 		}		
 		var error:NSError? = nil
-		var fetchedObjects = moc.executeFetchRequest(fetchRequest, error:&error)
+		var fetchedObjects: [AnyObject]?
+		do {
+			fetchedObjects = try moc.executeFetchRequest(fetchRequest)
+		} catch let error1 as NSError {
+			error = error1
+			fetchedObjects = nil
+		}
 		if(error == nil) {
 			locations = fetchedObjects as? [Location]
 		} else {
@@ -188,7 +262,7 @@ class Fetcher {
 		var locationsWithArtPhotos: [Location] = []
 		if let locations = fetchAllLocations() {
 			for location in locations {
-				if let art = fetchArtWithPhotosForLocation(location.idLocation) {
+				if let _ = fetchArtWithPhotosForLocation(location.idLocation) {
 					locationsWithArtPhotos.append(location)
 				}
 			}
@@ -204,7 +278,13 @@ class Fetcher {
 		fetchRequest.predicate = NSPredicate(format:"%K == %@", "idArt", idArt) // TODO: define
 		
 		var error:NSError? = nil
-		var fetchedObjects = moc.executeFetchRequest(fetchRequest, error:&error)
+		var fetchedObjects: [AnyObject]?
+		do {
+			fetchedObjects = try moc.executeFetchRequest(fetchRequest)
+		} catch let error1 as NSError {
+			error = error1
+			fetchedObjects = nil
+		}
 		if(error == nil) {
 			photos = fetchedObjects as? [Photo]
 		} else {
@@ -218,13 +298,13 @@ class Fetcher {
 		fetchRequest.entity = NSEntityDescription.entityForName(inEntityNamed, inManagedObjectContext:moc)
 		fetchRequest.predicate = NSPredicate(format:"%K == %@", ModelEntity.objectId, objectId)
 		
-		var error:NSError? = nil
-		var fetchedObjects:[AnyObject] = moc.executeFetchRequest(fetchRequest, error:&error)!
+		let error:NSError? = nil
+		let fetchedObjects:[AnyObject] = try! moc.executeFetchRequest(fetchRequest)
 		if(error == nil) {
-			var managedObject = fetchedObjects.last as? NSManagedObject
+			let managedObject = fetchedObjects.last as? NSManagedObject
 			return managedObject
 		} else {
-			println("\(__FILE__) \(__FUNCTION__) \(error?.description)")
+			print("\(__FILE__) \(__FUNCTION__) \(error?.description)")
 		}
 		
 		return nil
@@ -238,11 +318,11 @@ class Fetcher {
 		fetchRequest.entity = NSEntityDescription.entityForName(inEntityNamed, inManagedObjectContext:moc)
 		fetchRequest.predicate = NSPredicate(format:"%K IN %@", ModelEntity.objectId, jsonIds)
 		
-		var error:NSError? = nil
-		var fetchedObjects:[AnyObject] = moc.executeFetchRequest(fetchRequest, error:&error)!
+		let error:NSError? = nil
+		let fetchedObjects:[AnyObject] = try! moc.executeFetchRequest(fetchRequest)
 		if(error == nil) {
 			for obj in fetchedObjects {
-				var id = obj.valueForKey(ModelEntity.objectId) as! String!
+				let id = obj.valueForKey(ModelEntity.objectId) as! String!
 				objectIds += [id]
 			}
 		} else {

@@ -10,25 +10,26 @@ import UIKit
 
 class MapPresentAnimatedTransistioning: NSObject, UIViewControllerAnimatedTransitioning {
 	
-	func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+	func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
 		return 1.0 // TODO:
 	}
 
 func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-		var animatingViewController:UIViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
-		var animatingView = animatingViewController.view
+		let animatingViewController:UIViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
+		let animatingView = animatingViewController.view
 		animatingView.frame = transitionContext.finalFrameForViewController(animatingViewController)
 		animatingView.layer.shadowOpacity = 0.5 // affects toolbar tranparency
 //		animatingView.layer.cornerRadius = 5
 //		animatingView.clipsToBounds = true
 
-		var containerView = transitionContext.containerView()
-		containerView.addSubview(animatingView)
+		if let containerView = transitionContext.containerView() {
+			containerView.addSubview(animatingView)
+		}
 	
-		var presentedTransform = CGAffineTransformIdentity
-		var scale = CGAffineTransformMakeScale(0.001,0.001) // TODO:
-		var rotation = CGAffineTransformMakeRotation(8 * CGFloat(M_PI)) // TODO:
-		var dismissedTransform = CGAffineTransformConcat(scale, rotation)
+		let presentedTransform = CGAffineTransformIdentity
+		let scale = CGAffineTransformMakeScale(0.001,0.001) // TODO:
+		let rotation = CGAffineTransformMakeRotation(8 * CGFloat(M_PI)) // TODO:
+		let dismissedTransform = CGAffineTransformConcat(scale, rotation)
 		
 		animatingView.transform = dismissedTransform
 		
@@ -36,7 +37,7 @@ func animateTransition(transitionContext: UIViewControllerContextTransitioning) 
 									delay: 0,
 				   usingSpringWithDamping: 300.0, // TODO define
 					initialSpringVelocity: 10.0, // TODO define
-								  options: UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.BeginFromCurrentState,
+								  options: [UIViewAnimationOptions.AllowUserInteraction, UIViewAnimationOptions.BeginFromCurrentState],
 							   animations: { () -> Void in
 									animatingView.transform = presentedTransform
 								}) { (finished) -> Void in
