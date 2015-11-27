@@ -147,6 +147,8 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
 			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
 				let sectionInset: CGFloat = 5.0
+				collectionViewFlowLayout.sectionInset.top = sectionInset
+
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
 				let itemSpacing: CGFloat = sectionInset / 2.0
@@ -158,6 +160,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxPhotoWidth) // TODO: hard constant hack for aspect ratio
 			} else {
 				let sectionInset: CGFloat = 5.0
+				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
 				let itemSpacing: CGFloat = sectionInset / 2.0

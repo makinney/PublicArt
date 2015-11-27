@@ -14,4 +14,5 @@ class LocationCollectionViewCell: UICollectionViewCell {
 	var imageFileName = String()
 		
 	@IBOutlet weak var photoBorderView: UIView!
+	
 }

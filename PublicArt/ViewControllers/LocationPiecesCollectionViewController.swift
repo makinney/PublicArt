@@ -154,9 +154,10 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
 			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
 				let sectionInset: CGFloat = 5.0
+				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = sectionInset / 2.0
+				let itemSpacing: CGFloat = 2.5
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 
 				
@@ -165,9 +166,10 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: 1.33 * maxPhotoWidth) // TODO: hard constant hack for aspect ratio
 			} else {
 				let sectionInset: CGFloat = 5.0
+				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = sectionInset / 2.0
+				let itemSpacing: CGFloat = 2.5
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				minimumPhotosPerLine = 2
 				let maxPhotoWidth = photoWidthAvailable(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)

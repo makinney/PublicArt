@@ -41,6 +41,7 @@ final class ArtistCollectionViewController: UICollectionViewController {
 		super.viewDidLoad()
 		
 		title = "Artists" // TITLE
+		collectionView?.backgroundColor = UIColor.whiteColor()
 		
 		let nibName = UINib(nibName: CellIdentifier.MediaCollectionViewCell.rawValue, bundle: nil) // TODO:
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue)
@@ -109,12 +110,13 @@ final class ArtistCollectionViewController: UICollectionViewController {
 			let masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
 			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
 			
-			collectionViewFlowLayout.minimumLineSpacing = 5
+			collectionViewFlowLayout.minimumLineSpacing = 1
 			var minimumCellsPerLine = 2 // ultimately up to flow layout
 			
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
 			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
-				let sectionInset: CGFloat = 5.0
+				let sectionInset: CGFloat = 2
+				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
 				let itemSpacing: CGFloat = sectionInset / 2.0
@@ -125,7 +127,8 @@ final class ArtistCollectionViewController: UICollectionViewController {
 				maxCellWidth = cellWidthToUse(masterViewsWidth, cellsPerLine: minimumCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
 				collectionViewFlowLayout.itemSize = CGSize(width: maxCellWidth, height: maxCellWidth / 8.0) // TODO: hard constant hack for aspect ratio
 			} else {
-				let sectionInset: CGFloat = 5.0
+				let sectionInset: CGFloat = 2
+				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
 				let itemSpacing: CGFloat = sectionInset / 2.0
@@ -161,6 +164,8 @@ final class ArtistCollectionViewController: UICollectionViewController {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.MediaCollectionViewCell.rawValue, forIndexPath: indexPath) as! MediaCollectionViewCell
 		let artist = self.artists[indexPath.row]
 		cell.title.text = artistFullName(artist)
+		cell.backgroundColor = UIColor.blackColor()
+		cell.title.textColor = UIColor.whiteColor()
 		return cell
 	}
 	
@@ -209,13 +214,15 @@ final class ArtistCollectionViewController: UICollectionViewController {
 		let indexPathsVisible = collectionView.indexPathsForVisibleItems()
 		for path in indexPathsVisible {
 					let cell = collectionView.cellForItemAtIndexPath(path) as? MediaCollectionViewCell
-					cell?.backgroundColor = UIColor.whiteColor()
-					cell?.title.textColor = UIColor.blackColor()
+					cell?.backgroundColor = UIColor.blackColor()
+					cell?.title.textColor = UIColor.whiteColor()
 		}
 		
-		let cell = collectionView.cellForItemAtIndexPath(indexPath) as? MediaCollectionViewCell
-		cell?.backgroundColor = UIColor.selectionBackgroundHighlite()
-		cell?.title.textColor = UIColor.whiteColor()
+		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
+			let cell = collectionView.cellForItemAtIndexPath(indexPath) as? MediaCollectionViewCell
+			cell?.backgroundColor = UIColor.sfOrangeColor()
+			cell?.title.textColor = UIColor.blackColor()
+		}
 	}
 	
 }

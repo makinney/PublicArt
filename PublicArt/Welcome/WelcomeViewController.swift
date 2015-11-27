@@ -41,12 +41,12 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
 //		let browseViewController: WelcomeBrowseViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewControllerWithIdentifier(WelcomeIdentifier.BrowseViewController.rawValue) as! WelcomeBrowseViewController
 		let exploreViewController: WelcomeExploreViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewControllerWithIdentifier(WelcomeIdentifier.ExploreViewController.rawValue) as! WelcomeExploreViewController
 		let discoverViewController: WelcomeDiscoverViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewControllerWithIdentifier(WelcomeIdentifier.DiscoverViewController.rawValue) as! WelcomeDiscoverViewController
-//		let contributeViewController: WelcomeContributeViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewControllerWithIdentifier(WelcomeIdentifier.ContributeViewController.rawValue) as! WelcomeContributeViewController
+		let contributeViewController: WelcomeContributeViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewControllerWithIdentifier(WelcomeIdentifier.ContributeViewController.rawValue) as! WelcomeContributeViewController
 		
 		let mainViewController: UITabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.MainViewController.rawValue) as! UITabBarController
 
 
-		let viewControllers: [UIViewController] = [publicViewController, exploreViewController, discoverViewController, mainViewController ]
+		let viewControllers: [UIViewController] = [publicViewController, discoverViewController, exploreViewController, contributeViewController, mainViewController]
 		
 		pageWidth = publicViewController.view.frame.width
 		pageCount = viewControllers.count

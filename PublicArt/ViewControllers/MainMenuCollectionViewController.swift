@@ -26,6 +26,12 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		collectionView?.reloadData()
 		self.title = "Public Art" // TITLE
 		
+		if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
+			collectionView?.backgroundColor = UIColor.whiteColor()
+		} else {
+			collectionView?.backgroundColor = UIColor.whiteColor()
+		}
+		
 		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
 			showDefaultDetailViewController()
 		}
@@ -52,17 +58,11 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 	// MARK: Flow Layout
 	func maxCellWidth(screenWidth: CGFloat, photosPerLine: Int, itemSpacing: CGFloat, flowLayout:UICollectionViewFlowLayout ) -> CGFloat {
 		let numPhotos: CGFloat = CGFloat(photosPerLine)
-		var totalInterItemSpacing: CGFloat = 0.0
-		var totalInsetSpacing: CGFloat = 0.0
-		var totalSpacing: CGFloat = 0.0
-		var spaceLeftForPhotos: CGFloat = 0.0
-		var photoWidth: CGFloat = 0.0
-		
-		totalInterItemSpacing = numPhotos * itemSpacing
-		totalInsetSpacing = flowLayout.sectionInset.left + flowLayout.sectionInset.right
-		totalSpacing = totalInterItemSpacing + totalInsetSpacing
-		spaceLeftForPhotos = screenWidth - totalSpacing
-		photoWidth = spaceLeftForPhotos / numPhotos
+		let totalInterItemSpacing: CGFloat = numPhotos * itemSpacing
+		let totalInsetSpacing: CGFloat = flowLayout.sectionInset.left + flowLayout.sectionInset.right
+		let totalSpacing: CGFloat = totalInterItemSpacing + totalInsetSpacing
+		let spaceLeftForPhotos: CGFloat = screenWidth - totalSpacing
+		let photoWidth: CGFloat = spaceLeftForPhotos / numPhotos
 		return photoWidth
 	}
 	
@@ -77,12 +77,12 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 			
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
 			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
-				collectionViewFlowLayout.minimumLineSpacing = 2
+				collectionViewFlowLayout.minimumLineSpacing = 1
 				let sectionInset: CGFloat = 1
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = sectionInset
+				let itemSpacing: CGFloat = 1
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				
 				minimumPhotosPerLine = 2
@@ -94,7 +94,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = sectionInset
+				let itemSpacing: CGFloat = 4
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				
 				minimumPhotosPerLine = 1
@@ -155,6 +155,13 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDelegate
 	
+	var artistCollectionViewController: ArtistCollectionViewController?
+	var catagoryCollectionViewController: CatagoryCollectionViewController?
+	var locationsCollectionViewController: LocationsCollectionViewController?
+	var titlesCollectionViewController: TitlesCollectionViewController?
+	var mediaCollectionViewController: MediaCollectionViewController?
+
+	
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 		let row = indexPath.row
 	
@@ -162,29 +169,40 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		switch(row) {
 		case MainMenuRow.Artists.rawValue:
 		
-			let vc: ArtistCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtistCollectionViewController.rawValue) as! ArtistCollectionViewController
-			showViewController(vc, sender: self)
+			if artistCollectionViewController == nil {
+				artistCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtistCollectionViewController.rawValue) as? ArtistCollectionViewController
+			}
+			
+			showViewController(artistCollectionViewController!, sender: self)
 
 		case MainMenuRow.Catagory.rawValue:
 		
-			if let catagoryCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.CatagoryCollectionViewController.rawValue) as? CatagoryCollectionViewController {
-				showViewController(catagoryCollectionViewController, sender: self)
+			if catagoryCollectionViewController == nil {
+				catagoryCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.CatagoryCollectionViewController.rawValue) as? CatagoryCollectionViewController
 			}
+			showViewController(catagoryCollectionViewController!, sender: self)
 			
 		case MainMenuRow.Neighborhoods.rawValue:
-			if let locationsCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.LocationCollectionViewController.rawValue) as? LocationsCollectionViewController {
-				showViewController(locationsCollectionViewController, sender: self)
+			if locationsCollectionViewController == nil {
+				locationsCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.LocationCollectionViewController.rawValue) as? LocationsCollectionViewController
 			}
-			
+			showViewController(locationsCollectionViewController!, sender: self)
+
 		case MainMenuRow.Titles.rawValue:
 		
-			let vc: TitlesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.TitlesCollectionViewController.rawValue) as! TitlesCollectionViewController
-			showViewController(vc, sender: self)
+			if titlesCollectionViewController == nil {
+			 titlesCollectionViewController  = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.TitlesCollectionViewController.rawValue) as? TitlesCollectionViewController
+			}
+		
+			showViewController(titlesCollectionViewController!, sender: self)
 
 
 		case MainMenuRow.Medium.rawValue:
-			let vc: MediaCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.MediaCollectionViewController.rawValue) as! MediaCollectionViewController
-			showViewController(vc, sender: self)
+		
+			if mediaCollectionViewController == nil {
+				mediaCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.MediaCollectionViewController.rawValue) as? MediaCollectionViewController
+			}
+			showViewController(mediaCollectionViewController!, sender: self)
 
 		
 //		case MainMenuRow.Favorites.rawValue:

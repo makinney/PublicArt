@@ -52,7 +52,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yRo-ju-b9P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="82" y="-222"/>
+            <point key="canvasLocation" x="-266" y="-222"/>
         </scene>
         <!--Welcome Public View Controller-->
         <scene sceneID="9h6-aO-vMM">
@@ -85,7 +85,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z4f-n2-6LZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="728" y="-222"/>
+            <point key="canvasLocation" x="424" y="-222"/>
         </scene>
         <!--Welcome Browse View Controller-->
         <scene sceneID="GeP-zZ-SKO">
@@ -122,7 +122,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZOM-Bd-zO2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="728" y="454"/>
+            <point key="canvasLocation" x="1108" y="488"/>
         </scene>
         <!--Welcome Explore View Controller-->
         <scene sceneID="33S-uE-dss">
@@ -136,30 +136,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Explore" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXb-yt-gpQ">
-                                <rect key="frame" x="16" y="279" width="568" height="42"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explore" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yxr-N3-W4w">
+                                <rect key="frame" x="138" y="243" width="324" height="74"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="wIo-5U-bD2"/>
+                                    <constraint firstAttribute="width" constant="324" id="UFb-gg-K0P"/>
+                                    <constraint firstAttribute="height" constant="74" id="WrJ-Zd-fhr"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Baskerville-SemiBold" family="Baskerville" pointSize="32"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="44"/>
+                                <color key="textColor" red="0.95294117649999999" green="0.17254901959999999" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="pXb-yt-gpQ" secondAttribute="centerY" id="MXN-Zd-met"/>
-                            <constraint firstAttribute="centerX" secondItem="pXb-yt-gpQ" secondAttribute="centerX" id="TRN-KB-atT"/>
-                            <constraint firstItem="pXb-yt-gpQ" firstAttribute="leading" secondItem="a7n-6a-Dut" secondAttribute="leadingMargin" id="huD-hg-3AN"/>
-                            <constraint firstItem="pXb-yt-gpQ" firstAttribute="trailing" secondItem="a7n-6a-Dut" secondAttribute="trailingMargin" id="igZ-St-Duy"/>
+                            <constraint firstItem="yxr-N3-W4w" firstAttribute="centerX" secondItem="a7n-6a-Dut" secondAttribute="centerX" id="8wx-Ip-gAF"/>
+                            <constraint firstItem="yxr-N3-W4w" firstAttribute="centerY" secondItem="a7n-6a-Dut" secondAttribute="centerY" constant="-20" id="xrD-2w-yWn"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="amK-G7-pcl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="728" y="1116"/>
+            <point key="canvasLocation" x="1794" y="-222"/>
         </scene>
         <!--Welcome Discover View Controller-->
         <scene sceneID="sCX-DT-ySj">
@@ -173,29 +172,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Discover" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycH-tk-ae6">
-                                <rect key="frame" x="16" y="279" width="568" height="42"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycH-tk-ae6">
+                                <rect key="frame" x="20" y="259" width="560" height="42"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="Vnp-ND-qdE"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Baskerville-SemiBold" family="Baskerville" pointSize="32"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="44"/>
+                                <color key="textColor" red="0.95294117649999999" green="0.17254901959999999" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ycH-tk-ae6" firstAttribute="centerY" secondItem="kPX-Og-71k" secondAttribute="centerY" id="fLj-8J-Swt"/>
                             <constraint firstItem="ycH-tk-ae6" firstAttribute="leading" secondItem="kPX-Og-71k" secondAttribute="leadingMargin" id="uVR-7V-JYt"/>
+                            <constraint firstItem="ycH-tk-ae6" firstAttribute="centerY" secondItem="kPX-Og-71k" secondAttribute="centerY" constant="-20" id="yXq-dE-vC3"/>
                             <constraint firstItem="ycH-tk-ae6" firstAttribute="trailing" secondItem="kPX-Og-71k" secondAttribute="trailingMargin" id="ynA-6g-U7Y"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wkd-vn-2do" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="728" y="1765"/>
+            <point key="canvasLocation" x="1108" y="-222"/>
         </scene>
         <!--Welcome Contribute View Controller-->
         <scene sceneID="NtI-Dh-Rpg">
@@ -209,48 +208,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Share" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTG-Yu-Ufh">
-                                <rect key="frame" x="16" y="279" width="568" height="42"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="xPI-rv-59H"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Baskerville-SemiBold" family="Baskerville" pointSize="32"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="YqX-R9-Skk">
-                                <rect key="frame" x="143" y="407" width="314" height="42"/>
+                                <rect key="frame" x="148" y="231" width="322" height="51"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="314" id="aHB-dQ-Ir9"/>
-                                    <constraint firstAttribute="height" constant="42" id="qd6-eL-9tZ"/>
+                                    <constraint firstAttribute="width" constant="322" id="aHB-dQ-Ir9"/>
+                                    <constraint firstAttribute="height" constant="51" id="qd6-eL-9tZ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Baskerville-BoldItalic" family="Baskerville" pointSize="32"/>
-                                <state key="normal" title="Start">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="44"/>
+                                <state key="normal" title="San Francisco">
+                                    <color key="titleColor" red="0.95294117649999999" green="0.17254901959999999" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="onContinueButton:" destination="et8-lR-pQe" eventType="touchUpInside" id="qCf-5X-TkG"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="otf-yg-pPf">
+                                <rect key="frame" x="143" y="290" width="327" height="51"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="327" id="7sA-Ju-Lga"/>
+                                    <constraint firstAttribute="height" constant="51" id="S1H-Di-p25"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="44"/>
+                                <state key="normal" title="Public Art">
+                                    <color key="titleColor" red="0.95294117649999999" green="0.17254901959999999" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onContinueButton:" destination="et8-lR-pQe" eventType="touchUpInside" id="fVp-Tx-aZ0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="XTG-Yu-Ufh" secondAttribute="centerY" id="6uT-kR-Zxf"/>
-                            <constraint firstAttribute="centerX" secondItem="YqX-R9-Skk" secondAttribute="centerX" id="JB4-hU-fby"/>
-                            <constraint firstItem="XTG-Yu-Ufh" firstAttribute="leading" secondItem="4qf-Qo-lZH" secondAttribute="leadingMargin" id="JKh-Fy-dH9"/>
-                            <constraint firstItem="XTG-Yu-Ufh" firstAttribute="trailing" secondItem="4qf-Qo-lZH" secondAttribute="trailingMargin" id="Vz6-WU-Cnp"/>
-                            <constraint firstAttribute="centerX" secondItem="XTG-Yu-Ufh" secondAttribute="centerX" id="gfD-ct-cVK"/>
-                            <constraint firstItem="pld-HS-Q8O" firstAttribute="top" secondItem="YqX-R9-Skk" secondAttribute="bottom" constant="151" id="zCp-9n-D3H"/>
+                            <constraint firstAttribute="centerX" secondItem="YqX-R9-Skk" secondAttribute="centerX" constant="-9" id="JB4-hU-fby"/>
+                            <constraint firstItem="otf-yg-pPf" firstAttribute="leading" secondItem="YqX-R9-Skk" secondAttribute="leading" constant="-5" id="oQA-sh-Aes"/>
+                            <constraint firstItem="otf-yg-pPf" firstAttribute="top" secondItem="YqX-R9-Skk" secondAttribute="bottom" constant="8" id="tHu-bS-nXt"/>
+                            <constraint firstItem="pld-HS-Q8O" firstAttribute="top" secondItem="YqX-R9-Skk" secondAttribute="bottom" constant="318" id="zCp-9n-D3H"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t2c-il-ngC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="728" y="2438"/>
+            <point key="canvasLocation" x="2480" y="-222"/>
         </scene>
     </scenes>
     <resources>

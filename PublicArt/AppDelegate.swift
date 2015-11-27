@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
 		self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-//		self.normalWindowRoot(animate:false)
-		self.useWelcomeAsRoot()
+		self.normalWindowRoot(animate:false)
+//		self.useWelcomeAsRoot()
 		self.window?.makeKeyAndVisible()
 
 		setAppearanceProxies()
@@ -118,7 +118,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
 		UINavigationBar.appearance().tintColor = UIColor.whiteColor()
 		UINavigationBar.appearance().barTintColor = UIColor.blackColor()
-		UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+		UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.sfOrangeColor(),
+															NSFontAttributeName: UIFont.systemFontOfSize(20)]
 		
 		UITabBar.appearance().barTintColor = UIColor.blackColor()
 		UITabBar.appearance().tintColor = UIColor.whiteColor()

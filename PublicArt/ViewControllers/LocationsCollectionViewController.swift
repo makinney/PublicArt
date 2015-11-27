@@ -45,6 +45,8 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		
 		title = "Locations" // TITLE
 		
+		collectionView?.backgroundColor = UIColor.whiteColor()
+		
 		let nibName = UINib(nibName: CellIdentifier.LocationCollectionViewCell.rawValue, bundle: nil) // TODO:
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.LocationCollectionViewCell.rawValue)
 		setupFlowLayout()
@@ -75,9 +77,9 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	}
 	
 	
-	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
+		resetVisibleCellBackgroundColors()
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -119,24 +121,26 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
 			var maxCellWidth: CGFloat = 0.0
 
-			collectionViewFlowLayout.minimumLineSpacing = 5
+			collectionViewFlowLayout.minimumLineSpacing = 2
 			var minimumNumberCellsPerLine = 2 // ultimately up to flow layout
 			
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
 			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
-				let sectionInset: CGFloat = 5.0
+				let sectionInset: CGFloat = 2.0
+				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = sectionInset / 2.0
+				let itemSpacing: CGFloat = 2
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				minimumNumberCellsPerLine = 3
 				maxCellWidth = cellWidthAvailable(masterViewsWidth, cellsPerLine: minimumNumberCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
 				collectionViewFlowLayout.itemSize = CGSize(width: maxCellWidth, height: maxCellWidth) 
 			} else {
-				let sectionInset: CGFloat = 5.0
+				let sectionInset: CGFloat = 2.0
+				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = sectionInset / 2.0
+				let itemSpacing: CGFloat = 2
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				minimumNumberCellsPerLine = 3
 				maxCellWidth = cellWidthAvailable(masterViewsWidth, cellsPerLine: minimumNumberCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
@@ -161,7 +165,19 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		return cell
 	}
 	
-	
+	func resetVisibleCellBackgroundColors() {
+		if let indexPathsVisible = self.collectionView?.indexPathsForVisibleItems() ,
+			let collectionView = collectionView {
+				for path in indexPathsVisible { // hack fix for bug where deselected cells still look selected, sometimes
+					let location = fetchResultsController.objectAtIndexPath(path) as! Location
+					if location.artwork.count > 0 || location.name == "All"{
+						let cell = collectionView.cellForItemAtIndexPath(path) as? LocationCollectionViewCell
+						cell?.backgroundColor = UIColor.blackColor()
+						cell?.title.textColor = UIColor.whiteColor()
+					}
+				}
+		}
+	}
 	
     // MARK: UICollectionViewDataSource
 	
@@ -172,8 +188,8 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		cell.title.text = location.name
 
 		if location.artwork.count > 0 || location.name == "All" {
-			cell.backgroundColor = UIColor.whiteColor()
-			cell.title.textColor = UIColor.blackColor()
+			cell.backgroundColor = UIColor.blackColor()
+			cell.title.textColor = UIColor.whiteColor()
 		} else  {
 			cell.backgroundColor = UIColor.lightGrayColor()
 			cell.title.textColor =  UIColor.grayColor()
@@ -242,7 +258,6 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	}
 
 	
-	
 	override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
 		let location = fetchResultsController.objectAtIndexPath(indexPath) as! Location
 		if location.artwork.count > 0 || location.name == "All" {
@@ -259,19 +274,20 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		return false
     }
 	
-	override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-		let indexPathsVisible = collectionView.indexPathsForVisibleItems()
-		for path in indexPathsVisible { // hack fix for bug where deselected cells still look selected, sometimes
-				let location = fetchResultsController.objectAtIndexPath(path) as! Location
-				if location.artwork.count > 0 || location.name == "All"{
-					let cell = collectionView.cellForItemAtIndexPath(path) as? LocationCollectionViewCell
-					cell?.backgroundColor = UIColor.whiteColor()
-					cell?.title.textColor = UIColor.blackColor()
-				}
-		}
 	
+	override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+	
+		resetVisibleCellBackgroundColors()
+		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
+			let cell = collectionView.cellForItemAtIndexPath(indexPath) as? LocationCollectionViewCell
+			cell?.backgroundColor = UIColor.sfOrangeColor()
+			cell?.title.textColor = UIColor.blackColor()
+		}
+	}
+	
+	override func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
 		let cell = collectionView.cellForItemAtIndexPath(indexPath) as? LocationCollectionViewCell
-		cell?.backgroundColor = UIColor.selectionBackgroundHighlite()
+		cell?.backgroundColor = UIColor.blackColor()
 		cell?.title.textColor = UIColor.whiteColor()
 	}
 	
