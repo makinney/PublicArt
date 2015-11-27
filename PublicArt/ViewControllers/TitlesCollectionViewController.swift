@@ -17,6 +17,7 @@ final class TitlesCollectionViewController: UICollectionViewController {
 	private var maxCellWidth: CGFloat = 0.0
 	private var error:NSError?
 	private let moc: NSManagedObjectContext?
+	private var selectedArt: Art?
 	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
 	
 	override init(collectionViewLayout: UICollectionViewLayout) {
@@ -55,6 +56,15 @@ final class TitlesCollectionViewController: UICollectionViewController {
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
+		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular,
+			let selectedArt = selectedArt {
+			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController {
+				let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as!  SingleArtViewController
+				singleArtViewController.update(selectedArt, artBackgroundColor: nil)
+				navigationController.setViewControllers([singleArtViewController], animated: false)
+				showDetailViewController(navigationController, sender: self)
+			}
+		}
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -162,6 +172,7 @@ final class TitlesCollectionViewController: UICollectionViewController {
 	
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
+			selectedArt = art
 			if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
 				if	let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as?  SingleArtViewController {
 						singleArtViewController.update(art, artBackgroundColor: nil)

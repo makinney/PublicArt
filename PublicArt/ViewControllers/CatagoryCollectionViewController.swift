@@ -13,6 +13,8 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 	private var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
 	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
 	private var categoryMenuItem = CatagoryMenuItem()
+	private var selectedMenuItem: (title: String, tag: String)?
+
 	
 	// MARK: Life Cycle
 
@@ -26,6 +28,18 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 		
 		title = "Catagories"
     }
+	
+	override func viewWillAppear(animated: Bool) {
+		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular,
+			let selectedMenuItem = selectedMenuItem {
+			let filter = ArtPiecesCollectionViewDataFilter(key: "tags", value: selectedMenuItem.tag, title: selectedMenuItem.title)
+			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
+				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
+					artPiecesCollectionViewController.fetchFilter(filter)
+					showDetailViewController(navigationController, sender: self)
+			}
+		}
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -110,6 +124,7 @@ final class CatagoryCollectionViewController: UICollectionViewController {
         return cell
     }
 	
+	
 	func menuItem(row: Int) -> (title: String, tag: String) {
 		switch(row) {
 		case CatagoryMenuOrder.Monuments.rawValue:
@@ -134,20 +149,17 @@ final class CatagoryCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDelegate
 	
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-	
+		selectedMenuItem = menuItem(indexPath.row)
+		let filter = ArtPiecesCollectionViewDataFilter(key: "tags", value: selectedMenuItem!.tag, title: selectedMenuItem!.title)
 		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
 			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
 			if artPiecesCollectionViewController != nil {
-				let (title, tag) = menuItem(indexPath.row)
-				let filter = ArtPiecesCollectionViewDataFilter(key: "tags", value: tag, title: title)
 				artPiecesCollectionViewController!.fetchFilter(filter)
 				showDetailViewController(artPiecesCollectionViewController!, sender: self)
 			}
 		} else {
 			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
 				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
-					let (title, tag) = menuItem(indexPath.row)
-					let filter = ArtPiecesCollectionViewDataFilter(key: "tags", value: tag, title: title)
 					artPiecesCollectionViewController.fetchFilter(filter)
 					showDetailViewController(navigationController, sender: self)
 			}

@@ -20,6 +20,7 @@ final class ArtistCollectionViewController: UICollectionViewController {
 	private var error:NSError?
 	private let moc: NSManagedObjectContext?
 	private var artists = [Artist]()
+	private var selectedArtist: Artist?
 	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
 	
 	override init(collectionViewLayout: UICollectionViewLayout) {
@@ -76,6 +77,16 @@ final class ArtistCollectionViewController: UICollectionViewController {
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
+		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular,
+			let selectedArtist = selectedArtist {
+				if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
+					let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
+						let artistName = artistFullName(selectedArtist)
+						let filter = ArtPiecesCollectionViewDataFilter(key: "idArtist", value: selectedArtist.idArtist, title: artistName)
+						artPiecesCollectionViewController.fetchFilter(filter)
+						showDetailViewController(navigationController, sender: self)
+				}
+		}
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -156,7 +167,9 @@ final class ArtistCollectionViewController: UICollectionViewController {
 		return cellWidth
 	}
 	
+	func showArtistWhenRegularSize(artist: Artist) {
 	
+	}
 	
 	// MARK: UICollectionViewDataSource
 	
@@ -180,28 +193,28 @@ final class ArtistCollectionViewController: UICollectionViewController {
 	// MARK: UICollectionViewDelegate
 	
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+	
+		let artist = self.artists[indexPath.row]
+		selectedArtist = artist
+		let artistName = artistFullName(artist)
+		let filter = ArtPiecesCollectionViewDataFilter(key: "idArtist", value: artist.idArtist, title: artistName)
+	
 		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
 			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
 			if artPiecesCollectionViewController != nil {
-				let artist = self.artists[indexPath.row]
-				let artistName = artistFullName(artist)
-				let filter = ArtPiecesCollectionViewDataFilter(key: "idArtist", value: artist.idArtist, title: artistName)
 				artPiecesCollectionViewController!.fetchFilter(filter)
 				showDetailViewController(artPiecesCollectionViewController!, sender: self)
 			}
 		} else {
-	
 			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
 				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
-					let artist = self.artists[indexPath.row]
-					let artistName = artistFullName(artist)
-					let filter = ArtPiecesCollectionViewDataFilter(key: "idArtist", value: artist.idArtist, title: artistName)
 					artPiecesCollectionViewController.fetchFilter(filter)
 					showDetailViewController(navigationController, sender: self)
 			}
 		}
 	}
 	
+
 	override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
 		return true
 	}

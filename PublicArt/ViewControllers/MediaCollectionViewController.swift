@@ -19,6 +19,7 @@ final class MediaCollectionViewController: UICollectionViewController {
 	private var error:NSError?
 	private let moc: NSManagedObjectContext?
 	private var media = [String]()
+	private var selectedMediumName: String?
 	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
 	
 	override init(collectionViewLayout: UICollectionViewLayout) {
@@ -70,6 +71,15 @@ final class MediaCollectionViewController: UICollectionViewController {
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
+		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular,
+			let selectedMediumName = selectedMediumName {
+				let filter = ArtPiecesCollectionViewDataFilter(key: "medium", value: selectedMediumName, title: selectedMediumName)
+				if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
+					let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
+						artPiecesCollectionViewController.fetchFilter(filter)
+						showDetailViewController(navigationController, sender: self)
+				}
+		}
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -174,20 +184,18 @@ final class MediaCollectionViewController: UICollectionViewController {
 	// MARK: UICollectionViewDelegate
 	
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+		selectedMediumName = media[indexPath.row] as String
+		let filter = ArtPiecesCollectionViewDataFilter(key: "medium", value: selectedMediumName!, title: selectedMediumName!)
+	
 		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
 			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
 			if artPiecesCollectionViewController != nil {
-				let mediumName = media[indexPath.row] as String
-				let filter = ArtPiecesCollectionViewDataFilter(key: "medium", value: mediumName, title: mediumName)
 				artPiecesCollectionViewController!.fetchFilter(filter)
 				showDetailViewController(artPiecesCollectionViewController!, sender: self)
 			}
 		} else {
-	
 			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
 				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
-					let mediumName = media[indexPath.row] as String
-					let filter = ArtPiecesCollectionViewDataFilter(key: "medium", value: mediumName, title: mediumName)
 					artPiecesCollectionViewController.fetchFilter(filter)
 					showDetailViewController(navigationController, sender: self)
 			}

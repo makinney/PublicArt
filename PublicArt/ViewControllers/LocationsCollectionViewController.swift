@@ -18,6 +18,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 //	private var detailViewController: UIViewController?
 	private var collapseDetailViewController = true
 	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
+	private var selectedLocation: Location?
 	
 	private var error:NSError?
 	private let moc: NSManagedObjectContext?
@@ -79,7 +80,10 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-		resetVisibleCellBackgroundColors()
+		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular,
+			let selectedLocation = selectedLocation {
+				showArtPiecesFromNavController(selectedLocation)
+		}
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -223,6 +227,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 		if let location = fetchResultsController.objectAtIndexPath(indexPath) as? Location {
+			selectedLocation = location
 			if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
 				showArtPiecesWithoutNavController(location)
 			} else {
