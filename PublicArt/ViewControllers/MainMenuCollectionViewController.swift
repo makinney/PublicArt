@@ -44,7 +44,6 @@ final class MainMenuCollectionViewController: UICollectionViewController {
         super.didReceiveMemoryWarning()
         print("\(__FILE__) \(__FUNCTION__)")
     }
-
 	
     // MARK: - Navigation
 

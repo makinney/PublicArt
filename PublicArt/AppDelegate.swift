@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		self.window?.makeKeyAndVisible()
 
 		setAppearanceProxies()
+
+		UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
 		//
 		Parse.enableLocalDatastore()
 		ParsePhoto.registerSubclass()
