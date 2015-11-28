@@ -21,12 +21,13 @@
                                 <animations/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6NR-3r-tH5">
-                                <rect key="frame" x="8" y="204" width="289" height="44"/>
+                                <rect key="frame" x="0.0" y="226" width="305" height="22"/>
                                 <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Z5H-rh-thU"/>
+                                    <constraint firstAttribute="height" constant="22" id="Z5H-rh-thU"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -37,12 +38,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="6NR-3r-tH5" secondAttribute="bottom" id="Ghx-XP-SeL"/>
-                            <constraint firstItem="6NR-3r-tH5" firstAttribute="leading" secondItem="kW4-X4-S5Q" secondAttribute="leading" constant="8" id="SpQ-la-fZ8"/>
+                            <constraint firstItem="6NR-3r-tH5" firstAttribute="leading" secondItem="kW4-X4-S5Q" secondAttribute="leading" id="SpQ-la-fZ8"/>
                             <constraint firstAttribute="bottom" secondItem="CdF-f1-Vcd" secondAttribute="bottom" id="ae6-rX-hgc"/>
                             <constraint firstAttribute="trailing" secondItem="CdF-f1-Vcd" secondAttribute="trailing" id="eHz-hG-91n"/>
                             <constraint firstItem="CdF-f1-Vcd" firstAttribute="leading" secondItem="kW4-X4-S5Q" secondAttribute="leading" constant="-5" id="fjQ-dn-Xaf"/>
                             <constraint firstItem="CdF-f1-Vcd" firstAttribute="top" secondItem="kW4-X4-S5Q" secondAttribute="top" id="ifz-9w-ocS"/>
-                            <constraint firstAttribute="trailing" secondItem="6NR-3r-tH5" secondAttribute="trailing" constant="8" id="jrP-J7-dKu"/>
+                            <constraint firstAttribute="trailing" secondItem="6NR-3r-tH5" secondAttribute="trailing" id="jrP-J7-dKu"/>
                         </constraints>
                     </view>
                 </subviews>

@@ -14,15 +14,23 @@ import Bolts
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+	let didShowLandingScreenKey = "DidShowWelcomeScreenKey"
 	var window: UIWindow?
 	var artDataManager: ArtDataManager?
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
 		self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-		self.normalWindowRoot(animate:false)
-//		self.useWelcomeAsRoot()
+		
+	//	self.useWelcomeAsRoot()
+
+		if NSUserDefaults.standardUserDefaults().boolForKey(didShowLandingScreenKey) {
+			self.normalWindowRoot(animate:false)
+		} else {
+			NSUserDefaults.standardUserDefaults().setBool(true, forKey: didShowLandingScreenKey)
+			NSUserDefaults.standardUserDefaults().synchronize()
+			self.useWelcomeAsRoot()
+		}
 		self.window?.makeKeyAndVisible()
 
 		setAppearanceProxies()
@@ -112,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func applicationWillTerminate(application: UIApplication) {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 	}
-
+	
 	// MARK: Appearance
 	func setAppearanceProxies() {
 	//	UIBarButtonItem.appearance().tintColor = UIColor.blackColor()
@@ -130,7 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		UIToolbar.appearance().barTintColor = UIColor.blackColor()
 		UIToolbar.appearance().tintColor = UIColor.whiteColor()
 
-		UIToolbar.appearance().translucent = true
+	//	UIToolbar.appearance().translucent = true
 	//	UIToolbar.appearance().setBackgroundImage(toolbarBackgroundImage(), forToolbarPosition: .Any, barMetrics: .Default)
 	}
 	

@@ -25,7 +25,8 @@ final class MapRouting {
 	
 	
 	private func googleMapsAvailable() -> Bool {
-		return UIApplication.sharedApplication().canOpenURL(NSURL(string: "comgooglemaps://")!)
+		let can = UIApplication.sharedApplication().canOpenURL(NSURL(string: "comgooglemaps://")!)
+		return can
 	}
 	
 	private func useAppleMaps() {
@@ -59,9 +60,7 @@ final class MapRouting {
 			let routeWithGoogleMapsAction = UIAlertAction(title: "Google Maps", style: .Default) {[weak self] (alert) -> Void in
 			self?.useGoogleMaps()
 		}
-		
-		appsSheet.addAction(routeWithGoogleMapsAction)
-		
+			appsSheet.addAction(routeWithGoogleMapsAction)
 		}
 		
 		viewController.presentViewController(appsSheet, animated: true) { () -> Void in

@@ -171,7 +171,7 @@
         <scene sceneID="hdP-Ro-F5j">
             <objects>
                 <collectionViewController storyboardIdentifier="DiscoverCollectionViewControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="g7n-ws-DDI" customClass="MainMenuCollectionViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="DDV-sK-8N4">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="DDV-sK-8N4">
                         <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>

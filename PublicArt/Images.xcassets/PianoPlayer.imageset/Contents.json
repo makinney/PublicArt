@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "PianoPlayer.jpg"
+      "filename" : "PianoPlayerClose-2.jpg",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "PianoPlayer-1.jpg"
+      "filename" : "PianoPlayerClose-1.jpg",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "PianoPlayer-2.jpg"
+      "filename" : "PianoPlayerClose.jpg",
+      "scale" : "3x"
     }
   ],
   "info" : {

@@ -44,7 +44,7 @@ final class ArtistCollectionViewController: UICollectionViewController {
 		title = "Artists" // TITLE
 		collectionView?.backgroundColor = UIColor.whiteColor()
 		
-		let nibName = UINib(nibName: CellIdentifier.MediaCollectionViewCell.rawValue, bundle: nil) // TODO:
+		let nibName = UINib(nibName: CellIdentifier.MediaCollectionViewCell.rawValue, bundle: nil) 
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue)
 		setupArtistsFlowLayout()
 		

@@ -126,6 +126,7 @@
 		1FD0A7D11B50732B0086FDB2 /* ParseRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD0A7D01B50732B0086FDB2 /* ParseRefresh.swift */; };
 		1FFC1BF41B5ACE7300384394 /* TitlesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC1BF31B5ACE7300384394 /* TitlesCollectionViewController.swift */; };
 		1FFC1BF61B5ADD9700384394 /* ArtistCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC1BF51B5ADD9700384394 /* ArtistCollectionViewController.swift */; };
+		1FFE49B71C09672100AED9A4 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE49B61C09672100AED9A4 /* ImageExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -276,6 +277,7 @@
 		1FD0A7D01B50732B0086FDB2 /* ParseRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseRefresh.swift; path = Parse/ParseRefresh.swift; sourceTree = "<group>"; };
 		1FFC1BF31B5ACE7300384394 /* TitlesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TitlesCollectionViewController.swift; path = ViewControllers/TitlesCollectionViewController.swift; sourceTree = "<group>"; };
 		1FFC1BF51B5ADD9700384394 /* ArtistCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtistCollectionViewController.swift; path = ViewControllers/ArtistCollectionViewController.swift; sourceTree = "<group>"; };
+		1FFE49B61C09672100AED9A4 /* ImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageExtension.swift; path = Extensions/ImageExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -530,6 +532,7 @@
 				1FC6F8271B3A52D100810258 /* ThumbExtension.swift */,
 				1FC6F8351B3C797100810258 /* LocPhotoExtension.swift */,
 				1F09BB7B1B56BA4400191100 /* ColorExtension.swift */,
+				1FFE49B61C09672100AED9A4 /* ImageExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -797,6 +800,7 @@
 				1F060E261BC0BC2E0092F9AF /* MoreTableViewController.swift in Sources */,
 				1F03195D1B603258000778E4 /* Art.swift in Sources */,
 				1F09BB591B2F79D400E4807C /* CatagoryCollectionViewController.swift in Sources */,
+				1FFE49B71C09672100AED9A4 /* ImageExtension.swift in Sources */,
 				1F0319571B603257000778E4 /* Location.swift in Sources */,
 				1F4C73451B3E6E02001ACEE0 /* SingleArtViewController.swift in Sources */,
 				1FC6F82C1B3B7FCA00810258 /* ParseWebService.swift in Sources */,

@@ -53,7 +53,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		navigationController?.interactivePopGestureRecognizer?.enabled = false
 		navigationController?.delegate = self
 	
-		let nibName = UINib(nibName: CellIdentifier.ArtworkCollectionViewCell.rawValue, bundle: nil) // TODO:
+		let nibName = UINib(nibName: CellIdentifier.ArtworkCollectionViewCell.rawValue, bundle: nil)
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.ArtworkCollectionViewCell.rawValue)
 		setupArtPiecesPhotosFlowLayout()
 		
@@ -109,7 +109,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	}
 	
 	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning() // TODO: FIXME this happens when rotating and trying different images
+		super.didReceiveMemoryWarning()
 		print("\(__FILE__) did receive memory warning")
 
 	}

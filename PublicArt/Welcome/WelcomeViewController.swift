@@ -28,6 +28,8 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
 		super.viewDidAppear(animated)
 		self.scrollView.delegate = self
 		setupChildren()
+		pageControl.numberOfPages = pageCount
+		pageControl.currentPageIndicatorTintColor = UIColor.sfOrangeColor()
 		view.alpha = 1.0
 	}
 	
@@ -47,11 +49,11 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
 
 
 		let viewControllers: [UIViewController] = [publicViewController, discoverViewController, exploreViewController, contributeViewController, mainViewController]
+		pageCount = viewControllers.count
 		
 		pageWidth = publicViewController.view.frame.width
-		pageCount = viewControllers.count
 		scrollView!.contentSize = CGSize(width: (CGFloat(pageCount) * pageWidth), height: view.frame.height)
-
+		
 		var idx:Int = 0
 		
 		for viewController in viewControllers {

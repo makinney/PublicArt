@@ -44,7 +44,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		title = "Locations" // TITLE
+		title = "Location" // TITLE
 		
 		collectionView?.backgroundColor = UIColor.whiteColor()
 		
@@ -189,7 +189,11 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.LocationCollectionViewCell.rawValue, forIndexPath: indexPath) as! LocationCollectionViewCell
 		let location = fetchResultsController.objectAtIndexPath(indexPath) as! Location
 	
-		cell.title.text = location.name
+		if location.name != "All" {
+			cell.title.text = location.name
+		} else {
+			cell.title.text = "San Francisco"
+		}
 
 		if location.artwork.count > 0 || location.name == "All" {
 			cell.backgroundColor = UIColor.blackColor()

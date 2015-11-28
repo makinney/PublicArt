@@ -190,7 +190,7 @@ class ArtDataManager : NSObject {
 	
 	private func checkForRequiredNotifications() {
 //		if let newPhotos = newPhotos where newPhotos.count > 0 {
-//			var timeInterval: NSTimeInterval = 1 // TODO: define
+//			var timeInterval: NSTimeInterval = 1 // : define
 //			var timer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target:self, selector: "postNewPhotosNotification", userInfo:nil, repeats:false)
 //		}
 	}

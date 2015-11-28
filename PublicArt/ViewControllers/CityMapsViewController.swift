@@ -75,7 +75,7 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 		mapView.mapType = getSavedMapType()
 		prepareToolbarItems()
 		
-		self.title = "Explore"
+		self.title = "San Francisco"
 		
 		fetchResultsController.delegate = self
 		do {

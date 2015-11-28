@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "FlorenceFavoriteSquare.jpg"
+      "filename" : "IMG_5549-2.jpg",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "FlorenceFavoriteSquare-1.jpg"
+      "filename" : "IMG_5549-1.jpg",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "FlorenceFavoriteSquare-2.jpg"
+      "filename" : "IMG_5549.jpg",
+      "scale" : "3x"
     }
   ],
   "info" : {
