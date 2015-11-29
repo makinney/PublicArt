@@ -16,7 +16,7 @@ enum CatagoryType {
 	case Murals
 	case Plagues
 	case Sculpture
-	case Site
+	case Steel
 	case Statues
 	case StreetArt
 }
@@ -26,7 +26,7 @@ enum CatagoryMenuOrder: Int {
 	case Murals
 	case Plagues
 	case Sculpture
-	case Site
+	case Steel
 	case Statues
 //	case StreetArt
 	case CountRows = 6
@@ -50,9 +50,9 @@ struct CatagoryMenuItem {
 		case .Sculpture:
 			title = "Sculpture"
 			tag = "Sculpture"
-		case .Site:
-			title = "Site Specfic"
-			tag = "Site"
+		case .Steel:
+			title = "Steel"
+			tag = "Steel"
 		case .Statues:
 			title = "Statues"
 			tag = "Statue"

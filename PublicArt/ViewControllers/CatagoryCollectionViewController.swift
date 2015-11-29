@@ -135,8 +135,8 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 			return (title: categoryMenuItem.value(.Plagues).title, tag: categoryMenuItem.value(.Plagues).tag)
 		case CatagoryMenuOrder.Sculpture.rawValue:
 			return (title: categoryMenuItem.value(.Sculpture).title, tag: categoryMenuItem.value(.Sculpture).tag)
-		case CatagoryMenuOrder.Site.rawValue:
-			return (title: categoryMenuItem.value(.Site).title, tag: categoryMenuItem.value(.Site).tag)
+		case CatagoryMenuOrder.Steel.rawValue:
+			return (title: categoryMenuItem.value(.Steel).title, tag: categoryMenuItem.value(.Steel).tag)
 		case CatagoryMenuOrder.Statues.rawValue:
 			return (title: categoryMenuItem.value(.Statues).title, tag: categoryMenuItem.value(.Statues).tag)
 
