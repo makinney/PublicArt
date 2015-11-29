@@ -21,12 +21,15 @@ class ArtDataCreator {
 	
 	// MARK: create
 	
-	func createOrUpdateAppCommon(parseAppCommon: ParseAppCommon) ->(created: [AppCommon], updated: [AppCommon]) {
+	func createOrUpdateAppCommon(parseAppCommon: ParseAppCommon) -> (created: [AppCommon], updated: [AppCommon])? {
 		var created = [AppCommon]()
 		var updated = [AppCommon]()
 		
-		if let objectId = parseAppCommon.objectId,
-			let appCommon = self.fetcher.fetchManagedObjWithId(objectId, inEntityNamed: ModelEntity.appCommon, moc: moc) as? AppCommon {
+		guard let objectId = parseAppCommon.objectId else {
+			return (nil)
+		}
+		
+		if let appCommon = self.fetcher.fetchManagedObjWithId(objectId, inEntityNamed: ModelEntity.appCommon, moc: moc) as? AppCommon {
 				AppCommon.update(appCommon, parseAppCommon: parseAppCommon)
 				updated.append(appCommon)
 		} else {
@@ -48,7 +51,8 @@ class ArtDataCreator {
 					Art.update(art, parseArt: parseArt)
 					updated.append(art)
 			} else {
-				if let art = Art.create(parseArt, moc: moc) {
+				if let _ = parseArt.objectId,
+					let art = Art.create(parseArt, moc: moc) {
 					created.append(art)
 				}
 			}
@@ -66,7 +70,8 @@ class ArtDataCreator {
 					Artist.update(artist, parseArtist: parseArtist)
 					updated.append(artist)
 			} else {
-				if let artist = Artist.create(parseArtist, moc: moc) {
+				if let _ = parseArtist.objectId,
+					let artist = Artist.create(parseArtist, moc: moc) {
 					created.append(artist)
 				}
 			}
@@ -85,7 +90,8 @@ class ArtDataCreator {
 				Photo.update(photo, parsePhoto: parsePhoto )
 					updated.append(photo)
 			} else {
-				if let photo = Photo.create(parsePhoto, moc: moc) {
+				if let _ = parsePhoto.objectId,
+					let photo = Photo.create(parsePhoto, moc: moc) {
 					created.append(photo)
 				}
 			}
@@ -104,7 +110,8 @@ class ArtDataCreator {
 					Thumb.update(thumb, parseThumb: parseThumb )
 					updated.append(thumb)
 			} else {
-				if let thumb = Thumb.create(parseThumb, moc: moc) {
+				if let _ = parseThumb.objectId,
+					let thumb = Thumb.create(parseThumb, moc: moc) {
 					created.append(thumb)
 				}
 			}
@@ -123,7 +130,8 @@ class ArtDataCreator {
 					Location.update(location, parseLocation: parseLocation)
 					updated.append(location)
 			} else {
-				if let location = Location.create(parseLocation, moc: moc) {
+				if let _ = parseLocation.objectId,
+					let location = Location.create(parseLocation, moc: moc) {
 					created.append(location)
 				}
 			}
@@ -141,7 +149,8 @@ class ArtDataCreator {
 					LocPhoto.update(locPhoto, parseLocPhoto: parseLocPhoto )
 					updated.append(locPhoto)
 			} else {
-				if let locPhoto = LocPhoto.create(parseLocPhoto, moc: moc) {
+				if let _ = parseLocPhoto.objectId,
+					let locPhoto = LocPhoto.create(parseLocPhoto, moc: moc) {
 					created.append(locPhoto)
 				}
 			}

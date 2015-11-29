@@ -686,13 +686,10 @@
                                                             <segue destination="oad-Te-es5" kind="presentation" identifier="ButtonToMapID" id="ICm-2k-qAt"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Zoom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Cm-oA-eUa">
-                                                        <rect key="frame" x="225" y="287" width="150" height="29"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Touch to Zoom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Cm-oA-eUa">
+                                                        <rect key="frame" x="21" y="287" width="558" height="29"/>
                                                         <animations/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="150" id="0N0-0z-4y2"/>
-                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -717,9 +714,10 @@
                                                     <constraint firstItem="w3O-IE-Dub" firstAttribute="top" secondItem="poq-xo-sc2" secondAttribute="bottom" constant="8" id="W67-em-bq4"/>
                                                     <constraint firstItem="VDp-Vs-vO4" firstAttribute="leading" secondItem="w3O-IE-Dub" secondAttribute="leading" id="Zds-ag-QC1"/>
                                                     <constraint firstItem="Mbz-b0-SPa" firstAttribute="centerX" secondItem="poq-xo-sc2" secondAttribute="centerX" constant="8.5" id="ZeH-7i-p0I"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="3Cm-oA-eUa" secondAttribute="trailing" constant="13" id="aXQ-EJ-yss"/>
+                                                    <constraint firstItem="3Cm-oA-eUa" firstAttribute="leading" secondItem="jWh-d9-GTp" secondAttribute="leadingMargin" constant="13" id="bhE-Qh-TYy"/>
                                                     <constraint firstItem="poq-xo-sc2" firstAttribute="leading" secondItem="jWh-d9-GTp" secondAttribute="leading" id="crN-0p-9e1"/>
                                                     <constraint firstAttribute="trailing" secondItem="VDp-Vs-vO4" secondAttribute="trailing" constant="16" id="dg4-0n-RFl"/>
-                                                    <constraint firstItem="3Cm-oA-eUa" firstAttribute="centerX" secondItem="poq-xo-sc2" secondAttribute="centerX" id="fIV-hU-jSj"/>
                                                     <constraint firstItem="poq-xo-sc2" firstAttribute="top" secondItem="jWh-d9-GTp" secondAttribute="top" constant="2" id="g5h-Rw-Wyn"/>
                                                     <constraint firstItem="sdV-Pl-et5" firstAttribute="top" secondItem="VDp-Vs-vO4" secondAttribute="bottom" constant="8" id="jiF-bO-VTD"/>
                                                     <constraint firstItem="VDp-Vs-vO4" firstAttribute="leading" secondItem="sdV-Pl-et5" secondAttribute="leading" id="vML-df-fLf"/>

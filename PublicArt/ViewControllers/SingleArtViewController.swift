@@ -308,10 +308,12 @@ final class SingleArtViewController: UIViewController {
 	}
 	
 	func showTouchPrompt() {
-		artImageView.addSubview(touchImagePrompt)
-		UIView.animateWithDuration(2.0, animations: { [weak self] () -> Void in
-			self?.touchImagePrompt?.alpha = 0.75
+		if !photoTouchedAtLeastOnce {
+			artImageView.addSubview(touchImagePrompt)
+			UIView.animateWithDuration(2.0, animations: { [weak self] () -> Void in
+				self?.touchImagePrompt?.alpha = 0.75
 			})
+		}
 	}
 	
 	private func hideTouchPrompt() {

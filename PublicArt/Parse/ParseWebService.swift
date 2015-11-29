@@ -11,7 +11,7 @@ import Parse
 
 class ParseWebService {
 
-	class func getAppCommonSince(date: NSDate, complete:(parseAppCommon: ParseAppCommon) -> Void) -> Void {
+	class func getAppCommonSince(date: NSDate, complete:(parseAppCommon: ParseAppCommon?) -> Void) -> Void {
 		let query = PFQuery(className: ParseAppCommon.parseClassName())
 		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
 		query.limit = 1 //
@@ -21,7 +21,7 @@ class ParseWebService {
 				if let parseAppCommon: ParseAppCommon = objects?.last as? ParseAppCommon {
 					complete(parseAppCommon: parseAppCommon)
 				} else {
-					complete(parseAppCommon: ParseAppCommon())
+					complete(parseAppCommon: nil)
 				}
 			} else {
 				print("\(__FILE__) \(__FUNCTION__) \(error?.description)")
@@ -31,7 +31,7 @@ class ParseWebService {
 	}
 	
 	
-	class func getAllArtSince(date: NSDate, complete:(parseArt: [ParseArt]) -> Void) -> Void {
+	class func getAllArtSince(date: NSDate, complete:(parseArt: [ParseArt]?) -> Void) -> Void {
 		let query = PFQuery(className: ParseArt.parseClassName())
 		query.whereKey("hasThumb", equalTo: NSNumber(bool: true))
 		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
@@ -41,7 +41,7 @@ class ParseWebService {
 				if let parseArt: [ParseArt] = objects as? [ParseArt] {
 					complete(parseArt: parseArt)
 				} else {
-					complete(parseArt: [ParseArt]())
+					complete(parseArt: nil)
 				}
 			} else {
 				print("\(__FILE__) \(__FUNCTION__) \(error?.description)")
@@ -50,7 +50,7 @@ class ParseWebService {
 		}
 	}
 	
-	class func getAllPhotosSince(date: NSDate, complete:(parsePhotos: [ParsePhoto]) -> Void) -> Void {
+	class func getAllPhotosSince(date: NSDate, complete:(parsePhotos: [ParsePhoto]?) -> Void) -> Void {
 		let query = PFQuery(className: ParsePhoto.parseClassName())
 		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
 		query.limit = 999 // max per parse
@@ -59,7 +59,7 @@ class ParseWebService {
 				if let parsePhotos: [ParsePhoto] = objects as? [ParsePhoto] {
 					complete(parsePhotos: parsePhotos)
 				} else {
-					complete(parsePhotos: [ParsePhoto]())
+					complete(parsePhotos: nil)
 				}
 			} else {
 				print("\(__FILE__) \(__FUNCTION__) \(error?.description)")
@@ -68,7 +68,7 @@ class ParseWebService {
 		}
 	}
 	
-	class func getAllThumbsSince(date: NSDate, complete:(parseThumbs: [ParseThumb]) -> Void) -> Void {
+	class func getAllThumbsSince(date: NSDate, complete:(parseThumbs: [ParseThumb]?) -> Void) -> Void {
 		let query = PFQuery(className: ParseThumb.parseClassName())
 		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
 		query.limit = 999 // max per parse
@@ -77,7 +77,7 @@ class ParseWebService {
 				if let parseThumbs: [ParseThumb] = objects as? [ParseThumb] {
 					complete(parseThumbs: parseThumbs)
 				} else {
-					complete(parseThumbs: [ParseThumb]())
+					complete(parseThumbs: nil)
 				}
 			} else {
 				print("\(__FILE__) \(__FUNCTION__) \(error?.description)")
@@ -87,7 +87,7 @@ class ParseWebService {
 	}
 	
 	
-	class func getAllLocationsSince(date: NSDate, complete:(parseLocations: [ParseLocation]) -> Void) -> Void {
+	class func getAllLocationsSince(date: NSDate, complete:(parseLocations: [ParseLocation]?) -> Void) -> Void {
 		let query = PFQuery(className: ParseLocation.parseClassName())
 		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
 		query.limit = 999 // max per parse
@@ -96,7 +96,7 @@ class ParseWebService {
 				if let parseLocation: [ParseLocation] = objects as? [ParseLocation] {
 					complete(parseLocations: parseLocation)
 				} else {
-					complete(parseLocations: [ParseLocation]())
+					complete(parseLocations: nil)
 				}
 			} else {
 				print("\(__FILE__) \(__FUNCTION__) \(error?.description)")
@@ -105,7 +105,7 @@ class ParseWebService {
 		}
 	}
 	
-	class func getAllLocPhotosSince(date: NSDate, complete:(parseLocPhotos: [ParseLocPhoto]) -> Void) -> Void {
+	class func getAllLocPhotosSince(date: NSDate, complete:(parseLocPhotos: [ParseLocPhoto]?) -> Void) -> Void {
 		let query = PFQuery(className: ParseLocPhoto.parseClassName())
 		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
 		query.limit = 999 // max per parse
@@ -114,7 +114,7 @@ class ParseWebService {
 				if let parseLocPhotos: [ParseLocPhoto] = objects as? [ParseLocPhoto] {
 					complete(parseLocPhotos: parseLocPhotos)
 				} else {
-					complete(parseLocPhotos: [ParseLocPhoto]())
+					complete(parseLocPhotos: nil)
 				}
 			} else {
 				print("\(__FILE__) \(__FUNCTION__) \(error?.description)")
@@ -124,7 +124,7 @@ class ParseWebService {
 	}
 	
 	
-	class func getAllArtistSince(date: NSDate, complete:(parseArtist: [ParseArtist]) -> Void) -> Void {
+	class func getAllArtistSince(date: NSDate, complete:(parseArtist: [ParseArtist]?) -> Void) -> Void {
 		let query = PFQuery(className: ParseArtist.parseClassName())
 		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
 		query.limit = 999 // max per parse
@@ -133,7 +133,7 @@ class ParseWebService {
 				if let parseArtist: [ParseArtist] = objects as? [ParseArtist] {
 					complete(parseArtist: parseArtist)
 				} else {
-					complete(parseArtist: [ParseArtist]())
+					complete(parseArtist: nil)
 				}
 			} else {
 				print("\(__FILE__) \(__FUNCTION__) \(error?.description)")

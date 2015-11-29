@@ -26,6 +26,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		collectionView?.reloadData()
 		self.title = "Public Art" // TITLE
 		
+		
 		if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
 			collectionView?.backgroundColor = UIColor.whiteColor()
 		} else {
