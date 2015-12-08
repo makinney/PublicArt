@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 final class SingleArtViewController: UIViewController {
 
@@ -285,14 +286,29 @@ final class SingleArtViewController: UIViewController {
 		avc.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList,
 			UIActivityTypeAirDrop, UIActivityTypePostToFlickr]
 		
+	//	let vc = SLComposeViewController(forServiceType: SLServiceTypeFacebook) {
+		
+			let vc = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+			vc.setInitialText(msg)
+			vc.addImage(image)
+		
+		if let appCommon = fetcher.fetchAppCommon() {
+			let facebookPage = appCommon.facebookPublicArtPage
+			if let facebookPageURL = NSURL(string: facebookPage) {
+		//		activityItems.append(facebookPageURL)
+		//		vc.addURL(facebookPageURL)
+			}
+		}
+		
+		
 		let userInterfaceIdion = traitCollection.userInterfaceIdiom
 		if userInterfaceIdion == .Phone {
-			avc.modalTransitionStyle = .CoverVertical
-			presentViewController(avc, animated: true, completion: nil)
+			vc.modalTransitionStyle = .CoverVertical
+			presentViewController(vc, animated: true, completion: nil)
 		} else {
-			avc.modalPresentationStyle = .Popover
-			avc.popoverPresentationController?.barButtonItem = barButtonItem
-			presentViewController(avc, animated: true, completion: nil)
+			vc.modalPresentationStyle = .Popover
+			vc.popoverPresentationController?.barButtonItem = barButtonItem
+			presentViewController(vc, animated: true, completion: nil)
 		}
 	}
 	

@@ -10,11 +10,11 @@ import UIKit
 import Parse
 import Bolts
 
-
+	let didShowLandingScreenKey = "DidShowWelcomeScreenKey"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-	let didShowLandingScreenKey = "DidShowWelcomeScreenKey"
+
 	var window: UIWindow?
 	var artDataManager: ArtDataManager?
 
@@ -27,8 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		if NSUserDefaults.standardUserDefaults().boolForKey(didShowLandingScreenKey) {
 			self.normalWindowRoot(animate:false)
 		} else {
-			NSUserDefaults.standardUserDefaults().setBool(true, forKey: didShowLandingScreenKey)
-			NSUserDefaults.standardUserDefaults().synchronize()
 			self.useWelcomeAsRoot()
 		}
 		self.window?.makeKeyAndVisible()
@@ -68,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	func normalWindowRoot(animate animate: Bool) {
 		let mainViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.MainViewController.rawValue) as? UITabBarController
+		mainViewController!.view.backgroundColor = UIColor.blackColor()
 		if animate == false {
 			self.window?.rootViewController = mainViewController
 		} else {
@@ -133,7 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		UITabBar.appearance().barTintColor = UIColor.blackColor()
 		UITabBar.appearance().tintColor = UIColor.whiteColor()
-		UITabBar.appearance().translucent = true
+	//	UITabBar.appearance().translucent = true
 		
 		UIToolbar.appearance().barTintColor = UIColor.blackColor()
 		UIToolbar.appearance().tintColor = UIColor.whiteColor()

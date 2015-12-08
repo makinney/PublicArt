@@ -80,6 +80,8 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
 		self.pageControl.currentPage = page
 		if page == pageCount - 1  {
 			self.pageControl.hidden = true
+			NSUserDefaults.standardUserDefaults().setBool(true, forKey: didShowLandingScreenKey)
+			NSUserDefaults.standardUserDefaults().synchronize()
 		} else {
 			self.pageControl.hidden = false
 		}

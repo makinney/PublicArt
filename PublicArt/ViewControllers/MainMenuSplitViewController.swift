@@ -14,6 +14,8 @@ class MainMenuSplitViewController: UISplitViewController {
         super.viewDidLoad()
 		self.delegate = self
 		preferredDisplayMode = .AllVisible
+		
+		view.backgroundColor = UIColor.clearColor()
 
         // Do any additional setup after loading the view.
     }

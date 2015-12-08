@@ -15,15 +15,18 @@
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <animations/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="WVx-oo-7dW" kind="relationship" relationship="viewControllers" id="a9x-ue-DhU"/>
+                        <segue destination="WVx-oo-7dW" kind="relationship" relationship="viewControllers" id="NbB-IB-Z6N"/>
                         <segue destination="nBu-ce-fRo" kind="relationship" relationship="viewControllers" id="FAu-ae-QXJ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-68" y="876"/>
+            <point key="canvasLocation" x="94" y="703"/>
         </scene>
         <!--More Table View Controller-->
         <scene sceneID="zpc-IQ-qid">
@@ -104,7 +107,7 @@
                                     <constraint firstAttribute="height" constant="100" id="r2G-jF-g8c"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No representation is made or warranty given as to their content, route practicability or efficiency, or map accuracy." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPo-Y4-8Ls">
@@ -115,7 +118,7 @@
                                     <constraint firstAttribute="height" constant="125" id="iaD-Da-CH2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woM-zD-oAA">
@@ -127,7 +130,7 @@
                                 </constraints>
                                 <string key="text">User assumes all risk of use. Supplier assumes no legal liability or responsibility for any loss, damage, injury, or delay associated with the use of this product.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -150,7 +153,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Pbb-6U-D4K">
             <objects>
-                <navigationController id="rMD-Y1-dPa" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsWhenVerticallyCompact="YES" id="rMD-Y1-dPa" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="J9D-hH-VjQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -160,18 +163,18 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="g7n-ws-DDI" kind="relationship" relationship="rootViewController" id="SWK-7x-6PW"/>
+                        <segue destination="g7n-ws-DDI" kind="relationship" relationship="rootViewController" id="a90-GF-GWh"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xsn-CS-IX3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1548" y="-339"/>
+            <point key="canvasLocation" x="1528" y="-1364"/>
         </scene>
         <!--Main Menu Collection View Controller-->
         <scene sceneID="hdP-Ro-F5j">
             <objects>
                 <collectionViewController storyboardIdentifier="DiscoverCollectionViewControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="g7n-ws-DDI" customClass="MainMenuCollectionViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="DDV-sK-8N4">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="DDV-sK-8N4">
                         <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
@@ -206,7 +209,7 @@
                         <segue destination="f8G-4b-S0O" kind="show" identifier="MainMenuToCatagorySegueID" id="s3z-Q0-BZr"/>
                         <segue destination="Rlu-bl-K4j" kind="show" identifier="MainMenuToNeighborhoodSegueID" id="4Wf-dO-N3w"/>
                         <segue destination="3KP-EB-LU6" kind="show" identifier="MainMenuToMediaSegueID" id="w2O-2f-nXq"/>
-                        <segue destination="xax-Zc-3AC" kind="showDetail" identifier="MainMenuToTitlesSegueID" id="d1g-bZ-QI5"/>
+                        <segue destination="xax-Zc-3AC" kind="show" identifier="MainMenuToTitlesSegueID" action="showDetailViewController:sender:" id="d1g-bZ-QI5"/>
                         <segue destination="Kqd-lx-yAS" kind="show" identifier="MainMenuToArtistsSegueID" id="t3W-aR-Ej7"/>
                     </connections>
                 </collectionViewController>
@@ -386,7 +389,7 @@
             <objects>
                 <collectionViewController storyboardIdentifier="TitlesCollectionViewControllerID" id="xax-Zc-3AC" customClass="TitlesCollectionViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Am2-56-VFL">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -460,7 +463,7 @@
         <!--Discover-->
         <scene sceneID="dq0-1X-0iD">
             <objects>
-                <splitViewController storyboardIdentifier="DiscoverSplitViewControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WVx-oo-7dW" customClass="MainMenuSplitViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController storyboardIdentifier="DiscoverSplitViewControllerID" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WVx-oo-7dW" customClass="MainMenuSplitViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Discover" image="tab-art" id="SQI-A7-PA2"/>
                     <connections>
                         <segue destination="rMD-Y1-dPa" kind="relationship" relationship="masterViewController" id="Z5V-aP-0PQ"/>
@@ -560,11 +563,11 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tD7-2K-zCc">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="565"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tD7-2K-zCc">
+                                <rect key="frame" x="0.0" y="-64" width="600" height="565"/>
                                 <animations/>
                             </mapView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrd-7g-TBC">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rrd-7g-TBC">
                                 <rect key="frame" x="0.0" y="443" width="600" height="44"/>
                                 <animations/>
                                 <items>
@@ -789,13 +792,13 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NWg-WI-SGY">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NWg-WI-SGY">
+                                <rect key="frame" x="0.0" y="-64" width="600" height="600"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BvW-zN-VE7" userLabel="activityIndicator">
-                                <rect key="frame" x="290" y="234" width="37" height="37"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BvW-zN-VE7" userLabel="activityIndicator">
+                                <rect key="frame" x="290" y="259" width="37" height="37"/>
                                 <animations/>
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
