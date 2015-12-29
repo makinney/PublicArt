@@ -20,6 +20,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
 	private var maxPhotoWidth: CGFloat = 0.0
 	private let moc: NSManagedObjectContext?
+	private let thumbImages = ThumbImages()
 	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
 
 	private var error:NSError?
@@ -27,6 +28,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	var fetchFilterKey: String?
 	var fetchFilterValue: String?
 	var pageTitle: String?
+	var photoImages: PhotoImages?
 	
 	func fetchFilter(filter: ArtPiecesCollectionViewControllerDataFilterProtocol) {
 		fetchFilterKey = filter.fetchFilterKey
@@ -192,21 +194,26 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.ArtworkCollectionViewCell.rawValue, forIndexPath: indexPath) as! ArtworkCollectionViewCell
 		let art = fetchResultsController.objectAtIndexPath(indexPath) as! Art
-		cell.title.text = art.title
 		if let thumb = art.thumb {
-			if cell.imageView.image == nil { // prevents spinning over existing images
-				cell.activityIndicator.startAnimating()
-			} else {
-				cell.imageView.image = nil //
-			}
-			cell.imageFileName = thumb.imageFileName
-			ImageDownload.downloadThumb(art, complete: { (data, imageFileName) -> () in
-				if let data = data
-				   where cell.imageFileName == imageFileName {
-					cell.imageView.image = UIImage(data: data) ?? UIImage()
+			if cell.imageFileName != thumb.imageFileName {
+				cell.imageFileName = thumb.imageFileName
+				
+				if cell.imageView.image == nil { // prevents spinning over existing images
+					cell.activityIndicator.startAnimating()
+				} else {
+					cell.imageView.image = nil //
 				}
-				cell.activityIndicator.stopAnimating()
-			})
+				
+				thumbImages.getImage(art, complete: { (image, imageFileName) -> () in // TODO -
+					if let image = image,
+						imageFileName = imageFileName
+					   where cell.imageFileName == imageFileName {
+						cell.imageView.image = image
+						cell.title.text = art.title
+					}
+					cell.activityIndicator.stopAnimating()
+				})
+			}
 		}
 		
 		return cell
@@ -221,14 +228,15 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		
 		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
 			if let thumb = art.thumb {
-				let aspectRatio = thumb.imageAspectRatio as Double
-				if aspectRatio > 0 && aspectRatio <= 1 {
-					height = width / CGFloat(aspectRatio) + 21.0 // TODO: hack based on label height
-				} else if aspectRatio > 1 {
+				let aspectRatio = thumb.imageAspectRatio as CGFloat
+				height = width / aspectRatio
+				if aspectRatio > 0 && aspectRatio <= 1.25 {
+					height = width / CGFloat(aspectRatio)// + 21.0 // TODO: hack based on label height
+				} else  {
 					width = width * 2.0  // TODO fine tune
-					height = width / CGFloat(aspectRatio) + 21.0 // TODO: hack based on label height
+					height = width / CGFloat(aspectRatio)// + 21.0 // TODO: hack based on label height
 				}
-			}			
+			}
 		}
 		return CGSize(width: width, height: height)
 	}
@@ -248,6 +256,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art,
 			let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as?  SingleArtViewController {
+			singleArtViewController.photoImages = photoImages
 			singleArtViewController.update(art, artBackgroundColor: nil)
 			showViewController(singleArtViewController, sender: self)
 		}

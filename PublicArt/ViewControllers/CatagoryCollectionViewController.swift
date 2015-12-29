@@ -10,6 +10,7 @@ import UIKit
 
 final class CatagoryCollectionViewController: UICollectionViewController {
 
+	var photoImages: PhotoImages?
 	private var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
 	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
 	private var categoryMenuItem = CatagoryMenuItem()
@@ -131,8 +132,8 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 			return (title: categoryMenuItem.value(.Monuments).title, tag: categoryMenuItem.value(.Monuments).tag)
 		case CatagoryMenuOrder.Murals.rawValue:
 			return (title: categoryMenuItem.value(.Murals).title, tag: categoryMenuItem.value(.Murals).tag)
-		case CatagoryMenuOrder.Plagues.rawValue:
-			return (title: categoryMenuItem.value(.Plagues).title, tag: categoryMenuItem.value(.Plagues).tag)
+		case CatagoryMenuOrder.Plaques.rawValue:
+			return (title: categoryMenuItem.value(.Plaques).title, tag: categoryMenuItem.value(.Plaques).tag)
 		case CatagoryMenuOrder.Sculpture.rawValue:
 			return (title: categoryMenuItem.value(.Sculpture).title, tag: categoryMenuItem.value(.Sculpture).tag)
 		case CatagoryMenuOrder.Steel.rawValue:
@@ -155,12 +156,14 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
 			if artPiecesCollectionViewController != nil {
 				artPiecesCollectionViewController!.fetchFilter(filter)
+				artPiecesCollectionViewController!.photoImages = photoImages
 				showDetailViewController(artPiecesCollectionViewController!, sender: self)
 			}
 		} else {
 			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
 				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
 					artPiecesCollectionViewController.fetchFilter(filter)
+					artPiecesCollectionViewController.photoImages = photoImages
 					showDetailViewController(navigationController, sender: self)
 			}
 		}

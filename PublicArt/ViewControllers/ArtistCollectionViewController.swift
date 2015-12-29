@@ -12,6 +12,7 @@ import CoreData
 final class ArtistCollectionViewController: UICollectionViewController {
 
 	// MARK: Properties
+	var photoImages: PhotoImages?
 	private var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
 	private var collapseDetailViewController = true
 	private var fetcher: Fetcher!
@@ -84,6 +85,7 @@ final class ArtistCollectionViewController: UICollectionViewController {
 						let artistName = artistFullName(selectedArtist)
 						let filter = ArtPiecesCollectionViewDataFilter(key: "idArtist", value: selectedArtist.idArtist, title: artistName)
 						artPiecesCollectionViewController.fetchFilter(filter)
+						artPiecesCollectionViewController.photoImages = photoImages
 						showDetailViewController(navigationController, sender: self)
 				}
 		}
@@ -203,12 +205,14 @@ final class ArtistCollectionViewController: UICollectionViewController {
 			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
 			if artPiecesCollectionViewController != nil {
 				artPiecesCollectionViewController!.fetchFilter(filter)
+				artPiecesCollectionViewController!.photoImages = photoImages
 				showDetailViewController(artPiecesCollectionViewController!, sender: self)
 			}
 		} else {
 			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
 				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
 					artPiecesCollectionViewController.fetchFilter(filter)
+					artPiecesCollectionViewController.photoImages = photoImages
 					showDetailViewController(navigationController, sender: self)
 			}
 		}

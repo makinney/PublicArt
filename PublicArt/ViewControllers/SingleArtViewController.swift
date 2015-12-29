@@ -39,6 +39,7 @@ final class SingleArtViewController: UIViewController {
 	private var mapRouting: MapRouting?
 	private var promptUserTimer: NSTimer?
 	private let promptUserTimerTimeout: NSTimeInterval = 5
+	var photoImages: PhotoImages?
 
 	// MARK: Lifecycles
 
@@ -241,6 +242,7 @@ final class SingleArtViewController: UIViewController {
 			if let singleArtPhotosCollectionViewController = segue.destinationViewController as? SingleArtPhotosCollectionViewController {
 				singleArtPhotosCollectionViewController.transitioningDelegate = singleArtPhotosAnimatedTransistionDelegate
 				singleArtPhotosCollectionViewController.modalPresentationStyle = .Custom
+				singleArtPhotosCollectionViewController.photoImages = photoImages
 				singleArtPhotosCollectionViewController.art = art
 			}
 		}
@@ -294,7 +296,7 @@ final class SingleArtViewController: UIViewController {
 		
 		if let appCommon = fetcher.fetchAppCommon() {
 			let facebookPage = appCommon.facebookPublicArtPage
-			if let facebookPageURL = NSURL(string: facebookPage) {
+			if let _ = NSURL(string: facebookPage) {
 		//		activityItems.append(facebookPageURL)
 		//		vc.addURL(facebookPageURL)
 			}

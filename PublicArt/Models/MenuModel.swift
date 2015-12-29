@@ -14,7 +14,7 @@ import UIKit
 enum CatagoryType {
 	case Monuments
 	case Murals
-	case Plagues
+	case Plaques
 	case Sculpture
 	case Steel
 	case Statues
@@ -24,7 +24,7 @@ enum CatagoryType {
 enum CatagoryMenuOrder: Int {
 	case Monuments = 0
 	case Murals
-	case Plagues
+	case Plaques
 	case Sculpture
 	case Steel
 	case Statues
@@ -44,9 +44,9 @@ struct CatagoryMenuItem {
 		case .Murals:
 			title = "Murals"
 			tag = "Mural"
-		case .Plagues:
-			title = "Plagues"
-			tag = "Plague"
+		case .Plaques:
+			title = "Plaques"
+			tag = "Plaque"
 		case .Sculpture:
 			title = "Sculpture"
 			tag = "Sculpture"
@@ -85,8 +85,8 @@ enum MainMenuRow: Int {
 	case Artists = 4
 	case Catagory = 2
 	case Neighborhoods = 0
-	case Titles = 3
-	case Medium = 1
+	case Titles = 1
+	case Medium = 3
 	case Favorites = 5
 	case CountRows = 6
 }
@@ -104,7 +104,7 @@ struct MainMenu {
 		var image = UIImage()
 		switch(mainMenuType) {
 		case .Artists:
-			image = UIImage(named: "SunYatSen") ?? image
+			image = UIImage(named: "HeadofStFrancis1") ?? image
 			title = "Artists"
 		case .Catagory:
 			image = UIImage(named: "LionClose") ?? image
@@ -113,7 +113,7 @@ struct MainMenu {
 			image = UIImage(named: "NorthBeachAlley") ?? image
 			title = "Locations"
 		case .Titles:
-			image = UIImage(named: "SphinxCropped") ?? image
+			image = UIImage(named: "MiguelCervantes") ?? image
 			title = "Titles"
 		case .Medium:
 			image = UIImage(named: "FlutePlayers") ?? image

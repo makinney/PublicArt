@@ -13,6 +13,7 @@ import CoreData
 final class LocationsCollectionViewController: UICollectionViewController, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout {
 
 	// MARK: Properties
+	var photoImages: PhotoImages?
 	private var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
 //	private var artPiecesNavigationController: UINavigationController
 //	private var detailViewController: UIViewController?
@@ -243,6 +244,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	func showArtPiecesFromNavController(location: Location) {
 		if let navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
 			let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
+				artPiecesCollectionViewController.photoImages = photoImages
 				if location.name != "All" {
 					let filter = ArtPiecesCollectionViewDataFilter(key: "idLocation", value: location.idLocation, title: location.name)
 					artPiecesCollectionViewController.fetchFilter(filter)
@@ -256,6 +258,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	
 	func showArtPiecesWithoutNavController(location: Location) {
 		if let artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController {
+			artPiecesCollectionViewController.photoImages = photoImages
 			if location.name != "All" {
 				let filter = ArtPiecesCollectionViewDataFilter(key: "idLocation", value: location.idLocation, title: location.name)
 				artPiecesCollectionViewController.fetchFilter(filter)

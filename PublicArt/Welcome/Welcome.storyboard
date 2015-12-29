@@ -209,10 +209,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7PZ-LJ-NBF" userLabel="TitleContainer">
-                                <rect key="frame" x="150" y="225" width="300" height="150"/>
+                                <rect key="frame" x="150" y="250" width="300" height="150"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="YqX-R9-Skk">
-                                        <rect key="frame" x="0.0" y="20" width="300" height="51"/>
+                                        <rect key="frame" x="0.0" y="49" width="300" height="51"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="51" id="qd6-eL-9tZ"/>
@@ -226,21 +226,6 @@
                                             <action selector="onContinueButton:" destination="et8-lR-pQe" eventType="touchUpInside" id="qCf-5X-TkG"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="otf-yg-pPf">
-                                        <rect key="frame" x="0.0" y="79" width="300" height="51"/>
-                                        <animations/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="51" id="S1H-Di-p25"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="44"/>
-                                        <state key="normal" title="Public Art">
-                                            <color key="titleColor" red="0.95294117649999999" green="0.17254901959999999" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onContinueButton:" destination="et8-lR-pQe" eventType="touchUpInside" id="fVp-Tx-aZ0"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -249,18 +234,33 @@
                                     <constraint firstItem="YqX-R9-Skk" firstAttribute="centerX" secondItem="7PZ-LJ-NBF" secondAttribute="centerX" id="OHN-Pv-mVV"/>
                                     <constraint firstItem="YqX-R9-Skk" firstAttribute="width" secondItem="7PZ-LJ-NBF" secondAttribute="width" id="VOk-dp-G4m"/>
                                     <constraint firstAttribute="height" constant="150" id="aMD-yU-LPv"/>
-                                    <constraint firstItem="otf-yg-pPf" firstAttribute="centerX" secondItem="7PZ-LJ-NBF" secondAttribute="centerX" id="g3O-TV-EkF"/>
-                                    <constraint firstItem="otf-yg-pPf" firstAttribute="top" secondItem="YqX-R9-Skk" secondAttribute="bottom" constant="8" id="guM-ZC-OHf"/>
-                                    <constraint firstItem="YqX-R9-Skk" firstAttribute="top" secondItem="7PZ-LJ-NBF" secondAttribute="top" constant="20" id="gxC-vw-c3w"/>
-                                    <constraint firstItem="otf-yg-pPf" firstAttribute="width" secondItem="7PZ-LJ-NBF" secondAttribute="width" id="yZR-4z-fwF"/>
+                                    <constraint firstItem="YqX-R9-Skk" firstAttribute="top" secondItem="7PZ-LJ-NBF" secondAttribute="top" constant="49" id="gxC-vw-c3w"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="otf-yg-pPf">
+                                <rect key="frame" x="150" y="250" width="300" height="51"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="51" id="S1H-Di-p25"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="44"/>
+                                <state key="normal" title="Public Art">
+                                    <color key="titleColor" red="0.95294117649999999" green="0.17254901959999999" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onContinueButton:" destination="et8-lR-pQe" eventType="touchUpInside" id="fVp-Tx-aZ0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="otf-yg-pPf" firstAttribute="top" secondItem="pFe-A6-R2q" secondAttribute="bottom" constant="230" id="2hK-Ur-jel"/>
                             <constraint firstItem="7PZ-LJ-NBF" firstAttribute="centerX" secondItem="4qf-Qo-lZH" secondAttribute="centerX" id="IDG-Xd-dIR"/>
-                            <constraint firstItem="7PZ-LJ-NBF" firstAttribute="centerY" secondItem="4qf-Qo-lZH" secondAttribute="centerY" id="LA4-nK-xjs"/>
+                            <constraint firstItem="otf-yg-pPf" firstAttribute="trailing" secondItem="7PZ-LJ-NBF" secondAttribute="trailing" id="Iob-7p-Qve"/>
+                            <constraint firstItem="7PZ-LJ-NBF" firstAttribute="centerY" secondItem="4qf-Qo-lZH" secondAttribute="centerY" constant="25" id="LA4-nK-xjs"/>
+                            <constraint firstItem="otf-yg-pPf" firstAttribute="leading" secondItem="7PZ-LJ-NBF" secondAttribute="leading" id="vce-W5-Ryn"/>
                         </constraints>
                     </view>
                 </viewController>

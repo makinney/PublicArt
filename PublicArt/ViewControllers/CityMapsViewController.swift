@@ -22,6 +22,8 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 	var location: Location?
 	private var moc: NSManagedObjectContext?
 	private var zoomed = false
+	var photoImages: PhotoImages?
+
 
 	private lazy var artUserLocation: ArtUserLocation = {
 		var userLocation = ArtUserLocation(mapView: self.mapView)
@@ -76,6 +78,8 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 		prepareToolbarItems()
 		
 		self.title = "Explore"
+		
+		photoImages = PhotoImages()
 		
 		fetchResultsController.delegate = self
 		do {
@@ -310,6 +314,7 @@ extension CityMapsViewController : MKMapViewDelegate, UIPopoverPresentationContr
 	//			if let rightCalloutAccessoryView = view.rightCalloutAccessoryView {
 	//				displayArtSummaryViewControllerAt(view.rightCalloutAccessoryView, art: art)
 					let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as! SingleArtViewController
+					singleArtViewController.photoImages = photoImages
 					singleArtViewController.update(art, artBackgroundColor: nil)
 					showViewController(singleArtViewController, sender: self)
 	//			}

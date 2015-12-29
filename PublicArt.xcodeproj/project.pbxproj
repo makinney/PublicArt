@@ -95,6 +95,8 @@
 		1F4C73531B40B17A001ACEE0 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C73521B40B17A001ACEE0 /* WelcomeViewController.swift */; };
 		1F4C73551B40B316001ACEE0 /* WelcomePublicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C73541B40B316001ACEE0 /* WelcomePublicViewController.swift */; };
 		1F4C73571B40B339001ACEE0 /* WelcomeBrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C73561B40B339001ACEE0 /* WelcomeBrowseViewController.swift */; };
+		1F65AB6F1C212F6A00FF43C7 /* ThumbImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F65AB6E1C212F6A00FF43C7 /* ThumbImages.swift */; };
+		1F65AB711C21393B00FF43C7 /* PhotoImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F65AB701C21393B00FF43C7 /* PhotoImages.swift */; };
 		1F8915F71B229ED400E83891 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8915F61B229ED400E83891 /* MenuModel.swift */; };
 		1F8916591B23C21D00E83891 /* PublicArtModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916571B23C21D00E83891 /* PublicArtModel.xcdatamodeld */; };
 		1F8916921B23D04100E83891 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8916911B23D04100E83891 /* CoreDataStack.swift */; };
@@ -245,6 +247,8 @@
 		1F4C73521B40B17A001ACEE0 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeViewController.swift; path = Welcome/WelcomeViewController.swift; sourceTree = "<group>"; };
 		1F4C73541B40B316001ACEE0 /* WelcomePublicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomePublicViewController.swift; path = Welcome/WelcomePublicViewController.swift; sourceTree = "<group>"; };
 		1F4C73561B40B339001ACEE0 /* WelcomeBrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeBrowseViewController.swift; path = Welcome/WelcomeBrowseViewController.swift; sourceTree = "<group>"; };
+		1F65AB6E1C212F6A00FF43C7 /* ThumbImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThumbImages.swift; path = Cache/ThumbImages.swift; sourceTree = "<group>"; };
+		1F65AB701C21393B00FF43C7 /* PhotoImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoImages.swift; path = Cache/PhotoImages.swift; sourceTree = "<group>"; };
 		1F8915F61B229ED400E83891 /* MenuModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuModel.swift; path = Models/MenuModel.swift; sourceTree = "<group>"; };
 		1F8916581B23C21D00E83891 /* PublicArtModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PublicArtModel.xcdatamodel; sourceTree = "<group>"; };
 		1F8916911B23D04100E83891 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = CoreData/CoreDataStack.swift; sourceTree = "<group>"; };
@@ -335,6 +339,7 @@
 			children = (
 				1F8916931B23D1C500E83891 /* ArtDataControl */,
 				1F8915F81B22B3B100E83891 /* Assets */,
+				1F65AB6D1C21274D00FF43C7 /* Cache */,
 				1F8916561B23C04300E83891 /* CoreData */,
 				1F8916731B23CDF300E83891 /* Extensions */,
 				1F89167C1B23CF2200E83891 /* Functions */,
@@ -486,6 +491,15 @@
 				1F456DA01B41BD1600302DE9 /* WelcomeDiscoverViewController.swift */,
 			);
 			name = Welcome;
+			sourceTree = "<group>";
+		};
+		1F65AB6D1C21274D00FF43C7 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				1F65AB6E1C212F6A00FF43C7 /* ThumbImages.swift */,
+				1F65AB701C21393B00FF43C7 /* PhotoImages.swift */,
+			);
+			name = Cache;
 			sourceTree = "<group>";
 		};
 		1F8915F51B229E3000E83891 /* Models */ = {
@@ -786,6 +800,7 @@
 				1FC6F8281B3A52D100810258 /* ThumbExtension.swift in Sources */,
 				1F0319631B603259000778E4 /* Artist.swift in Sources */,
 				1F8916BC1B23D22B00E83891 /* ArtMapPins.swift in Sources */,
+				1F65AB711C21393B00FF43C7 /* PhotoImages.swift in Sources */,
 				1F03194E1B5DEE3D000778E4 /* MapRouting.swift in Sources */,
 				1F09BB711B30A44C00E4807C /* CategoryPiecesCollectionViewControllerswift.swift in Sources */,
 				1F4C73531B40B17A001ACEE0 /* WelcomeViewController.swift in Sources */,
@@ -815,6 +830,7 @@
 				1F09BB8E1B31F54B00E4807C /* ParseArtist.swift in Sources */,
 				1F456D9B1B40D0C300302DE9 /* WelcomeExploreViewController.swift in Sources */,
 				1F09BB5A1B2F79D400E4807C /* MainMenuSplitViewController.swift in Sources */,
+				1F65AB6F1C212F6A00FF43C7 /* ThumbImages.swift in Sources */,
 				1F4C73221B3E6B9F001ACEE0 /* MapAnimatedTransistioningDelegate.swift in Sources */,
 				1FC6F8341B3C78AB00810258 /* ParseLocPhoto.swift in Sources */,
 				1F060E281BC0BCCA0092F9AF /* LegalDisclaimerViewController.swift in Sources */,

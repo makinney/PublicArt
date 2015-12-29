@@ -23,6 +23,7 @@ final class SingleArtPhotosCollectionViewController: UICollectionViewController 
 	
 	var collectionViewFlowLayout = SingleArtPhotosCollectionViewFlowLayout()
 	var photos: [Photo]?
+	var photoImages: PhotoImages?
 	
 	override init(collectionViewLayout: UICollectionViewLayout) {
 		super.init(collectionViewLayout: collectionViewLayout)
@@ -62,9 +63,6 @@ final class SingleArtPhotosCollectionViewController: UICollectionViewController 
     }
 	
 	
-
-
-
 	override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
 		super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
 		
@@ -99,13 +97,14 @@ final class SingleArtPhotosCollectionViewController: UICollectionViewController 
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.SingleArtPhotosCollectionViewCell.rawValue, forIndexPath: indexPath) as! SingleArtPhotosCollectionViewCell
 		cell.imageView.image = nil
-		if let photo = photos?[indexPath.row] {
+		if let photo = photos?[indexPath.row],
+			let photoImages = photoImages {
 			cell.imageFileName = photo.imageFileName
 			cell.activityIndicator.startAnimating()
-			ImageDownload.downloadPhoto(photo, complete: { (data, imageFileName) -> () in
-				if let data = data
+			photoImages.getImage(photo, complete: { (image, imageFileName) -> () in
+				if let image = image
 					where cell.imageFileName == imageFileName {
-						cell.imageView.image = UIImage(data: data) ?? UIImage()
+						cell.imageView.image = image
 				}
 				cell.activityIndicator.stopAnimating()
 			})

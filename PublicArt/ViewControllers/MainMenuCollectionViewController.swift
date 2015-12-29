@@ -16,6 +16,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 	private var mainMenu = MainMenu()
 	private var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
 	
+	let photoImages = PhotoImages() 
 	// MARK: Life Cycle
 
     override func viewDidLoad() {
@@ -171,6 +172,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		
 			if artistCollectionViewController == nil {
 				artistCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtistCollectionViewController.rawValue) as? ArtistCollectionViewController
+				artistCollectionViewController?.photoImages = photoImages
 			}
 			
 			showViewController(artistCollectionViewController!, sender: self)
@@ -179,19 +181,22 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		
 			if catagoryCollectionViewController == nil {
 				catagoryCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.CatagoryCollectionViewController.rawValue) as? CatagoryCollectionViewController
+				catagoryCollectionViewController?.photoImages = photoImages
 			}
 			showViewController(catagoryCollectionViewController!, sender: self)
 			
 		case MainMenuRow.Neighborhoods.rawValue:
 			if locationsCollectionViewController == nil {
 				locationsCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.LocationCollectionViewController.rawValue) as? LocationsCollectionViewController
+				locationsCollectionViewController?.photoImages = photoImages
 			}
 			showViewController(locationsCollectionViewController!, sender: self)
 
 		case MainMenuRow.Titles.rawValue:
 		
 			if titlesCollectionViewController == nil {
-			 titlesCollectionViewController  = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.TitlesCollectionViewController.rawValue) as? TitlesCollectionViewController
+				titlesCollectionViewController  = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.TitlesCollectionViewController.rawValue) as? TitlesCollectionViewController
+				titlesCollectionViewController?.photoImages = photoImages
 			}
 		
 			showViewController(titlesCollectionViewController!, sender: self)
@@ -201,6 +206,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		
 			if mediaCollectionViewController == nil {
 				mediaCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.MediaCollectionViewController.rawValue) as? MediaCollectionViewController
+				mediaCollectionViewController?.photoImages = photoImages
 			}
 			showViewController(mediaCollectionViewController!, sender: self)
 
@@ -219,12 +225,14 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
 			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
 			if artPiecesCollectionViewController != nil {
-				artPiecesCollectionViewController?.pageTitle = "San Francisco"
+				artPiecesCollectionViewController!.photoImages = photoImages
+				artPiecesCollectionViewController!.pageTitle = "San Francisco"
 				showDetailViewController(artPiecesCollectionViewController!, sender: self)
 			}
 		} else {
 			if let navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
 				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
+					artPiecesCollectionViewController.photoImages = photoImages
 					artPiecesCollectionViewController.pageTitle = "San Francisco"
 					showDetailViewController(navigationController, sender: self)
 			}

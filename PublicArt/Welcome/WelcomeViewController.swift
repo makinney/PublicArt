@@ -38,6 +38,10 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
 		view.alpha = 0.0
 	}
 	
+	override func shouldAutorotate() -> Bool {
+		return false
+	}
+	
 	func setupChildren() {
 		let publicViewController: WelcomePublicViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewControllerWithIdentifier(WelcomeIdentifier.PublicViewController.rawValue) as! WelcomePublicViewController
 //		let browseViewController: WelcomeBrowseViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewControllerWithIdentifier(WelcomeIdentifier.BrowseViewController.rawValue) as! WelcomeBrowseViewController

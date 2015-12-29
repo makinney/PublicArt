@@ -12,6 +12,7 @@ import CoreData
 final class MediaCollectionViewController: UICollectionViewController {
 
 	// MARK: Properties
+	var photoImages: PhotoImages?
 	private var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
 	private var collapseDetailViewController = true
 	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
@@ -191,12 +192,14 @@ final class MediaCollectionViewController: UICollectionViewController {
 			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
 			if artPiecesCollectionViewController != nil {
 				artPiecesCollectionViewController!.fetchFilter(filter)
+				artPiecesCollectionViewController!.photoImages = photoImages
 				showDetailViewController(artPiecesCollectionViewController!, sender: self)
 			}
 		} else {
 			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
 				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
 					artPiecesCollectionViewController.fetchFilter(filter)
+					artPiecesCollectionViewController.photoImages = photoImages
 					showDetailViewController(navigationController, sender: self)
 			}
 		}
