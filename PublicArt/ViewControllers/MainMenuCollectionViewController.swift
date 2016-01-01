@@ -28,11 +28,6 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		self.title = "Public Art" // TITLE
 		
 		
-		if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
-			collectionView?.backgroundColor = UIColor.whiteColor()
-		} else {
-			collectionView?.backgroundColor = UIColor.whiteColor()
-		}
 		
 		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
 			showDefaultDetailViewController()
@@ -41,6 +36,14 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
+		
+				if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
+					collectionView?.backgroundColor = UIColor.grayColor()
+				} else {
+					collectionView?.backgroundColor = UIColor.blackColor()
+				}
+
+		
 	}
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -79,7 +82,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
 			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
 				collectionViewFlowLayout.minimumLineSpacing = 1
-				let sectionInset: CGFloat = 1
+				let sectionInset: CGFloat = 0
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
@@ -91,11 +94,11 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxPhotoWidth) // TODO: hard constant hack for aspect ratio
 			} else {
 				collectionViewFlowLayout.minimumLineSpacing = 4
-				let sectionInset: CGFloat = 4
+				let sectionInset: CGFloat = 0
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = 4
+				let itemSpacing: CGFloat = 2
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				
 				minimumPhotosPerLine = 1

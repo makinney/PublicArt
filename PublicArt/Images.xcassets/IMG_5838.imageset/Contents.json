@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "SphinxCropped.jpg"
+      "filename" : "IMG_5838.jpg",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "SphinxCropped-1.jpg"
+      "filename" : "IMG_5838-1.jpg",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "SphinxCropped-2.jpg"
+      "filename" : "IMG_5838-2.jpg",
+      "scale" : "3x"
     }
   ],
   "info" : {

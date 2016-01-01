@@ -41,7 +41,6 @@ final class TitlesCollectionViewController: UICollectionViewController {
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue)
 		
 		title = "Titles"
-		collectionView?.backgroundColor = UIColor.whiteColor()
 		
 		setupArtTitlesFlowLayout()
 		
@@ -106,11 +105,11 @@ final class TitlesCollectionViewController: UICollectionViewController {
 			
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
 			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
-				let sectionInset: CGFloat = 2.0
+				let sectionInset: CGFloat = 1.0
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = sectionInset / 2.0
+				let itemSpacing: CGFloat = 1.0
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				
 				
@@ -122,7 +121,7 @@ final class TitlesCollectionViewController: UICollectionViewController {
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = sectionInset / 2.0
+				let itemSpacing: CGFloat = 2.0
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				minimumCellsPerLine = 1
 				maxCellWidth = cellWidthToUse(masterViewsWidth, cellsPerLine: minimumCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
@@ -156,7 +155,7 @@ final class TitlesCollectionViewController: UICollectionViewController {
 		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
 			cell.title.text = art.title
 			cell.backgroundColor = UIColor.blackColor()
-			cell.title.textColor = UIColor.whiteColor()
+			cell.title.textColor = UIColor.sfOrangeColor()
 		}
 		return cell
 	}
@@ -207,12 +206,12 @@ final class TitlesCollectionViewController: UICollectionViewController {
 			for path in indexPathsVisible {
 					let cell = collectionView.cellForItemAtIndexPath(path) as? MediaCollectionViewCell
 					cell?.backgroundColor = UIColor.blackColor()
-					cell?.title.textColor = UIColor.whiteColor()
+					cell?.title.textColor = UIColor.sfOrangeColor()
 			}
 			
 			if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
 				let cell = collectionView.cellForItemAtIndexPath(indexPath) as? MediaCollectionViewCell
-				cell?.backgroundColor = UIColor.sfOrangeColor()
+				cell?.backgroundColor = UIColor.whiteColor()
 				cell?.title.textColor = UIColor.blackColor()
 			}
 		}

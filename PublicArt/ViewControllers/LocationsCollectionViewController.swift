@@ -47,7 +47,6 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		
 		title = "Location" // TITLE
 		
-		collectionView?.backgroundColor = UIColor.whiteColor()
 		
 		let nibName = UINib(nibName: CellIdentifier.LocationCollectionViewCell.rawValue, bundle: nil) // TODO:
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.LocationCollectionViewCell.rawValue)
@@ -131,11 +130,11 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 			
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
 			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
-				let sectionInset: CGFloat = 2.0
+				let sectionInset: CGFloat = 1.0
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = 2
+				let itemSpacing: CGFloat = 1.0
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				minimumNumberCellsPerLine = 3
 				maxCellWidth = cellWidthAvailable(masterViewsWidth, cellsPerLine: minimumNumberCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
@@ -145,7 +144,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = 2
+				let itemSpacing: CGFloat = 2.0
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				minimumNumberCellsPerLine = 3
 				maxCellWidth = cellWidthAvailable(masterViewsWidth, cellsPerLine: minimumNumberCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
@@ -178,7 +177,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 					if location.artwork.count > 0 || location.name == "All"{
 						let cell = collectionView.cellForItemAtIndexPath(path) as? LocationCollectionViewCell
 						cell?.backgroundColor = UIColor.blackColor()
-						cell?.title.textColor = UIColor.whiteColor()
+						cell?.title.textColor = UIColor.sfOrangeColor()
 					}
 				}
 		}
@@ -198,7 +197,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 
 		if location.artwork.count > 0 || location.name == "All" {
 			cell.backgroundColor = UIColor.blackColor()
-			cell.title.textColor = UIColor.whiteColor()
+			cell.title.textColor = UIColor.sfOrangeColor()
 		} else  {
 			cell.backgroundColor = UIColor.lightGrayColor()
 			cell.title.textColor =  UIColor.grayColor()
@@ -292,7 +291,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		resetVisibleCellBackgroundColors()
 		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
 			let cell = collectionView.cellForItemAtIndexPath(indexPath) as? LocationCollectionViewCell
-			cell?.backgroundColor = UIColor.sfOrangeColor()
+			cell?.backgroundColor = UIColor.whiteColor()
 			cell?.title.textColor = UIColor.blackColor()
 		}
 	}
@@ -300,7 +299,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	override func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
 		let cell = collectionView.cellForItemAtIndexPath(indexPath) as? LocationCollectionViewCell
 		cell?.backgroundColor = UIColor.blackColor()
-		cell?.title.textColor = UIColor.whiteColor()
+		cell?.title.textColor = UIColor.sfOrangeColor()
 	}
 	
 }

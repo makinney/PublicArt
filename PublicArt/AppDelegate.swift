@@ -122,6 +122,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	// MARK: Appearance
 	func setAppearanceProxies() {
+	
+		UICollectionView.appearance().backgroundColor = UIColor.grayColor()
 	//	UIBarButtonItem.appearance().tintColor = UIColor.blackColor()
 	//	UINavigationBar.appearance().backgroundColor = UIColor.blackColor()
   

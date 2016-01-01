@@ -77,6 +77,8 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		if let pageTitle = pageTitle {
 			title = pageTitle
 		}
+		
+		collectionView?.backgroundColor = UIColor.whiteColor()
 	}
 	
 	override func viewDidAppear(animated: Bool) {

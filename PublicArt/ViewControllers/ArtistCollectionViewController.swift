@@ -43,7 +43,6 @@ final class ArtistCollectionViewController: UICollectionViewController {
 		super.viewDidLoad()
 		
 		title = "Artists" // TITLE
-		collectionView?.backgroundColor = UIColor.whiteColor()
 		
 		let nibName = UINib(nibName: CellIdentifier.MediaCollectionViewCell.rawValue, bundle: nil) 
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue)
@@ -128,11 +127,11 @@ final class ArtistCollectionViewController: UICollectionViewController {
 			
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
 			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
-				let sectionInset: CGFloat = 2
+				let sectionInset: CGFloat = 1
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = sectionInset / 2.0
+				let itemSpacing: CGFloat = 1
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				
 				
@@ -180,7 +179,7 @@ final class ArtistCollectionViewController: UICollectionViewController {
 		let artist = self.artists[indexPath.row]
 		cell.title.text = artistFullName(artist)
 		cell.backgroundColor = UIColor.blackColor()
-		cell.title.textColor = UIColor.whiteColor()
+		cell.title.textColor = UIColor.sfOrangeColor()
 		return cell
 	}
 	
@@ -232,12 +231,12 @@ final class ArtistCollectionViewController: UICollectionViewController {
 		for path in indexPathsVisible {
 					let cell = collectionView.cellForItemAtIndexPath(path) as? MediaCollectionViewCell
 					cell?.backgroundColor = UIColor.blackColor()
-					cell?.title.textColor = UIColor.whiteColor()
+					cell?.title.textColor = UIColor.sfOrangeColor()
 		}
 		
 		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
 			let cell = collectionView.cellForItemAtIndexPath(indexPath) as? MediaCollectionViewCell
-			cell?.backgroundColor = UIColor.sfOrangeColor()
+			cell?.backgroundColor = UIColor.whiteColor()
 			cell?.title.textColor = UIColor.blackColor()
 		}
 	}

@@ -40,7 +40,6 @@ final class MediaCollectionViewController: UICollectionViewController {
 		super.viewDidLoad()
 		
 		title = "Media" // TITLE
-		collectionView?.backgroundColor = UIColor.whiteColor()
 		
 		let nibName = UINib(nibName: CellIdentifier.MediaCollectionViewCell.rawValue, bundle: nil) // TODO:
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue)
@@ -120,11 +119,11 @@ final class MediaCollectionViewController: UICollectionViewController {
 			
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
 			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
-				let sectionInset: CGFloat = 2.0
+				let sectionInset: CGFloat = 1.0
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = sectionInset / 2.0
+				let itemSpacing: CGFloat = 1.0
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				
 				
@@ -136,7 +135,7 @@ final class MediaCollectionViewController: UICollectionViewController {
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = sectionInset / 2.0
+				let itemSpacing: CGFloat = 2.0
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				minimumCellsPerLine = 1
 				maxCellWidth = cellWidthToUse(masterViewsWidth, cellsPerLine: minimumCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
@@ -170,7 +169,7 @@ final class MediaCollectionViewController: UICollectionViewController {
 		let mediumName = media[indexPath.row] as String
 		cell.title.text = mediumName
 		cell.backgroundColor = UIColor.blackColor()
-		cell.title.textColor = UIColor.whiteColor()
+		cell.title.textColor = UIColor.sfOrangeColor()
 		return cell
 	}
 	
@@ -218,12 +217,12 @@ final class MediaCollectionViewController: UICollectionViewController {
 		for path in indexPathsVisible {
 					let cell = collectionView.cellForItemAtIndexPath(path) as? MediaCollectionViewCell
 					cell?.backgroundColor = UIColor.blackColor()
-					cell?.title.textColor = UIColor.whiteColor()
+					cell?.title.textColor = UIColor.sfOrangeColor()
 		}
 		
 		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
 			let cell = collectionView.cellForItemAtIndexPath(indexPath) as? MediaCollectionViewCell
-			cell?.backgroundColor = UIColor.sfOrangeColor()
+			cell?.backgroundColor = UIColor.whiteColor()
 			cell?.title.textColor = UIColor.blackColor()
 		}
 	}

@@ -15,6 +15,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
 	
     override func awakeFromNib() {
         super.awakeFromNib()
+		menuItemName.textColor = UIColor.sfOrangeColor()
         // Initialization code
     }
 

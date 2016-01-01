@@ -82,10 +82,10 @@ enum MainMenuType {
 }
 
 enum MainMenuRow: Int {
-	case Artists = 4
-	case Catagory = 2
-	case Neighborhoods = 0
-	case Titles = 1
+	case Artists = 1
+	case Catagory = 4
+	case Neighborhoods = 2
+	case Titles = 0
 	case Medium = 3
 	case Favorites = 5
 	case CountRows = 6
@@ -104,19 +104,19 @@ struct MainMenu {
 		var image = UIImage()
 		switch(mainMenuType) {
 		case .Artists:
-			image = UIImage(named: "HeadofStFrancis1") ?? image
+			image = UIImage(named: "FlutePlayers") ?? image
 			title = "Artists"
 		case .Catagory:
 			image = UIImage(named: "LionClose") ?? image
 			title = "Catagories"
 		case .Neighborhoods:
-			image = UIImage(named: "NorthBeachAlley") ?? image
+			image = UIImage(named: "IMG_0951") ?? image
 			title = "Locations"
 		case .Titles:
-			image = UIImage(named: "MiguelCervantes") ?? image
+			image = UIImage(named: "IMG_5037") ?? image
 			title = "Titles"
 		case .Medium:
-			image = UIImage(named: "FlutePlayers") ?? image
+			image = UIImage(named: "IMG_5838") ?? image
 			title = "Media"
 		case .Favorites:
 		//	image = UIImage(named: "SixteenthAveTiledStepsCropped") ?? image

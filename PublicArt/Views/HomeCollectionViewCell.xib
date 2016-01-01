@@ -19,25 +19,25 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CdF-f1-Vcd">
                                 <rect key="frame" x="-5" y="0.0" width="310" height="248"/>
                                 <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6NR-3r-tH5">
-                                <rect key="frame" x="0.0" y="226" width="305" height="22"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6NR-3r-tH5">
+                                <rect key="frame" x="0.0" y="222" width="305" height="26"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="Z5H-rh-thU"/>
+                                    <constraint firstAttribute="height" constant="26" id="Z5H-rh-thU"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="6NR-3r-tH5" secondAttribute="bottom" id="Ghx-XP-SeL"/>
+                            <constraint firstAttribute="bottom" secondItem="6NR-3r-tH5" secondAttribute="bottom" id="MS1-x0-kaR"/>
                             <constraint firstItem="6NR-3r-tH5" firstAttribute="leading" secondItem="kW4-X4-S5Q" secondAttribute="leading" id="SpQ-la-fZ8"/>
                             <constraint firstAttribute="bottom" secondItem="CdF-f1-Vcd" secondAttribute="bottom" id="ae6-rX-hgc"/>
                             <constraint firstAttribute="trailing" secondItem="CdF-f1-Vcd" secondAttribute="trailing" id="eHz-hG-91n"/>

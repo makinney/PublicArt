@@ -49,7 +49,7 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 
 
 	func setupFlowLayout() {
-		let maxCellHeight: CGFloat = 40.0
+		let maxCellHeight: CGFloat = 44
 		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
 			collectionViewFlowLayout.scrollDirection = .Vertical
 			let masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
@@ -59,11 +59,11 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 			
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
 			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
-				let sectionInset: CGFloat = 2
+				let sectionInset: CGFloat = 1
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = sectionInset / 2.0
+				let itemSpacing: CGFloat = 1
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				
 				minimumCellsPerLine = 1
@@ -74,7 +74,7 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = sectionInset / 2.0
+				let itemSpacing: CGFloat = 2.0
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				minimumCellsPerLine = 1
 				let maxPhotoWidth = maxCellWidth(masterViewsWidth, cellsPerLine: minimumCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
@@ -121,7 +121,7 @@ final class CatagoryCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.CategoryCollectionViewCell.rawValue, forIndexPath: indexPath) as! CategoryCollectionViewCell
 		cell.menuItemName.text = menuItem(indexPath.row).title
 		cell.backgroundColor = UIColor.blackColor()
-		cell.menuItemName.textColor = UIColor.whiteColor()
+		cell.menuItemName.textColor = UIColor.sfOrangeColor()
         return cell
     }
 	
@@ -183,12 +183,12 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 		for path in indexPathsVisible {
 				let cell = collectionView.cellForItemAtIndexPath(path) as? CategoryCollectionViewCell
 				cell?.backgroundColor = UIColor.blackColor()
-				cell?.menuItemName.textColor = UIColor.whiteColor()
+				cell?.menuItemName.textColor = UIColor.sfOrangeColor()
 		}
 		
 		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
 			let cell = collectionView.cellForItemAtIndexPath(indexPath) as? CategoryCollectionViewCell
-			cell?.backgroundColor = UIColor.sfOrangeColor()
+			cell?.backgroundColor = UIColor.whiteColor()
 			cell?.menuItemName.textColor = UIColor.blackColor()
 		}
 	}
