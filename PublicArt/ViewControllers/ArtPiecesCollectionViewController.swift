@@ -206,7 +206,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 					cell.imageView.image = nil //
 				}
 				
-				thumbImages.getImage(art, complete: { (image, imageFileName) -> () in // TODO -
+				thumbImages.getImage(art, complete: { (image, imageFileName) -> () in
 					if let image = image,
 						imageFileName = imageFileName
 					   where cell.imageFileName == imageFileName {
@@ -233,10 +233,10 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 				let aspectRatio = thumb.imageAspectRatio as CGFloat
 				height = width / aspectRatio
 				if aspectRatio > 0 && aspectRatio <= 1.25 {
-					height = width / CGFloat(aspectRatio)// + 21.0 // TODO: hack based on label height
+					height = width / CGFloat(aspectRatio)
 				} else  {
 					width = width * 2.0  // TODO fine tune
-					height = width / CGFloat(aspectRatio)// + 21.0 // TODO: hack based on label height
+					height = width / CGFloat(aspectRatio)
 				}
 			}
 		}
