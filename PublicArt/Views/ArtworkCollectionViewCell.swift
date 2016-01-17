@@ -10,13 +10,19 @@ import UIKit
 
 class ArtworkCollectionViewCell: UICollectionViewCell {
     
+	@IBOutlet weak var titleHeight: NSLayoutConstraint!
+	@IBOutlet weak var imageViewHeight: NSLayoutConstraint!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var title: UILabel!
 	var imageFileName = String()
-		
-	@IBOutlet weak var photoBorderView: UIView!
-//	var imageSize:CGSize = CGSize(width: 0, height: 0)
 	
-
+	
+	override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
+		super.applyLayoutAttributes(layoutAttributes)
+		let attributes = layoutAttributes as! ArtworkLayoutAttributes
+		imageViewHeight.constant = attributes.photoHeight
+	}
+	
+	
 }
