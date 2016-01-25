@@ -146,60 +146,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	}()
 	
 	
-//	func setupArtPiecesPhotosFlowLayout() {
-//		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
-//			collectionViewFlowLayout.scrollDirection = .Vertical
-//			let masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
-//			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
-//			
-//			collectionViewFlowLayout.minimumLineSpacing = 5
-//				var minimumPhotosPerLine = 2 // ultimately up to flow layout
-//			
-//			userInterfaceIdion = traitCollection.userInterfaceIdiom
-//			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
-//				let sectionInset: CGFloat = 5.0
-//				collectionViewFlowLayout.sectionInset.top = sectionInset
-//
-//				collectionViewFlowLayout.sectionInset.left = sectionInset
-//				collectionViewFlowLayout.sectionInset.right = sectionInset
-//				let itemSpacing: CGFloat = sectionInset / 2.0
-//				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
-//
-//				
-//				minimumPhotosPerLine = 2
-//				maxPhotoWidth = photoWidthAvailable(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
-//				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxPhotoWidth) // TODO: hard constant hack for aspect ratio
-//			} else {
-//				let sectionInset: CGFloat = 5.0
-//				collectionViewFlowLayout.sectionInset.top = sectionInset
-//				collectionViewFlowLayout.sectionInset.left = sectionInset
-//				collectionViewFlowLayout.sectionInset.right = sectionInset
-//				let itemSpacing: CGFloat = sectionInset / 2.0
-//				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
-//				minimumPhotosPerLine = 2
-//				maxPhotoWidth = photoWidthAvailable(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
-//				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxPhotoWidth)
-//			}
-//		}
-//	}
-	
-//	func photoWidthAvailable(screenWidth: CGFloat, photosPerLine: Int, itemSpacing: CGFloat, flowLayout:UICollectionViewFlowLayout ) -> CGFloat {
-//		let numPhotos: CGFloat = CGFloat(photosPerLine)
-//		var totalInterItemSpacing: CGFloat = 0.0
-//		var totalInsetSpacing: CGFloat = 0.0
-//		var totalSpacing: CGFloat = 0.0
-//		var spaceLeftForPhotos: CGFloat = 0.0
-//		var photoWidth: CGFloat = 0.0
-//		
-//		totalInterItemSpacing = numPhotos * itemSpacing
-//		totalInsetSpacing = flowLayout.sectionInset.left + flowLayout.sectionInset.right
-//		totalSpacing = totalInterItemSpacing + totalInsetSpacing
-//		spaceLeftForPhotos = screenWidth - totalSpacing
-//		photoWidth = spaceLeftForPhotos / numPhotos
-//		return photoWidth
-//	}
-//	
-	
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.ArtworkCollectionViewCell.rawValue, forIndexPath: indexPath) as! ArtworkCollectionViewCell
 		let art = fetchResultsController.objectAtIndexPath(indexPath) as! Art
@@ -228,27 +174,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		return cell
 	}
 		
-	
-//	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//		// default square
-//		var height: CGFloat = maxPhotoWidth
-//		var width: CGFloat = maxPhotoWidth
-//		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
-//			if let thumb = art.thumb {
-//				let aspectRatio = thumb.imageAspectRatio as CGFloat
-//				height = width / aspectRatio
-//				if aspectRatio > 0 && aspectRatio <= 1.25 {
-//					height = width / CGFloat(aspectRatio)
-//				} else  {
-//					width = width * 2.0  // TODO fine tune
-//					height = width / CGFloat(aspectRatio)
-//				}
-//			}
-//		}
-//		return CGSize(width: width, height: height)
-//	}
-//	
-//	
 	override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
 		return fetchResultsController.sections?.count ?? 0
 	}
@@ -293,7 +218,6 @@ extension ArtPiecesCollectionViewController: ArtworkLayoutDelegate {
 	func collectionView(collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
 		return 21 // FIXME:
 	}
-	
 }
 
 

@@ -10,9 +10,16 @@ import UIKit
 
 class LocationCollectionViewCell: UICollectionViewCell {
    
+	@IBOutlet weak var viewHeight: NSLayoutConstraint!
 	@IBOutlet weak var title: UILabel!
 	var imageFileName = String()
 		
-	@IBOutlet weak var photoBorderView: UIView!
+	
+	override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
+		super.applyLayoutAttributes(layoutAttributes)
+		let attributes = layoutAttributes as! ArtworkLayoutAttributes
+		viewHeight.constant = attributes.photoHeight // no images for location collection
+	}
+
 	
 }

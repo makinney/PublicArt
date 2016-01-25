@@ -15,8 +15,6 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	// MARK: Properties
 	var photoImages: PhotoImages?
 	private var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
-//	private var artPiecesNavigationController: UINavigationController
-//	private var detailViewController: UIViewController?
 	private var collapseDetailViewController = true
 	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
 	private var selectedLocation: Location?
@@ -50,7 +48,12 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		
 		let nibName = UINib(nibName: CellIdentifier.LocationCollectionViewCell.rawValue, bundle: nil) // TODO:
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.LocationCollectionViewCell.rawValue)
-		setupFlowLayout()
+		
+		let artworkCollectionViewLayout = collectionViewLayout as! ArtworkCollectionViewLayout
+		artworkCollectionViewLayout.cellPadding = 1
+		artworkCollectionViewLayout.delegate = self
+		artworkCollectionViewLayout.numberOfColumns = 3
+
 		
 		fetchResultsController.delegate = self
 		do {
@@ -97,7 +100,6 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 //	}
 	
 	override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
-		setupFlowLayout()
 		collectionView?.reloadData()
 	}
 	
@@ -115,43 +117,6 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc!, sectionNameKeyPath: nil, cacheName: nil)
 		return frc
 		}()
-	
-    // MARK: - Navigation
-	
-	func setupFlowLayout() {
-		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
-			collectionViewFlowLayout.scrollDirection = .Vertical
-			let masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
-			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
-			var maxCellWidth: CGFloat = 0.0
-
-			collectionViewFlowLayout.minimumLineSpacing = 2
-			var minimumNumberCellsPerLine = 2 // ultimately up to flow layout
-			
-			userInterfaceIdion = traitCollection.userInterfaceIdiom
-			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
-				let sectionInset: CGFloat = 1.0
-				collectionViewFlowLayout.sectionInset.top = sectionInset
-				collectionViewFlowLayout.sectionInset.left = sectionInset
-				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = 1.0
-				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
-				minimumNumberCellsPerLine = 3
-				maxCellWidth = cellWidthAvailable(masterViewsWidth, cellsPerLine: minimumNumberCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
-				collectionViewFlowLayout.itemSize = CGSize(width: maxCellWidth, height: maxCellWidth) 
-			} else {
-				let sectionInset: CGFloat = 2.0
-				collectionViewFlowLayout.sectionInset.top = sectionInset
-				collectionViewFlowLayout.sectionInset.left = sectionInset
-				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = 2.0
-				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
-				minimumNumberCellsPerLine = 3
-				maxCellWidth = cellWidthAvailable(masterViewsWidth, cellsPerLine: minimumNumberCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
-				collectionViewFlowLayout.itemSize = CGSize(width: maxCellWidth, height: maxCellWidth)
-			}
-		}
-	}
 	
 	func cellWidthAvailable(screenWidth: CGFloat, cellsPerLine: Int, itemSpacing: CGFloat, flowLayout:UICollectionViewFlowLayout ) -> CGFloat {
 		let numCells: CGFloat = CGFloat(cellsPerLine)
@@ -216,19 +181,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	}
 	
     // MARK: UICollectionViewDelegate
-//	
-//	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-//		if let location = fetchResultsController.objectAtIndexPath(indexPath) as? Location {
-//			if location.name != "All" {
-//				let filter = ArtPiecesCollectionViewDataFilter(key: "idLocation", value: location.idLocation, title: location.name)
-//				artPiecesCollectionViewController.fetchFilter(filter)
-//			} else {
-//				artPiecesCollectionViewController.pageTitle = "San Francisco"
-//			}
-//			showDetailViewController(detailViewController, sender: self)
-//		}
-//	}
-	
+
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 		if let location = fetchResultsController.objectAtIndexPath(indexPath) as? Location {
 			selectedLocation = location
@@ -310,5 +263,20 @@ extension LocationsCollectionViewController : NSFetchedResultsControllerDelegate
 		collectionView?.reloadData()
 	}
 }
+
+
+extension LocationsCollectionViewController: ArtworkLayoutDelegate {
+	
+	func collectionView(collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
+		let height = width // photos for menus are always square
+		return height
+	}
+	
+	func collectionView(collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
+		return 0 // FIXME:
+	}
+}
+
+
 
 

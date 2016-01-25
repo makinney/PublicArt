@@ -10,6 +10,8 @@ import UIKit
 
 class HomeCollectionViewCell: UICollectionViewCell {
 
+	@IBOutlet weak var menuItemNameHeight: NSLayoutConstraint!
+	@IBOutlet weak var imageViewHeight: NSLayoutConstraint!
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var menuItemName: UILabel!
 	
@@ -18,5 +20,11 @@ class HomeCollectionViewCell: UICollectionViewCell {
 		menuItemName.textColor = UIColor.sfOrangeColor()
         // Initialization code
     }
+	
+	override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
+		super.applyLayoutAttributes(layoutAttributes)
+		let attributes = layoutAttributes as! ArtworkLayoutAttributes
+		imageViewHeight.constant = attributes.photoHeight
+	}
 
 }

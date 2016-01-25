@@ -23,11 +23,14 @@ final class MainMenuCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 		let nibName = UINib(nibName: "HomeCollectionViewCell", bundle: nil)
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: "HomeCollectionViewCellID")
-		setupFlowLayout()
 		collectionView?.reloadData()
 		self.title = "Public Art" // TITLE
 		
 		
+		let artworkCollectionViewLayout = collectionViewLayout as! ArtworkCollectionViewLayout
+		artworkCollectionViewLayout.cellPadding = 1
+		artworkCollectionViewLayout.delegate = self
+		artworkCollectionViewLayout.numberOfColumns = 2
 		
 		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
 			showDefaultDetailViewController()
@@ -38,7 +41,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		super.viewWillAppear(animated)
 		
 				if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
-					collectionView?.backgroundColor = UIColor.grayColor()
+					collectionView?.backgroundColor = UIColor.blackColor()
 				} else {
 					collectionView?.backgroundColor = UIColor.blackColor()
 				}
@@ -52,68 +55,10 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 	
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-	
-	
-	// MARK: Flow Layout
-	func maxCellWidth(screenWidth: CGFloat, photosPerLine: Int, itemSpacing: CGFloat, flowLayout:UICollectionViewFlowLayout ) -> CGFloat {
-		let numPhotos: CGFloat = CGFloat(photosPerLine)
-		let totalInterItemSpacing: CGFloat = numPhotos * itemSpacing
-		let totalInsetSpacing: CGFloat = flowLayout.sectionInset.left + flowLayout.sectionInset.right
-		let totalSpacing: CGFloat = totalInterItemSpacing + totalInsetSpacing
-		let spaceLeftForPhotos: CGFloat = screenWidth - totalSpacing
-		let photoWidth: CGFloat = spaceLeftForPhotos / numPhotos
-		return photoWidth
-	}
-	
-	
-	func setupFlowLayout() {
-		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
-			collectionViewFlowLayout.scrollDirection = .Vertical
-			let masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
-			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
-			
-			var minimumPhotosPerLine = 0 // ultimately up to flow layout
-			
-			userInterfaceIdion = traitCollection.userInterfaceIdiom
-			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
-				collectionViewFlowLayout.minimumLineSpacing = 1
-				let sectionInset: CGFloat = 0
-				collectionViewFlowLayout.sectionInset.top = sectionInset
-				collectionViewFlowLayout.sectionInset.left = sectionInset
-				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = 1
-				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
-				
-				minimumPhotosPerLine = 2
-				let maxPhotoWidth = maxCellWidth(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
-				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxPhotoWidth) // TODO: hard constant hack for aspect ratio
-			} else {
-				collectionViewFlowLayout.minimumLineSpacing = 4
-				let sectionInset: CGFloat = 0
-				collectionViewFlowLayout.sectionInset.top = sectionInset
-				collectionViewFlowLayout.sectionInset.left = sectionInset
-				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = 2
-				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
-				
-				minimumPhotosPerLine = 1
-				let maxPhotoWidth = maxCellWidth(masterViewsWidth, photosPerLine: minimumPhotosPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
-				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxPhotoWidth)
-			}
-		}
-	}
-	
 	override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
-		setupFlowLayout()
 		//		collectionView?.reloadData()
 	}
 	
-
     // MARK: UICollectionViewDataSource
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -241,34 +186,20 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 			}
 		}
 	}
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-    
-    }
-    */
-
 }
+
+extension MainMenuCollectionViewController: ArtworkLayoutDelegate {
+
+	func collectionView(collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
+		let height = width
+		return height
+	}
+	
+	func collectionView(collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
+		return 0 // FIXME:
+	}
+}
+	
+
+
+
