@@ -28,9 +28,18 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		
 		
 		let artworkCollectionViewLayout = collectionViewLayout as! ArtworkCollectionViewLayout
-		artworkCollectionViewLayout.cellPadding = 1
-		artworkCollectionViewLayout.delegate = self
-		artworkCollectionViewLayout.numberOfColumns = 2
+		
+		userInterfaceIdion = traitCollection.userInterfaceIdiom
+		if userInterfaceIdion == .Pad {
+			artworkCollectionViewLayout.cellPadding = 5
+			artworkCollectionViewLayout.delegate = self
+			artworkCollectionViewLayout.numberOfColumns = 1
+		} else {
+			artworkCollectionViewLayout.cellPadding = 1
+			artworkCollectionViewLayout.delegate = self
+			artworkCollectionViewLayout.numberOfColumns = 2
+		}
+	
 		
 		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
 			showDefaultDetailViewController()

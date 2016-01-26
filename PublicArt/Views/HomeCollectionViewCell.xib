@@ -17,7 +17,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CdF-f1-Vcd">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="31n-QR-UeR"/>
                                 </constraints>
@@ -61,7 +61,7 @@
                 <outlet property="menuItemName" destination="6NR-3r-tH5" id="zMe-Ak-hQr"/>
                 <outlet property="menuItemNameHeight" destination="Z5H-rh-thU" id="3HW-ZZ-8lf"/>
             </connections>
-            <point key="canvasLocation" x="94.5" y="548"/>
+            <point key="canvasLocation" x="94" y="548"/>
         </collectionViewCell>
     </objects>
 </document>

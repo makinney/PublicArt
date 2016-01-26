@@ -1,4 +1,4 @@
-//
+////
 //  HomeCollectionViewCell.swift
 //  PublicArt
 //
@@ -14,10 +14,17 @@ class HomeCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageViewHeight: NSLayoutConstraint!
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var menuItemName: UILabel!
+	@IBOutlet weak var overlayView: UIView!
 	
     override func awakeFromNib() {
         super.awakeFromNib()
 		menuItemName.textColor = UIColor.sfOrangeColor()
+//		let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
+		
+	//	let visualEffectView = UIVisualEffectView(effect: UIVibrancyEffect(forBlurEffect: UIBlurEffect(style: .Dark))) as UIVisualEffectView
+		
+	//	visualEffectView.frame = imageView.bounds
+	//	imageView.addSubview(visualEffectView)
         // Initialization code
     }
 	
