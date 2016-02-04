@@ -10,7 +10,6 @@ import UIKit
 
 final class CatagoryCollectionViewController: UICollectionViewController {
 
-	var photoImages: PhotoImages?
 	private var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
 	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
 	private var categoryMenuItem = CatagoryMenuItem()
@@ -23,7 +22,8 @@ final class CatagoryCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 		let nibName = UINib(nibName: CellIdentifier.CategoryCollectionViewCell.rawValue, bundle: nil)
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.CategoryCollectionViewCell.rawValue)
-				
+		collectionView?.backgroundColor = UIColor.whiteColor()
+
 		setupFlowLayout()
 		collectionView?.reloadData()
 		
@@ -156,14 +156,12 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
 			if artPiecesCollectionViewController != nil {
 				artPiecesCollectionViewController!.fetchFilter(filter)
-				artPiecesCollectionViewController!.photoImages = photoImages
 				showDetailViewController(artPiecesCollectionViewController!, sender: self)
 			}
 		} else {
 			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
 				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
 					artPiecesCollectionViewController.fetchFilter(filter)
-					artPiecesCollectionViewController.photoImages = photoImages
 					showDetailViewController(navigationController, sender: self)
 			}
 		}

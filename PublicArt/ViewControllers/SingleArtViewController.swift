@@ -39,7 +39,6 @@ final class SingleArtViewController: UIViewController {
 	private var mapRouting: MapRouting?
 	private var promptUserTimer: NSTimer?
 	private let promptUserTimerTimeout: NSTimeInterval = 5
-	var photoImages: PhotoImages?
 
 	// MARK: Lifecycles
 
@@ -141,23 +140,16 @@ final class SingleArtViewController: UIViewController {
 		if let art = art {
 			if let highResPhoto = thumbNailsHighResolutionVersionIn(art) {
 				activityIndicator.startAnimating()
-				ImageDownload.downloadPhoto(highResPhoto, complete: {[weak self] (data, imageFileName) -> () in
-					if let data = data	{
-						let image = UIImage(data: data) ?? UIImage()
-						self?.artImageView.image = image
-						self?.artImageView.hidden = false
-					}
+				PhotoImages.sharedInstance.getImage(highResPhoto, complete: {[weak self] (image, imageFileName) -> () in
+					self?.artImageView.image = image
+					self?.artImageView.hidden = false
 					self?.activityIndicator.stopAnimating()
 				})
 			} else {
-				activityIndicator.startAnimating()
-				ImageDownload.downloadThumb(art, complete: {[weak self] (data, imageFileName) -> () in
-				if let data = data	{
-					let image = UIImage(data: data) ?? UIImage()
+			
+				ThumbImages.sharedInstance.getImage(art, complete: { [weak self] (image, imageFileName) -> ()  in
 					self?.artImageView.image = image
 					self?.artImageView.hidden = false
-				}
-					self?.activityIndicator.stopAnimating()
 				})
 			}
 
@@ -242,7 +234,6 @@ final class SingleArtViewController: UIViewController {
 			if let singleArtPhotosCollectionViewController = segue.destinationViewController as? SingleArtPhotosCollectionViewController {
 				singleArtPhotosCollectionViewController.transitioningDelegate = singleArtPhotosAnimatedTransistionDelegate
 				singleArtPhotosCollectionViewController.modalPresentationStyle = .Custom
-				singleArtPhotosCollectionViewController.photoImages = photoImages
 				singleArtPhotosCollectionViewController.art = art
 			}
 		}

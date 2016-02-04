@@ -23,5 +23,6 @@ struct ModelAttributes {
 	static let artworkTitle = "title" // TODO: move to the model attribute name structure
 	static let locationName = "name"
 	static let medium = "medium"
+	static let hasThumb = "hasThumb"
 }
 

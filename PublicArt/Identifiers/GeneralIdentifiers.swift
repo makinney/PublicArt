@@ -8,6 +8,11 @@
 
 import Foundation
 
+public struct ImageFileName {
+	static let NoThumbImage = "noThumb"
+}
+
+
 public enum SortMode {
 	case byTitle
 	case byNeighborhood

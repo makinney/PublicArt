@@ -13,7 +13,7 @@ import Parse
 class ImageDownload {
 	
 	class func downloadThumb(art: Art, complete:(data: NSData?, imageFileName: String)->()) {
-		if let thumb = art.thumb {
+		if let thumb = art.thumb where art.hasThumb == true {
 			let query = PFQuery(className: ParseThumb.parseClassName())
 			query.fromLocalDatastore()
 			query.getObjectInBackgroundWithId(thumb.objectId, block: { (pfObject, error) -> Void in

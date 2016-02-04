@@ -21,7 +21,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
 	private var maxPhotoWidth: CGFloat = 0.0
 	private let moc: NSManagedObjectContext?
-	private let thumbImages = ThumbImages()
 	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
 
 	private var error:NSError?
@@ -29,7 +28,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	var fetchFilterKey: String?
 	var fetchFilterValue: String?
 	var pageTitle: String?
-	var photoImages: PhotoImages?
 	
 	func fetchFilter(filter: ArtPiecesCollectionViewControllerDataFilterProtocol) {
 		fetchFilterKey = filter.fetchFilterKey
@@ -64,13 +62,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		artworkCollectionViewLayout.delegate = self
 		artworkCollectionViewLayout.numberOfColumns = 2
 		
-		//setupArtPiecesPhotosFlowLayout()
-//		
-//		NSNotificationCenter.defaultCenter().addObserver(self,
-//			selector:"newArtCityDatabase:",
-//			name: ArtAppNotifications.NewArtCityDatabase.rawValue,
-//			object: nil)
-		
 		fetchResultsController.delegate = self
 		do {
 			try fetchResultsController.performFetch()
@@ -93,27 +84,14 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 //		collectionView?.reloadData()
 	}
 	
-	override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-//		if self.view.frame.size.width != size.width ||
-//			self.view.frame.size.height != size.height {
-//				setupArtCityPhotosFlowLayout()
-//				collectionView?.reloadData()
-//		
-//		}
-//		if initialHorizontalSizeClass == .Compact {
-//			displayDefaultArt()
-//		}
-	}
 
 	override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
 		if let previousTraitCollection = previousTraitCollection {
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
 			if userInterfaceIdion == .Pad {
-	//			setupArtPiecesPhotosFlowLayout()
 				collectionView?.reloadData()
 			} else if traitCollection.horizontalSizeClass != previousTraitCollection.horizontalSizeClass ||
 				traitCollection.verticalSizeClass != previousTraitCollection.verticalSizeClass {
-	//			setupArtPiecesPhotosFlowLayout()
 				collectionView?.reloadData()
 			}
 		}
@@ -129,17 +107,23 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	//
 	lazy var fetchResultsController:NSFetchedResultsController = {
 		let fetchRequest = NSFetchRequest(entityName:ModelEntity.art)
-		
+		var predicates = [NSPredicate]()
+		// TODO: fixme should support multiple key:values
 		if let key = self.fetchFilterKey,
 			let value = self.fetchFilterValue {
 			if key != "tags" {
-				fetchRequest.predicate = NSPredicate(format:"%K == %@", key,value)
+				predicates.append(NSPredicate(format:"%K == %@", key,value))
 			} else {
-				fetchRequest.predicate = NSPredicate(format:"%K CONTAINS[cd] %@", key,value)
+				predicates.append(NSPredicate(format:"%K CONTAINS[cd] %@", key,value))
 			}
 		}
+		//
+		predicates.append(NSPredicate(format:"%K == %@", "hasThumb",NSNumber(bool: true))) // has photos
+		
+		var compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+		fetchRequest.predicate = compoundPredicate
 
-		let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.artworkTitle, ascending:true, selector: "localizedStandardCompare:")]
+		let sortDescriptor = [NSSortDescriptor(key:"hasThumb", ascending:false, selector: "localizedStandardCompare:"), NSSortDescriptor(key:ModelAttributes.artworkTitle, ascending:true, selector: "localizedStandardCompare:")]
 		fetchRequest.sortDescriptors = sortDescriptor
 		let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc!, sectionNameKeyPath: nil, cacheName: nil)
 		return frc
@@ -148,28 +132,26 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.ArtworkCollectionViewCell.rawValue, forIndexPath: indexPath) as! ArtworkCollectionViewCell
+
 		let art = fetchResultsController.objectAtIndexPath(indexPath) as! Art
-		if let thumb = art.thumb {
-			if cell.imageFileName != thumb.imageFileName {
-				cell.imageFileName = thumb.imageFileName
-				
-				if cell.imageView.image == nil { // prevents spinning over existing images
-					cell.activityIndicator.startAnimating()
-				} else {
-					cell.imageView.image = nil //
-				}
-				
-				thumbImages.getImage(art, complete: { (image, imageFileName) -> () in
-					if let image = image,
-						imageFileName = imageFileName
-					   where cell.imageFileName == imageFileName {
-						cell.imageView.image = image
-						cell.title.text = art.title
-					}
-					cell.activityIndicator.stopAnimating()
-				})
-			}
+
+		if cell.imageView.image == nil { // prevents spinning over existing images
+			cell.activityIndicator.startAnimating()
 		}
+
+		ThumbImages.sharedInstance.getImage(art, complete: { (image, imageFileName) -> () in
+			if let image = image {
+				cell.imageView.image = image
+				cell.title.text = art.title
+				cell.noImageTitle.text = ""
+			} else {
+				cell.imageView.image = nil
+				cell.title.text = ""
+				cell.noImageTitle.text = art.title
+			}
+			
+			cell.activityIndicator.stopAnimating()
+		})
 		
 		return cell
 	}
@@ -179,7 +161,8 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	}
 	
 	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		let sectionInfo = fetchResultsController.sections![section] 
+		let sectionInfo = fetchResultsController.sections![section]
+		print("\(sectionInfo.numberOfObjects) fetched")
 		return sectionInfo.numberOfObjects
 	}
 	
@@ -188,7 +171,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art,
 			let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as?  SingleArtViewController {
-			singleArtViewController.photoImages = photoImages
 			singleArtViewController.update(art, artBackgroundColor: nil)
 			showViewController(singleArtViewController, sender: self)
 		}
@@ -204,19 +186,23 @@ extension ArtPiecesCollectionViewController: ArtworkLayoutDelegate {
 	
 	func collectionView(collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
 		var height: CGFloat = 100
+		let boundingRect = CGRect(x: 0, y: 0, width: width, height: CGFloat(MAXFLOAT)) //
+		var imageHeight = width //
+		
 		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art,
 			let thumb = art.thumb {
-				let boundingRect = CGRect(x: 0, y: 0, width: width, height: CGFloat(MAXFLOAT)) //
-				let imageHeight = width / (thumb.imageAspectRatio as CGFloat)
-				let rect = AVMakeRectWithAspectRatioInsideRect(CGSize(width: width, height: imageHeight), boundingRect)
-				height = rect.height
+				imageHeight = width / (thumb.imageAspectRatio as CGFloat)
+		} else {
+			imageHeight = width * 0.25
 		}
 		
+		let rect = AVMakeRectWithAspectRatioInsideRect(CGSize(width: width, height: imageHeight), boundingRect)
+		height = rect.height
 		return height
 	}
 	
 	func collectionView(collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
-		return 21 // FIXME:
+		return 25 // FIXME:
 	}
 }
 

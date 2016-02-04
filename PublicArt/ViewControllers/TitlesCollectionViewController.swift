@@ -12,7 +12,6 @@ import CoreData
 final class TitlesCollectionViewController: UICollectionViewController {
 
 	// MARK: Properties
-	var photoImages: PhotoImages?
 	private var collapseDetailViewController = true
 	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
 	private var maxCellWidth: CGFloat = 0.0
@@ -44,6 +43,8 @@ final class TitlesCollectionViewController: UICollectionViewController {
 		
 		setupArtTitlesFlowLayout()
 		
+		collectionView?.backgroundColor = UIColor.whiteColor()
+		
 		fetchResultsController.delegate = self
 		do {
 			try fetchResultsController.performFetch()
@@ -60,7 +61,6 @@ final class TitlesCollectionViewController: UICollectionViewController {
 			let selectedArt = selectedArt {
 			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController {
 				let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as!  SingleArtViewController
-				singleArtViewController.photoImages = photoImages
 				singleArtViewController.update(selectedArt, artBackgroundColor: nil)
 				navigationController.setViewControllers([singleArtViewController], animated: false)
 				showDetailViewController(navigationController, sender: self)
@@ -176,14 +176,12 @@ final class TitlesCollectionViewController: UICollectionViewController {
 			selectedArt = art
 			if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
 				if	let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as?  SingleArtViewController {
-						singleArtViewController.photoImages = photoImages
 						singleArtViewController.update(art, artBackgroundColor: nil)
 						showViewController(singleArtViewController, sender: self)
 				}
 			} else {
 				if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController {
 					let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as!  SingleArtViewController
-					singleArtViewController.photoImages = photoImages
 					singleArtViewController.update(art, artBackgroundColor: nil)
 					navigationController.setViewControllers([singleArtViewController], animated: false)
 					showDetailViewController(navigationController, sender: self)

@@ -10,8 +10,9 @@ import UIKit
 
 class ThumbImages {
 	let MaxImages = 100
+	static let sharedInstance = ThumbImages()
 	
-	init(){
+	private init(){
 		
 	}
 	
@@ -32,6 +33,7 @@ class ThumbImages {
 				})
 			}
 		} else {
+			//let noThumbImage = UIImage(named: ImageFileName.NoThumbImage)
 			complete(image: nil, imageFileName: nil)
 		}
 	}

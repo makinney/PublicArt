@@ -23,7 +23,6 @@ final class SingleArtPhotosCollectionViewController: UICollectionViewController 
 	
 	var collectionViewFlowLayout = SingleArtPhotosCollectionViewFlowLayout()
 	var photos: [Photo]?
-	var photoImages: PhotoImages?
 	
 	override init(collectionViewLayout: UICollectionViewLayout) {
 		super.init(collectionViewLayout: collectionViewLayout)
@@ -97,11 +96,10 @@ final class SingleArtPhotosCollectionViewController: UICollectionViewController 
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.SingleArtPhotosCollectionViewCell.rawValue, forIndexPath: indexPath) as! SingleArtPhotosCollectionViewCell
 		cell.imageView.image = nil
-		if let photo = photos?[indexPath.row],
-			let photoImages = photoImages {
+		if let photo = photos?[indexPath.row] {
 			cell.imageFileName = photo.imageFileName
 			cell.activityIndicator.startAnimating()
-			photoImages.getImage(photo, complete: { (image, imageFileName) -> () in
+			PhotoImages.sharedInstance.getImage(photo, complete: { (image, imageFileName) -> () in
 				if let image = image
 					where cell.imageFileName == imageFileName {
 						cell.imageView.image = image

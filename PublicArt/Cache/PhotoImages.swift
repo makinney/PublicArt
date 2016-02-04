@@ -10,8 +10,8 @@ import UIKit
 
 class PhotoImages {
 	let MaxImages = 30
-
-	init(){
+	static let sharedInstance = PhotoImages()
+	private init(){
 		
 	}
 	

@@ -13,7 +13,6 @@ import CoreData
 final class LocationsCollectionViewController: UICollectionViewController, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout {
 
 	// MARK: Properties
-	var photoImages: PhotoImages?
 	private var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
 	private var collapseDetailViewController = true
 	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
@@ -48,6 +47,8 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		
 		let nibName = UINib(nibName: CellIdentifier.LocationCollectionViewCell.rawValue, bundle: nil) // TODO:
 		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.LocationCollectionViewCell.rawValue)
+		
+		collectionView?.backgroundColor = UIColor.whiteColor()
 		
 		let artworkCollectionViewLayout = collectionViewLayout as! ArtworkCollectionViewLayout
 		artworkCollectionViewLayout.cellPadding = 1
@@ -196,7 +197,6 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	func showArtPiecesFromNavController(location: Location) {
 		if let navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
 			let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
-				artPiecesCollectionViewController.photoImages = photoImages
 				if location.name != "All" {
 					let filter = ArtPiecesCollectionViewDataFilter(key: "idLocation", value: location.idLocation, title: location.name)
 					artPiecesCollectionViewController.fetchFilter(filter)
@@ -210,7 +210,6 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	
 	func showArtPiecesWithoutNavController(location: Location) {
 		if let artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController {
-			artPiecesCollectionViewController.photoImages = photoImages
 			if location.name != "All" {
 				let filter = ArtPiecesCollectionViewDataFilter(key: "idLocation", value: location.idLocation, title: location.name)
 				artPiecesCollectionViewController.fetchFilter(filter)

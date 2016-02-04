@@ -33,7 +33,7 @@ class ParseWebService {
 	
 	class func getAllArtSince(date: NSDate, complete:(parseArt: [ParseArt]?) -> Void) -> Void {
 		let query = PFQuery(className: ParseArt.parseClassName())
-		query.whereKey("hasThumb", equalTo: NSNumber(bool: true))
+		query.whereKey("locationVerified", equalTo: NSNumber(bool: true))
 		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
 		query.limit = 999 // max per parse
 		query.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error: NSError?) -> Void in

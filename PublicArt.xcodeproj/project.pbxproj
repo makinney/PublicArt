@@ -65,6 +65,7 @@
 		1F1EE1171B2A1F1C0087FBBF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1EE10C1B2A1F1C0087FBBF /* Security.framework */; };
 		1F1EE1181B2A1F1C0087FBBF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1EE10D1B2A1F1C0087FBBF /* StoreKit.framework */; };
 		1F1EE1191B2A1F1C0087FBBF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1EE10E1B2A1F1C0087FBBF /* SystemConfiguration.framework */; };
+		1F24AEA81C59309D00C5980B /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F24AEA71C59309D00C5980B /* CoreDataController.swift */; };
 		1F2EBF2E1C49D426005B49E7 /* ArtworkCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2EBF2D1C49D426005B49E7 /* ArtworkCollectionViewLayout.swift */; };
 		1F2EBF301C49DE0B005B49E7 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2EBF2F1C49DE0B005B49E7 /* RoundedView.swift */; };
 		1F456D9B1B40D0C300302DE9 /* WelcomeExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F456D9A1B40D0C300302DE9 /* WelcomeExploreViewController.swift */; };
@@ -219,6 +220,7 @@
 		1F1EE10C1B2A1F1C0087FBBF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1F1EE10D1B2A1F1C0087FBBF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1F1EE10E1B2A1F1C0087FBBF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1F24AEA71C59309D00C5980B /* CoreDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		1F2EBF2D1C49D426005B49E7 /* ArtworkCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtworkCollectionViewLayout.swift; path = Layout/ArtworkCollectionViewLayout.swift; sourceTree = "<group>"; };
 		1F2EBF2F1C49DE0B005B49E7 /* RoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundedView.swift; path = Views/RoundedView.swift; sourceTree = "<group>"; };
 		1F456D9A1B40D0C300302DE9 /* WelcomeExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeExploreViewController.swift; path = Welcome/WelcomeExploreViewController.swift; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 		1F8916561B23C04300E83891 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				1F24AEA71C59309D00C5980B /* CoreDataController.swift */,
 				1F0319701B603D0E000778E4 /* AppCommon.swift */,
 				1F0319621B603259000778E4 /* Artist.swift */,
 				1F0319601B603259000778E4 /* LocPhoto.swift */,
@@ -774,6 +777,7 @@
 				1F4C733C1B3E6BC3001ACEE0 /* SingleArtPhotosCollectionViewCell.swift in Sources */,
 				1FC6F8241B3A510B00810258 /* ParseThumb.swift in Sources */,
 				1F8916B21B23D20700E83891 /* GeneralIdentifiers.swift in Sources */,
+				1F24AEA81C59309D00C5980B /* CoreDataController.swift in Sources */,
 				1F4C73341B3E6BC3001ACEE0 /* ArtCitySupplementaryView.swift in Sources */,
 				1F09BB821B3102ED00E4807C /* ParsePhoto.swift in Sources */,
 				1F456DA31B4201F700302DE9 /* CityMapsViewController.swift in Sources */,
