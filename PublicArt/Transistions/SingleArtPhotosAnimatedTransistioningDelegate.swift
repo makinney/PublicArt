@@ -10,16 +10,16 @@ import UIKit
 
 class SingleArtPhotosAnimatedTransistioningDelegate : NSObject, UIViewControllerTransitioningDelegate {
 	
-	func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
-		return SingleArtPhotosPresentationController(presentedViewController: presented, presentingViewController: presenting)
+	func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+		return SingleArtPhotosPresentationController(presentedViewController: presented, presenting: presenting!)
 	}
 	
-	func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 		let mapPresentAnimatedTransistioning = SingleArtPhotosPresentAnimatedTransistioning()
 		return mapPresentAnimatedTransistioning
 	}
 	
-	func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+	func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 		let mapDismissAnimatedTransistioning = SingleArtPhotosDismissAnimatedTransistioning()
 		return mapDismissAnimatedTransistioning
 	}

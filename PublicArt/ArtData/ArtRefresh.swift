@@ -11,36 +11,36 @@ import CoreData
 
 class ArtRefresh {
 	
-	class func artRefreshFromServerRequired(complete:(required: Bool, clientLastRefreshed: NSDate?, serverLastRefreshed: NSDate?) ->() ) {
-		let clientLastRefreshed: NSDate? = ArtRefresh.clientLastRefreshed()
+	class func artRefreshFromServerRequired(_ complete:@escaping (_ required: Bool, _ clientLastRefreshed: Date?, _ serverLastRefreshed: Date?) ->() ) {
+		let clientLastRefreshed: Date? = ArtRefresh.clientLastRefreshed()
 		ParseWebService.getPublicArtRefresh {(parseRefresh) -> Void in
 			if let serverLastRefreshed = parseRefresh?.last?.lastRefresh {
 				if let clientLastRefreshed = clientLastRefreshed {
-					if clientLastRefreshed != serverLastRefreshed{
-						complete(required: true, clientLastRefreshed: clientLastRefreshed, serverLastRefreshed: serverLastRefreshed)
+					if clientLastRefreshed != serverLastRefreshed as Date{
+						complete(true, clientLastRefreshed, serverLastRefreshed as Date)
 					} else {
-						complete(required: false, clientLastRefreshed: clientLastRefreshed, serverLastRefreshed: serverLastRefreshed)
+						complete(false, clientLastRefreshed, serverLastRefreshed as Date)
 					}
 				} else {
 					// first time app's art has every been refreshed
-					complete(required: true, clientLastRefreshed: nil, serverLastRefreshed: serverLastRefreshed)
+					complete(true, nil, serverLastRefreshed as Date)
 				}
 			} else { // nothing back from query
-				complete(required: false, clientLastRefreshed: nil, serverLastRefreshed: nil)
+				complete(false, nil, nil)
 			}
 		}
 	}
 	
-	class func clientLastRefreshed() -> NSDate? {
-		var lastRefresh: NSDate?
-		if let date: NSDate? = NSUserDefaults.standardUserDefaults().valueForKey(UserDefaultKeys.LastPublicArtUpdate.rawValue) as? NSDate {
+	class func clientLastRefreshed() -> Date? {
+		var lastRefresh: Date?
+		if let date = UserDefaults.standard.value(forKey: UserDefaultKeys.LastPublicArtUpdate.rawValue) as? Date {
 			lastRefresh = date
 		}
 		return lastRefresh
 	}
 	
-	class func clientRefreshed(date: NSDate) {
-		NSUserDefaults.standardUserDefaults().setValue(date, forKey: UserDefaultKeys.LastPublicArtUpdate.rawValue)
-		NSUserDefaults.standardUserDefaults().synchronize()
+	class func clientRefreshed(_ date: Date) {
+		UserDefaults.standard.setValue(date, forKey: UserDefaultKeys.LastPublicArtUpdate.rawValue)
+		UserDefaults.standard.synchronize()
 	}
 }

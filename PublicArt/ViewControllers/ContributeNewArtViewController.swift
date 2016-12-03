@@ -13,7 +13,7 @@ class ContributeNewArtViewController: UIViewController {
 
 	var fetcher = Fetcher(managedObjectContext: CoreDataStack.sharedInstance.managedObjectContext!)
 
-	@IBAction func submitTouched(sender: UIButton) {
+	@IBAction func submitTouched(_ sender: UIButton) {
 //		submit()
 	}
 	
@@ -30,7 +30,7 @@ class ContributeNewArtViewController: UIViewController {
     }
     
 
-	private func submit() {
+	fileprivate func submit() {
 //		let art = fetcher.fetchArt("50091")!
 //		let photos: [Photo] = fetcher.fetchPhotosFor("50091")!
 //		let photo = photos.last

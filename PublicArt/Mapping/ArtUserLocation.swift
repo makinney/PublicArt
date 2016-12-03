@@ -11,10 +11,10 @@ import MapKit
 
 class ArtUserLocation: NSObject {
 
-	private var checkZoomRequired = true
-	private var mapView: MKMapView?
-	private var trackingUserLocation = false
-	var trackingCallback: ((trackingState: Bool) -> ())?
+	fileprivate var checkZoomRequired = true
+	fileprivate var mapView: MKMapView?
+	fileprivate var trackingUserLocation = false
+	var trackingCallback: ((_ trackingState: Bool) -> ())?
 	
 	lazy var locationManager: CLLocationManager = {
 		var manager = CLLocationManager()
@@ -27,12 +27,12 @@ class ArtUserLocation: NSObject {
 		super.init()
 		locationManager.delegate = self
 		self.mapView = mapView
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "didEnterBackground", name: UIApplicationDidEnterBackgroundNotification, object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "willEnterForeground", name: UIApplicationWillEnterForegroundNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(ArtUserLocation.didEnterBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(ArtUserLocation.willEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
 	}
 	
 	deinit {
-		NSNotificationCenter.defaultCenter().removeObserver(self)
+		NotificationCenter.default.removeObserver(self)
 	}
 	
 	func didEnterBackground() {
@@ -76,14 +76,14 @@ class ArtUserLocation: NSObject {
 		tracking(trackingUserLocation)
 	}
 	
-	func tracking(state: Bool){
-		trackingCallback?(trackingState:state)
+	func tracking(_ state: Bool){
+		trackingCallback?(state)
 	}
 	
 	func havePermission() -> Bool {
 		var permission = false
 		let status =  CLLocationManager.authorizationStatus()
-		if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
+		if status == .authorizedAlways || status == .authorizedWhenInUse {
 			permission = true
 		}
 		return permission
@@ -93,8 +93,8 @@ class ArtUserLocation: NSObject {
 		locationManager.requestWhenInUseAuthorization()
 	}
 	
-	func zoomUser(coordinates: CLLocationCoordinate2D) {
-		mapView?.setCenterCoordinate(coordinates, animated: true)
+	func zoomUser(_ coordinates: CLLocationCoordinate2D) {
+		mapView?.setCenter(coordinates, animated: true)
 		let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01) // TODO:
 		let region = MKCoordinateRegion(center:coordinates, span:span)
 		mapView?.setRegion(region, animated: true)
@@ -104,7 +104,7 @@ class ArtUserLocation: NSObject {
 
 extension ArtUserLocation: CLLocationManagerDelegate {
 
-	 func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+	 func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		if let userLocation = mapView?.userLocation {
 			if userLocation.coordinate.latitude != 0.0 && userLocation.coordinate.longitude != 0.0 {
 				if checkZoomRequired { // && mapView?.userLocationVisible == false   {
@@ -115,14 +115,10 @@ extension ArtUserLocation: CLLocationManagerDelegate {
 		}
 	}
 	
-	func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-		if error.domain == kCLErrorDomain {
-			if error.code == CLError.Denied.rawValue {
-				stopUpdating()
-			}
-		}
-	}
-	
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) { // FIXME: how to use error?
+        stopUpdating()
+    }
+   	
 }
 
 

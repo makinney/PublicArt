@@ -12,25 +12,25 @@ class MapPresentationController: UIPresentationController {
 
 	var dimmingView: UIView!
 
-	override init(presentedViewController: UIViewController, presentingViewController: UIViewController) {
-		super.init(presentedViewController: presentedViewController, presentingViewController: presentingViewController)
+	override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
+		super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
 		setupDimmingView()
 	}
 	
 	func setupDimmingView() {
 		dimmingView = UIView()
 //		dimmingView.backgroundColor = UIColor.greenColor().colorWithAlphaComponent(0.1)
-		let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
+		let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark)) as UIVisualEffectView
 		visualEffectView.frame = dimmingView.bounds
-		visualEffectView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+		visualEffectView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
 		dimmingView.addSubview(visualEffectView)
 		
-		let tapRecognizer = UITapGestureRecognizer(target: self, action: "dimmingViewTapped:")
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(MapPresentationController.dimmingViewTapped(_:)))
 		dimmingView.addGestureRecognizer(tapRecognizer)
 	}
 	
-	func dimmingViewTapped(tapRecognizer: UITapGestureRecognizer) {
-		presentingViewController.dismissViewControllerAnimated(true, completion: nil)
+	func dimmingViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
+		presentingViewController.dismiss(animated: true, completion: nil)
 	}
 	
 	
@@ -43,7 +43,7 @@ class MapPresentationController: UIPresentationController {
 	override func containerViewWillLayoutSubviews() {
 	
 		dimmingView.frame = containerView?.bounds ?? CGRect()
-		presentedView()!.frame = frameOfPresentedViewInContainerView()
+		presentedView!.frame = frameOfPresentedViewInContainerView
 		
 //		presentedView().layer.borderColor = UIColor.lightGrayColor().CGColor
 //		presentedView().layer.borderWidth = 2.0
@@ -51,9 +51,9 @@ class MapPresentationController: UIPresentationController {
 	}
 	
 	
-	override func frameOfPresentedViewInContainerView() -> CGRect {//
+	override var frameOfPresentedViewInContainerView : CGRect {//
 		let containerBounds:CGRect = self.containerView!.bounds
-		var presentedViewFrame = CGRectZero
+		var presentedViewFrame = CGRect.zero
 		let width:CGFloat = containerBounds.size.width * 0.80
 		let height:CGFloat = containerBounds.size.height  * 0.80 // TODO: hard coded
 //		if self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClass.Compact {
@@ -63,8 +63,8 @@ class MapPresentationController: UIPresentationController {
 //			
 //		}
 //		
-		presentedViewFrame.size = CGSizeMake(width,height)
-		presentedViewFrame.origin = CGPointMake(containerBounds.size.width / 2.0, containerBounds.size.height / 2.0) // TODO: can use to locate initial frame postion
+		presentedViewFrame.size = CGSize(width: width,height: height)
+		presentedViewFrame.origin = CGPoint(x: containerBounds.size.width / 2.0, y: containerBounds.size.height / 2.0) // TODO: can use to locate initial frame postion
 		presentedViewFrame.origin.x -= presentedViewFrame.size.width / 2.0; // TODO: can use to locate initial frame postion
 		presentedViewFrame.origin.y -= presentedViewFrame.size.height / 2.0; // TODO: can use to locate initial frame postion
 		
@@ -79,15 +79,15 @@ class MapPresentationController: UIPresentationController {
 		let containerView = self.containerView
 		dimmingView.frame = containerView!.bounds
 		dimmingView.alpha = 0.0
-		containerView!.insertSubview(dimmingView, atIndex: 0)
+		containerView!.insertSubview(dimmingView, at: 0)
 
-		presentedViewController.transitionCoordinator()?.animateAlongsideTransition({ (context) -> Void in
+		presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (context) -> Void in
 			self.dimmingView.alpha = 1.0
 		}, completion: nil)
 	}
 	
 	override func dismissalTransitionWillBegin() {
-		presentedViewController.transitionCoordinator()?.animateAlongsideTransition({ (context) -> Void in
+		presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (context) -> Void in
 			self.dimmingView.alpha = 0.0
 		}, completion: nil)
 	}

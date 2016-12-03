@@ -12,15 +12,15 @@ import CoreData
 final class MediaCollectionViewController: UICollectionViewController {
 
 	// MARK: Properties
-	private var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
-	private var collapseDetailViewController = true
-	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
-	private var maxCellWidth: CGFloat = 0.0
-	private var error:NSError?
-	private let moc: NSManagedObjectContext?
-	private var media = [String]()
-	private var selectedMediumName: String?
-	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
+	fileprivate var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
+	fileprivate var collapseDetailViewController = true
+	fileprivate var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
+	fileprivate var maxCellWidth: CGFloat = 0.0
+	fileprivate var error:NSError?
+	fileprivate let moc: NSManagedObjectContext?
+	fileprivate var media = [String]()
+	fileprivate var selectedMediumName: String?
+	fileprivate var userInterfaceIdion: UIUserInterfaceIdiom = .phone
 	
 	override init(collectionViewLayout: UICollectionViewLayout) {
 		moc = CoreDataStack.sharedInstance.managedObjectContext
@@ -41,25 +41,27 @@ final class MediaCollectionViewController: UICollectionViewController {
 		title = "Media" // TITLE
 		
 		let nibName = UINib(nibName: CellIdentifier.MediaCollectionViewCell.rawValue, bundle: nil) // TODO:
-		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue)
+		self.collectionView?.register(nibName, forCellWithReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue)
 		setupMediaFlowLayout()
 		
-		collectionView?.backgroundColor = UIColor.whiteColor()
+		collectionView?.backgroundColor = UIColor.white
 
 		
 		fetchResultsController.delegate = self
 		do {
 			try fetchResultsController.performFetch()
+            if let art = fetchResultsController.fetchedObjects {
+                media = createMediaNameList(art)
+                collectionView?.reloadData()
+            }
+
 		} catch let error1 as NSError {
 			error = error1
 		}
-		let art = fetchResultsController.fetchedObjects as! [Art]
-		media = createMediaNameList(art)
-		collectionView?.reloadData()
-		
+			
 	}
 	
-	func createMediaNameList(artwork: [Art]) -> [String] {
+	func createMediaNameList(_ artwork: [Art]) -> [String] {
 		var mediaName = [String]()
 		var lastMedium = String()
 		for art in artwork {
@@ -71,12 +73,12 @@ final class MediaCollectionViewController: UICollectionViewController {
 		return mediaName
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular,
+		if UIScreen.main.traitCollection.horizontalSizeClass == .regular,
 			let selectedMediumName = selectedMediumName {
 				let filter = ArtPiecesCollectionViewDataFilter(key: "medium", value: selectedMediumName, title: selectedMediumName)
-				if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
+				if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArtPiecesNavControllerID") as? UINavigationController,
 					let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
 						artPiecesCollectionViewController.fetchFilter(filter)
 						showDetailViewController(navigationController, sender: self)
@@ -84,25 +86,25 @@ final class MediaCollectionViewController: UICollectionViewController {
 		}
 	}
 	
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 	}
 	
-	override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
 		setupMediaFlowLayout()
 		collectionView?.reloadData()
 	}
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
-		print("\(__FILE__) \(__FUNCTION__)")
+		print("\(#file) \(#function)")
 	}
 	
 	// MARK: Fetch Results Controller
 	//
-	lazy var fetchResultsController:NSFetchedResultsController = {
-		let fetchRequest = NSFetchRequest(entityName:ModelEntity.art)
-		let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.medium, ascending:true, selector: "localizedStandardCompare:")]
+	lazy var fetchResultsController:NSFetchedResultsController<Art> = {
+		let fetchRequest = NSFetchRequest<Art>(entityName:ModelEntity.art)
+		let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.medium, ascending:true, selector: #selector(NSString.localizedStandardCompare(_:)))]
 		fetchRequest.sortDescriptors = sortDescriptor
 		let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc!, sectionNameKeyPath: nil, cacheName: nil)
 		return frc
@@ -112,7 +114,7 @@ final class MediaCollectionViewController: UICollectionViewController {
 	
 	func setupMediaFlowLayout() {
 		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
-			collectionViewFlowLayout.scrollDirection = .Vertical
+			collectionViewFlowLayout.scrollDirection = .vertical
 			let masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
 			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
 			
@@ -120,7 +122,7 @@ final class MediaCollectionViewController: UICollectionViewController {
 			var minimumCellsPerLine = 2 // ultimately up to flow layout
 			
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
-			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
+			if userInterfaceIdion == .phone || userInterfaceIdion == .unspecified {
 				let sectionInset: CGFloat = 1.0
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
@@ -146,7 +148,7 @@ final class MediaCollectionViewController: UICollectionViewController {
 		}
 	}
 	
-	func cellWidthToUse(screenWidth: CGFloat, cellsPerLine: Int, itemSpacing: CGFloat, flowLayout:UICollectionViewFlowLayout ) -> CGFloat {
+	func cellWidthToUse(_ screenWidth: CGFloat, cellsPerLine: Int, itemSpacing: CGFloat, flowLayout:UICollectionViewFlowLayout ) -> CGFloat {
 		let numCells: CGFloat = CGFloat(cellsPerLine)
 		var totalInterItemSpacing: CGFloat = 0.0
 		var totalInsetSpacing: CGFloat = 0.0
@@ -166,37 +168,37 @@ final class MediaCollectionViewController: UICollectionViewController {
 	
 	// MARK: UICollectionViewDataSource
 	
-	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.MediaCollectionViewCell.rawValue, forIndexPath: indexPath) as! MediaCollectionViewCell
+	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue, for: indexPath) as! MediaCollectionViewCell
 		let mediumName = media[indexPath.row] as String
 		cell.title.text = mediumName
-		cell.backgroundColor = UIColor.blackColor()
+		cell.backgroundColor = UIColor.black
 		cell.title.textColor = UIColor.sfOrangeColor()
 		return cell
 	}
 	
-	override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+	override func numberOfSections(in collectionView: UICollectionView) -> Int {
 		return 1
 	}
 	
-	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return media.count
 	}
 	
 	// MARK: UICollectionViewDelegate
 	
-	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		selectedMediumName = media[indexPath.row] as String
 		let filter = ArtPiecesCollectionViewDataFilter(key: "medium", value: selectedMediumName!, title: selectedMediumName!)
 	
-		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
-			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
+		if UIScreen.main.traitCollection.horizontalSizeClass == .compact {
+			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
 			if artPiecesCollectionViewController != nil {
 				artPiecesCollectionViewController!.fetchFilter(filter)
 				showDetailViewController(artPiecesCollectionViewController!, sender: self)
 			}
 		} else {
-			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
+			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArtPiecesNavControllerID") as? UINavigationController,
 				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
 					artPiecesCollectionViewController.fetchFilter(filter)
 					showDetailViewController(navigationController, sender: self)
@@ -204,26 +206,26 @@ final class MediaCollectionViewController: UICollectionViewController {
 		}
 	}
 	
-	override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+	override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
 		return true
 	}
 	
-	override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+	override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
 		return true
 	}
 	
-	override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-		let indexPathsVisible = collectionView.indexPathsForVisibleItems()
+	override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+		let indexPathsVisible = collectionView.indexPathsForVisibleItems
 		for path in indexPathsVisible {
-					let cell = collectionView.cellForItemAtIndexPath(path) as? MediaCollectionViewCell
-					cell?.backgroundColor = UIColor.blackColor()
+					let cell = collectionView.cellForItem(at: path) as? MediaCollectionViewCell
+					cell?.backgroundColor = UIColor.black
 					cell?.title.textColor = UIColor.sfOrangeColor()
 		}
 		
-		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
-			let cell = collectionView.cellForItemAtIndexPath(indexPath) as? MediaCollectionViewCell
-			cell?.backgroundColor = UIColor.whiteColor()
-			cell?.title.textColor = UIColor.blackColor()
+		if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
+			let cell = collectionView.cellForItem(at: indexPath) as? MediaCollectionViewCell
+			cell?.backgroundColor = UIColor.white
+			cell?.title.textColor = UIColor.black
 		}
 	}
 	
@@ -231,10 +233,11 @@ final class MediaCollectionViewController: UICollectionViewController {
 
 extension MediaCollectionViewController : NSFetchedResultsControllerDelegate {
 	
-	func controllerDidChangeContent(controller: NSFetchedResultsController) {
-		let art = fetchResultsController.fetchedObjects as! [Art]
-		media = createMediaNameList(art)
-		collectionView?.reloadData()
+	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        if let art = fetchResultsController.fetchedObjects {
+            media = createMediaNameList(art)
+            collectionView?.reloadData()
+        }
 	}
 }
 

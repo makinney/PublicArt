@@ -13,13 +13,13 @@ import CoreData
 
 class LocPhoto: NSManagedObject {
 
-    @NSManaged var createdAt: NSDate
+    @NSManaged var createdAt: Date
     @NSManaged var idLocation: String
     @NSManaged var imageAspectRatio: NSNumber
     @NSManaged var imageFileName: String
     @NSManaged var imageFileURL: String
     @NSManaged var objectId: String
-    @NSManaged var updatedAt: NSDate
+    @NSManaged var updatedAt: Date
     @NSManaged var spareOne: String
     @NSManaged var spareTwo: NSNumber
     @NSManaged var spareThree: NSNumber

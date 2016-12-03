@@ -8,15 +8,39 @@
 
 import UIKit
 import CoreData
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 
 final class LocationPiecesCollectionViewController: UICollectionViewController, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout {
-	private var collapseDetailViewController = true
-	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
+	fileprivate var collapseDetailViewController = true
+	fileprivate var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
 	
 
-	private var error:NSError?
-	private let moc: NSManagedObjectContext?
+	fileprivate var error:NSError?
+	fileprivate let moc: NSManagedObjectContext?
 	
 //	private lazy var artNavController:UINavigationController = {
 //		var navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtNavigationController.rawValue) as! UINavigationController
@@ -26,7 +50,7 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 //		return navigationController
 //		}()
 
-	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
+	fileprivate var userInterfaceIdion: UIUserInterfaceIdiom = .phone
 	
 	override init(collectionViewLayout: UICollectionViewLayout) {
 		moc = CoreDataStack.sharedInstance.managedObjectContext
@@ -39,32 +63,32 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 	}
 	
 	deinit {
-		NSNotificationCenter.defaultCenter().removeObserver(self)
+		NotificationCenter.default.removeObserver(self)
 	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		navigationController?.interactivePopGestureRecognizer?.enabled = false
+		navigationController?.interactivePopGestureRecognizer?.isEnabled = false
 		navigationController?.delegate = self
 		
 		
 		
 		let nibName = UINib(nibName: "ArtworkCollectionViewCell", bundle: nil) // TODO:
-		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: "ArtworkCollectionViewCell")
+		self.collectionView?.register(nibName, forCellWithReuseIdentifier: "ArtworkCollectionViewCell")
 //		var subNibName = UINib(nibName: "ArtCitySupplementaryView", bundle: nil) // TODO:
 //		self.collectionView?.registerNib(subNibName, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ArtCitySupplementaryView")
 		
 		setupArtCityPhotosFlowLayout()
 		
-		NSNotificationCenter.defaultCenter().addObserver(self,
-			selector:"newArtCityDatabase:",
-			name: ArtAppNotifications.NewArtCityDatabase.rawValue,
+		NotificationCenter.default.addObserver(self,
+			selector:#selector(LocationPiecesCollectionViewController.newArtCityDatabase(_:)),
+			name: NSNotification.Name(rawValue: ArtAppNotifications.NewArtCityDatabase.rawValue),
 			object: nil)
 		
 		
-		NSNotificationCenter.defaultCenter().addObserver(self,
-			selector: "contentSizeCategoryDidChange",
-			name: UIContentSizeCategoryDidChangeNotification,
+		NotificationCenter.default.addObserver(self,
+			selector: #selector(LocationPiecesCollectionViewController.contentSizeCategoryDidChange),
+			name: NSNotification.Name.UIContentSizeCategoryDidChange,
 			object: nil)
 		
 		fetchResultsController.delegate = self
@@ -77,49 +101,49 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 		collectionView?.reloadData()
 		
 		userInterfaceIdion = traitCollection.userInterfaceIdiom
-		if userInterfaceIdion == .Pad {
+		if userInterfaceIdion == .pad {
 			displayDefaultArt()
 		}
 
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		self.navigationController?.navigationBar.topItem?.title = "Location Pieces"
 	}
 	
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 //		collectionView?.reloadData()
 	}
 	
-	override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-		if initialHorizontalSizeClass == .Compact {
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		if initialHorizontalSizeClass == .compact {
 			displayDefaultArt()
 		}
 	}
 	
-	override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
 	//	setupArtCityPhotosFlowLayout()
 //		collectionView?.reloadData()
 	}
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning() // TODO: FIXME this happens when rotating and trying different images
-		print("\(__FILE__) did receive memory warning")
+		print("\(#file) did receive memory warning")
 
 	}
 
 	// MARK: Fetch Results Controller
 	//
-	lazy var fetchResultsController:NSFetchedResultsController = {
-		let fetchRequest = NSFetchRequest(entityName:ModelEntity.art)
+	lazy var fetchResultsController:NSFetchedResultsController<Art> = {
+		let fetchRequest = NSFetchRequest<Art>(entityName:ModelEntity.art)
 		fetchRequest.predicate = NSPredicate(format:"%K != %@", "thumbFile", "") // TODO: define
 /*	// sort by location and then title
 		let sortDescriptor = [NSSortDescriptor(key: "locationName", ascending: true, selector: "localizedStandardCompare:"),
 			NSSortDescriptor(key:ModelAttributes.artworkTitle, ascending:true, selector: "localizedStandardCompare:")]
 */
-		let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.artworkTitle, ascending:true, selector: "localizedStandardCompare:")]
+        let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.artworkTitle, ascending:true, selector: #selector(NSString.localizedStandardCompare(_:)))]
 
 		fetchRequest.sortDescriptors = sortDescriptor
 		let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc!, sectionNameKeyPath: nil, cacheName: nil)
@@ -144,7 +168,7 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 	
 	func setupArtCityPhotosFlowLayout() {
 		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
-			collectionViewFlowLayout.scrollDirection = .Vertical
+			collectionViewFlowLayout.scrollDirection = .vertical
 			let masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
 			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
 			
@@ -152,7 +176,7 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 				var minimumPhotosPerLine = 0 // ultimately up to flow layout
 			
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
-			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
+			if userInterfaceIdion == .phone || userInterfaceIdion == .unspecified {
 				let sectionInset: CGFloat = 5.0
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
@@ -178,7 +202,7 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 		}
 	}
 	
-	func photoWidthAvailable(screenWidth: CGFloat, photosPerLine: Int, itemSpacing: CGFloat, flowLayout:UICollectionViewFlowLayout ) -> CGFloat {
+	func photoWidthAvailable(_ screenWidth: CGFloat, photosPerLine: Int, itemSpacing: CGFloat, flowLayout:UICollectionViewFlowLayout ) -> CGFloat {
 		let numPhotos: CGFloat = CGFloat(photosPerLine)
 		var totalInterItemSpacing: CGFloat = 0.0
 		var totalInsetSpacing: CGFloat = 0.0
@@ -195,8 +219,8 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 	}
 	
 		
-	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.ArtworkCollectionViewCell.rawValue, forIndexPath: indexPath) as! ArtworkCollectionViewCell
+	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.ArtworkCollectionViewCell.rawValue, for: indexPath) as! ArtworkCollectionViewCell
 //		let art = fetchResultsController.objectAtIndexPath(indexPath) as! Art
 //		cell.imageUrl = art.thumbFile
 		cell.imageView.image = nil
@@ -241,18 +265,18 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 //		return supplementaryView
 //	}
 	
-	override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+	override func numberOfSections(in collectionView: UICollectionView) -> Int {
 		return fetchResultsController.sections?.count ?? 0
 	}
 	
-	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		let sectionInfo = fetchResultsController.sections![section] 
 		return sectionInfo.numberOfObjects
 	}
 	
 	// MARK: ArtPhotos Navigation
 	
-	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
 //			if let singleArtViewController = artNavController.viewControllers.last as? SingleArtViewController {
 //				singleArtViewController.update(art, artBackgroundColor: nil)
@@ -285,16 +309,16 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 		collectionView?.reloadData()
 	}
 	
-	func newArtCityDatabase(notification: NSNotification) {
+	func newArtCityDatabase(_ notification: Notification) {
 		collectionView?.reloadData()
 	}
 	
 	// MARK: Misc
-	func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+	func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
 		//		self.collectionView?.alpha = 0.0
 	}
 	
-	func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
+	func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
 		//		self.collectionView?.alpha = 1.0
 	}
 	
@@ -336,7 +360,7 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 
 extension LocationPiecesCollectionViewController : NSFetchedResultsControllerDelegate {
 	
-	func controllerDidChangeContent(controller: NSFetchedResultsController) {
+	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		collectionView?.reloadData()
 	}
 }

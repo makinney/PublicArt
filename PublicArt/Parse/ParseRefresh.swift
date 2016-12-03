@@ -11,19 +11,20 @@ import Foundation
 import Parse
 
 class ParseRefresh : PFObject, PFSubclassing {
+	private static var __once: () = {
+// FIXME:            self.registerSubclass
+		}()
 	override class func initialize() {
 		struct Static {
-			static var onceToken : dispatch_once_t = 0
+			static var onceToken : Int = 0
 		}
-		dispatch_once(&Static.onceToken) {
-			self.registerSubclass()
-		}
+		_ = ParseRefresh.__once
 	}
 	
 	static func parseClassName() -> String {
 		return "refresh"
 	}
 	
-	@NSManaged var lastRefresh: NSDate?
+	@NSManaged var lastRefresh: Date?
 	
 }

@@ -9,20 +9,20 @@
 import Foundation
 import CoreData
 
-public class CoreDataStack {
+open class CoreDataStack {
 
 	init() {
 	
 	}
 	
-	public class var sharedInstance: CoreDataStack {
+	open class var sharedInstance: CoreDataStack {
 		struct Singleton {
 			static let instance = CoreDataStack()
 		}
 		return Singleton.instance
 	}
 	
-	public func saveContext () ->  Bool {
+	open func saveContext () ->  Bool {
 	    var success = true
 		if let moc = self.managedObjectContext {
 			if moc.hasChanges {
@@ -36,16 +36,16 @@ public class CoreDataStack {
 		return success
 	}
 	
-	lazy var applicationDocumentsDirectory: NSURL = {
+	lazy var applicationDocumentsDirectory: URL = {
 		// The directory the application uses to store the Core Data store file. This code uses a directory named "com.mkinney.City_Art_San_Francisco" in the application's documents Application Support directory.
-		let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+		let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 		return urls[urls.count-1] 
 		}()
 	
 	lazy var managedObjectModel: NSManagedObjectModel = {
 		// The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-		let modelURL = NSBundle.mainBundle().URLForResource("PublicArtModel", withExtension: "momd")!
-		return NSManagedObjectModel(contentsOfURL: modelURL)!
+		let modelURL = Bundle.main.url(forResource: "PublicArtModel", withExtension: "momd")!
+		return NSManagedObjectModel(contentsOf: modelURL)!
 		}()
 	
 	lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
@@ -55,11 +55,11 @@ public class CoreDataStack {
 		
 		// Create the coordinator and store
 		var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-		let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("PublicArtModel.sqlite")
+		let url = self.applicationDocumentsDirectory.appendingPathComponent("PublicArtModel.sqlite")
 		
 		var failureReason = "There was an error creating or loading the application's saved data."
 		do {
-			try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+			try coordinator!.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
 		} catch let error as NSError {
 			NSLog("Unresolved error \(error), \(error.userInfo)")
 	//		abort() // TODO:

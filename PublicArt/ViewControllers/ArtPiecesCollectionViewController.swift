@@ -2,7 +2,7 @@
 //  ArtPiecesCollectionViewController.swift
 //  ArtCity
 //
-//  Created by Michael Kinney on 5/2/15.
+//  Created by Michael Kinney on 5/2/15.2
 //  Copyright (c) 2015 mkinney. All rights reserved.
 //
 
@@ -17,19 +17,19 @@ protocol ArtPiecesCollectionViewControllerDataFilterProtocol {
 }
 
 final class ArtPiecesCollectionViewController: UICollectionViewController, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout {
-	private var collapseDetailViewController = true
-	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
-	private var maxPhotoWidth: CGFloat = 0.0
-	private let moc: NSManagedObjectContext?
-	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
+	fileprivate var collapseDetailViewController = true
+	fileprivate var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
+	fileprivate var maxPhotoWidth: CGFloat = 0.0
+	fileprivate let moc: NSManagedObjectContext?
+	fileprivate var userInterfaceIdion: UIUserInterfaceIdiom = .phone
 
-	private var error:NSError?
+	fileprivate var error:NSError?
 	
 	var fetchFilterKey: String?
 	var fetchFilterValue: String?
 	var pageTitle: String?
 	
-	func fetchFilter(filter: ArtPiecesCollectionViewControllerDataFilterProtocol) {
+	func fetchFilter(_ filter: ArtPiecesCollectionViewControllerDataFilterProtocol) {
 		fetchFilterKey = filter.fetchFilterKey
 		fetchFilterValue = filter.fetchFilterValue
 		pageTitle = filter.pageTitle
@@ -46,16 +46,16 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	}
 	
 	deinit {
-		NSNotificationCenter.defaultCenter().removeObserver(self)
+		NotificationCenter.default.removeObserver(self)
 	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		navigationController?.interactivePopGestureRecognizer?.enabled = false
+		navigationController?.interactivePopGestureRecognizer?.isEnabled = false
 		navigationController?.delegate = self
 	
 		let nibName = UINib(nibName: CellIdentifier.ArtworkCollectionViewCell.rawValue, bundle: nil)
-		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.ArtworkCollectionViewCell.rawValue)
+		self.collectionView?.register(nibName, forCellWithReuseIdentifier: CellIdentifier.ArtworkCollectionViewCell.rawValue)
 		
 		let artworkCollectionViewLayout = collectionViewLayout as! ArtworkCollectionViewLayout
 		artworkCollectionViewLayout.cellPadding = 5
@@ -70,25 +70,25 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		}
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		if let pageTitle = pageTitle {
 			title = pageTitle
 		}
 		
-		collectionView?.backgroundColor = UIColor.blackColor()
+		collectionView?.backgroundColor = UIColor.black
 	}
 	
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 //		collectionView?.reloadData()
 	}
 	
 
-	override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
 		if let previousTraitCollection = previousTraitCollection {
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
-			if userInterfaceIdion == .Pad {
+			if userInterfaceIdion == .pad {
 				collectionView?.reloadData()
 			} else if traitCollection.horizontalSizeClass != previousTraitCollection.horizontalSizeClass ||
 				traitCollection.verticalSizeClass != previousTraitCollection.verticalSizeClass {
@@ -99,14 +99,14 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
-		print("\(__FILE__) did receive memory warning")
+		print("\(#file) did receive memory warning")
 
 	}
 
 	// MARK: Fetch Results Controller
 	//
-	lazy var fetchResultsController:NSFetchedResultsController = {
-		let fetchRequest = NSFetchRequest(entityName:ModelEntity.art)
+	lazy var fetchResultsController:NSFetchedResultsController<Art> = {
+		let fetchRequest = NSFetchRequest<Art>(entityName:ModelEntity.art)
 		var predicates = [NSPredicate]()
 		// TODO: fixme should support multiple key:values
 		if let key = self.fetchFilterKey,
@@ -118,22 +118,22 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 			}
 		}
 		//
-		predicates.append(NSPredicate(format:"%K == %@", "hasThumb",NSNumber(bool: true))) // has photos
+		predicates.append(NSPredicate(format:"%K == %@", "hasThumb",NSNumber(value: true as Bool))) // has photos FIXME: Swift 3 what is true as Bool
 		
 		var compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
 		fetchRequest.predicate = compoundPredicate
 
-		let sortDescriptor = [NSSortDescriptor(key:"hasThumb", ascending:false, selector: "localizedStandardCompare:"), NSSortDescriptor(key:ModelAttributes.artworkTitle, ascending:true, selector: "localizedStandardCompare:")]
+		let sortDescriptor = [NSSortDescriptor(key:"hasThumb", ascending:false, selector: #selector(NSString.localizedStandardCompare(_:))), NSSortDescriptor(key:ModelAttributes.artworkTitle, ascending:true, selector: #selector(NSString.localizedStandardCompare(_:)))]
 		fetchRequest.sortDescriptors = sortDescriptor
 		let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc!, sectionNameKeyPath: nil, cacheName: nil)
 		return frc
 	}()
 	
 	
-	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.ArtworkCollectionViewCell.rawValue, forIndexPath: indexPath) as! ArtworkCollectionViewCell
+	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.ArtworkCollectionViewCell.rawValue, for: indexPath) as! ArtworkCollectionViewCell
 
-		let art = fetchResultsController.objectAtIndexPath(indexPath) as! Art
+		let art = fetchResultsController.object(at: indexPath)
 
 		if cell.imageView.image == nil { // prevents spinning over existing images
 			cell.activityIndicator.startAnimating()
@@ -156,11 +156,11 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		return cell
 	}
 		
-	override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+	override func numberOfSections(in collectionView: UICollectionView) -> Int {
 		return fetchResultsController.sections?.count ?? 0
 	}
 	
-	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		let sectionInfo = fetchResultsController.sections![section]
 		print("\(sectionInfo.numberOfObjects) fetched")
 		return sectionInfo.numberOfObjects
@@ -168,40 +168,42 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	
 	// MARK: ArtPhotos Navigation
 	
-	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art,
-			let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as?  SingleArtViewController {
+	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let art = fetchResultsController.object(at: indexPath)
+		if let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ViewControllerIdentifier.SingleArtViewController.rawValue) as?  SingleArtViewController {
 			singleArtViewController.update(art, artBackgroundColor: nil)
-			showViewController(singleArtViewController, sender: self)
+			show(singleArtViewController, sender: self)
 		}
 	}
 
 	// MARK: Notification handlers
-	func newArtCityDatabase(notification: NSNotification) {
+	func newArtCityDatabase(_ notification: Notification) {
 		collectionView?.reloadData()
 	}
 }
 
 extension ArtPiecesCollectionViewController: ArtworkLayoutDelegate {
 	
-	func collectionView(collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
+	func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
 		var height: CGFloat = 100
 		let boundingRect = CGRect(x: 0, y: 0, width: width, height: CGFloat(MAXFLOAT)) //
 		var imageHeight = width //
 		
-		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art,
-			let thumb = art.thumb {
-				imageHeight = width / (thumb.imageAspectRatio as CGFloat)
+        let art = fetchResultsController.object(at: indexPath)
+        
+		if let thumb = art.thumb {
+            imageHeight = width / (thumb.imageAspectRatio as CGFloat)
 		} else {
 			imageHeight = width * 0.25
 		}
 		
-		let rect = AVMakeRectWithAspectRatioInsideRect(CGSize(width: width, height: imageHeight), boundingRect)
+		let rect = AVMakeRect(aspectRatio: CGSize(width: width, height: imageHeight), insideRect: boundingRect)
 		height = rect.height
 		return height
 	}
 	
-	func collectionView(collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
+	func collectionView(_ collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
 		return 25 // FIXME:
 	}
 }
@@ -209,7 +211,7 @@ extension ArtPiecesCollectionViewController: ArtworkLayoutDelegate {
 
 extension ArtPiecesCollectionViewController : NSFetchedResultsControllerDelegate {
 	
-	func controllerDidChangeContent(controller: NSFetchedResultsController) {
+	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		collectionView?.reloadData()
 	}
 }

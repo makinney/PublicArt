@@ -12,41 +12,41 @@ import Parse
 
 class ImageDownload {
 	
-	class func downloadThumb(art: Art, complete:(data: NSData?, imageFileName: String)->()) {
-		if let thumb = art.thumb where art.hasThumb == true {
+	class func downloadThumb(_ art: Art, complete:@escaping (_ data: Data?, _ imageFileName: String)->()) {
+		if let thumb = art.thumb, art.hasThumb == true {
 			let query = PFQuery(className: ParseThumb.parseClassName())
 			query.fromLocalDatastore()
-			query.getObjectInBackgroundWithId(thumb.objectId, block: { (pfObject, error) -> Void in
+			query.getObjectInBackground(withId: thumb.objectId, block: { (pfObject, error) -> Void in
 				if let pfObject = pfObject {
 					let file = pfObject["imageFile"] as! PFFile
-					file.getDataInBackgroundWithBlock({ (data, error) -> Void in
+					file.getDataInBackground(block: { (data, error) -> Void in
 						if error == nil {
-							complete(data:data, imageFileName: thumb.imageFileName)
+							complete(data, thumb.imageFileName)
 						} else {
-							print("\(__FILE__) \(__FUNCTION__) error \(error?.description)")
-							complete(data:nil, imageFileName: thumb.imageFileName)
+							print("\(#file) \(#function) error \(error?.localizedDescription)")
+							complete(nil, thumb.imageFileName)
 							
 						}
 					})
 				}
 			})
 		} else {
-			complete(data: nil, imageFileName: String())
+			complete(nil, String())
 		}
 	}
 
-	class func downloadPhoto(photo: Photo, complete:(data: NSData?, imageFileName: String)->()) {
+	class func downloadPhoto(_ photo: Photo, complete:@escaping (_ data: Data?, _ imageFileName: String)->()) {
 			let query = PFQuery(className: ParsePhoto.parseClassName())
 			query.fromLocalDatastore()
-			query.getObjectInBackgroundWithId(photo.objectId, block: { (pfObject, error) -> Void in
+			query.getObjectInBackground(withId: photo.objectId, block: { (pfObject, error) -> Void in
 				if let pfObject = pfObject {
 					let file = pfObject["imageFile"] as! PFFile
-					file.getDataInBackgroundWithBlock({ (data, error) -> Void in
+					file.getDataInBackground(block: { (data, error) -> Void in
 						if error == nil {
-							complete(data:data, imageFileName: photo.imageFileName)
+							complete(data, photo.imageFileName)
 						} else {
-							print("\(__FILE__) \(__FUNCTION__) error \(error?.description)")
-							complete(data:nil, imageFileName: photo.imageFileName)
+							print("\(#file) \(#function) error \(error?.localizedDescription)")
+							complete(nil, photo.imageFileName)
 							
 						}
 					})

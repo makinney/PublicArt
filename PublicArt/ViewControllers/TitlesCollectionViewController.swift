@@ -12,13 +12,13 @@ import CoreData
 final class TitlesCollectionViewController: UICollectionViewController {
 
 	// MARK: Properties
-	private var collapseDetailViewController = true
-	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
-	private var maxCellWidth: CGFloat = 0.0
-	private var error:NSError?
-	private let moc: NSManagedObjectContext?
-	private var selectedArt: Art?
-	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
+	fileprivate var collapseDetailViewController = true
+	fileprivate var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
+	fileprivate var maxCellWidth: CGFloat = 0.0
+	fileprivate var error:NSError?
+	fileprivate let moc: NSManagedObjectContext?
+	fileprivate var selectedArt: Art?
+	fileprivate var userInterfaceIdion: UIUserInterfaceIdiom = .phone
 	
 	override init(collectionViewLayout: UICollectionViewLayout) {
 		moc = CoreDataStack.sharedInstance.managedObjectContext
@@ -37,13 +37,13 @@ final class TitlesCollectionViewController: UICollectionViewController {
 		super.viewDidLoad()
 		
 		let nibName = UINib(nibName: CellIdentifier.MediaCollectionViewCell.rawValue, bundle: nil) // TODO: view for titles
-		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue)
+		self.collectionView?.register(nibName, forCellWithReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue)
 		
 		title = "Titles"
 		
 		setupArtTitlesFlowLayout()
 		
-		collectionView?.backgroundColor = UIColor.whiteColor()
+		collectionView?.backgroundColor = UIColor.white
 		
 		fetchResultsController.delegate = self
 		do {
@@ -55,12 +55,12 @@ final class TitlesCollectionViewController: UICollectionViewController {
 		
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular,
+		if UIScreen.main.traitCollection.horizontalSizeClass == .regular,
 			let selectedArt = selectedArt {
-			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController {
-				let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as!  SingleArtViewController
+			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArtPiecesNavControllerID") as? UINavigationController {
+				let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ViewControllerIdentifier.SingleArtViewController.rawValue) as!  SingleArtViewController
 				singleArtViewController.update(selectedArt, artBackgroundColor: nil)
 				navigationController.setViewControllers([singleArtViewController], animated: false)
 				showDetailViewController(navigationController, sender: self)
@@ -68,25 +68,25 @@ final class TitlesCollectionViewController: UICollectionViewController {
 		}
 	}
 	
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 	}
 	
-	override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
 		setupArtTitlesFlowLayout()
 		collectionView?.reloadData()
 	}
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
-		print("\(__FILE__) \(__FUNCTION__)")
+		print("\(#file) \(#function)")
 	}
 	
 	// MARK: Fetch Results Controller
 	//
-	lazy var fetchResultsController:NSFetchedResultsController = {
-		let fetchRequest = NSFetchRequest(entityName:ModelEntity.art)
-		let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.artworkTitle, ascending:true, selector: "localizedStandardCompare:")]
+	lazy var fetchResultsController:NSFetchedResultsController<Art> = {
+		let fetchRequest = NSFetchRequest<Art>(entityName:ModelEntity.art)
+        let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.artworkTitle, ascending:true, selector: #selector(NSString.localizedCompare(_:)))]
 		fetchRequest.sortDescriptors = sortDescriptor
 		let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc!, sectionNameKeyPath: nil, cacheName: nil)
 		return frc
@@ -96,7 +96,7 @@ final class TitlesCollectionViewController: UICollectionViewController {
 	
 	func setupArtTitlesFlowLayout() {
 		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
-			collectionViewFlowLayout.scrollDirection = .Vertical
+			collectionViewFlowLayout.scrollDirection = .vertical
 			let masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
 			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
 			
@@ -104,7 +104,7 @@ final class TitlesCollectionViewController: UICollectionViewController {
 			var minimumCellsPerLine = 2 // ultimately up to flow layout
 			
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
-			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
+			if userInterfaceIdion == .phone || userInterfaceIdion == .unspecified {
 				let sectionInset: CGFloat = 1.0
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
@@ -130,7 +130,7 @@ final class TitlesCollectionViewController: UICollectionViewController {
 		}
 	}
 	
-	func cellWidthToUse(screenWidth: CGFloat, cellsPerLine: Int, itemSpacing: CGFloat, flowLayout:UICollectionViewFlowLayout ) -> CGFloat {
+	func cellWidthToUse(_ screenWidth: CGFloat, cellsPerLine: Int, itemSpacing: CGFloat, flowLayout:UICollectionViewFlowLayout ) -> CGFloat {
 		let numCells: CGFloat = CGFloat(cellsPerLine)
 		var totalInterItemSpacing: CGFloat = 0.0
 		var totalInsetSpacing: CGFloat = 0.0
@@ -150,67 +150,66 @@ final class TitlesCollectionViewController: UICollectionViewController {
 	
 	// MARK: UICollectionViewDataSource
 	
-	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.MediaCollectionViewCell.rawValue, forIndexPath: indexPath) as! MediaCollectionViewCell
-		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
-			cell.title.text = art.title
-			cell.backgroundColor = UIColor.blackColor()
-			cell.title.textColor = UIColor.sfOrangeColor()
-		}
+	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue, for: indexPath) as! MediaCollectionViewCell
+        let art = fetchResultsController.object(at: indexPath)
+        cell.title.text = art.title
+        cell.backgroundColor = UIColor.black
+        cell.title.textColor = UIColor.sfOrangeColor()
+		
 		return cell
 	}
 	
-	override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+	override func numberOfSections(in collectionView: UICollectionView) -> Int {
 		return 1
 	}
 	
-	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		let sectionInfo = fetchResultsController.sections![section] 
 		return sectionInfo.numberOfObjects
 	}
 	
 	// MARK: UICollectionViewDelegate
 	
-	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		if let art = fetchResultsController.objectAtIndexPath(indexPath) as? Art {
-			selectedArt = art
-			if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
-				if	let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as?  SingleArtViewController {
-						singleArtViewController.update(art, artBackgroundColor: nil)
-						showViewController(singleArtViewController, sender: self)
-				}
-			} else {
-				if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController {
-					let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as!  SingleArtViewController
-					singleArtViewController.update(art, artBackgroundColor: nil)
-					navigationController.setViewControllers([singleArtViewController], animated: false)
-					showDetailViewController(navigationController, sender: self)
-				}
-			}
-		}
-	}
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let art = fetchResultsController.object(at: indexPath)
+        selectedArt = art
+        if UIScreen.main.traitCollection.horizontalSizeClass == .compact {
+            if	let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ViewControllerIdentifier.SingleArtViewController.rawValue) as?  SingleArtViewController {
+                singleArtViewController.update(art, artBackgroundColor: nil)
+                show(singleArtViewController, sender: self)
+            }
+        } else {
+            if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArtPiecesNavControllerID") as? UINavigationController {
+                let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ViewControllerIdentifier.SingleArtViewController.rawValue) as!  SingleArtViewController
+                singleArtViewController.update(art, artBackgroundColor: nil)
+                navigationController.setViewControllers([singleArtViewController], animated: false)
+                showDetailViewController(navigationController, sender: self)
+            }
+        }
+    }
 	
-	override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+	override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
 		return true
 	}
 	
-	override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+	override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
 		return true
 	}
 	
-	override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
-			let indexPathsVisible = collectionView.indexPathsForVisibleItems()
+	override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+		if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
+			let indexPathsVisible = collectionView.indexPathsForVisibleItems
 			for path in indexPathsVisible {
-					let cell = collectionView.cellForItemAtIndexPath(path) as? MediaCollectionViewCell
-					cell?.backgroundColor = UIColor.blackColor()
+					let cell = collectionView.cellForItem(at: path) as? MediaCollectionViewCell
+					cell?.backgroundColor = UIColor.black
 					cell?.title.textColor = UIColor.sfOrangeColor()
 			}
 			
-			if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
-				let cell = collectionView.cellForItemAtIndexPath(indexPath) as? MediaCollectionViewCell
-				cell?.backgroundColor = UIColor.whiteColor()
-				cell?.title.textColor = UIColor.blackColor()
+			if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
+				let cell = collectionView.cellForItem(at: indexPath) as? MediaCollectionViewCell
+				cell?.backgroundColor = UIColor.white
+				cell?.title.textColor = UIColor.black
 			}
 		}
 	}
@@ -219,7 +218,7 @@ final class TitlesCollectionViewController: UICollectionViewController {
 
 extension TitlesCollectionViewController : NSFetchedResultsControllerDelegate {
 	
-	func controllerDidChangeContent(controller: NSFetchedResultsController) {
+	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		collectionView?.reloadData()
 	}
 }

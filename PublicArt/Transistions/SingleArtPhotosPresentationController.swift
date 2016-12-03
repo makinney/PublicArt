@@ -13,14 +13,14 @@ class SingleArtPhotosPresentationController: UIPresentationController {
 	var dimmingView: UIView!
 	var closeButton: UIButton?
 	
-	override init(presentedViewController: UIViewController, presentingViewController: UIViewController) {
-		super.init(presentedViewController: presentedViewController, presentingViewController: presentingViewController)
+	override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
+		super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
 		
-		let tapRecognizer = UITapGestureRecognizer(target: self, action: "viewTapped:")
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(SingleArtPhotosPresentationController.viewTapped(_:)))
 		presentedViewController.view.addGestureRecognizer(tapRecognizer)
 		
 		
-		let dblLapRecognizer = UITapGestureRecognizer(target: self, action: "dblViewTapped:")
+		let dblLapRecognizer = UITapGestureRecognizer(target: self, action: #selector(SingleArtPhotosPresentationController.dblViewTapped(_:)))
 		dblLapRecognizer.numberOfTapsRequired = 2
 		presentedViewController.view.addGestureRecognizer(dblLapRecognizer)
 		
@@ -30,14 +30,14 @@ class SingleArtPhotosPresentationController: UIPresentationController {
 	}
 	
 	
-	func dblViewTapped(tapRecognizer: UITapGestureRecognizer) {
+	func dblViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
 	}
 	
 	func setupDimmingView() {
 		dimmingView = UIView()
-		let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
+		let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark)) as UIVisualEffectView
 		visualEffectView.frame = dimmingView.bounds
-		visualEffectView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+		visualEffectView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
 		dimmingView.addSubview(visualEffectView)
 	}
 	
@@ -68,16 +68,16 @@ class SingleArtPhotosPresentationController: UIPresentationController {
 //
 //	}
 	
-	func viewTapped(tapRecognizer: UITapGestureRecognizer) {
+	func viewTapped(_ tapRecognizer: UITapGestureRecognizer) {
 		dismiss()
 	}
 	
-	func closeButtonTapped(sender: UIButton) {
+	func closeButtonTapped(_ sender: UIButton) {
 		dismiss()
 	}
 	
 	func dismiss() {
-		presentingViewController.dismissViewControllerAnimated(true, completion: nil)
+		presentingViewController.dismiss(animated: true, completion: nil)
 	}
 	
 	override func containerViewWillLayoutSubviews() {
@@ -85,18 +85,18 @@ class SingleArtPhotosPresentationController: UIPresentationController {
 			dimmingView.frame = containerView.bounds
 		}
 // TODO: Swift 2.0 what is this form ?		dimmingView.frame = (containerView?.bounds)!
-		presentedView()?.frame = frameOfPresentedViewInContainerView()
+		presentedView?.frame = frameOfPresentedViewInContainerView
 //		setupCloseButton()
 	}
 	
-	override func frameOfPresentedViewInContainerView() -> CGRect {//
+	override var frameOfPresentedViewInContainerView : CGRect {//
 		let containerBounds:CGRect = self.containerView?.bounds ?? CGRect()
-		var presentedViewFrame = CGRectZero
+		var presentedViewFrame = CGRect.zero
 		let width:CGFloat = containerBounds.size.width * 1.0
 		let height:CGFloat = containerBounds.size.height  * 1.0 // TODO: hard coded
 
-		presentedViewFrame.size = CGSizeMake(width,height)
-		presentedViewFrame.origin = CGPointMake(containerBounds.size.width / 2.0, containerBounds.size.height / 2.0) // TODO: can use to locate initial frame postion
+		presentedViewFrame.size = CGSize(width: width,height: height)
+		presentedViewFrame.origin = CGPoint(x: containerBounds.size.width / 2.0, y: containerBounds.size.height / 2.0) // TODO: can use to locate initial frame postion
 		presentedViewFrame.origin.x -= presentedViewFrame.size.width / 2.0; // TODO: can use to locate initial frame postion
 		presentedViewFrame.origin.y -= presentedViewFrame.size.height / 2.0; // TODO: can use to locate initial frame postion
 		return presentedViewFrame
@@ -109,15 +109,15 @@ class SingleArtPhotosPresentationController: UIPresentationController {
 		let containerView = self.containerView
 		dimmingView.frame = containerView?.bounds ?? CGRect()
 		dimmingView.alpha = 0.0
-		containerView?.insertSubview(dimmingView, atIndex: 0)
+		containerView?.insertSubview(dimmingView, at: 0)
 
-		presentedViewController.transitionCoordinator()?.animateAlongsideTransition({ (context) -> Void in
+		presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (context) -> Void in
 			self.dimmingView.alpha = 1.0
 		}, completion: nil)
 	}
 	
 	override func dismissalTransitionWillBegin() {
-		presentedViewController.transitionCoordinator()?.animateAlongsideTransition({ (context) -> Void in
+		presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (context) -> Void in
 			self.dimmingView.alpha = 0.0
 		}, completion: nil)
 	}

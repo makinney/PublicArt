@@ -13,9 +13,9 @@ class MainMenuSplitViewController: UISplitViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		self.delegate = self
-		preferredDisplayMode = .AllVisible
+		preferredDisplayMode = .allVisible
 		
-		view.backgroundColor = UIColor.clearColor()
+		view.backgroundColor = UIColor.clear
 
         // Do any additional setup after loading the view.
     }
@@ -49,9 +49,9 @@ extension MainMenuSplitViewController : UISplitViewControllerDelegate {
 	//	}
 	
 	
-	func splitViewController(splitViewController: UISplitViewController,
-		collapseSecondaryViewController secondaryViewController: UIViewController,
-		ontoPrimaryViewController primaryViewController: UIViewController) -> Bool {
+	func splitViewController(_ splitViewController: UISplitViewController,
+		collapseSecondary secondaryViewController: UIViewController,
+		onto primaryViewController: UIViewController) -> Bool {
 			return true
 	}
 	//

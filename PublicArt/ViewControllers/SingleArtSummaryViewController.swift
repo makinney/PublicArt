@@ -27,7 +27,7 @@ class SingleArtSummaryViewController: UIViewController {
         super.viewDidLoad()
     }
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		if let art = art {
 			artTitle.text = art.title
 			if let artist = art.artist {

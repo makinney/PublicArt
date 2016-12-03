@@ -17,15 +17,15 @@ final class SingleArtMapViewController : UIViewController {
 	@IBOutlet weak var mapView: MKMapView!
 	@IBOutlet weak var topToolbar: UIToolbar!
 
-	private let annotationViewId = "annotationViewId"
+	fileprivate let annotationViewId = "annotationViewId"
 	var art:Art?
-	private var mapRouting: MapRouting?
+	fileprivate var mapRouting: MapRouting?
 	
 	lazy var artMapAnnotation:ArtMapAnnotation = {
 			ArtMapAnnotation(art: self.art!)
 		}()
 	
-	private lazy var artUserLocation: ArtUserLocation = {
+	fileprivate lazy var artUserLocation: ArtUserLocation = {
 		var userLocation = ArtUserLocation(mapView: self.mapView)
 		userLocation.trackingCallback = {(tracking) ->() in
 			if tracking {
@@ -40,21 +40,21 @@ final class SingleArtMapViewController : UIViewController {
 	}()
 	
 	var doneBarButtonItem: UIBarButtonItem {
-		return UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "onDoneButton:")
+		return UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(SingleArtMapViewController.onDoneButton(_:)))
 	}
 	
 	var routeBarButtonItem: UIBarButtonItem {
 		let image = UIImage(named: "DirectionsArrow")
-		return UIBarButtonItem(image:image, style: .Plain, target:self, action: "onRouteButton:")
+		return UIBarButtonItem(image:image, style: .plain, target:self, action: #selector(SingleArtMapViewController.onRouteButton(_:)))
 
 	}
 	var flexibleSpaceBarButtonItem: UIBarButtonItem {
-		return UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+		return UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 	}
 
 	var infoBarButtonItem: UIBarButtonItem {
 		let image = UIImage(named: "toolbar-infoButton")
-		return UIBarButtonItem(image:image, style: .Plain, target:self, action: "onInfoButton:")
+		return UIBarButtonItem(image:image, style: .plain, target:self, action: #selector(SingleArtMapViewController.onInfoButton(_:)))
 	}
 	
 	var locateMeBarButtonItem: UIBarButtonItem?
@@ -75,10 +75,10 @@ final class SingleArtMapViewController : UIViewController {
 		super.viewDidLoad()
 		mapView.delegate = self
 		mapView.mapType = getSavedMapType()
-		containerView.sendSubviewToBack(mapView)
+		containerView.sendSubview(toBack: mapView)
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		prepareToolbarItems()
 		zoomToRegion()
@@ -86,14 +86,14 @@ final class SingleArtMapViewController : UIViewController {
 	}
 	
 	func dismiss() {
-		dismissViewControllerAnimated(true, completion:nil)
+		self.dismiss(animated: true, completion:nil)
 	}
 	
 	// MARK: preps
 	
 	func prepareToolbarItems() {
 		let image = UIImage(named: "toolbar-arrow")
-		locateMeBarButtonItem = UIBarButtonItem(image:image, style: .Plain, target:self, action: "onLocateMeButton:")
+		locateMeBarButtonItem = UIBarButtonItem(image:image, style: .plain, target:self, action: #selector(SingleArtMapViewController.onLocateMeButton(_:)))
 		let bottomItems = [locateMeBarButtonItem!, flexibleSpaceBarButtonItem, infoBarButtonItem]
 		bottomToolbar.items = bottomItems
 		let topItems = [routeBarButtonItem, flexibleSpaceBarButtonItem, doneBarButtonItem]
@@ -102,7 +102,7 @@ final class SingleArtMapViewController : UIViewController {
 
 	// MARK: Mapping
 	
-	private func mapCoordinates() -> CLLocationCoordinate2D {
+	fileprivate func mapCoordinates() -> CLLocationCoordinate2D {
 		var coordinates = CLLocationCoordinate2D(latitude: ArtCityMap.centerLatitude , longitude: ArtCityMap.centerLongitude )
 		if let art = art {
 			let latitude = art.latitude.doubleValue
@@ -122,41 +122,41 @@ final class SingleArtMapViewController : UIViewController {
 
 	// MARK: button actions
 
-	func onDoneButton(barbuttonItem: UIBarButtonItem) {
+	func onDoneButton(_ barbuttonItem: UIBarButtonItem) {
 		dismiss()
 	}
 	
-	func onRouteButton(barButtonItem: UIBarButtonItem) {
+	func onRouteButton(_ barButtonItem: UIBarButtonItem) {
 		if let art = self.art {
 			mapRouting = MapRouting(art: art)
 			mapRouting?.showAvailableAppsSheet(self, barButtonItem: barButtonItem)
 		}
 	}
 
-	func onLocateMeButton(barbuttonItem: UIBarButtonItem ) {
+	func onLocateMeButton(_ barbuttonItem: UIBarButtonItem ) {
 		artUserLocation.toggleShowUserLocation()
 	}
 	
-	func onInfoButton(barButtonItem: UIBarButtonItem) {
+	func onInfoButton(_ barButtonItem: UIBarButtonItem) {
 		showInfoSheet(barButtonItem)
 	}
 	
-	func showInfoSheet(barButtonItem: UIBarButtonItem) {
-		let infoSheet = UIAlertController(title: "Select Map Type", message: "", preferredStyle: .ActionSheet)
+	func showInfoSheet(_ barButtonItem: UIBarButtonItem) {
+		let infoSheet = UIAlertController(title: "Select Map Type", message: "", preferredStyle: .actionSheet)
 		infoSheet.popoverPresentationController?.barButtonItem = barButtonItem
 	
-		let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (alert) -> Void in
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (alert) -> Void in
 		}
-		let mapStandardAction = UIAlertAction(title: "Standard", style: .Default) { (alert) -> Void in
-			self.mapView.mapType = .Standard
+		let mapStandardAction = UIAlertAction(title: "Standard", style: .default) { (alert) -> Void in
+			self.mapView.mapType = .standard
 			self.saveMapType(self.mapView.mapType)
 		}
-		let mapHybridAction = UIAlertAction(title: "Hybrid", style: .Default) { (alert) -> Void in
-			self.mapView.mapType = .Hybrid
+		let mapHybridAction = UIAlertAction(title: "Hybrid", style: .default) { (alert) -> Void in
+			self.mapView.mapType = .hybrid
 			self.saveMapType(self.mapView.mapType)
 		}
-		let mapSatelliteAction = UIAlertAction(title: "Satellite", style: .Default) { (alert) -> Void in
-			self.mapView.mapType = .Satellite
+		let mapSatelliteAction = UIAlertAction(title: "Satellite", style: .default) { (alert) -> Void in
+			self.mapView.mapType = .satellite
 			self.saveMapType(self.mapView.mapType)
 		}
 		
@@ -165,40 +165,40 @@ final class SingleArtMapViewController : UIViewController {
 		infoSheet.addAction(mapHybridAction)
 		infoSheet.addAction(mapSatelliteAction)
 		
-		presentViewController(infoSheet, animated: true) { () -> Void in
+		present(infoSheet, animated: true) { () -> Void in
 		}
 	}
 	
 	// MARK: Map Persistance
 	
-	func saveMapType(type: MKMapType) {
+	func saveMapType(_ type: MKMapType) {
 		var codedType: String = "Standard"
 		switch (type) {
-		case .Standard:
+		case .standard:
 			codedType = "Standard"
-		case .Hybrid:
+		case .hybrid:
 			codedType = "Hybrid"
-		case .Satellite:
+		case .satellite:
 			codedType = "Satellite"
 		default:
 			codedType = "Standard"
 		}
-		NSUserDefaults.standardUserDefaults().setObject(codedType, forKey: "SingleArtMapType")
+		UserDefaults.standard.set(codedType, forKey: "SingleArtMapType")
 	}
 	
 	func getSavedMapType() -> MKMapType {
-		var mapType: MKMapType = .Standard
-		let userDefaults = NSUserDefaults.standardUserDefaults
-		if let codedType = userDefaults().objectForKey("SingleArtMapType") as? String {
+		var mapType: MKMapType = .standard
+		let userDefaults = UserDefaults.standard
+		if let codedType = userDefaults.object(forKey: "SingleArtMapType") as? String {
 			switch (codedType) {
 			case "Standard":
-				mapType = .Standard
+				mapType = .standard
 			case "Hybrid":
-				mapType = .Hybrid
+				mapType = .hybrid
 			case "Satellite":
-				mapType = .Satellite
+				mapType = .satellite
 			default:
-				mapType = .Standard
+				mapType = .standard
 			}
 		}
 		return mapType
@@ -208,7 +208,7 @@ final class SingleArtMapViewController : UIViewController {
 
 extension SingleArtMapViewController : MKMapViewDelegate {
 
-	func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+	func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
 		if let annotation = view.annotation as? ArtMapAnnotation {
 			if let art = annotation.art {
 				print("art name is \(art.title)")
@@ -216,12 +216,12 @@ extension SingleArtMapViewController : MKMapViewDelegate {
 		}
 	}
 	
-	func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+	func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 		if let _ = annotation as? MKUserLocation {
 			return nil
 		}
 	
-		if let annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationViewId) {
+		if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationViewId) {
 			annotationView.annotation = annotation
 			return annotationView
 		} else {

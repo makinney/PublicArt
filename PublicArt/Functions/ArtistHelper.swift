@@ -8,7 +8,7 @@
 
 import Foundation
 
-func artistFullName(artist: Artist) -> String {
+func artistFullName(_ artist: Artist) -> String {
 	var name = String()
 	if artist.firstName.characters.count > 1 {
 		name = artist.firstName + " "

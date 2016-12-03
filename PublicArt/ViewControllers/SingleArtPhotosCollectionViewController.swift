@@ -35,41 +35,41 @@ final class SingleArtPhotosCollectionViewController: UICollectionViewController 
     override func viewDidLoad() {
         super.viewDidLoad()
 		let nibName = UINib(nibName: "SingleArtPhotosCollectionViewCell", bundle: nil) // TODO:
-		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: "SingleArtPhotosCollectionViewCell")
+		self.collectionView?.register(nibName, forCellWithReuseIdentifier: "SingleArtPhotosCollectionViewCell")
 //		self.collectionView?.delegate = self
-		self.view.backgroundColor = UIColor.clearColor()
-		collectionView?.backgroundColor = UIColor.clearColor()
+		self.view.backgroundColor = UIColor.clear
+		collectionView?.backgroundColor = UIColor.clear
 		collectionView?.reloadData() // required to prevent Assertion failure in -[UICollectionViewData numberOfItemsBeforeSection:]
     }
 
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		collectionView?.collectionViewLayout = collectionViewFlowLayout
 		collectionViewFlowLayout.minimumLineSpacing = 0
-		collectionViewFlowLayout.scrollDirection = .Horizontal
+		collectionViewFlowLayout.scrollDirection = .horizontal
 //		collectionViewFlowLayout.scrollDirection = .Vertical
 //		if let collectionView = collectionView {
 //			collectionViewFlowLayout.currentPage = collectionView.contentOffset.y / collectionView.bounds.height
 //		}
-		collectionView?.pagingEnabled = true
+		collectionView?.isPagingEnabled = true
 		updateItemSize()
 		collectionView?.reloadData()
 	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-		print("\(__FILE__) did receive memory warning")
+		print("\(#file) did receive memory warning")
     }
 	
 	
-	override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-		super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
 		
 		if let collectionView = collectionView {
 			collectionViewFlowLayout.currentPage = collectionView.contentOffset.y / collectionView.bounds.height
 		}
 		
-		coordinator.animateAlongsideTransitionInView(view, animation: { (context) -> Void in
+		coordinator.animateAlongsideTransition(in: view, animation: { (context) -> Void in
 				self.updateItemSize()
 			}) { (context) -> Void in
 		}
@@ -78,47 +78,46 @@ final class SingleArtPhotosCollectionViewController: UICollectionViewController 
 	func updateItemSize() {
 		let navBarHeight = navigationController?.navigationBar.frame.size.height ?? 0
 		let tabBarHeight = tabBarController?.tabBar.frame.size.height ?? 0
-		let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height ?? 0
+		let statusBarHeight = UIApplication.shared.statusBarFrame.size.height 
 		//var collectionViewHeight = collectionView?.frame.height ?? 0
 		
 			if let collectionView = self.collectionView {
 				var presentedViewHeight = collectionView.frame.size.height
 				var presentedViewWidth = collectionView.frame.size.width
 				if let presentationController = self.presentationController as? SingleArtPhotosPresentationController {
-					presentedViewHeight = presentationController.frameOfPresentedViewInContainerView().height  - navBarHeight - tabBarHeight - statusBarHeight
-					presentedViewWidth = presentationController.frameOfPresentedViewInContainerView().width
+                    presentedViewHeight = presentationController.frameOfPresentedViewInContainerView.height - navBarHeight - tabBarHeight - statusBarHeight
+					presentedViewWidth = presentationController.frameOfPresentedViewInContainerView.width
 				}
 				let height : CGFloat = presentedViewHeight  - collectionViewFlowLayout.sectionInset.top - collectionViewFlowLayout.sectionInset.bottom + 20 // FIXME: adding 20 allows vertical paging to line up,why ?
 				collectionViewFlowLayout.itemSize = CGSize(width: presentedViewWidth, height: height)
 			}
 	}
 
-	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.SingleArtPhotosCollectionViewCell.rawValue, forIndexPath: indexPath) as! SingleArtPhotosCollectionViewCell
+	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.SingleArtPhotosCollectionViewCell.rawValue, for: indexPath) as! SingleArtPhotosCollectionViewCell
 		cell.imageView.image = nil
 		if let photo = photos?[indexPath.row] {
 			cell.imageFileName = photo.imageFileName
 			cell.activityIndicator.startAnimating()
 			PhotoImages.sharedInstance.getImage(photo, complete: { (image, imageFileName) -> () in
-				if let image = image
-					where cell.imageFileName == imageFileName {
+				if let image = image, cell.imageFileName == imageFileName {
 						cell.imageView.image = image
 				}
 				cell.activityIndicator.stopAnimating()
 			})
 		}
 
-		cell.backgroundColor = UIColor.clearColor()
-		cell.imageView.backgroundColor = UIColor.clearColor()
+		cell.backgroundColor = UIColor.clear
+		cell.imageView.backgroundColor = UIColor.clear
 		
 		return cell
 	}
 	
-	override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+	override func numberOfSections(in collectionView: UICollectionView) -> Int {
 		return 1
 	}
 	
-	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		if let count = photos?.count {
 			return count
 		}

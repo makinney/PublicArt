@@ -12,13 +12,13 @@ import Parse
 
 extension Thumb {
 	
-	class func create(parseThumb: ParseThumb, moc: NSManagedObjectContext) -> Thumb? {
-		if let thumb = NSEntityDescription.insertNewObjectForEntityForName(ModelEntity.thumb, inManagedObjectContext:moc) as? Thumb {
+	class func create(_ parseThumb: ParseThumb, moc: NSManagedObjectContext) -> Thumb? {
+		if let thumb = NSEntityDescription.insertNewObject(forEntityName: ModelEntity.thumb, into:moc) as? Thumb {
 			thumb.createdAt = parseThumb.createdAt!
 			thumb.objectId = parseThumb.objectId!
 			thumb.updatedAt = parseThumb.updatedAt!
 			thumb.idArt = parseThumb.idArt ?? ""
-			thumb.imageAspectRatio = parseThumb.imageAspectRatio
+            thumb.imageAspectRatio = NSNumber(value: parseThumb.imageAspectRatio)
 			
 			if let imageFile = parseThumb.imageFile {
 				thumb.imageFileName = extractImageFileName(imageFile.name)
@@ -31,12 +31,12 @@ extension Thumb {
 	}
 	
 	
-	class func update(thumb: Thumb, parseThumb: ParseThumb) {
+	class func update(_ thumb: Thumb, parseThumb: ParseThumb) {
 		thumb.createdAt = parseThumb.createdAt!
 		thumb.objectId = parseThumb.objectId!
 		thumb.updatedAt = parseThumb.updatedAt!
 		thumb.idArt = parseThumb.idArt ?? ""
-		thumb.imageAspectRatio = parseThumb.imageAspectRatio
+        thumb.imageAspectRatio = NSNumber(value: parseThumb.imageAspectRatio)
 		
 		if let imageFile = parseThumb.imageFile {
 			thumb.imageFileName = extractImageFileName(imageFile.name)
@@ -45,11 +45,11 @@ extension Thumb {
 		}
 	}
 	
-	class private func extractImageFileName(source: String) -> String {
+	class fileprivate func extractImageFileName(_ source: String) -> String {
 		var imageFileName = ""
 		let delimiter = "-"
-		if let lastDelimiter = source.rangeOfString(delimiter, options: NSStringCompareOptions.BackwardsSearch) {
-			imageFileName = source[lastDelimiter.endIndex..<source.endIndex]
+		if let lastDelimiter = source.range(of: delimiter, options: NSString.CompareOptions.backwards) {
+			imageFileName = source[lastDelimiter.upperBound..<source.endIndex]
 		}
 		// println("extracted image file name \(imageFileName)")
 		return imageFileName

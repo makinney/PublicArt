@@ -17,7 +17,7 @@ class Art: NSManagedObject {
     @NSManaged var address: String
     @NSManaged var artWebLink: String
     @NSManaged var condition: String
-    @NSManaged var createdAt: NSDate
+    @NSManaged var createdAt: Date
     @NSManaged var credit: String
     @NSManaged var descriptionFileName: String
     @NSManaged var descriptionFileURL: String
@@ -34,7 +34,7 @@ class Art: NSManagedObject {
     @NSManaged var objectId: String
     @NSManaged var tags: String
     @NSManaged var title: String
-    @NSManaged var updatedAt: NSDate
+    @NSManaged var updatedAt: Date
     @NSManaged var spareOne: String
     @NSManaged var spareTwo: NSNumber
     @NSManaged var spareThree: NSNumber

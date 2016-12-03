@@ -24,46 +24,46 @@ final class MapRouting {
 	}
 	
 	
-	private func googleMapsAvailable() -> Bool {
-		let can = UIApplication.sharedApplication().canOpenURL(NSURL(string: "comgooglemaps://")!)
+	fileprivate func googleMapsAvailable() -> Bool {
+		let can = UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://")!)
 		return can
 	}
 	
-	private func useAppleMaps() {
+	fileprivate func useAppleMaps() {
 		let placemark: MKPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), addressDictionary: [String(kABPersonAddressStreetKey) : artworkName])
 		let artworkMapItem = MKMapItem(placemark: placemark)
-		MKMapItem.openMapsWithItems([artworkMapItem], launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking])
+		MKMapItem.openMaps(with: [artworkMapItem], launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking])
 	}
 	
-	private func useGoogleMaps() {
+	fileprivate func useGoogleMaps() {
 		let directionsRequest = "comgooglemaps://?daddr=" + "\(latitude)" + "," + "\(longitude)" + "&directionsmode=walking"
-		if let directionsURL = NSURL(string: directionsRequest) {
-			UIApplication.sharedApplication().openURL(directionsURL)
+		if let directionsURL = URL(string: directionsRequest) {
+			UIApplication.shared.openURL(directionsURL)
 		}
 	}
 	
 	
-	func showAvailableAppsSheet(viewController: UIViewController, barButtonItem: UIBarButtonItem) {
-		let appsSheet = UIAlertController(title: "Directions to Art", message: "Select App", preferredStyle: .ActionSheet)
+	func showAvailableAppsSheet(_ viewController: UIViewController, barButtonItem: UIBarButtonItem) {
+		let appsSheet = UIAlertController(title: "Directions to Art", message: "Select App", preferredStyle: .actionSheet)
 		appsSheet.popoverPresentationController?.barButtonItem = barButtonItem
 		
-		let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (alert) -> Void in
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (alert) -> Void in
 		}
 		appsSheet.addAction(cancelAction)
 		
-		let routeWithAppleMapsAction = UIAlertAction(title: "Apple Maps", style: .Default) {[weak self] (alert) -> Void in
+		let routeWithAppleMapsAction = UIAlertAction(title: "Apple Maps", style: .default) {[weak self] (alert) -> Void in
 			self?.useAppleMaps()
 		}
 		appsSheet.addAction(routeWithAppleMapsAction)
 	
 		if googleMapsAvailable() {
-			let routeWithGoogleMapsAction = UIAlertAction(title: "Google Maps", style: .Default) {[weak self] (alert) -> Void in
+			let routeWithGoogleMapsAction = UIAlertAction(title: "Google Maps", style: .default) {[weak self] (alert) -> Void in
 			self?.useGoogleMaps()
 		}
 			appsSheet.addAction(routeWithGoogleMapsAction)
 		}
 		
-		viewController.presentViewController(appsSheet, animated: true) { () -> Void in
+		viewController.present(appsSheet, animated: true) { () -> Void in
 		}
 	}
 

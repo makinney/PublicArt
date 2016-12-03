@@ -10,9 +10,9 @@ import UIKit
 
 class WelcomeContributeViewController: UIViewController {
 
-	@IBAction func onContinueButton(sender: AnyObject) {
+	@IBAction func onContinueButton(_ sender: AnyObject) {
 	
-	 let app =	UIApplication.sharedApplication().delegate as! AppDelegate
+	 let app =	UIApplication.shared.delegate as! AppDelegate
 	 app.normalWindowRoot(animate: true)
 	 
 

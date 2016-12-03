@@ -24,7 +24,7 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
 		super.init(coder:aDecoder)
 	}
 	
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		self.scrollView.delegate = self
 		setupChildren()
@@ -33,23 +33,23 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
 		view.alpha = 1.0
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		view.alpha = 0.0
 	}
 	
-	override func shouldAutorotate() -> Bool {
+	override var shouldAutorotate : Bool {
 		return false
 	}
 	
 	func setupChildren() {
-		let publicViewController: WelcomePublicViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewControllerWithIdentifier(WelcomeIdentifier.PublicViewController.rawValue) as! WelcomePublicViewController
+		let publicViewController: WelcomePublicViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewController(withIdentifier: WelcomeIdentifier.PublicViewController.rawValue) as! WelcomePublicViewController
 //		let browseViewController: WelcomeBrowseViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewControllerWithIdentifier(WelcomeIdentifier.BrowseViewController.rawValue) as! WelcomeBrowseViewController
-		let exploreViewController: WelcomeExploreViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewControllerWithIdentifier(WelcomeIdentifier.ExploreViewController.rawValue) as! WelcomeExploreViewController
-		let discoverViewController: WelcomeDiscoverViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewControllerWithIdentifier(WelcomeIdentifier.DiscoverViewController.rawValue) as! WelcomeDiscoverViewController
-		let contributeViewController: WelcomeContributeViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewControllerWithIdentifier(WelcomeIdentifier.ContributeViewController.rawValue) as! WelcomeContributeViewController
+		let exploreViewController: WelcomeExploreViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewController(withIdentifier: WelcomeIdentifier.ExploreViewController.rawValue) as! WelcomeExploreViewController
+		let discoverViewController: WelcomeDiscoverViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewController(withIdentifier: WelcomeIdentifier.DiscoverViewController.rawValue) as! WelcomeDiscoverViewController
+		let contributeViewController: WelcomeContributeViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewController(withIdentifier: WelcomeIdentifier.ContributeViewController.rawValue) as! WelcomeContributeViewController
 		
-		let mainViewController: UITabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.MainViewController.rawValue) as! UITabBarController
+		let mainViewController: UITabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ViewControllerIdentifier.MainViewController.rawValue) as! UITabBarController
 
 
 		let viewControllers: [UIViewController] = [publicViewController, discoverViewController, exploreViewController, contributeViewController, mainViewController]
@@ -65,8 +65,8 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
 			let x = CGFloat(idx) * scrollView!.frame.width
 			viewController.view.frame  = CGRect(x: x, y: 0, width: viewController.view.frame.size.width, height: viewController.view.frame.size.height)
 			scrollView!.addSubview(viewController.view)
-			viewController.didMoveToParentViewController(self)
-			idx++;
+			viewController.didMove(toParentViewController: self)
+			idx += 1;
 		}
 		
 		scrollView!.addSubview(pageControl)
@@ -78,16 +78,16 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         // Dispose of any resources that can be recreated.
     }
 	
-	func scrollViewDidScroll(scrollView: UIScrollView) {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		let fractionalPage = self.scrollView.contentOffset.x / pageWidth
 		let page: Int = Int(fractionalPage)
 		self.pageControl.currentPage = page
 		if page == pageCount - 1  {
-			self.pageControl.hidden = true
-			NSUserDefaults.standardUserDefaults().setBool(true, forKey: didShowLandingScreenKey)
-			NSUserDefaults.standardUserDefaults().synchronize()
+			self.pageControl.isHidden = true
+			UserDefaults.standard.set(true, forKey: didShowLandingScreenKey)
+			UserDefaults.standard.synchronize()
 		} else {
-			self.pageControl.hidden = false
+			self.pageControl.isHidden = false
 		}
 	}
 	

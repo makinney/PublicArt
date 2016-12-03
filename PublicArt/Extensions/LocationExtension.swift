@@ -12,8 +12,8 @@ import CoreData
 
 extension Location {
 
-	class func create(parseLocation: ParseLocation, moc: NSManagedObjectContext) -> Location? {
-		if let location = NSEntityDescription.insertNewObjectForEntityForName(ModelEntity.location, inManagedObjectContext:moc) as? Location {
+	class func create(_ parseLocation: ParseLocation, moc: NSManagedObjectContext) -> Location? {
+		if let location = NSEntityDescription.insertNewObject(forEntityName: ModelEntity.location, into:moc) as? Location {
 			location.objectId = parseLocation.objectId!
 			location.createdAt = parseLocation.createdAt!
 			location.updatedAt = parseLocation.updatedAt!
@@ -24,8 +24,8 @@ extension Location {
 			let latitude = parseLocation.latitude ?? ""
 			let longitude = parseLocation.longitude ?? ""
 			let coordinates = mapCoordinates(latitude: latitude, longitude: longitude)
-			location.longitude = coordinates.longitude
-			location.latitude = coordinates.latitude
+            location.longitude = NSNumber(value: coordinates.longitude)
+            location.latitude = NSNumber(value: coordinates.latitude)
 			
 	
 			return location
@@ -33,7 +33,7 @@ extension Location {
 		return nil
 	}
 
-	class func update(location: Location, parseLocation: ParseLocation) {
+	class func update(_ location: Location, parseLocation: ParseLocation) {
 	
 		location.objectId = parseLocation.objectId!
 		location.createdAt = parseLocation.createdAt!
@@ -45,8 +45,8 @@ extension Location {
 		let latitude = parseLocation.latitude ?? ""
 		let longitude = parseLocation.longitude ?? ""
 		let coordinates = mapCoordinates(latitude: latitude, longitude: longitude)
-		location.longitude = coordinates.longitude
-		location.latitude = coordinates.latitude
+        location.longitude = NSNumber(value: coordinates.longitude)
+        location.latitude = NSNumber(value: coordinates.latitude)
 	}
 	
 }

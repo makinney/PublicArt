@@ -9,8 +9,8 @@
 import UIKit
 
 protocol ArtworkLayoutDelegate {
-	func collectionView(collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat
-	func collectionView(collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat
+	func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat
+	func collectionView(_ collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat
 }
 
 
@@ -18,13 +18,13 @@ class ArtworkLayoutAttributes: UICollectionViewLayoutAttributes {
 	
 	var photoHeight: CGFloat = 0
 	
-	override func copyWithZone(zone: NSZone) -> AnyObject {
-		let copy = super.copyWithZone(zone) as! ArtworkLayoutAttributes
+	override func copy(with zone: NSZone?) -> Any {
+		let copy = super.copy(with: zone) as! ArtworkLayoutAttributes
 		copy.photoHeight = photoHeight
 		return copy
 	}
 	
-	override func isEqual(object: AnyObject?) -> Bool {
+	override func isEqual(_ object: Any?) -> Bool {
 		if let attributes = object as? ArtworkLayoutAttributes {
 			if attributes.photoHeight == photoHeight {
 				return super.isEqual(object)
@@ -40,33 +40,33 @@ class ArtworkCollectionViewLayout: UICollectionViewLayout {
 	var cellPadding: CGFloat = 0
 	var numberOfColumns = 2
 	
-	private var cache = [ArtworkLayoutAttributes]()
-	private var contentHeight: CGFloat = 0
-	private var width: CGFloat {
+	fileprivate var cache = [ArtworkLayoutAttributes]()
+	fileprivate var contentHeight: CGFloat = 0
+	fileprivate var width: CGFloat {
 		get {
 			guard let collectionView = collectionView else {
 				return 1
 			}
 			let insets = collectionView.contentInset
-			return CGRectGetWidth(collectionView.bounds) - (insets.left + insets.right)
+			return collectionView.bounds.width - (insets.left + insets.right)
 		}
 	}
 	
-	override class func layoutAttributesClass() -> AnyClass {
+	override class var layoutAttributesClass : AnyClass {
 		return ArtworkLayoutAttributes.self
 	}
 	
-	override func collectionViewContentSize() -> CGSize {
+	override var collectionViewContentSize : CGSize {
 		return CGSize(width: width, height: contentHeight)
 	}
 	
-	override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+	override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
 		cache = []
 		return true
 	}
 
 
-	 override func prepareLayout() {
+	 override func prepare() {
 		guard let delegate = delegate else {
 			return
 		}
@@ -78,11 +78,11 @@ class ArtworkCollectionViewLayout: UICollectionViewLayout {
 				xOffsets.append(CGFloat(column) * columnWidth)
 			}
 			
-			var yOffsets = [CGFloat](count: numberOfColumns, repeatedValue: 0)
+			var yOffsets = [CGFloat](repeating: 0, count: numberOfColumns)
 			
 			var column = 0
-			for item in 0..<collectionView!.numberOfItemsInSection(0) {
-				let indexPath = NSIndexPath(forItem: item, inSection: 0)
+			for item in 0..<collectionView!.numberOfItems(inSection: 0) {
+				let indexPath = IndexPath(item: item, section: 0)
 				
 				let width = columnWidth - (cellPadding * 2)
 				let photoHeight = delegate.collectionView(collectionView!, heightForPhotoAtIndexPath: indexPath, withWidth: width)
@@ -90,22 +90,26 @@ class ArtworkCollectionViewLayout: UICollectionViewLayout {
 				let height = cellPadding + photoHeight + annotationHeight + cellPadding
 				
 				let frame = CGRect(x: xOffsets[column], y: yOffsets[column], width: columnWidth, height: height)
-				let insetFrame = CGRectInset(frame, cellPadding, cellPadding)
-				let attributes = ArtworkLayoutAttributes(forCellWithIndexPath: indexPath)
+				let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
+				let attributes = ArtworkLayoutAttributes(forCellWith: indexPath)
 				attributes.frame = insetFrame
 				attributes.photoHeight = photoHeight
 				cache.append(attributes)
-				contentHeight = max(contentHeight, CGRectGetMaxY(frame))
+				contentHeight = max(contentHeight, frame.maxY)
 				yOffsets[column] = yOffsets[column] + height
-				column = column >= (numberOfColumns - 1) ? 0 : ++column
+                if column >= numberOfColumns - 1 {
+                    column = 0
+                } else {
+                    column += 1
+                }
 			}
 		}
 	}
 	
-	override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+	override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
 		var layoutAttributes = [UICollectionViewLayoutAttributes]()
 		for attributes in cache {
-			if CGRectIntersectsRect(attributes.frame, rect) {
+			if attributes.frame.intersects(rect) {
 				layoutAttributes.append(attributes)
 			}
 		}

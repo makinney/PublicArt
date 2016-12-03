@@ -10,34 +10,34 @@ import UIKit
 
 class SingleArtPhotosPresentAnimatedTransistioning: NSObject, UIViewControllerAnimatedTransitioning {
 	
-	func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+	func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
 		return 0.2 // TODO:
 	}
 	
-	func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-		let animatingViewController:UIViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
+	func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+		let animatingViewController:UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
 		let animatingView = animatingViewController.view
-		animatingView.frame = transitionContext.finalFrameForViewController(animatingViewController)
+		animatingView?.frame = transitionContext.finalFrame(for: animatingViewController)
 //		animatingView.layer.shadowOpacity = 0.5 // affects toolbar tranparency
 //		animatingView.layer.cornerRadius = 5
-		animatingView.clipsToBounds = true
+		animatingView?.clipsToBounds = true
 		
-		if let containerView = transitionContext.containerView() {
-			containerView.addSubview(animatingView)
-		}
+		if let animatingView = animatingView {
+			transitionContext.containerView.addSubview(animatingView)
+        }
 		
-		let presentedTransform = CGAffineTransformIdentity
-		let scale = CGAffineTransformMakeScale(0.001,0.001) // TODO:
+		let presentedTransform = CGAffineTransform.identity
+		let scale = CGAffineTransform(scaleX: 0.001,y: 0.001) // TODO:
 	//	var rotation = CGAffineTransformMakeRotation(5 * CGFloat(M_PI)) // TODO:
 		let dismissedTransform = scale
 		
-		animatingView.transform = dismissedTransform
+		animatingView?.transform = dismissedTransform
 		
-		UIView.animateWithDuration(transitionDuration(transitionContext),
+		UIView.animate(withDuration: transitionDuration(using: transitionContext),
 			delay: 0,
-			options: UIViewAnimationOptions.CurveEaseInOut,
+			options: UIViewAnimationOptions(),
 			animations: { () -> Void in
-				animatingView.transform = presentedTransform
+				animatingView?.transform = presentedTransform
 			}) { (finished) -> Void in
 				transitionContext.completeTransition(finished)
 		}

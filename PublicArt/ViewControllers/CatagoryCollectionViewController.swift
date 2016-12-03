@@ -10,10 +10,10 @@ import UIKit
 
 final class CatagoryCollectionViewController: UICollectionViewController {
 
-	private var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
-	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
-	private var categoryMenuItem = CatagoryMenuItem()
-	private var selectedMenuItem: (title: String, tag: String)?
+	fileprivate var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
+	fileprivate var userInterfaceIdion: UIUserInterfaceIdiom = .phone
+	fileprivate var categoryMenuItem = CatagoryMenuItem()
+	fileprivate var selectedMenuItem: (title: String, tag: String)?
 
 	
 	// MARK: Life Cycle
@@ -21,8 +21,8 @@ final class CatagoryCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		let nibName = UINib(nibName: CellIdentifier.CategoryCollectionViewCell.rawValue, bundle: nil)
-		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.CategoryCollectionViewCell.rawValue)
-		collectionView?.backgroundColor = UIColor.whiteColor()
+		self.collectionView?.register(nibName, forCellWithReuseIdentifier: CellIdentifier.CategoryCollectionViewCell.rawValue)
+		collectionView?.backgroundColor = UIColor.white
 
 		setupFlowLayout()
 		collectionView?.reloadData()
@@ -30,11 +30,11 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 		title = "Catagories"
     }
 	
-	override func viewWillAppear(animated: Bool) {
-		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular,
+	override func viewWillAppear(_ animated: Bool) {
+		if UIScreen.main.traitCollection.horizontalSizeClass == .regular,
 			let selectedMenuItem = selectedMenuItem {
 			let filter = ArtPiecesCollectionViewDataFilter(key: "tags", value: selectedMenuItem.tag, title: selectedMenuItem.title)
-			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
+			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArtPiecesNavControllerID") as? UINavigationController,
 				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
 					artPiecesCollectionViewController.fetchFilter(filter)
 					showDetailViewController(navigationController, sender: self)
@@ -44,21 +44,21 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        print("\(__FILE__) \(__FUNCTION__)")
+        print("\(#file) \(#function)")
     }
 
 
 	func setupFlowLayout() {
 		let maxCellHeight: CGFloat = 44
 		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
-			collectionViewFlowLayout.scrollDirection = .Vertical
+			collectionViewFlowLayout.scrollDirection = .vertical
 			let masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
 			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
 			collectionViewFlowLayout.minimumLineSpacing = 1
 			var minimumCellsPerLine = 0
 			
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
-			if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
+			if userInterfaceIdion == .phone || userInterfaceIdion == .unspecified {
 				let sectionInset: CGFloat = 1
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
@@ -83,7 +83,7 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 		}
 	}
 	
-	func maxCellWidth(screenWidth: CGFloat, cellsPerLine: Int, itemSpacing: CGFloat, flowLayout:UICollectionViewFlowLayout ) -> CGFloat {
+	func maxCellWidth(_ screenWidth: CGFloat, cellsPerLine: Int, itemSpacing: CGFloat, flowLayout:UICollectionViewFlowLayout ) -> CGFloat {
 		let numCells: CGFloat = CGFloat(cellsPerLine)
 		var totalInterItemSpacing: CGFloat = 0.0
 		var totalInsetSpacing: CGFloat = 0.0
@@ -100,7 +100,7 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 	}
 	
 
-	override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
 		setupFlowLayout()
 		//		collectionView?.reloadData()
 	}
@@ -108,38 +108,38 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //#warning Incomplete method implementation -- Return the number of items in the section
-		return CatagoryMenuOrder.CountRows.rawValue
+		return CatagoryMenuOrder.countRows.rawValue
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.CategoryCollectionViewCell.rawValue, forIndexPath: indexPath) as! CategoryCollectionViewCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.CategoryCollectionViewCell.rawValue, for: indexPath) as! CategoryCollectionViewCell
 		cell.menuItemName.text = menuItem(indexPath.row).title
-		cell.backgroundColor = UIColor.blackColor()
+		cell.backgroundColor = UIColor.black
 		cell.menuItemName.textColor = UIColor.sfOrangeColor()
         return cell
     }
 	
 	
-	func menuItem(row: Int) -> (title: String, tag: String) {
+	func menuItem(_ row: Int) -> (title: String, tag: String) {
 		switch(row) {
-		case CatagoryMenuOrder.Monuments.rawValue:
-			return (title: categoryMenuItem.value(.Monuments).title, tag: categoryMenuItem.value(.Monuments).tag)
-		case CatagoryMenuOrder.Murals.rawValue:
-			return (title: categoryMenuItem.value(.Murals).title, tag: categoryMenuItem.value(.Murals).tag)
-		case CatagoryMenuOrder.Plaques.rawValue:
-			return (title: categoryMenuItem.value(.Plaques).title, tag: categoryMenuItem.value(.Plaques).tag)
-		case CatagoryMenuOrder.Sculpture.rawValue:
-			return (title: categoryMenuItem.value(.Sculpture).title, tag: categoryMenuItem.value(.Sculpture).tag)
-		case CatagoryMenuOrder.Steel.rawValue:
-			return (title: categoryMenuItem.value(.Steel).title, tag: categoryMenuItem.value(.Steel).tag)
-		case CatagoryMenuOrder.Statues.rawValue:
-			return (title: categoryMenuItem.value(.Statues).title, tag: categoryMenuItem.value(.Statues).tag)
+		case CatagoryMenuOrder.monuments.rawValue:
+			return (title: categoryMenuItem.value(.monuments).title, tag: categoryMenuItem.value(.monuments).tag)
+		case CatagoryMenuOrder.murals.rawValue:
+			return (title: categoryMenuItem.value(.murals).title, tag: categoryMenuItem.value(.murals).tag)
+		case CatagoryMenuOrder.plaques.rawValue:
+			return (title: categoryMenuItem.value(.plaques).title, tag: categoryMenuItem.value(.plaques).tag)
+		case CatagoryMenuOrder.sculpture.rawValue:
+			return (title: categoryMenuItem.value(.sculpture).title, tag: categoryMenuItem.value(.sculpture).tag)
+		case CatagoryMenuOrder.steel.rawValue:
+			return (title: categoryMenuItem.value(.steel).title, tag: categoryMenuItem.value(.steel).tag)
+		case CatagoryMenuOrder.statues.rawValue:
+			return (title: categoryMenuItem.value(.statues).title, tag: categoryMenuItem.value(.statues).tag)
 
 //		case CatagoryMenuOrder.StreetArt.rawValue:
 //			return (title: categoryMenuItem.value(.StreetArt).title, tag: categoryMenuItem.value(.StreetArt).tag)
@@ -149,17 +149,17 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 	}
     // MARK: UICollectionViewDelegate
 	
-	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		selectedMenuItem = menuItem(indexPath.row)
 		let filter = ArtPiecesCollectionViewDataFilter(key: "tags", value: selectedMenuItem!.tag, title: selectedMenuItem!.title)
-		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
-			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
+		if UIScreen.main.traitCollection.horizontalSizeClass == .compact {
+			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
 			if artPiecesCollectionViewController != nil {
 				artPiecesCollectionViewController!.fetchFilter(filter)
 				showDetailViewController(artPiecesCollectionViewController!, sender: self)
 			}
 		} else {
-			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
+			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArtPiecesNavControllerID") as? UINavigationController,
 				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
 					artPiecesCollectionViewController.fetchFilter(filter)
 					showDetailViewController(navigationController, sender: self)
@@ -167,27 +167,27 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 		}
 	}
 
-	override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+	override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
 		return true
 	}
 	
 	
-	override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+	override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
 		return true
 	}
 	
-	override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-		let indexPathsVisible = collectionView.indexPathsForVisibleItems()
+	override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+		let indexPathsVisible = collectionView.indexPathsForVisibleItems
 		for path in indexPathsVisible {
-				let cell = collectionView.cellForItemAtIndexPath(path) as? CategoryCollectionViewCell
-				cell?.backgroundColor = UIColor.blackColor()
+				let cell = collectionView.cellForItem(at: path) as? CategoryCollectionViewCell
+				cell?.backgroundColor = UIColor.black
 				cell?.menuItemName.textColor = UIColor.sfOrangeColor()
 		}
 		
-		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
-			let cell = collectionView.cellForItemAtIndexPath(indexPath) as? CategoryCollectionViewCell
-			cell?.backgroundColor = UIColor.whiteColor()
-			cell?.menuItemName.textColor = UIColor.blackColor()
+		if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
+			let cell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell
+			cell?.backgroundColor = UIColor.white
+			cell?.menuItemName.textColor = UIColor.black
 		}
 	}
 }

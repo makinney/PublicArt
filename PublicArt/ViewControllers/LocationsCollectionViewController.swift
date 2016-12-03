@@ -13,18 +13,18 @@ import CoreData
 final class LocationsCollectionViewController: UICollectionViewController, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout {
 
 	// MARK: Properties
-	private var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
-	private var collapseDetailViewController = true
-	private var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
-	private var selectedLocation: Location?
+	fileprivate var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
+	fileprivate var collapseDetailViewController = true
+	fileprivate var initialHorizontalSizeClass: UIUserInterfaceSizeClass?
+	fileprivate var selectedLocation: Location?
 	
-	private var error:NSError?
-	private let moc: NSManagedObjectContext?
+	fileprivate var error:NSError?
+	fileprivate let moc: NSManagedObjectContext?
 	
 	var fetchFilterKey: String?
 	var fetchFilterValue: String?
 	
-	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
+	fileprivate var userInterfaceIdion: UIUserInterfaceIdiom = .phone
 	
 	override init(collectionViewLayout: UICollectionViewLayout) {
 		moc = CoreDataStack.sharedInstance.managedObjectContext
@@ -46,9 +46,9 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		
 		
 		let nibName = UINib(nibName: CellIdentifier.LocationCollectionViewCell.rawValue, bundle: nil) // TODO:
-		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: CellIdentifier.LocationCollectionViewCell.rawValue)
+		self.collectionView?.register(nibName, forCellWithReuseIdentifier: CellIdentifier.LocationCollectionViewCell.rawValue)
 		
-		collectionView?.backgroundColor = UIColor.whiteColor()
+		collectionView?.backgroundColor = UIColor.white
 		
 		let artworkCollectionViewLayout = collectionViewLayout as! ArtworkCollectionViewLayout
 		artworkCollectionViewLayout.cellPadding = 1
@@ -82,15 +82,15 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	}
 	
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular,
+		if UIScreen.main.traitCollection.horizontalSizeClass == .regular,
 			let selectedLocation = selectedLocation {
 				showArtPiecesFromNavController(selectedLocation)
 		}
 	}
 	
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 	}
 	
@@ -100,26 +100,26 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 //		}
 //	}
 	
-	override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
 		collectionView?.reloadData()
 	}
 	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        print("\(__FILE__) \(__FUNCTION__)")
+        print("\(#file) \(#function)")
     }
 
 	// MARK: Fetch Results Controller
-	//
-	lazy var fetchResultsController:NSFetchedResultsController = {
-		let fetchRequest = NSFetchRequest(entityName:ModelEntity.location)
-		let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.locationName, ascending:true, selector: "localizedStandardCompare:")]
+	// FIXME: what is NSFetchRequestResult
+	lazy var fetchResultsController:NSFetchedResultsController<Location> = {
+		let fetchRequest = NSFetchRequest<Location>(entityName:ModelEntity.location)
+        let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.locationName, ascending:true, selector: #selector(NSString.localizedStandardCompare(_:)))]
 		fetchRequest.sortDescriptors = sortDescriptor
 		let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc!, sectionNameKeyPath: nil, cacheName: nil)
 		return frc
 		}()
 	
-	func cellWidthAvailable(screenWidth: CGFloat, cellsPerLine: Int, itemSpacing: CGFloat, flowLayout:UICollectionViewFlowLayout ) -> CGFloat {
+	func cellWidthAvailable(_ screenWidth: CGFloat, cellsPerLine: Int, itemSpacing: CGFloat, flowLayout:UICollectionViewFlowLayout ) -> CGFloat {
 		let numCells: CGFloat = CGFloat(cellsPerLine)
 		var totalInterItemSpacing: CGFloat = 0.0
 		var totalInsetSpacing: CGFloat = 0.0
@@ -136,13 +136,13 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	}
 	
 	func resetVisibleCellBackgroundColors() {
-		if let indexPathsVisible = self.collectionView?.indexPathsForVisibleItems() ,
+		if let indexPathsVisible = self.collectionView?.indexPathsForVisibleItems ,
 			let collectionView = collectionView {
 				for path in indexPathsVisible { // hack fix for bug where deselected cells still look selected, sometimes
-					let location = fetchResultsController.objectAtIndexPath(path) as! Location
+					let location = fetchResultsController.object(at: path)
 					if location.artwork.count > 0 || location.name == "All"{
-						let cell = collectionView.cellForItemAtIndexPath(path) as? LocationCollectionViewCell
-						cell?.backgroundColor = UIColor.blackColor()
+						let cell = collectionView.cellForItem(at: path) as? LocationCollectionViewCell
+						cell?.backgroundColor = UIColor.black
 						cell?.title.textColor = UIColor.sfOrangeColor()
 					}
 				}
@@ -151,9 +151,9 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	
     // MARK: UICollectionViewDataSource
 	
-	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier.LocationCollectionViewCell.rawValue, forIndexPath: indexPath) as! LocationCollectionViewCell
-		let location = fetchResultsController.objectAtIndexPath(indexPath) as! Location
+	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.LocationCollectionViewCell.rawValue, for: indexPath) as! LocationCollectionViewCell
+		let location = fetchResultsController.object(at: indexPath)
 	
 		if location.name != "All" {
 			cell.title.text = location.name
@@ -162,40 +162,39 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		}
 
 		if location.artwork.count > 0 || location.name == "All" {
-			cell.backgroundColor = UIColor.blackColor()
+			cell.backgroundColor = UIColor.black
 			cell.title.textColor = UIColor.sfOrangeColor()
 		} else  {
-			cell.backgroundColor = UIColor.lightGrayColor()
-			cell.title.textColor =  UIColor.grayColor()
+			cell.backgroundColor = UIColor.lightGray
+			cell.title.textColor =  UIColor.gray
 		}
 		
 		return cell
 	}
 	
-	override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+	override func numberOfSections(in collectionView: UICollectionView) -> Int {
 		return fetchResultsController.sections?.count ?? 0
 	}
 	
-	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		let sectionInfo = fetchResultsController.sections![section] 
 		return sectionInfo.numberOfObjects
 	}
 	
     // MARK: UICollectionViewDelegate
 
-	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		if let location = fetchResultsController.objectAtIndexPath(indexPath) as? Location {
-			selectedLocation = location
-			if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
-				showArtPiecesWithoutNavController(location)
-			} else {
-				showArtPiecesFromNavController(location)
-			}
-		}
-	}
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let location = fetchResultsController.object(at: indexPath)
+        selectedLocation = location
+        if UIScreen.main.traitCollection.horizontalSizeClass == .compact {
+            showArtPiecesWithoutNavController(location)
+        } else {
+            showArtPiecesFromNavController(location)
+        }
+    }
 	
-	func showArtPiecesFromNavController(location: Location) {
-		if let navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
+	func showArtPiecesFromNavController(_ location: Location) {
+		if let navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArtPiecesNavControllerID") as? UINavigationController,
 			let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
 				if location.name != "All" {
 					let filter = ArtPiecesCollectionViewDataFilter(key: "idLocation", value: location.idLocation, title: location.name)
@@ -208,8 +207,8 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		}
 	}
 	
-	func showArtPiecesWithoutNavController(location: Location) {
-		if let artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController {
+	func showArtPiecesWithoutNavController(_ location: Location) {
+		if let artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController {
 			if location.name != "All" {
 				let filter = ArtPiecesCollectionViewDataFilter(key: "idLocation", value: location.idLocation, title: location.name)
 				artPiecesCollectionViewController.fetchFilter(filter)
@@ -221,16 +220,16 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 	}
 
 	
-	override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-		let location = fetchResultsController.objectAtIndexPath(indexPath) as! Location
+	override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+		let location = fetchResultsController.object(at: indexPath)
 		if location.artwork.count > 0 || location.name == "All" {
 			return true
 		}
 		return false
 	}
 
-    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-		let location = fetchResultsController.objectAtIndexPath(indexPath) as! Location
+    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+		let location = fetchResultsController.object(at: indexPath) 
 		if location.artwork.count > 0 || location.name == "All" {
 			return true
 		}
@@ -238,19 +237,19 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
     }
 	
 	
-	override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+	override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
 	
 		resetVisibleCellBackgroundColors()
-		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
-			let cell = collectionView.cellForItemAtIndexPath(indexPath) as? LocationCollectionViewCell
-			cell?.backgroundColor = UIColor.whiteColor()
-			cell?.title.textColor = UIColor.blackColor()
+		if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
+			let cell = collectionView.cellForItem(at: indexPath) as? LocationCollectionViewCell
+			cell?.backgroundColor = UIColor.white
+			cell?.title.textColor = UIColor.black
 		}
 	}
 	
-	override func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-		let cell = collectionView.cellForItemAtIndexPath(indexPath) as? LocationCollectionViewCell
-		cell?.backgroundColor = UIColor.blackColor()
+	override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+		let cell = collectionView.cellForItem(at: indexPath) as? LocationCollectionViewCell
+		cell?.backgroundColor = UIColor.black
 		cell?.title.textColor = UIColor.sfOrangeColor()
 	}
 	
@@ -258,7 +257,7 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 
 extension LocationsCollectionViewController : NSFetchedResultsControllerDelegate {
 	
-	func controllerDidChangeContent(controller: NSFetchedResultsController) {
+	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		collectionView?.reloadData()
 	}
 }
@@ -266,12 +265,12 @@ extension LocationsCollectionViewController : NSFetchedResultsControllerDelegate
 
 extension LocationsCollectionViewController: ArtworkLayoutDelegate {
 	
-	func collectionView(collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
+	func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
 		let height = width // photos for menus are always square
 		return height
 	}
 	
-	func collectionView(collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
+	func collectionView(_ collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
 		return 0 // FIXME:
 	}
 }

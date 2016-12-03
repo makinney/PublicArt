@@ -23,7 +23,7 @@ class AppCommon: NSManagedObject {
     @NSManaged var spareThree: NSNumber
     @NSManaged var spareFour: NSNumber
     @NSManaged var objectId: String
-    @NSManaged var updatedAt: NSDate
-    @NSManaged var createdAt: NSDate
+    @NSManaged var updatedAt: Date
+    @NSManaged var createdAt: Date
 
 }

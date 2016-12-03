@@ -21,7 +21,7 @@ class ArtDataCreator {
 	
 	// MARK: create
 	
-	func createOrUpdateAppCommon(parseAppCommon: ParseAppCommon) -> (created: [AppCommon], updated: [AppCommon])? {
+	func createOrUpdateAppCommon(_ parseAppCommon: ParseAppCommon) -> (created: [AppCommon], updated: [AppCommon])? {
 		var created = [AppCommon]()
 		var updated = [AppCommon]()
 		
@@ -41,7 +41,7 @@ class ArtDataCreator {
 	}
 
 	
-	func createOrUpdateArt(parseArt: [ParseArt]) ->(created: [Art], updated: [Art]) {
+	func createOrUpdateArt(_ parseArt: [ParseArt]) ->(created: [Art], updated: [Art]) {
 		var created = [Art]()
 		var updated = [Art]()
 		
@@ -60,7 +60,7 @@ class ArtDataCreator {
 		return (created, updated)
 	}
 	
-	func createOrUpdateArtist(parseArtist: [ParseArtist]) ->(created: [Artist], updated: [Artist]) {
+	func createOrUpdateArtist(_ parseArtist: [ParseArtist]) ->(created: [Artist], updated: [Artist]) {
 		var created = [Artist]()
 		var updated = [Artist]()
 		
@@ -80,7 +80,7 @@ class ArtDataCreator {
 	}
 	
 	
-	func createOrUpdatePhotos(parsePhoto: [ParsePhoto]) ->(created: [Photo], updated: [Photo]) {
+	func createOrUpdatePhotos(_ parsePhoto: [ParsePhoto]) ->(created: [Photo], updated: [Photo]) {
 		var created = [Photo]()
 		var updated = [Photo]()
 		
@@ -100,7 +100,7 @@ class ArtDataCreator {
 	}
 	
 	
-	func createOrUpdateThumbs(parseThumb: [ParseThumb]) ->(created: [Thumb], updated: [Thumb]) {
+	func createOrUpdateThumbs(_ parseThumb: [ParseThumb]) ->(created: [Thumb], updated: [Thumb]) {
 		var created = [Thumb]()
 		var updated = [Thumb]()
 		
@@ -120,7 +120,7 @@ class ArtDataCreator {
 	}
 	
 	
-	func createOrUpdateLocations(parseLocation: [ParseLocation]) ->(created: [Location], updated: [Location]) {
+	func createOrUpdateLocations(_ parseLocation: [ParseLocation]) ->(created: [Location], updated: [Location]) {
 		var created = [Location]()
 		var updated = [Location]()
 		
@@ -139,7 +139,7 @@ class ArtDataCreator {
 		return (created, updated)
 	}
 	
-	func createOrUpdateLocPhotos(parseLocPhoto: [ParseLocPhoto]) ->(created: [LocPhoto], updated: [LocPhoto]) {
+	func createOrUpdateLocPhotos(_ parseLocPhoto: [ParseLocPhoto]) ->(created: [LocPhoto], updated: [LocPhoto]) {
 		var created = [LocPhoto]()
 		var updated = [LocPhoto]()
 		

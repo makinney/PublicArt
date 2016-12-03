@@ -27,7 +27,7 @@ class ArtDataManager : NSObject {
 	}
 	
 	
-	func refresh(beginningAtDate: NSDate, endingAtDate: NSDate) {
+	func refresh(_ beginningAtDate: Date, endingAtDate: Date) {
 		refreshFromWeb(beginningAtDate, complete: {[weak self] (art, artists, locations, photos, thumbs, locPhotos, appCommon) -> () in
 			self?.updatePhotoToArtBindings(photos)
 			self?.updateArtToLocationBindings(art)
@@ -42,7 +42,7 @@ class ArtDataManager : NSObject {
 	
 	// TODO: needs error handling !!!
 	//
-	private func refreshFromWeb(beginningDate: NSDate, complete:(art: [Art], artists: [Artist], locations: [Location], photos: [Photo], thumbs: [Thumb], locPhotos: [LocPhoto], appCommon: [AppCommon]) ->()) {
+	fileprivate func refreshFromWeb(_ beginningDate: Date, complete:@escaping (_ art: [Art], _ artists: [Artist], _ locations: [Location], _ photos: [Photo], _ thumbs: [Thumb], _ locPhotos: [LocPhoto], _ appCommon: [AppCommon]) ->()) {
 		// get art and create or update
 		refreshArtFromWeb(beginningDate, complete: {[weak self] (art) -> () in
 			self!.refreshPhotosFromWeb(beginningDate, complete: { (photos) -> () in
@@ -51,7 +51,7 @@ class ArtDataManager : NSObject {
 						self!.refreshThumbsFromWeb(beginningDate, complete: { (thumbs) -> () in
 							self!.refreshLocPhotosFromWeb(beginningDate, complete: { (locPhotos) -> () in
 								self!.refreshAppCommonFromWeb(beginningDate, complete: { (appCommon) -> () in
-									complete(art: art, artists: artists, locations: locations, photos: photos, thumbs: thumbs, locPhotos: locPhotos, appCommon: appCommon)
+									complete(art, artists, locations, photos, thumbs, locPhotos, appCommon) // FIXME: Swift 3  when no parameter names here ?
 								})
 							})
 						})
@@ -63,120 +63,120 @@ class ArtDataManager : NSObject {
 	
 	// MARK: get latest from web --- refactor to other class ?
 	
-	private func refreshAppCommonFromWeb(date: NSDate, complete:(appCommon: [AppCommon]) ->()) {
+	fileprivate func refreshAppCommonFromWeb(_ date: Date, complete:@escaping (_ appCommon: [AppCommon]) ->()) {
 		ParseWebService.getAppCommonSince(date) {[weak self] (parseAppCommon) -> Void in
 			var appCommon = [AppCommon]()
 			if let parseAppCommon = parseAppCommon,
 				let crud = self?.artDataCreator.createOrUpdateAppCommon(parseAppCommon) {
 				appCommon = crud.created + crud.updated
 			}
-			complete(appCommon: appCommon)
+			complete(appCommon)
 		}
 	}
 	
-	private func refreshArtFromWeb(date: NSDate, complete:(art: [Art]) ->()) {
+	fileprivate func refreshArtFromWeb(_ date: Date, complete:@escaping (_ art: [Art]) ->()) {
 		ParseWebService.getAllArtSince(date) {[weak self] (parseArt) -> Void in
 			var art = [Art]()
 			if let parseArt = parseArt,
 				let crud = self?.artDataCreator.createOrUpdateArt(parseArt) {
 					art = crud.created + crud.updated
 			}
-			complete(art: art)
+			complete(art)
 		}
 	}
 	
-	private func refreshArtistsFromWeb(date: NSDate, complete:(artists: [Artist]) ->()) {
+	fileprivate func refreshArtistsFromWeb(_ date: Date, complete:@escaping (_ artists: [Artist]) ->()) {
 		ParseWebService.getAllArtistSince(date) {[weak self] (parseArtists) -> Void in
 			var artists = [Artist]()
 			if let parseArtists = parseArtists,
 				let crud = self?.artDataCreator.createOrUpdateArtist(parseArtists) {
 					artists = crud.created + crud.updated
 			}
-			complete(artists: artists)
+			complete(artists)
 		}
 	}
 	
-	private func refreshPhotosFromWeb(date: NSDate, complete:(photos: [Photo]) ->()) {
+	fileprivate func refreshPhotosFromWeb(_ date: Date, complete:@escaping (_ photos: [Photo]) ->()) {
 		ParseWebService.getAllPhotosSince(date) {[weak self] (parsePhotos) -> Void in
 			var photos = [Photo]()
 			if let parsePhotos = parsePhotos,
 				let crud = self?.artDataCreator.createOrUpdatePhotos(parsePhotos) {
 					photos = crud.created + crud.updated
 			}
-			PFObject.pinAllInBackground(parsePhotos) // saving the PFFile image reference
-			complete(photos: photos)
+			PFObject.pinAll(inBackground: parsePhotos) // saving the PFFile image reference
+			complete(photos)
 		}
 	}
 	
-	private func refreshLocationsFromWeb(date: NSDate, complete:(locations: [Location]) ->()) {
+	fileprivate func refreshLocationsFromWeb(_ date: Date, complete:@escaping (_ locations: [Location]) ->()) {
 		ParseWebService.getAllLocationsSince(date) {[weak self] (parseLocations) -> Void in
 			var locations = [Location]()
 			if let parseLocations = parseLocations,
 				let crud = self?.artDataCreator.createOrUpdateLocations(parseLocations) {
 					locations = crud.created + crud.updated
 			}
-			complete(locations: locations)
+			complete(locations)
 		}
 	}
 	
-	private func refreshThumbsFromWeb(date: NSDate, complete:(thumbs: [Thumb]) ->()) {
+	fileprivate func refreshThumbsFromWeb(_ date: Date, complete:@escaping (_ thumbs: [Thumb]) ->()) {
 		ParseWebService.getAllThumbsSince(date) {[weak self] (parseThumbs) -> Void in
 			var thumbs = [Thumb]()
 			if let parseThumbs = parseThumbs,
 				let crud = self?.artDataCreator.createOrUpdateThumbs(parseThumbs) {
 					thumbs = crud.created + crud.updated
 			}
-			PFObject.pinAllInBackground(parseThumbs) // saving the PFFile image reference
-			complete(thumbs: thumbs)
+			PFObject.pinAll(inBackground: parseThumbs) // saving the PFFile image reference
+			complete(thumbs)
 		}
 	}
 	
-	private func refreshLocPhotosFromWeb(date: NSDate, complete:(locPhotos: [LocPhoto]) ->()) {
+	fileprivate func refreshLocPhotosFromWeb(_ date: Date, complete:@escaping (_ locPhotos: [LocPhoto]) ->()) {
 		ParseWebService.getAllLocPhotosSince(date) {[weak self] (parseLocPhotos) -> Void in
 			var locPhotos = [LocPhoto]()
 			if let parseLocPhotos = parseLocPhotos,
 				let crud = self?.artDataCreator.createOrUpdateLocPhotos(parseLocPhotos) {
 					locPhotos = crud.created + crud.updated
 			}
-			PFObject.pinAllInBackground(parseLocPhotos) // saving the PFFile image reference
-			complete(locPhotos: locPhotos)
+			PFObject.pinAll(inBackground: parseLocPhotos) // saving the PFFile image reference
+			complete(locPhotos)
 		}
 	}
 	
 	// MARK: Update bindings
 	
-	private func updateArtToLocationBindings(art:[Art]) {
+	fileprivate func updateArtToLocationBindings(_ art:[Art]) {
 		for art in art {
 			if let location = self.fetcher.fetchLocation(art.idLocation) {
-				let artSet:NSMutableSet = location.artwork.mutableCopy() as! NSMutableSet
-				artSet.addObject(art)
+				let artSet:NSMutableSet = location.artwork.mutableCopy() as! NSMutableSet // FIXME: Swift 3 can these be Swift Sets now?
+				artSet.add(art)
 				location.artwork = artSet.copy() as! NSSet
 			}
 		}
 	}
 	
-	private func updateArtToArtistBindings(art:[Art]) {
+	fileprivate func updateArtToArtistBindings(_ art:[Art]) {
 		for art in art {
 			if let artist = self.fetcher.fetchArtist(art.idArtist) {
 				let artistArtworkSet:NSMutableSet = artist.artwork.mutableCopy() as! NSMutableSet
-				artistArtworkSet.addObject(art)
+				artistArtworkSet.add(art)
 				artist.artwork = artistArtworkSet.copy() as! NSSet
 			}
 		}
 	}
 
-	private func updatePhotoToArtBindings(photos:[Photo]) {
+	fileprivate func updatePhotoToArtBindings(_ photos:[Photo]) {
 		for photo in photos {
 			if let art = self.fetcher.fetchArt(photo.idArt) {
 				let relationSet: NSMutableSet = art.photos.mutableCopy() as! NSMutableSet
-				relationSet.addObject(photo)
+				relationSet.add(photo)
 				art.photos = relationSet.copy() as! NSSet
 			
 			}
 		}
 	}
 	
-	private func updateThumbToArtBindings(thumbs:[Thumb]) {
+	fileprivate func updateThumbToArtBindings(_ thumbs:[Thumb]) {
 		for thumb in thumbs {
 			if let art = self.fetcher.fetchArt(thumb.idArt) {
 				art.thumb = thumb
@@ -184,7 +184,7 @@ class ArtDataManager : NSObject {
 		}
 	}
 	
-	private func updateLocPhotoToLocationBindings(locPhotos:[LocPhoto]) {
+	fileprivate func updateLocPhotoToLocationBindings(_ locPhotos:[LocPhoto]) {
 		for locPhoto in locPhotos {
 			if let location = self.fetcher.fetchLocation(locPhoto.idLocation) {
 				location.photo = locPhoto
@@ -195,7 +195,7 @@ class ArtDataManager : NSObject {
 	
 	// MARK: notifications
 	
-	private func checkForRequiredNotifications() {
+	fileprivate func checkForRequiredNotifications() {
 //		if let newPhotos = newPhotos where newPhotos.count > 0 {
 //			var timeInterval: NSTimeInterval = 1 // : define
 //			var timer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target:self, selector: "postNewPhotosNotification", userInfo:nil, repeats:false)

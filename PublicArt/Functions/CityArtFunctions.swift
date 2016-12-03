@@ -9,11 +9,11 @@
 import Foundation
 
 
-func ascending(s1: String, s2: String) -> Bool {
+func ascending(_ s1: String, s2: String) -> Bool {
 	return s1 < s2
 }
 
-func outsideArtCityMapBoundaries(latitude latitude: Double, longitude: Double) -> Bool {
+func outsideArtCityMapBoundaries(latitude: Double, longitude: Double) -> Bool {
 	let withInBoundaries = false
 	if latitude < ArtCityMap.minlatitude || latitude > ArtCityMap.maxlatitude {
 		return true
@@ -50,7 +50,7 @@ func mapCoordinates(latitude lat: String, longitude lng: String) -> (latitude: D
 }
 
 
-func DLog(message: String, function: String = __FUNCTION__){
+func DLog(_ message: String, function: String = #function){
 	#if DEBUG
 		println("\(function): \(message)")
 	#endif

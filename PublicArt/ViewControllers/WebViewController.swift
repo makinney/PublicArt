@@ -21,17 +21,17 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         // Do any additional setup after loading the view.
     }
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		if let webViewAddress = webViewAddress,
-			let url = NSURL.init(string: webViewAddress) {
-				let urlRequest = NSURLRequest(URL:url)
+			let url = URL.init(string: webViewAddress) {
+				let urlRequest = URLRequest(url:url)
 				webView.loadRequest(urlRequest)
 				activityIndicator.startAnimating()
 		}
 	}
 	
-	override func viewWillDisappear(animated: Bool) {
+	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		webView.stopLoading()
 		activityIndicator.stopAnimating()
@@ -42,7 +42,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-	func webViewDidFinishLoad(webView: UIWebView) {
+	func webViewDidFinishLoad(_ webView: UIWebView) {
 		activityIndicator.stopAnimating()
 	}
 	

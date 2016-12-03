@@ -12,48 +12,48 @@ import UIKit
 // MARK: Catagory
 
 enum CatagoryType {
-	case Monuments
-	case Murals
-	case Plaques
-	case Sculpture
-	case Steel
-	case Statues
-	case StreetArt
+	case monuments
+	case murals
+	case plaques
+	case sculpture
+	case steel
+	case statues
+	case streetArt
 }
 
 enum CatagoryMenuOrder: Int {
-	case Monuments = 0
-	case Murals
-	case Plaques
-	case Sculpture
-	case Steel
-	case Statues
+	case monuments = 0
+	case murals
+	case plaques
+	case sculpture
+	case steel
+	case statues
 //	case StreetArt
-	case CountRows = 6
+	case countRows = 6
 }
 
 struct CatagoryMenuItem {
 	
-	func value(catagoryMenuOrder: CatagoryMenuOrder) -> (title: String, tag: String) {
+	func value(_ catagoryMenuOrder: CatagoryMenuOrder) -> (title: String, tag: String) {
 		var title = ""
 		var tag = ""
 		switch(catagoryMenuOrder) {
-		case .Monuments:
+		case .monuments:
 			title = "Monuments"
 			tag = "Monument"
-		case .Murals:
+		case .murals:
 			title = "Murals"
 			tag = "Mural"
-		case .Plaques:
+		case .plaques:
 			title = "Plaques"
 			tag = "Plaque"
-		case .Sculpture:
+		case .sculpture:
 			title = "Sculpture"
 			tag = "Sculpture"
-		case .Steel:
+		case .steel:
 			title = "Steel"
 			tag = "Steel"
-		case .Statues:
+		case .statues:
 			title = "Statues"
 			tag = "Statue"
 //		case .StreetArt:
@@ -73,22 +73,22 @@ struct CatagoryMenuItem {
 // MARK: Discover
 
 enum MainMenuType {
-	case Artists
-	case Catagory
-	case Neighborhoods
-	case Titles
-	case Medium
-	case Favorites
+	case artists
+	case catagory
+	case neighborhoods
+	case titles
+	case medium
+	case favorites
 }
 
 enum MainMenuRow: Int {
-	case Artists = 1
-	case Catagory = 4
-	case Neighborhoods = 2
-	case Titles = 0
-	case Medium = 3
-	case Favorites = 5
-	case CountRows = 6
+	case artists = 1
+	case catagory = 4
+	case neighborhoods = 2
+	case titles = 0
+	case medium = 3
+	case favorites = 5
+	case countRows = 6
 }
 
 struct MainMenuItem {
@@ -99,28 +99,28 @@ struct MainMenuItem {
 
 struct MainMenu {
 	
-	func item(mainMenuType: MainMenuType) -> MainMenuItem {
+	func item(_ mainMenuType: MainMenuType) -> MainMenuItem {
 		var title = ""
 		var image = UIImage()
 		switch(mainMenuType) {
-		case .Artists:
+		case .artists:
 			image = UIImage(named: "FlutePlayers") ?? image
 			title = "Artists"
-		case .Catagory:
+		case .catagory:
 			image = UIImage(named: "LionClose") ?? image
 			title = "Catagories"
-		case .Neighborhoods:
+		case .neighborhoods:
 			image = UIImage(named: "IMG_0951") ?? image
 			title = "Locations"
-		case .Titles:
+		case .titles:
 			image = UIImage(named: "IMG_5037") ?? image
 			title = "Titles"
-		case .Medium:
+		case .medium:
 			image = UIImage(named: "IMG_5838") ?? image
 			title = "Media"
-		case .Favorites:
+		case .favorites:
 		//	image = UIImage(named: "SixteenthAveTiledStepsCropped") ?? image
-			image = UIImage.imageWithColor(UIColor.blackColor())
+			image = UIImage.imageWithColor(UIColor.black)
 			title =  ""
 		}
 		

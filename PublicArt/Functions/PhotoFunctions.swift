@@ -9,21 +9,21 @@
 import Foundation
 
 
-func convertToSortedArray(set: Set<Photo>) -> [Photo] {
+func convertToSortedArray(_ set: Set<Photo>) -> [Photo] {
 	var photos = [Photo]()
-	let sortedPhotoSet = set.sort({ $0.imageFileName < $1.imageFileName })
+	let sortedPhotoSet = set.sorted(by: { $0.imageFileName < $1.imageFileName }) // FIXME: sorted return the set or not ?
 	for photo in sortedPhotoSet {
 		photos.append(photo)
 	}
 	return photos
 }
 
-func sortThumbnailPhotoToFirstPositionIn(photos: [Photo]) -> [Photo] {
+func sortThumbnailPhotoToFirstPositionIn(_ photos: [Photo]) -> [Photo] {
 	var photos = photos
-	for (index, photo) in photos.enumerate() {
+	for (index, photo) in photos.enumerated() {
 		if photo.tnMatch == true {
-			photos.removeAtIndex(index)
-			photos.insert(photo, atIndex: 0)
+			photos.remove(at: index)
+			photos.insert(photo, at: 0)
 			break
 		}
 	}
@@ -31,7 +31,7 @@ func sortThumbnailPhotoToFirstPositionIn(photos: [Photo]) -> [Photo] {
 }
 
 
-func thumbNailsHighResolutionVersionIn(art: Art) -> Photo? {
+func thumbNailsHighResolutionVersionIn(_ art: Art) -> Photo? {
 	var highResPhoto: Photo?
 	if let photoSet: Set<Photo> = art.photos as? Set {
 		for photo in photoSet {
@@ -44,7 +44,7 @@ func thumbNailsHighResolutionVersionIn(art: Art) -> Photo? {
 	return highResPhoto
 }
 
-func thumbNailsHighResolutionVersionIn(photos: [Photo]) -> Photo? {
+func thumbNailsHighResolutionVersionIn(_ photos: [Photo]) -> Photo? {
 	var highResPhoto: Photo?
 	let photos = photos
 	for photo in photos {

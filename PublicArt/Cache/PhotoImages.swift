@@ -11,44 +11,44 @@ import UIKit
 class PhotoImages {
 	let MaxImages = 30
 	static let sharedInstance = PhotoImages()
-	private init(){
+	fileprivate init(){
 		
 	}
 	
-	func getImage(photo: Photo, complete:(image: UIImage?, imageFileName: String?)->()) {
+	func getImage(_ photo: Photo, complete:@escaping (_ image: UIImage?, _ imageFileName: String?)->()) {
 			if let image = getImage(photo.imageFileName) {
-				complete(image: image, imageFileName: photo.imageFileName)
+				complete(image, photo.imageFileName)
 			} else {
 				ImageDownload.downloadPhoto(photo, complete: { [weak self] (data, imageFileName) -> () in
 					if let data = data,
 						let image = UIImage(data: data) {
 							self?.addImage(image, name: imageFileName)
-							complete(image: image, imageFileName:  imageFileName)
+							complete(image, imageFileName)
 					} else {
-						complete(image: nil, imageFileName: imageFileName)
+						complete(nil, imageFileName)
 					}
 				})
 			}
 	}
 	
-	private
+	fileprivate
 	
 	var cache: [String : UIImage] = Dictionary()
 	
-	func addImage(image: UIImage, name: String) {
+	func addImage(_ image: UIImage, name: String) {
 		if cache.count >= MaxImages {
 			removeAnImage()
 		}
 		cache[name] = image
 	}
 	
-	func getImage(name: String) -> UIImage? {
+	func getImage(_ name: String) -> UIImage? {
 		return cache[name]
 	}
 	
-	private func removeAnImage() {
+	fileprivate func removeAnImage() {
 		if cache.count > 0 {
-			cache.removeAtIndex(cache.startIndex)
+			cache.remove(at: cache.startIndex)
 		}
 	}
 }

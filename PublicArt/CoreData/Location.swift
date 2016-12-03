@@ -13,13 +13,13 @@ import CoreData
 
 class Location: NSManagedObject {
 
-    @NSManaged var createdAt: NSDate
+    @NSManaged var createdAt: Date
     @NSManaged var idLocation: String
     @NSManaged var latitude: NSNumber
     @NSManaged var longitude: NSNumber
     @NSManaged var name: String
     @NSManaged var objectId: String
-    @NSManaged var updatedAt: NSDate
+    @NSManaged var updatedAt: Date
     @NSManaged var spareOne: String
     @NSManaged var spareTwo: String
     @NSManaged var spareThree: NSNumber

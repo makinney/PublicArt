@@ -28,8 +28,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
 	
-	override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
-		super.applyLayoutAttributes(layoutAttributes)
+	override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+		super.apply(layoutAttributes)
 		let attributes = layoutAttributes as! ArtworkLayoutAttributes
 		imageViewHeight.constant = attributes.photoHeight
 	}

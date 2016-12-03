@@ -11,14 +11,14 @@ import CoreData
 
 extension Photo {
 	
-	class func create(parsePhoto: ParsePhoto, moc: NSManagedObjectContext) -> Photo? {
-		if let photo = NSEntityDescription.insertNewObjectForEntityForName(ModelEntity.photo, inManagedObjectContext:moc) as? Photo {
+	class func create(_ parsePhoto: ParsePhoto, moc: NSManagedObjectContext) -> Photo? {
+		if let photo = NSEntityDescription.insertNewObject(forEntityName: ModelEntity.photo, into:moc) as? Photo {
 			photo.createdAt = parsePhoto.createdAt!
 			photo.objectId = parsePhoto.objectId!
 			photo.updatedAt = parsePhoto.updatedAt!
 			photo.idArt = parsePhoto.idArt ?? ""
-			photo.imageAspectRatio = parsePhoto.imageAspectRatio
-			photo.tnMatch = parsePhoto.tnMatch ?? false
+            photo.imageAspectRatio = NSNumber(value: parsePhoto.imageAspectRatio)
+			photo.tnMatch = parsePhoto.tnMatch as NSNumber? ?? false
 
 			if let imageFile = parsePhoto.imageFile {
 				photo.imageFileName = extractImageFileName(imageFile.name)
@@ -30,13 +30,13 @@ extension Photo {
 		return nil
 	}
 	
-	class func update(photo: Photo, parsePhoto: ParsePhoto) {
+	class func update(_ photo: Photo, parsePhoto: ParsePhoto) {
 			photo.createdAt = parsePhoto.createdAt!
 			photo.objectId = parsePhoto.objectId!
 			photo.updatedAt = parsePhoto.updatedAt!
 			photo.idArt = parsePhoto.idArt ?? ""
-			photo.imageAspectRatio = parsePhoto.imageAspectRatio
-			photo.tnMatch = parsePhoto.tnMatch ?? false
+            photo.imageAspectRatio = NSNumber(value: parsePhoto.imageAspectRatio)
+			photo.tnMatch = parsePhoto.tnMatch as NSNumber? ?? false
 
 			if let imageFile = parsePhoto.imageFile {
 				photo.imageFileName = extractImageFileName(imageFile.name)
@@ -45,11 +45,11 @@ extension Photo {
 			}
 	}
 	
-	class private func extractImageFileName(source: String) -> String {
+	class fileprivate func extractImageFileName(_ source: String) -> String {
 		var imageFileName = ""
 		let delimiter = "-"
-		if let lastDelimiter = source.rangeOfString(delimiter, options: NSStringCompareOptions.BackwardsSearch) {
-			imageFileName = source[lastDelimiter.endIndex..<source.endIndex]
+		if let lastDelimiter = source.range(of: delimiter, options: NSString.CompareOptions.backwards) {
+			imageFileName = source[lastDelimiter.upperBound..<source.endIndex]
 		}
 		// println("extracted image file name \(imageFileName)")
 		return imageFileName

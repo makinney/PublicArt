@@ -11,8 +11,8 @@ import CoreData
 
 extension AppCommon {
 	
-	class func create(parseAppCommon: ParseAppCommon, moc: NSManagedObjectContext) -> AppCommon? {
-		if let appCommon = NSEntityDescription.insertNewObjectForEntityForName(ModelEntity.appCommon, inManagedObjectContext:moc) as? AppCommon {
+	class func create(_ parseAppCommon: ParseAppCommon, moc: NSManagedObjectContext) -> AppCommon? {
+		if let appCommon = NSEntityDescription.insertNewObject(forEntityName: ModelEntity.appCommon, into:moc) as? AppCommon {
 			appCommon.objectId = parseAppCommon.objectId!
 			appCommon.createdAt = parseAppCommon.createdAt!
 			appCommon.updatedAt = parseAppCommon.updatedAt!
@@ -22,7 +22,7 @@ extension AppCommon {
 		return nil
 	}
 	
-	class func update(appCommon: AppCommon, parseAppCommon: ParseAppCommon) {
+	class func update(_ appCommon: AppCommon, parseAppCommon: ParseAppCommon) {
 		appCommon.objectId = parseAppCommon.objectId!
 		appCommon.createdAt = parseAppCommon.createdAt!
 		appCommon.updatedAt = parseAppCommon.updatedAt!

@@ -11,8 +11,8 @@ import CoreData
 
 extension Artist {
 	
-	class func create(parseArtist: ParseArtist, moc: NSManagedObjectContext) -> Artist? {
-		if let artist = NSEntityDescription.insertNewObjectForEntityForName(ModelEntity.artist, inManagedObjectContext:moc) as? Artist {
+	class func create(_ parseArtist: ParseArtist, moc: NSManagedObjectContext) -> Artist? {
+		if let artist = NSEntityDescription.insertNewObject(forEntityName: ModelEntity.artist, into:moc) as? Artist {
 			artist.objectId = parseArtist.objectId!
 			artist.createdAt = parseArtist.createdAt!
 			artist.updatedAt = parseArtist.updatedAt!
@@ -26,7 +26,7 @@ extension Artist {
 	}
 	
 	
-	class func update(artist: Artist, parseArtist: ParseArtist) {
+	class func update(_ artist: Artist, parseArtist: ParseArtist) {
 		artist.objectId = parseArtist.objectId!
 		artist.createdAt = parseArtist.createdAt!
 		artist.updatedAt = parseArtist.updatedAt!

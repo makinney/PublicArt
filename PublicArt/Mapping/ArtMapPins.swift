@@ -34,7 +34,7 @@ class ArtMapPins {
 	
 	var defaultImageName = "map-letter8"
 	
-	func imageNameFor(text: String) -> String {
+	func imageNameFor(_ text: String) -> String {
 		var imageName = defaultImageName
 //		var imageIndex = 0
 //		let letter = getFirstLetterAsLowerCase(text)
@@ -59,9 +59,9 @@ class ArtMapPins {
 		return imageName
 	}
 	
-	func getFirstLetterAsLowerCase(text: String) -> String {
+	func getFirstLetterAsLowerCase(_ text: String) -> String {
 		let first: String = String(text[text.startIndex])
-		return first.lowercaseString
+		return first.lowercased()
 	}
 	
 	

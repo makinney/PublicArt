@@ -11,9 +11,9 @@ import CoreData
 
 extension Art {
 	
-	class func create(parseArt: ParseArt, moc: NSManagedObjectContext) -> Art? {
+	class func create(_ parseArt: ParseArt, moc: NSManagedObjectContext) -> Art? {
 		
-		if let art = NSEntityDescription.insertNewObjectForEntityForName(ModelEntity.art, inManagedObjectContext:moc) as? Art {
+		if let art = NSEntityDescription.insertNewObject(forEntityName: ModelEntity.art, into:moc) as? Art {
 	
 			art.objectId = parseArt.objectId!
 			art.createdAt = parseArt.createdAt!
@@ -24,12 +24,12 @@ extension Art {
 			art.credit = parseArt.credit ?? ""
 		
 			art.dimensions = parseArt.dimensions ?? ""
-			art.hasThumb = parseArt.hasThumb ?? false
+			art.hasThumb = parseArt.hasThumb as NSNumber? ?? false // FIXME: Swift 3  why NSNumber?
 			art.idArt = parseArt.idArt ?? ""
 			art.idArtist = parseArt.idArtist ?? ""
 			art.idLocation = parseArt.idLocation ?? ""
 			art.medium = parseArt.medium ?? ""
-			art.missing = parseArt.missing ?? false
+			art.missing = parseArt.missing as NSNumber? ?? false
 			art.tags = parseArt.tags ?? ""
 			art.title = parseArt.title ?? ""
 			art.address = parseArt.address ?? ""
@@ -37,8 +37,8 @@ extension Art {
 			let latitude = parseArt.latitude ?? ""
 			let longitude = parseArt.longitude ?? ""
 			let coordinates = mapCoordinates(latitude: latitude, longitude: longitude)
-			art.longitude = coordinates.longitude
-			art.latitude = coordinates.latitude
+			art.longitude = NSNumber(value: coordinates.longitude)
+			art.latitude = NSNumber(value: coordinates.latitude)
 			art.artWebLink = parseArt.artWebLink ?? ""
 			
 			if let descriptionFile = parseArt.descriptionFile {
@@ -53,7 +53,7 @@ extension Art {
 	}
 	
 
-	class func update(art: Art, parseArt: ParseArt) {
+	class func update(_ art: Art, parseArt: ParseArt) {
 		art.objectId = parseArt.objectId!
 		art.createdAt = parseArt.createdAt!
 		art.updatedAt = parseArt.updatedAt!
@@ -63,12 +63,12 @@ extension Art {
 		art.credit = parseArt.credit ?? ""
 		
 		art.dimensions = parseArt.dimensions ?? ""
-		art.hasThumb = parseArt.hasThumb ?? false
+		art.hasThumb = parseArt.hasThumb as NSNumber? ?? false
 		art.idArt = parseArt.idArt ?? ""
 		art.idArtist = parseArt.idArtist ?? ""
 		art.idLocation = parseArt.idLocation ?? ""
 		art.medium = parseArt.medium ?? ""
-		art.missing = parseArt.missing ?? false
+		art.missing = parseArt.missing as NSNumber? ?? false
 		art.tags = parseArt.tags ?? ""
 		art.title = parseArt.title ?? ""
 		art.address = parseArt.address ?? ""
@@ -76,8 +76,8 @@ extension Art {
 		let latitude = parseArt.latitude ?? ""
 		let longitude = parseArt.longitude ?? ""
 		let coordinates = mapCoordinates(latitude: latitude, longitude: longitude)
-		art.longitude = coordinates.longitude
-		art.latitude = coordinates.latitude
+		art.longitude = NSNumber(value: coordinates.longitude)
+		art.latitude = NSNumber(value: coordinates.latitude)
 		art.artWebLink = parseArt.artWebLink ?? ""
 		
 		if let descriptionFile = parseArt.descriptionFile {

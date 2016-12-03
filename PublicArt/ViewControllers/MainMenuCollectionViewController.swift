@@ -12,16 +12,16 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 
 	// MARK: Properties
 	
-	private var userInterfaceIdion: UIUserInterfaceIdiom = .Phone
-	private var mainMenu = MainMenu()
-	private var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
+	fileprivate var userInterfaceIdion: UIUserInterfaceIdiom = .phone
+	fileprivate var mainMenu = MainMenu()
+	fileprivate var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
 	
 	// MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 		let nibName = UINib(nibName: "HomeCollectionViewCell", bundle: nil)
-		self.collectionView?.registerNib(nibName, forCellWithReuseIdentifier: "HomeCollectionViewCellID")
+		self.collectionView?.register(nibName, forCellWithReuseIdentifier: "HomeCollectionViewCellID")
 		collectionView?.reloadData()
 		self.title = "Public Art" // TITLE
 		
@@ -29,7 +29,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		let artworkCollectionViewLayout = collectionViewLayout as! ArtworkCollectionViewLayout
 		
 		userInterfaceIdion = traitCollection.userInterfaceIdiom
-		if userInterfaceIdion == .Pad {
+		if userInterfaceIdion == .pad {
 			artworkCollectionViewLayout.cellPadding = 5
 			artworkCollectionViewLayout.delegate = self
 			artworkCollectionViewLayout.numberOfColumns = 1
@@ -40,67 +40,67 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		}
 	
 		
-		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Regular {
+		if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
 			showDefaultDetailViewController()
 		}
     }
 
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-				if userInterfaceIdion == .Phone || userInterfaceIdion == .Unspecified {
-					collectionView?.backgroundColor = UIColor.blackColor()
+				if userInterfaceIdion == .phone || userInterfaceIdion == .unspecified {
+					collectionView?.backgroundColor = UIColor.black
 				} else {
-					collectionView?.backgroundColor = UIColor.blackColor()
+					collectionView?.backgroundColor = UIColor.black
 				}
 
 		
 	}
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        print("\(__FILE__) \(__FUNCTION__)")
+        print("\(#file) \(#function)")
     }
 	
     // MARK: - Navigation
 
-	override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
 		//		collectionView?.reloadData()
 	}
 	
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //#warning Incomplete method implementation -- Return the number of items in the section
-		return MainMenuRow.CountRows.rawValue
+		return MainMenuRow.countRows.rawValue
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("HomeCollectionViewCellID", forIndexPath: indexPath) as! HomeCollectionViewCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionViewCellID", for: indexPath) as! HomeCollectionViewCell
 		cell.imageView.image = UIImage()
 		
 		let row = indexPath.row
 		var mainMenuItem: MainMenuItem?
 		
 		switch(row) {
-		case MainMenuRow.Artists.rawValue:
-			 mainMenuItem = mainMenu.item(.Artists)
-		case MainMenuRow.Catagory.rawValue:
-			 mainMenuItem = mainMenu.item(.Catagory)
-		case MainMenuRow.Neighborhoods.rawValue:
-			 mainMenuItem = mainMenu.item(.Neighborhoods)
-		case MainMenuRow.Titles.rawValue:
-			mainMenuItem = mainMenu.item(.Titles)
-		case MainMenuRow.Medium.rawValue:
-			 mainMenuItem = mainMenu.item(.Medium)
-		case MainMenuRow.Favorites.rawValue:
-			 mainMenuItem = mainMenu.item(.Favorites)
+		case MainMenuRow.artists.rawValue:
+			 mainMenuItem = mainMenu.item(.artists)
+		case MainMenuRow.catagory.rawValue:
+			 mainMenuItem = mainMenu.item(.catagory)
+		case MainMenuRow.neighborhoods.rawValue:
+			 mainMenuItem = mainMenu.item(.neighborhoods)
+		case MainMenuRow.titles.rawValue:
+			mainMenuItem = mainMenu.item(.titles)
+		case MainMenuRow.medium.rawValue:
+			 mainMenuItem = mainMenu.item(.medium)
+		case MainMenuRow.favorites.rawValue:
+			 mainMenuItem = mainMenu.item(.favorites)
 		default:
-			print("\(__FILE__) \(__FUNCTION__) menu row not defined for row \(row)")
+			print("\(#file) \(#function) menu row not defined for row \(row)")
 		}
 		
 		if let mainMenuItem = mainMenuItem {
@@ -119,52 +119,52 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 	var mediaCollectionViewController: MediaCollectionViewController?
 
 	
-	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let row = indexPath.row
 	
 	
 		switch(row) {
-		case MainMenuRow.Artists.rawValue:
+		case MainMenuRow.artists.rawValue:
 		
 			if artistCollectionViewController == nil {
-				artistCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.ArtistCollectionViewController.rawValue) as? ArtistCollectionViewController
+				artistCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ViewControllerIdentifier.ArtistCollectionViewController.rawValue) as? ArtistCollectionViewController
 			}
 			
-			showViewController(artistCollectionViewController!, sender: self)
+			show(artistCollectionViewController!, sender: self)
 
-		case MainMenuRow.Catagory.rawValue:
+		case MainMenuRow.catagory.rawValue:
 		
 			if catagoryCollectionViewController == nil {
-				catagoryCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.CatagoryCollectionViewController.rawValue) as? CatagoryCollectionViewController
+				catagoryCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ViewControllerIdentifier.CatagoryCollectionViewController.rawValue) as? CatagoryCollectionViewController
 			}
-			showViewController(catagoryCollectionViewController!, sender: self)
+			show(catagoryCollectionViewController!, sender: self)
 			
-		case MainMenuRow.Neighborhoods.rawValue:
+		case MainMenuRow.neighborhoods.rawValue:
 			if locationsCollectionViewController == nil {
-				locationsCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.LocationCollectionViewController.rawValue) as? LocationsCollectionViewController
+				locationsCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ViewControllerIdentifier.LocationCollectionViewController.rawValue) as? LocationsCollectionViewController
 			}
-			showViewController(locationsCollectionViewController!, sender: self)
+			show(locationsCollectionViewController!, sender: self)
 
-		case MainMenuRow.Titles.rawValue:
+		case MainMenuRow.titles.rawValue:
 		
 			if titlesCollectionViewController == nil {
-				titlesCollectionViewController  = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.TitlesCollectionViewController.rawValue) as? TitlesCollectionViewController
+				titlesCollectionViewController  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ViewControllerIdentifier.TitlesCollectionViewController.rawValue) as? TitlesCollectionViewController
 			}
 		
-			showViewController(titlesCollectionViewController!, sender: self)
+			show(titlesCollectionViewController!, sender: self)
 
 
-		case MainMenuRow.Medium.rawValue:
+		case MainMenuRow.medium.rawValue:
 		
 			if mediaCollectionViewController == nil {
-				mediaCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.MediaCollectionViewController.rawValue) as? MediaCollectionViewController
+				mediaCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ViewControllerIdentifier.MediaCollectionViewController.rawValue) as? MediaCollectionViewController
 			}
-			showViewController(mediaCollectionViewController!, sender: self)
+			show(mediaCollectionViewController!, sender: self)
 
 		
 //		case MainMenuRow.Favorites.rawValue:
 		default:
-			print("\(__FILE__) \(__FUNCTION__) menu row not defined for row \(row)")
+			print("\(#file) \(#function) menu row not defined for row \(row)")
 		}
 		
 	
@@ -173,14 +173,14 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 	}
 
 	func showDefaultDetailViewController() {
-		if UIScreen.mainScreen().traitCollection.horizontalSizeClass == .Compact {
-			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
+		if UIScreen.main.traitCollection.horizontalSizeClass == .compact {
+			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
 			if artPiecesCollectionViewController != nil {
 				artPiecesCollectionViewController!.pageTitle = "San Francisco"
 				showDetailViewController(artPiecesCollectionViewController!, sender: self)
 			}
 		} else {
-			if let navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ArtPiecesNavControllerID") as? UINavigationController,
+			if let navigationController:UINavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArtPiecesNavControllerID") as? UINavigationController,
 				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
 					artPiecesCollectionViewController.pageTitle = "San Francisco"
 					showDetailViewController(navigationController, sender: self)
@@ -191,12 +191,12 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 
 extension MainMenuCollectionViewController: ArtworkLayoutDelegate {
 
-	func collectionView(collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
+	func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
 		let height = width
 		return height
 	}
 	
-	func collectionView(collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
+	func collectionView(_ collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
 		return 0 // FIXME:
 	}
 }

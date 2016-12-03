@@ -27,7 +27,7 @@ extension ArtMapAnnotation : MKAnnotation {
 			if title.characters.count > maxCharacters {
 				let elipses = "..."
 				let elipseCount = elipses.characters.count
-				let trimmedTitle = title.substringToIndex(title.startIndex.advancedBy((maxCharacters - elipseCount)))
+				let trimmedTitle = title.substring(to: title.characters.index(title.startIndex, offsetBy: (maxCharacters - elipseCount)))
 				return trimmedTitle + elipses
 			}
 			return title

@@ -16,15 +16,15 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 	@IBOutlet weak var mapView: MKMapView!
 	@IBOutlet weak var toolbar: UIToolbar!
 	
-	private let annotationViewId = "annotationViewId"
-	private var art: [Art]?
-	private var error:NSError?
+	fileprivate let annotationViewId = "annotationViewId"
+	fileprivate var art: [Art]?
+	fileprivate var error:NSError?
 	var location: Location?
-	private var moc: NSManagedObjectContext?
-	private var zoomed = false
+	fileprivate var moc: NSManagedObjectContext?
+	fileprivate var zoomed = false
 
 
-	private lazy var artUserLocation: ArtUserLocation = {
+	fileprivate lazy var artUserLocation: ArtUserLocation = {
 		var userLocation = ArtUserLocation(mapView: self.mapView)
 		userLocation.trackingCallback = {(tracking) ->() in
 			if tracking {
@@ -38,29 +38,29 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 		return userLocation
 	}()
 	
-	private var firstViewAppearance = true
+	fileprivate var firstViewAppearance = true
 	
 	var flexibleSpaceBarButtonItem: UIBarButtonItem {
-		return UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+		return UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 	}
 	
 	var fixedSpaceBarButtonItem: UIBarButtonItem {
-		let item = UIBarButtonItem(barButtonSystemItem: .FixedSpace , target: nil, action: nil)
+		let item = UIBarButtonItem(barButtonSystemItem: .fixedSpace , target: nil, action: nil)
 		item.width = 30
 		return item
 	}
 	
 	var infoBarButtonItem: UIBarButtonItem {
 		let image = UIImage(named: "toolbar-infoButton")
-		return UIBarButtonItem(image:image, style: .Plain, target:self, action: "onInfoButton:")
+		return UIBarButtonItem(image:image, style: .plain, target:self, action: #selector(CityMapsViewController.onInfoButton(_:)))
 	}
 	
 	var locateMeBarButtonItem: UIBarButtonItem?
 	
-	func showArtFor(location: Location, onlyHavingPhotos: Bool) {
-		if self.isViewLoaded() {  // TODO?
+	func showArtFor(_ location: Location, onlyHavingPhotos: Bool) {
+		if self.isViewLoaded {  // TODO?
 			updateMapAnnotations()
-			mapView.setCenterCoordinate(mapCoordinates(), animated: true)
+			mapView.setCenter(mapCoordinates(), animated: true)
 		}
 	}
 
@@ -81,19 +81,19 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 		fetchResultsController.delegate = self
 		do {
 			try fetchResultsController.performFetch()
+            self.art = fetchResultsController.fetchedObjects
 		} catch let error1 as NSError {
 			error = error1
 		}
-		self.art = fetchResultsController.fetchedObjects as? [Art]
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		mapView.mapType = getSavedMapType()
-		if self.traitCollection.verticalSizeClass == .Regular {
-			self.toolbar.hidden = false
+		if self.traitCollection.verticalSizeClass == .regular {
+			self.toolbar.isHidden = false
 		} else {
-			self.toolbar.hidden = true
+			self.toolbar.isHidden = true
 		}
 
 		if firstViewAppearance { // do not unexpectedly move map when user moves between tabs
@@ -108,7 +108,7 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 	
 	func prepareToolbarItems() {
 		let image = UIImage(named: "toolbar-arrow") // TODO: replace with my own artwork
-		locateMeBarButtonItem =   UIBarButtonItem(image:image, style: .Plain, target:self, action: "onLocateMeButton:")
+		locateMeBarButtonItem =   UIBarButtonItem(image:image, style: .plain, target:self, action: #selector(CityMapsViewController.onLocateMeButton(_:)))
 	
 		let items = [locateMeBarButtonItem!, flexibleSpaceBarButtonItem, infoBarButtonItem]
 		toolbar.items = items
@@ -116,8 +116,8 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 	
 	// MARK: Fetch Results Controller
 	//
-	lazy var fetchResultsController:NSFetchedResultsController = {
-		let fetchRequest = NSFetchRequest(entityName:ModelEntity.art)
+	lazy var fetchResultsController:NSFetchedResultsController<Art> = { 
+		let fetchRequest = NSFetchRequest<Art>(entityName:ModelEntity.art)
 		
 		if let location = self.location {
 			fetchRequest.predicate = NSPredicate(format:"%K == %@", "idLocation", location.idLocation) // TODO: define
@@ -129,24 +129,24 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 		return frc
 	}()
 	
-	func controllerDidChangeContent(controller: NSFetchedResultsController) {
+	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 	// TODO	collectionView?.reloadData()
 	}
 
 	// view transistioning
 	
-	override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-		super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-		if traitCollection.userInterfaceIdiom == .Phone {
-			let hidden = self.toolbar?.hidden ?? true
-			self.toolbar?.hidden = !hidden // prevent flash on size class change
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
+		if traitCollection.userInterfaceIdiom == .phone {
+			let hidden = self.toolbar?.isHidden ?? true
+			self.toolbar?.isHidden = !hidden // prevent flash on size class change
 		}
-		coordinator.animateAlongsideTransitionInView(view, animation: { (context) -> Void in
+		coordinator.animateAlongsideTransition(in: view, animation: { (context) -> Void in
 			}) { (context) -> Void in
-				if self.traitCollection.verticalSizeClass == .Regular {
-					self.toolbar?.hidden = false
+				if self.traitCollection.verticalSizeClass == .regular {
+					self.toolbar?.isHidden = false
 				} else {
-					self.toolbar?.hidden = true
+					self.toolbar?.isHidden = true
 				}
 		}
 	}
@@ -154,7 +154,7 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 
 	// MARK: mapping
 	
-	private func buildAnnotations() -> [ArtMapAnnotation] {
+	fileprivate func buildAnnotations() -> [ArtMapAnnotation] {
 		var annotations = [ArtMapAnnotation]()
 		if let art = self.art {
 			for art in art {
@@ -164,7 +164,7 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 		return annotations
 	}
 	
-	private func mapCoordinates() -> CLLocationCoordinate2D {
+	fileprivate func mapCoordinates() -> CLLocationCoordinate2D {
 		var coordinates = CLLocationCoordinate2D(latitude: ArtCityMap.centerLatitude , longitude: ArtCityMap.centerLongitude )
 		// TODO tweak location for art city center
 		if let location = location {
@@ -175,7 +175,7 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 		return coordinates
 	}
 	
-	private func updateMapAnnotations() {
+	fileprivate func updateMapAnnotations() {
 		let oldAnnotations = mapView.annotations
 		mapView.removeAnnotations(oldAnnotations)
 		let newAnnotations = buildAnnotations()
@@ -191,7 +191,7 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 	func zoomToRegion() {
 		if !zoomed {
 			let coordinates = mapCoordinates()
-			mapView.setCenterCoordinate(coordinates, animated: true)
+			mapView.setCenter(coordinates, animated: true)
 			let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1) // TODO:
 			let region = MKCoordinateRegion(center:coordinates, span:span)
 			mapView?.setRegion(region, animated: false)
@@ -202,30 +202,30 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 	
 	// MARK: actions
 	
-	func onLocateMeButton(barbuttonItem: UIBarButtonItem ) {
+	func onLocateMeButton(_ barbuttonItem: UIBarButtonItem ) {
 		artUserLocation.toggleShowUserLocation()
 	}
 	
-	func onInfoButton(barButtonItem: UIBarButtonItem) {
+	func onInfoButton(_ barButtonItem: UIBarButtonItem) {
 		showInfoSheet(barButtonItem)
 	}
 	
-	func showInfoSheet(barButtonItem: UIBarButtonItem) {
-		let infoSheet = UIAlertController(title: "Select Map Type", message: "", preferredStyle: .ActionSheet)
+	func showInfoSheet(_ barButtonItem: UIBarButtonItem) {
+		let infoSheet = UIAlertController(title: "Select Map Type", message: "", preferredStyle: .actionSheet)
 		infoSheet.popoverPresentationController?.barButtonItem = barButtonItem
 		
-		let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (alert) -> Void in
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (alert) -> Void in
 		}
-		let mapStandardAction = UIAlertAction(title: "Standard", style: .Default) { (alert) -> Void in
-			self.mapView.mapType = .Standard
+		let mapStandardAction = UIAlertAction(title: "Standard", style: .default) { (alert) -> Void in
+			self.mapView.mapType = .standard
 			self.saveMapType(self.mapView.mapType)
 		}
-		let mapHybridAction = UIAlertAction(title: "Hybrid", style: .Default) { (alert) -> Void in
-			self.mapView.mapType = .Hybrid
+		let mapHybridAction = UIAlertAction(title: "Hybrid", style: .default) { (alert) -> Void in
+			self.mapView.mapType = .hybrid
 			self.saveMapType(self.mapView.mapType)
 		}
-		let mapSatelliteAction = UIAlertAction(title: "Satellite", style: .Default) { (alert) -> Void in
-			self.mapView.mapType = .Satellite
+		let mapSatelliteAction = UIAlertAction(title: "Satellite", style: .default) { (alert) -> Void in
+			self.mapView.mapType = .satellite
 			self.saveMapType(self.mapView.mapType)
 		}
 		
@@ -234,40 +234,40 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 		infoSheet.addAction(mapHybridAction)
 		infoSheet.addAction(mapSatelliteAction)
 		
-		presentViewController(infoSheet, animated: true) { () -> Void in
+		present(infoSheet, animated: true) { () -> Void in
 		}
 	}
 	
 	// MARK: Map Persistance
 	
-	func saveMapType(type: MKMapType) {
+	func saveMapType(_ type: MKMapType) {
 		var codedType: String = "Standard"
 		switch (type) {
-		case .Standard:
+		case .standard:
 			codedType = "Standard"
-		case .Hybrid:
+		case .hybrid:
 			codedType = "Hybrid"
-		case .Satellite:
+		case .satellite:
 			codedType = "Satellite"
 		default:
 			codedType = "Standard"
 		}
-		NSUserDefaults.standardUserDefaults().setObject(codedType, forKey: "CityMapsType")
+		UserDefaults.standard.set(codedType, forKey: "CityMapsType")
 	}
 	
 	func getSavedMapType() -> MKMapType {
-		var mapType: MKMapType = .Standard
-		let userDefaults = NSUserDefaults.standardUserDefaults
-		if let codedType = userDefaults().objectForKey("CityMapsType") as? String {
+		var mapType: MKMapType = .standard
+		let userDefaults = UserDefaults.standard
+		if let codedType = userDefaults.object(forKey: "CityMapsType") as? String {
 			switch (codedType) {
 			case "Standard":
-				mapType = .Standard
+				mapType = .standard
 			case "Hybrid":
-				mapType = .Hybrid
+				mapType = .hybrid
 			case "Satellite":
-				mapType = .Satellite
+				mapType = .satellite
 			default:
-				mapType = .Standard
+				mapType = .standard
 			}
 		}
 		return mapType
@@ -278,47 +278,47 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
-		print("\(__FILE__) did receive memory warning")
+		print("\(#file) did receive memory warning")
 	}
 }
 
 extension CityMapsViewController : MKMapViewDelegate, UIPopoverPresentationControllerDelegate {
 
-	func adaptivePresentationStyleForPresentationController(
-		controller: UIPresentationController) -> UIModalPresentationStyle {
-		return UIModalPresentationStyle.None
+	func adaptivePresentationStyle(
+		for controller: UIPresentationController) -> UIModalPresentationStyle {
+		return UIModalPresentationStyle.none
 	}
 
-	func displayArtSummaryViewControllerAt(popoverAnchor: UIView, art: Art) {
-		let singleArtSummaryViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SingleArtSummaryViewController") as! SingleArtSummaryViewController
-		singleArtSummaryViewController.modalPresentationStyle = .Popover
+	func displayArtSummaryViewControllerAt(_ popoverAnchor: UIView, art: Art) {
+		let singleArtSummaryViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SingleArtSummaryViewController") as! SingleArtSummaryViewController
+		singleArtSummaryViewController.modalPresentationStyle = .popover
 		singleArtSummaryViewController.art = art
 		if let popoverPresentationController = singleArtSummaryViewController.popoverPresentationController {
 			popoverPresentationController.sourceView = popoverAnchor
 			popoverPresentationController.sourceRect = popoverAnchor.frame
-			popoverPresentationController.permittedArrowDirections = .Any
+			popoverPresentationController.permittedArrowDirections = .any
 			popoverPresentationController.delegate = self
-			presentViewController(singleArtSummaryViewController, animated: true, completion: { () -> Void in
+			present(singleArtSummaryViewController, animated: true, completion: { () -> Void in
 				
 			})
 			
 		}
 	}
 
-	func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+	func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
 		if let annotation = view.annotation as? ArtMapAnnotation {
 			if let art = annotation.art {
 	//			if let rightCalloutAccessoryView = view.rightCalloutAccessoryView {
 	//				displayArtSummaryViewControllerAt(view.rightCalloutAccessoryView, art: art)
-					let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(ViewControllerIdentifier.SingleArtViewController.rawValue) as! SingleArtViewController
+					let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ViewControllerIdentifier.SingleArtViewController.rawValue) as! SingleArtViewController
 					singleArtViewController.update(art, artBackgroundColor: nil)
-					showViewController(singleArtViewController, sender: self)
+					show(singleArtViewController, sender: self)
 	//			}
 			}
 		}		
 	}
 	
-	func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+	func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 		if  let imageView = view.leftCalloutAccessoryView as? UIImageView,
 		    let annotation = view.annotation as? ArtMapAnnotation,
 			let art = annotation.art {
@@ -329,21 +329,21 @@ extension CityMapsViewController : MKMapViewDelegate, UIPopoverPresentationContr
 		}
 	}
 
-	func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+	func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 		if let _  = annotation as? MKUserLocation {
 			return nil
 		}
 		
-		if let annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationViewId) as? MKArtAnnotationView {
+		if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationViewId) as? MKArtAnnotationView {
 			annotationView.annotation = annotation
 			annotationView.updateImage()
 			return annotationView
 		} else {
 			let annotationView = MKArtAnnotationView(annotation: annotation, reuseIdentifier: annotationViewId)
 			annotationView.canShowCallout = true
-			annotationView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+			annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
 			// TODO: TAP ON IMAGE TO SHOW POPOVER
-			annotationView.leftCalloutAccessoryView = UIImageView(frame: CGRect(origin: CGPointZero, size: CGSize(width:40, height:40)))
+			annotationView.leftCalloutAccessoryView = UIImageView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width:40, height:40)))
 			return annotationView
 		}
 	}
@@ -351,9 +351,9 @@ extension CityMapsViewController : MKMapViewDelegate, UIPopoverPresentationContr
 }
 
 extension CityMapsViewController {
-		override func collapseSecondaryViewController(secondaryViewController: UIViewController, forSplitViewController splitViewController: UISplitViewController) {
+		override func collapseSecondaryViewController(_ secondaryViewController: UIViewController, for splitViewController: UISplitViewController) {
 //			println("CityMapsViewController collapse")
-			super.collapseSecondaryViewController(secondaryViewController, forSplitViewController: splitViewController)
+			super.collapseSecondaryViewController(secondaryViewController, for: splitViewController)
 		}
 }
 
