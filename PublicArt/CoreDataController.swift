@@ -23,8 +23,9 @@ class CoreDataController: NSObject {
 		let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
 		self.managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 		self.managedObjectContext.persistentStoreCoordinator = psc
+        
 		
-		DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background).async {
+		DispatchQueue.global().async {
 			let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 			let docURL = urls[urls.endIndex-1]
 			let storeURL = docURL.appendingPathComponent("SingleViewCoreData.sqlite")

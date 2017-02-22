@@ -15,6 +15,10 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 	fileprivate var userInterfaceIdion: UIUserInterfaceIdiom = .phone
 	fileprivate var mainMenu = MainMenu()
 	fileprivate var artPiecesCollectionViewController: ArtPiecesCollectionViewController?
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 	
 	// MARK: Life Cycle
 
@@ -25,6 +29,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		collectionView?.reloadData()
 		self.title = "Public Art" // TITLE
 		
+        
 		
 		let artworkCollectionViewLayout = collectionViewLayout as! ArtworkCollectionViewLayout
 		

@@ -123,7 +123,7 @@ final class CityMapsViewController: UIViewController, NSFetchedResultsController
 			fetchRequest.predicate = NSPredicate(format:"%K == %@", "idLocation", location.idLocation) // TODO: define
 		}
 		
-		let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.artworkTitle, ascending:true, selector: "localizedStandardCompare:")]
+        let sortDescriptor = [NSSortDescriptor(key:ModelAttributes.artworkTitle, ascending:true, selector: #selector(NSString.localizedStandardCompare(_:)))]
 		fetchRequest.sortDescriptors = sortDescriptor
 		let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc!, sectionNameKeyPath: nil, cacheName: nil)
 		return frc

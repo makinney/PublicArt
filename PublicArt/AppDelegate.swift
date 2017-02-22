@@ -33,7 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		setAppearanceProxies()
 
-		UIApplication.shared.setStatusBarStyle(.lightContent, animated: false)
 		//
 		Parse.enableLocalDatastore()
 		ParsePhoto.registerSubclass()

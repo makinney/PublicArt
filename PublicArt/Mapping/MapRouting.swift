@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 import MapKit
-import AddressBook
+//import AddressBook
+import Contacts
 
 final class MapRouting {
 
@@ -30,7 +31,7 @@ final class MapRouting {
 	}
 	
 	fileprivate func useAppleMaps() {
-		let placemark: MKPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), addressDictionary: [String(kABPersonAddressStreetKey) : artworkName])
+		let placemark: MKPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), addressDictionary: [String(CNPostalAddressStreetKey) : artworkName])
 		let artworkMapItem = MKMapItem(placemark: placemark)
 		MKMapItem.openMaps(with: [artworkMapItem], launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking])
 	}

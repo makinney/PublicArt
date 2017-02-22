@@ -154,7 +154,7 @@ final class SingleArtViewController: UIViewController {
 			}
 
 			// art title
-			let artTitle = art.title ?? ""
+			let artTitle = art.title
 			artTitleButton.setTitle(artTitle, for: UIControlState())
 			if art.artWebLink.characters.count > 3  {
 				let image = UIImage(named: "disclosureIndicator") ?? UIImage()
@@ -191,7 +191,7 @@ final class SingleArtViewController: UIViewController {
 			}
 
 			// location
-			locationButton.setTitle(art.address ?? "", for: UIControlState())
+			locationButton.setTitle(art.address, for: UIControlState())
 			
 			// medium
 			if art.medium != "Undefined" {

@@ -77,7 +77,7 @@ open class CoreDataStack {
 			return nil
 		}
 		
-		var managedObjectContext = NSManagedObjectContext()
+		var managedObjectContext = NSManagedObjectContext.init(concurrencyType: .mainQueueConcurrencyType)
 		managedObjectContext.persistentStoreCoordinator = coordinator
 		return managedObjectContext
 		}()
