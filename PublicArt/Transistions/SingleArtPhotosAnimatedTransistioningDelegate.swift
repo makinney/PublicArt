@@ -11,7 +11,7 @@ import UIKit
 class SingleArtPhotosAnimatedTransistioningDelegate : NSObject, UIViewControllerTransitioningDelegate {
 	
 	func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-		return SingleArtPhotosPresentationController(presentedViewController: presented, presenting: presenting!)
+		return SingleArtPhotosPresentationController(presentedViewController: presented, presenting: presenting)
 	}
 	
 	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
