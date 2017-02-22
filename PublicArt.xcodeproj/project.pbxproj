@@ -999,6 +999,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 35RA2D9F5A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/PublicArtData-fkfryhgnyrdpjkcgftxfyorqipvh/Build/Products/Debug-iphonesimulator",
@@ -1011,7 +1012,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.makinney.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "7e55cd05-80dc-48fc-a40c-3dcf4a596db0";
+				PROVISIONING_PROFILE_SPECIFIER = "Public Art SF Development 2017";
 				SWIFT_OBJC_BRIDGING_HEADER = "PublicArt/PublicArt-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1024,6 +1026,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Michael Kinney (35RA2D9F5A)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Michael Kinney (35RA2D9F5A)";
+				DEVELOPMENT_TEAM = 35RA2D9F5A;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1039,7 +1042,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.makinney.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "f2f5dbd6-b9c7-4574-a1bd-863120c7ec82";
+				PROVISIONING_PROFILE_SPECIFIER = PublicArtSFDistribution2017;
 				SWIFT_OBJC_BRIDGING_HEADER = "PublicArt/PublicArt-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
