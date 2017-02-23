@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,43 +15,43 @@
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kW4-X4-S5Q">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CdF-f1-Vcd">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="31n-QR-UeR"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6NR-3r-tH5">
-                                <rect key="frame" x="0.0" y="174" width="200" height="26"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="75" width="200" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="26" id="Z5H-rh-thU"/>
+                                    <constraint firstAttribute="height" constant="50" id="Z5H-rh-thU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="6NR-3r-tH5" secondAttribute="bottom" id="MS1-x0-kaR"/>
-                            <constraint firstItem="6NR-3r-tH5" firstAttribute="leading" secondItem="kW4-X4-S5Q" secondAttribute="leading" id="SpQ-la-fZ8"/>
+                            <constraint firstItem="6NR-3r-tH5" firstAttribute="centerY" secondItem="kW4-X4-S5Q" secondAttribute="centerY" id="F2K-k7-QZx"/>
                             <constraint firstAttribute="trailing" secondItem="CdF-f1-Vcd" secondAttribute="trailing" id="eHz-hG-91n"/>
                             <constraint firstItem="CdF-f1-Vcd" firstAttribute="leading" secondItem="kW4-X4-S5Q" secondAttribute="leading" id="fjQ-dn-Xaf"/>
                             <constraint firstItem="CdF-f1-Vcd" firstAttribute="top" secondItem="kW4-X4-S5Q" secondAttribute="top" id="ifz-9w-ocS"/>
-                            <constraint firstAttribute="trailing" secondItem="6NR-3r-tH5" secondAttribute="trailing" id="jrP-J7-dKu"/>
+                            <constraint firstAttribute="trailing" secondItem="6NR-3r-tH5" secondAttribute="trailing" id="oGP-EB-yYo"/>
+                            <constraint firstItem="6NR-3r-tH5" firstAttribute="leading" secondItem="kW4-X4-S5Q" secondAttribute="leading" id="wlk-B0-jBu"/>
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="kW4-X4-S5Q" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="AeP-bs-tx6"/>
                 <constraint firstAttribute="trailing" secondItem="kW4-X4-S5Q" secondAttribute="trailing" id="KtV-WX-Y7V"/>

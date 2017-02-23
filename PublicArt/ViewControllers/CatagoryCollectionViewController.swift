@@ -25,6 +25,12 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 		collectionView?.backgroundColor = UIColor.white
 
 		setupFlowLayout()
+        collectionView?.backgroundColor = UIColor.black
+        if #available(iOS 10.0, *) {
+            collectionView?.isPrefetchingEnabled = false
+        } else {
+            // Fallback on earlier versions
+        }
 		collectionView?.reloadData()
 		
 		title = "Catagories"
@@ -120,8 +126,8 @@ final class CatagoryCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.CategoryCollectionViewCell.rawValue, for: indexPath) as! CategoryCollectionViewCell
 		cell.menuItemName.text = menuItem(indexPath.row).title
-		cell.backgroundColor = UIColor.black
-		cell.menuItemName.textColor = UIColor.sfOrangeColor()
+		cell.backgroundColor = UIColor.white
+		cell.menuItemName.textColor = UIColor.black
         return cell
     }
 	
@@ -180,14 +186,14 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 		let indexPathsVisible = collectionView.indexPathsForVisibleItems
 		for path in indexPathsVisible {
 				let cell = collectionView.cellForItem(at: path) as? CategoryCollectionViewCell
-				cell?.backgroundColor = UIColor.black
-				cell?.menuItemName.textColor = UIColor.sfOrangeColor()
+				cell?.backgroundColor = UIColor.white
+				cell?.menuItemName.textColor = UIColor.black
 		}
 		
 		if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
 			let cell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell
-			cell?.backgroundColor = UIColor.white
-			cell?.menuItemName.textColor = UIColor.black
+			cell?.backgroundColor = UIColor.black
+			cell?.menuItemName.textColor = UIColor.white
 		}
 	}
 }

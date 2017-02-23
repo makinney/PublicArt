@@ -120,7 +120,7 @@ struct MainMenu {
 			title = "Media"
 		case .favorites:
 		//	image = UIImage(named: "SixteenthAveTiledStepsCropped") ?? image
-			image = UIImage.imageWithColor(UIColor.black)
+			image = UIImage.imageWithColor(UIColor.white)
 			title =  ""
 		}
 		

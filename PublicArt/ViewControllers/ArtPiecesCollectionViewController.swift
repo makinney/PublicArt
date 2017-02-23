@@ -56,6 +56,11 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	
 		let nibName = UINib(nibName: CellIdentifier.ArtworkCollectionViewCell.rawValue, bundle: nil)
 		self.collectionView?.register(nibName, forCellWithReuseIdentifier: CellIdentifier.ArtworkCollectionViewCell.rawValue)
+        if #available(iOS 10.0, *) {
+            collectionView?.isPrefetchingEnabled = false
+        } else {
+            // Fallback on earlier versions
+        }
 		
 		let artworkCollectionViewLayout = collectionViewLayout as! ArtworkCollectionViewLayout
 		artworkCollectionViewLayout.cellPadding = 5
@@ -162,7 +167,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		let sectionInfo = fetchResultsController.sections![section]
-		print("\(sectionInfo.numberOfObjects) fetched")
 		return sectionInfo.numberOfObjects
 	}
 	

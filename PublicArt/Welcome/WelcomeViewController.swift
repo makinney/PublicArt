@@ -29,7 +29,7 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
 		self.scrollView.delegate = self
 		setupChildren()
 		pageControl.numberOfPages = pageCount
-		pageControl.currentPageIndicatorTintColor = UIColor.sfOrangeColor()
+		pageControl.currentPageIndicatorTintColor = UIColor.white
 		view.alpha = 1.0
 	}
 	

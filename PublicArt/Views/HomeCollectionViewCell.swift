@@ -18,7 +18,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
 	
     override func awakeFromNib() {
         super.awakeFromNib()
-		menuItemName.textColor = UIColor.sfOrangeColor()
+		menuItemName.textColor = UIColor.black
 //		let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
 		
 	//	let visualEffectView = UIVisualEffectView(effect: UIVibrancyEffect(forBlurEffect: UIBlurEffect(style: .Dark))) as UIVisualEffectView

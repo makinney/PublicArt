@@ -39,6 +39,12 @@ final class SingleArtPhotosCollectionViewController: UICollectionViewController 
 //		self.collectionView?.delegate = self
 		self.view.backgroundColor = UIColor.clear
 		collectionView?.backgroundColor = UIColor.clear
+        if #available(iOS 10.0, *) {
+            collectionView?.isPrefetchingEnabled = false
+        } else {
+            // Fallback on earlier versions
+        }
+
 		collectionView?.reloadData() // required to prevent Assertion failure in -[UICollectionViewData numberOfItemsBeforeSection:]
     }
 

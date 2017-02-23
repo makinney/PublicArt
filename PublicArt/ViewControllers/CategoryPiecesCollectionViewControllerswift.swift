@@ -66,6 +66,12 @@ class CategoryPiecesCollectionViewController: UICollectionViewController, UINavi
 			selector: #selector(CategoryPiecesCollectionViewController.contentSizeCategoryDidChange),
 			name: NSNotification.Name.UIContentSizeCategoryDidChange,
 			object: nil)
+        
+        if #available(iOS 10.0, *) {
+            collectionView?.isPrefetchingEnabled = false
+        } else {
+            // Fallback on earlier versions
+        }
 		
 		fetchResultsController.delegate = self
 		do {

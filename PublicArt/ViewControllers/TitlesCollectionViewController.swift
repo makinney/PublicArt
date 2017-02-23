@@ -43,7 +43,12 @@ final class TitlesCollectionViewController: UICollectionViewController {
 		
 		setupArtTitlesFlowLayout()
 		
-		collectionView?.backgroundColor = UIColor.white
+		collectionView?.backgroundColor = UIColor.black
+        if #available(iOS 10.0, *) {
+            collectionView?.isPrefetchingEnabled = false
+        } else {
+            // Fallback on earlier versions
+        }
 		
 		fetchResultsController.delegate = self
 		do {
@@ -154,8 +159,8 @@ final class TitlesCollectionViewController: UICollectionViewController {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue, for: indexPath) as! MediaCollectionViewCell
         let art = fetchResultsController.object(at: indexPath)
         cell.title.text = art.title
-        cell.backgroundColor = UIColor.black
-        cell.title.textColor = UIColor.sfOrangeColor()
+        cell.backgroundColor = UIColor.white
+        cell.title.textColor = UIColor.black
 		
 		return cell
 	}
@@ -202,8 +207,8 @@ final class TitlesCollectionViewController: UICollectionViewController {
 			let indexPathsVisible = collectionView.indexPathsForVisibleItems
 			for path in indexPathsVisible {
 					let cell = collectionView.cellForItem(at: path) as? MediaCollectionViewCell
-					cell?.backgroundColor = UIColor.black
-					cell?.title.textColor = UIColor.sfOrangeColor()
+					cell?.backgroundColor = UIColor.white
+					cell?.title.textColor = UIColor.black
 			}
 			
 			if UIScreen.main.traitCollection.horizontalSizeClass == .regular {

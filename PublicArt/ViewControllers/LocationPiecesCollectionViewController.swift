@@ -72,12 +72,16 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 		navigationController?.delegate = self
 		
 		
-		
 		let nibName = UINib(nibName: "ArtworkCollectionViewCell", bundle: nil) // TODO:
 		self.collectionView?.register(nibName, forCellWithReuseIdentifier: "ArtworkCollectionViewCell")
 //		var subNibName = UINib(nibName: "ArtCitySupplementaryView", bundle: nil) // TODO:
 //		self.collectionView?.registerNib(subNibName, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ArtCitySupplementaryView")
-		
+        if #available(iOS 10.0, *) {
+                collectionView?.isPrefetchingEnabled = false
+              } else {
+                // Fallback on earlier versions
+        }
+
 		setupArtCityPhotosFlowLayout()
 		
 		NotificationCenter.default.addObserver(self,

@@ -29,7 +29,11 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		collectionView?.reloadData()
 		self.title = "Public Art" // TITLE
 		
-        
+        if #available(iOS 10.0, *) {
+            collectionView?.isPrefetchingEnabled = false
+        } else {
+            // Fallback on earlier versions
+        }   
 		
 		let artworkCollectionViewLayout = collectionViewLayout as! ArtworkCollectionViewLayout
 		
@@ -110,7 +114,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		
 		if let mainMenuItem = mainMenuItem {
 			cell.menuItemName.text = mainMenuItem.title
-			cell.imageView.image = mainMenuItem.image
+//			cell.imageView.image = mainMenuItem.image
 		}
         return cell
     }

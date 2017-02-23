@@ -48,13 +48,19 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		let nibName = UINib(nibName: CellIdentifier.LocationCollectionViewCell.rawValue, bundle: nil) // TODO:
 		self.collectionView?.register(nibName, forCellWithReuseIdentifier: CellIdentifier.LocationCollectionViewCell.rawValue)
 		
-		collectionView?.backgroundColor = UIColor.white
-		
+		collectionView?.backgroundColor = UIColor.black
+        if #available(iOS 10.0, *) {
+            collectionView?.isPrefetchingEnabled = false
+        } else {
+            // Fallback on earlier versions
+        }
+        
 		let artworkCollectionViewLayout = collectionViewLayout as! ArtworkCollectionViewLayout
 		artworkCollectionViewLayout.cellPadding = 1
 		artworkCollectionViewLayout.delegate = self
 		artworkCollectionViewLayout.numberOfColumns = 3
 
+        
 		
 		fetchResultsController.delegate = self
 		do {
@@ -142,8 +148,8 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 					let location = fetchResultsController.object(at: path)
 					if location.artwork.count > 0 || location.name == "All"{
 						let cell = collectionView.cellForItem(at: path) as? LocationCollectionViewCell
-						cell?.backgroundColor = UIColor.black
-						cell?.title.textColor = UIColor.sfOrangeColor()
+						cell?.backgroundColor = UIColor.white
+						cell?.title.textColor = UIColor.black
 					}
 				}
 		}
@@ -162,10 +168,10 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		}
 
 		if location.artwork.count > 0 || location.name == "All" {
-			cell.backgroundColor = UIColor.black
-			cell.title.textColor = UIColor.sfOrangeColor()
+			cell.backgroundColor = UIColor.white
+			cell.title.textColor = UIColor.black
 		} else  {
-			cell.backgroundColor = UIColor.lightGray
+			cell.backgroundColor = UIColor.white
 			cell.title.textColor =  UIColor.gray
 		}
 		
@@ -242,15 +248,15 @@ final class LocationsCollectionViewController: UICollectionViewController, UINav
 		resetVisibleCellBackgroundColors()
 		if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
 			let cell = collectionView.cellForItem(at: indexPath) as? LocationCollectionViewCell
-			cell?.backgroundColor = UIColor.white
-			cell?.title.textColor = UIColor.black
+			cell?.backgroundColor = UIColor.black
+			cell?.title.textColor = UIColor.white
 		}
 	}
 	
 	override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
 		let cell = collectionView.cellForItem(at: indexPath) as? LocationCollectionViewCell
-		cell?.backgroundColor = UIColor.black
-		cell?.title.textColor = UIColor.sfOrangeColor()
+		cell?.backgroundColor = UIColor.white
+		cell?.title.textColor = UIColor.black
 	}
 	
 }

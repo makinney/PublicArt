@@ -128,7 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
 		UINavigationBar.appearance().tintColor = UIColor.white
 		UINavigationBar.appearance().barTintColor = UIColor.black
-		UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.sfOrangeColor(),
+		UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white,
 															NSFontAttributeName: UIFont.systemFont(ofSize: 20)]
 		
 		UITabBar.appearance().barTintColor = UIColor.black
