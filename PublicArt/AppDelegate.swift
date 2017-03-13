@@ -33,31 +33,70 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		setAppearanceProxies()
 
+        let configuration = ParseClientConfiguration {
+            $0.applicationId = "com.makinney.PublicArt"
+            $0.server = "https://whispering-taiga-34196.herokuapp.com/parse"
+            $0.isLocalDatastoreEnabled = true;
+
+        }
+        
+        Parse.initialize(with: configuration)
+
 		//
-		Parse.enableLocalDatastore()
 		ParsePhoto.registerSubclass()
 		ParseArtist.registerSubclass()
 		ParseArt.registerSubclass()
 		ParseLocation.registerSubclass()
 		
-		Parse.setApplicationId("SL4Z3PKg3yQMNDgiZOWzO6QYdrfSXaiyefVnesqS",
-			         clientKey: "M2nmbAOma1185BZDslTSqnWGmScwGHXkswt5Ea8e")
-		
-		ArtRefresh.artRefreshFromServerRequired {[weak self] (required, clientLastRefreshed, serverLastRefreshed) -> () in
-			if required {
-				self?.artDataManager = ArtDataManager(coreDataStack: CoreDataStack.sharedInstance)
-				if let clientLastRefreshed = clientLastRefreshed,
-					let serverLastRefreshed = serverLastRefreshed {
-					 self?.artDataManager!.refresh(clientLastRefreshed, endingAtDate: serverLastRefreshed)
-				} else if let serverLastRefreshed = serverLastRefreshed { // no client refresh, very first data download
-					let initialUpdate: Date = Date.distantPast // make sure to get everything
-					self?.artDataManager!.refresh(initialUpdate, endingAtDate: serverLastRefreshed)
-				}
-			}
-		}
+        
+//        let user = PFUser()
+//        user.username = "makinneyPublicArtUser"
+//        user.password = "x4BcDy23"
+//        user.signUpInBackground { succeeded, error in
+//            guard succeeded == true else {
+//                return
+//            }
+//            // Successful registration, display the wall
+//            print("success")
+//        }
+
+        
+        PFUser.logInWithUsername(inBackground: "makinneyPublicArtUser", password: "x4BcDy23") { [unowned self] user, error in
+            guard let _ = user else {
+                return
+            }
+            
+            ArtRefresh.artRefreshFromServerRequired {[weak self] (required, clientLastRefreshed, serverLastRefreshed) -> () in
+                if required {
+                    self?.artDataManager = ArtDataManager(coreDataStack: CoreDataStack.sharedInstance)
+                    if let clientLastRefreshed = clientLastRefreshed,
+                        let serverLastRefreshed = serverLastRefreshed {
+                        self?.artDataManager!.refresh(clientLastRefreshed, endingAtDate: serverLastRefreshed)
+                    } else if let serverLastRefreshed = serverLastRefreshed { // no client refresh, very first data download
+                        let initialUpdate: Date = Date.distantPast // make sure to get everything
+                        self?.artDataManager!.refresh(initialUpdate, endingAtDate: serverLastRefreshed)
+                    }
+                }
+            }
+        }
+
+        
+//		ArtRefresh.artRefreshFromServerRequired {[weak self] (required, clientLastRefreshed, serverLastRefreshed) -> () in
+//			if required {
+//				self?.artDataManager = ArtDataManager(coreDataStack: CoreDataStack.sharedInstance)
+//				if let clientLastRefreshed = clientLastRefreshed,
+//					let serverLastRefreshed = serverLastRefreshed {
+//					 self?.artDataManager!.refresh(clientLastRefreshed, endingAtDate: serverLastRefreshed)
+//				} else if let serverLastRefreshed = serverLastRefreshed { // no client refresh, very first data download
+//					let initialUpdate: Date = Date.distantPast // make sure to get everything
+//					self?.artDataManager!.refresh(initialUpdate, endingAtDate: serverLastRefreshed)
+//				}
+//			}
+//		}
 		return true
 	}
-	
+    
+  	
 	func useWelcomeAsRoot() {
 		let welcomeViewController = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewController(withIdentifier: WelcomeIdentifier.WelcomeViewController.rawValue) as? WelcomeViewController
 		self.window?.rootViewController = welcomeViewController

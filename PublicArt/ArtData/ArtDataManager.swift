@@ -43,6 +43,7 @@ class ArtDataManager : NSObject {
 	// TODO: needs error handling !!!
 	//
 	fileprivate func refreshFromWeb(_ beginningDate: Date, complete:@escaping (_ art: [Art], _ artists: [Artist], _ locations: [Location], _ photos: [Photo], _ thumbs: [Thumb], _ locPhotos: [LocPhoto], _ appCommon: [AppCommon]) ->()) {
+        
 		// get art and create or update
 		refreshArtFromWeb(beginningDate, complete: {[weak self] (art) -> () in
 			self!.refreshPhotosFromWeb(beginningDate, complete: { (photos) -> () in

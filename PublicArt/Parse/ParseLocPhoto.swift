@@ -10,17 +10,8 @@ import Foundation
 import Parse
 
 class ParseLocPhoto : PFObject, PFSubclassing {
-	private static var __once: () = {
-// FIXME:			self.registerSubclass()
-		}()
-	override class func initialize() {
-		struct Static {
-			static var onceToken : Int = 0
-		}
-		_ = ParseLocPhoto.__once
-	}
-	
-	static func parseClassName() -> String {
+
+    static func parseClassName() -> String {
 		return "locPhoto"
 	}
 	

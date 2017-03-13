@@ -12,23 +12,26 @@ import CoreData
 class ArtRefresh {
 	
 	class func artRefreshFromServerRequired(_ complete:@escaping (_ required: Bool, _ clientLastRefreshed: Date?, _ serverLastRefreshed: Date?) ->() ) {
-		let clientLastRefreshed: Date? = ArtRefresh.clientLastRefreshed()
-		ParseWebService.getPublicArtRefresh {(parseRefresh) -> Void in
-			if let serverLastRefreshed = parseRefresh?.last?.lastRefresh {
-				if let clientLastRefreshed = clientLastRefreshed {
-					if clientLastRefreshed != serverLastRefreshed as Date{
-						complete(true, clientLastRefreshed, serverLastRefreshed as Date)
-					} else {
-						complete(false, clientLastRefreshed, serverLastRefreshed as Date)
-					}
-				} else {
-					// first time app's art has every been refreshed
-					complete(true, nil, serverLastRefreshed as Date)
-				}
-			} else { // nothing back from query
-				complete(false, nil, nil)
-			}
-		}
+        // first time app's art has every been refreshed
+        complete(true, nil, Date.init()) // TODO: remove today's date just for debugging
+        
+//		let clientLastRefreshed: Date? = ArtRefresh.clientLastRefreshed()
+//		ParseWebService.getPublicArtRefresh {(parseRefresh) -> Void in
+//			if let serverLastRefreshed = parseRefresh?.last?.lastRefresh {
+//				if let clientLastRefreshed = clientLastRefreshed {
+//					if clientLastRefreshed != serverLastRefreshed as Date{
+//						complete(true, clientLastRefreshed, serverLastRefreshed as Date)
+//					} else {
+//						complete(false, clientLastRefreshed, serverLastRefreshed as Date)
+//					}
+//				} else {
+//					// first time app's art has every been refreshed
+//					complete(true, nil, serverLastRefreshed as Date)
+//				}
+//			} else { // nothing back from query
+//				complete(false, nil, nil)
+//			}
+//		}
 	}
 	
 	class func clientLastRefreshed() -> Date? {

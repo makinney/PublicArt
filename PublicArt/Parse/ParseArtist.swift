@@ -10,24 +10,26 @@ import Foundation
 import Parse
 
 
-class ParseArtist : PFObject, PFSubclassing {
-	private static var __once: () = {
-// FIXME:			self.registerSubclass()
-		}()
-	override class func initialize() {
-		struct Static {
-			static var onceToken : Int = 0
-		}
-		_ = ParseArtist.__once
-	}
-	
-	static func parseClassName() -> String {
-		return "artist"
-	}
-	
+final class ParseArtist: PFObject, PFSubclassing {
+
 	@NSManaged var firstName: String?
 	@NSManaged var lastName: String?
 	@NSManaged var idArtist: String?
 	@NSManaged var webLink: String?
-	
+    
+    // MARK: - Overridden
+//    override class func query() -> PFQuery<PFObject>? {
+//        let query = PFQuery(className: ParseArtist.parseClassName())
+//        query.includeKey("user")
+//        query.order(byDescending: "createdAt")
+//        return query
+//    }
+
 }
+
+extension ParseArtist {
+    static func parseClassName() -> String {
+        return "artist"
+    }
+}
+

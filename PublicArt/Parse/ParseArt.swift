@@ -10,16 +10,7 @@ import Foundation
 import Parse
 
 class ParseArt : PFObject, PFSubclassing {
-	private static var __once: () = {
-// FIXME:			self.registerSubclass()
-		}()
-	override class func initialize() {
-		struct Static {
-			static var onceToken : Int = 0
-		}
-		_ = ParseArt.__once
-	}
-	
+
 	static func parseClassName() -> String {
 		return "artwork"
 	}

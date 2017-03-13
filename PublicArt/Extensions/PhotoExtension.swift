@@ -21,7 +21,8 @@ extension Photo {
 			photo.tnMatch = parsePhoto.tnMatch as NSNumber? ?? false
 
 			if let imageFile = parsePhoto.imageFile {
-				photo.imageFileName = extractImageFileName(imageFile.name)
+	//			photo.imageFileName = extractImageFileName(imageFile.name)
+                photo.imageFileName = imageFile.name
 				photo.imageFileURL = imageFile.url ?? ""
 			}
 	
@@ -39,19 +40,20 @@ extension Photo {
 			photo.tnMatch = parsePhoto.tnMatch as NSNumber? ?? false
 
 			if let imageFile = parsePhoto.imageFile {
-				photo.imageFileName = extractImageFileName(imageFile.name)
+//				photo.imageFileName = extractImageFileName(imageFile.name)
+                photo.imageFileName = imageFile.name
 				photo.imageFileURL = imageFile.url ?? ""
 
 			}
 	}
 	
-	class fileprivate func extractImageFileName(_ source: String) -> String {
-		var imageFileName = ""
-		let delimiter = "-"
-		if let lastDelimiter = source.range(of: delimiter, options: NSString.CompareOptions.backwards) {
-			imageFileName = source[lastDelimiter.upperBound..<source.endIndex]
-		}
-		// println("extracted image file name \(imageFileName)")
-		return imageFileName
-	}
+//	class fileprivate func extractImageFileName(_ source: String) -> String {
+//		var imageFileName = ""
+//		let delimiter = "-"
+//		if let lastDelimiter = source.range(of: delimiter, options: NSString.CompareOptions.backwards) {
+//			imageFileName = source[lastDelimiter.upperBound..<source.endIndex]
+//		}
+//		// println("extracted image file name \(imageFileName)")
+//		return imageFileName
+//	}
 }

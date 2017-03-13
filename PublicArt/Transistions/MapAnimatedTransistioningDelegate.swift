@@ -11,7 +11,7 @@ import UIKit
 class MapAnimatedTransistioningDelegate : NSObject, UIViewControllerTransitioningDelegate {
 	
 	func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-		return MapPresentationController(presentedViewController: presented, presenting: presenting!)
+		return MapPresentationController(presentedViewController: presented, presenting: presenting)
 	}
 	
 	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {

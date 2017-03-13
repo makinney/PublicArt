@@ -9,17 +9,13 @@
 import Foundation
 import Parse
 
-class ParsePhoto : PFObject, PFSubclassing {
-	private static var __once: () = {
-// FIXME:			self.registerSubclass()
-		}()
-	override class func initialize() {
-		struct Static {
-			static var onceToken : Int = 0
-		}
-		_ = ParsePhoto.__once
-	}
-	
+final class ParsePhoto : PFObject, PFSubclassing {
+
+    // Required otherwise the application crashes
+    override init() {
+        super.init()
+    }
+
 	static func parseClassName() -> String {
 		return "photo"
 	}
@@ -29,3 +25,5 @@ class ParsePhoto : PFObject, PFSubclassing {
 	@NSManaged var imageAspectRatio: Double
 	@NSManaged var tnMatch: Bool
 }
+
+

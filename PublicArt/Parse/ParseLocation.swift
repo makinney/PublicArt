@@ -10,16 +10,6 @@ import Foundation
 import Parse
 
 class ParseLocation : PFObject, PFSubclassing {
-	private static var __once: () = {
-// FIXME:			self.registerSubclass()
-		}()
-	override class func initialize() {
-		struct Static {
-			static var onceToken : Int = 0
-		}
-		_ = ParseLocation.__once
-	}
-	
 	static func parseClassName() -> String {
 		return "location"
 	}
