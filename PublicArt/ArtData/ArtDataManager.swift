@@ -41,7 +41,7 @@ class ArtDataManager : NSObject {
 	}
 	
 	// TODO: needs error handling !!!
-	//
+	// TODO: refactor to use NSOperation 
 	fileprivate func refreshFromWeb(_ beginningDate: Date, complete:@escaping (_ art: [Art], _ artists: [Artist], _ locations: [Location], _ photos: [Photo], _ thumbs: [Thumb], _ locPhotos: [LocPhoto], _ appCommon: [AppCommon]) ->()) {
         
 		// get art and create or update
@@ -52,8 +52,8 @@ class ArtDataManager : NSObject {
 						self!.refreshThumbsFromWeb(beginningDate, complete: { (thumbs) -> () in
 							self!.refreshLocPhotosFromWeb(beginningDate, complete: { (locPhotos) -> () in
 								self!.refreshAppCommonFromWeb(beginningDate, complete: { (appCommon) -> () in
-									complete(art, artists, locations, photos, thumbs, locPhotos, appCommon) // FIXME: Swift 3  when no parameter names here ?
-								})
+									complete(art, artists, locations, photos, thumbs, locPhotos, appCommon)
+                                })
 							})
 						})
 					})

@@ -125,13 +125,11 @@ class ParseWebService {
 	
 	
 	class func getAllArtistSince(_ date: Date, complete:@escaping (_ parseArtist: [ParseArtist]?) -> Void) -> Void {
-        let query = PFQuery(className: "artist")
- //       let query = PFQuery(className: ParseArtist.parseClassName())
+        let query = PFQuery(className: ParseArtist.parseClassName())
 //		query.whereKey("updatedAt", greaterThanOrEqualTo: date )
         query.includeKey("user")
 		query.limit = 999 // max per parse
- //       query.findObjectsInBackground { (objects:[PFObject]?, error: Error?) -> Void in
-            query.findObjectsInBackground { (objects:[PFObject]?, error) -> Void in
+        query.findObjectsInBackground { (objects:[PFObject]?, error) -> Void in
 			if error == nil {
 				if let parseArtist = objects as? [ParseArtist] {
 					complete(parseArtist)
@@ -146,22 +144,18 @@ class ParseWebService {
 	}
 	
 	class func getPublicArtRefresh(_ complete:@escaping (_ parseRefresh: [ParseRefresh]?) -> Void) -> Void {
-//		let query = PFQuery(className: ParseRefresh.parseClassName())
-//		query.findObjectsInBackground { (objects:[PFObject]?, error: Error?) -> Void in
-//			if error == nil {
-//				if let parseRefresh: [ParseRefresh] = objects as? [ParseRefresh] {
-//					complete(parseRefresh: parseRefresh)
-//				} else {
-//					complete(parseRefresh: nil)
-//				}
-//			} else {
-//				print("\(#file) \(#function) \(error?.description)")
-//				complete(parseRefresh: nil)
-//			}
-//		}
+		let query = PFQuery(className: ParseRefresh.parseClassName())
+		query.findObjectsInBackground { (objects:[PFObject]?, error: Error?) -> Void in
+			if error == nil {
+				if let parseRefresh: [ParseRefresh] = objects as? [ParseRefresh] {
+					complete(parseRefresh)
+				} else {
+					complete(nil)
+				}
+			} else {
+				print("\(#file) \(#function) \(error?.localizedDescription)")
+				complete(nil)
+			}
+		}
 	}
-	
-
-
-	
 }

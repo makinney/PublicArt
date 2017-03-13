@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print("success")
 //        }
 
-        
+        // TODO: fix this login stuff...
         PFUser.logInWithUsername(inBackground: "makinneyPublicArtUser", password: "x4BcDy23") { [unowned self] user, error in
             guard let _ = user else {
                 return
@@ -79,20 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-
         
-//		ArtRefresh.artRefreshFromServerRequired {[weak self] (required, clientLastRefreshed, serverLastRefreshed) -> () in
-//			if required {
-//				self?.artDataManager = ArtDataManager(coreDataStack: CoreDataStack.sharedInstance)
-//				if let clientLastRefreshed = clientLastRefreshed,
-//					let serverLastRefreshed = serverLastRefreshed {
-//					 self?.artDataManager!.refresh(clientLastRefreshed, endingAtDate: serverLastRefreshed)
-//				} else if let serverLastRefreshed = serverLastRefreshed { // no client refresh, very first data download
-//					let initialUpdate: Date = Date.distantPast // make sure to get everything
-//					self?.artDataManager!.refresh(initialUpdate, endingAtDate: serverLastRefreshed)
-//				}
-//			}
-//		}
 		return true
 	}
     
