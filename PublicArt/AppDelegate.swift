@@ -35,47 +35,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let configuration = ParseClientConfiguration {
             $0.applicationId = "com.makinney.PublicArt"
+            $0.clientKey = "x4$3BcFjKl_46"
             $0.server = "https://whispering-taiga-34196.herokuapp.com/parse"
             $0.isLocalDatastoreEnabled = true;
-
         }
-        
         Parse.initialize(with: configuration)
-
-		//
 		ParsePhoto.registerSubclass()
 		ParseArtist.registerSubclass()
 		ParseArt.registerSubclass()
 		ParseLocation.registerSubclass()
 		
-        
-//        let user = PFUser()
-//        user.username = "makinneyPublicArtUser"
-//        user.password = "x4BcDy23"
-//        user.signUpInBackground { succeeded, error in
-//            guard succeeded == true else {
-//                return
-//            }
-//            // Successful registration, display the wall
-//            print("success")
-//        }
-
-        // TODO: fix this login stuff...
-        PFUser.logInWithUsername(inBackground: "makinneyPublicArtUser", password: "x4BcDy23") { [unowned self] user, error in
-            guard let _ = user else {
-                return
-            }
-            
-            ArtRefresh.artRefreshFromServerRequired {[weak self] (required, clientLastRefreshed, serverLastRefreshed) -> () in
-                if required {
-                    self?.artDataManager = ArtDataManager(coreDataStack: CoreDataStack.sharedInstance)
-                    if let clientLastRefreshed = clientLastRefreshed,
-                        let serverLastRefreshed = serverLastRefreshed {
-                        self?.artDataManager!.refresh(clientLastRefreshed, endingAtDate: serverLastRefreshed)
-                    } else if let serverLastRefreshed = serverLastRefreshed { // no client refresh, very first data download
-                        let initialUpdate: Date = Date.distantPast // make sure to get everything
-                        self?.artDataManager!.refresh(initialUpdate, endingAtDate: serverLastRefreshed)
-                    }
+        ArtRefresh.artRefreshFromServerRequired {[weak self] (required, clientLastRefreshed, serverLastRefreshed) -> () in
+            if required {
+                self?.artDataManager = ArtDataManager(coreDataStack: CoreDataStack.sharedInstance)
+                if let clientLastRefreshed = clientLastRefreshed,
+                    let serverLastRefreshed = serverLastRefreshed {
+                    self?.artDataManager!.refresh(clientLastRefreshed, endingAtDate: serverLastRefreshed)
+                } else if let serverLastRefreshed = serverLastRefreshed { // no client refresh, very first data download
+                    let initialUpdate: Date = Date.distantPast // make sure to get everything
+                    self?.artDataManager!.refresh(initialUpdate, endingAtDate: serverLastRefreshed)
                 }
             }
         }
