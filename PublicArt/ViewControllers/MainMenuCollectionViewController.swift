@@ -27,7 +27,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		let nibName = UINib(nibName: "HomeCollectionViewCell", bundle: nil)
 		self.collectionView?.register(nibName, forCellWithReuseIdentifier: "HomeCollectionViewCellID")
 		collectionView?.reloadData()
-		self.title = "Public Art" // TITLE
+		self.title = "San Francisco Public Art" // TITLE
 		
         if #available(iOS 10.0, *) {
             collectionView?.isPrefetchingEnabled = false
