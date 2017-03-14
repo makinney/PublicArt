@@ -143,14 +143,12 @@ final class SingleArtViewController: UIViewController {
 				PhotoImages.sharedInstance.getImage(highResPhoto, complete: {[weak self] (image, imageFileName) -> () in
 					self?.artImageView.image = image
 					self?.artImageView.isHidden = false
-                    self?.artImageView.layer.cornerRadius = 5
 					self?.activityIndicator.stopAnimating()
 				})
 			} else {
 			
 				ThumbImages.sharedInstance.getImage(art, complete: { [weak self] (image, imageFileName) -> ()  in
 					self?.artImageView.image = image
-                    self?.artImageView.layer.cornerRadius = 5
 					self?.artImageView.isHidden = false
 				})
 			}
