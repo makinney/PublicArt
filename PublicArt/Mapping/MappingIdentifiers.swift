@@ -13,8 +13,8 @@ Latitudes range from -90 to 90.
 Longitudes range from -180 to 180.
 */
 struct ArtCityMap { // anything other than the above
-	static let centerLatitude = 37.797509
-	static let centerLongitude = -122.410913
+	static let centerLatitude = 37.77
+	static let centerLongitude = -122.42
 	static let maxlatitude = 37.81303879
 	static let minlatitude = 37.70310882
 	static let maxlongitude = -122.35507965
