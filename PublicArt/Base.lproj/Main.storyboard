@@ -94,8 +94,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="The mapping, directions and listing information are provided solely as a guideline. " textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mb8-Kt-Hwg">
-                                <rect key="frame" x="150" y="53" width="300" height="100"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The mapping, directions and listing information are provided solely as a guideline. " textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mb8-Kt-Hwg">
+                                <rect key="frame" x="37.5" y="53" width="300" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Yid-cf-FBs"/>
                                     <constraint firstAttribute="height" constant="100" id="r2G-jF-g8c"/>
@@ -104,8 +104,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No representation is made or warranty given as to their content, route practicability or efficiency, or map accuracy." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPo-Y4-8Ls">
-                                <rect key="frame" x="150" y="168" width="300" height="125"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No representation is made or warranty given as to their content, route practicability or efficiency, or map accuracy." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPo-Y4-8Ls">
+                                <rect key="frame" x="37.5" y="168" width="300" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="hmC-JE-0vP"/>
                                     <constraint firstAttribute="height" constant="125" id="iaD-Da-CH2"/>
@@ -114,8 +114,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woM-zD-oAA">
-                                <rect key="frame" x="150" y="308" width="300" height="150"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woM-zD-oAA">
+                                <rect key="frame" x="37.5" y="308" width="300" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="LmN-XX-viT"/>
                                     <constraint firstAttribute="width" constant="300" id="SmA-b3-S3y"/>
@@ -469,12 +469,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="km2-gh-ceQ" userLabel="fieldsContainer">
-                                <rect key="frame" x="16" y="120" width="568" height="406"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="km2-gh-ceQ" userLabel="fieldsContainer">
+                                <rect key="frame" x="12" y="120" width="351" height="473"/>
                                 <color key="backgroundColor" red="0.45098039220000002" green="0.62745098040000002" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cI3-OP-FNH">
-                                <rect key="frame" x="16" y="526" width="568" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cI3-OP-FNH">
+                                <rect key="frame" x="12" y="593" width="351" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="xVM-4v-Gem"/>
                                 </constraints>
@@ -521,11 +521,14 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tD7-2K-zCc">
-                                <rect key="frame" x="0.0" y="-64" width="600" height="565"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tD7-2K-zCc">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                             </mapView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rrd-7g-TBC">
-                                <rect key="frame" x="0.0" y="443" width="600" height="44"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rrd-7g-TBC">
+                                <rect key="frame" x="0.0" y="510" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="wqG-Nb-YlQ"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem title="Item" id="BOj-xw-Fv8"/>
                                 </items>
@@ -533,13 +536,13 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="2x2-6b-HcW" firstAttribute="top" secondItem="tD7-2K-zCc" secondAttribute="bottom" constant="-14" id="297-Cu-SDV"/>
-                            <constraint firstItem="tD7-2K-zCc" firstAttribute="top" secondItem="dBv-tS-TNt" secondAttribute="bottom" constant="-64" id="4fr-ja-lOP"/>
+                            <constraint firstItem="rrd-7g-TBC" firstAttribute="top" secondItem="tD7-2K-zCc" secondAttribute="bottom" id="0dO-La-QpR"/>
                             <constraint firstItem="2x2-6b-HcW" firstAttribute="top" secondItem="rrd-7g-TBC" secondAttribute="bottom" id="8aL-gp-bff"/>
                             <constraint firstAttribute="trailing" secondItem="rrd-7g-TBC" secondAttribute="trailing" id="Bbz-Q2-o2a"/>
-                            <constraint firstItem="tD7-2K-zCc" firstAttribute="leading" secondItem="sEb-pJ-iWL" secondAttribute="leading" id="JxA-IC-wOc"/>
+                            <constraint firstAttribute="trailing" secondItem="tD7-2K-zCc" secondAttribute="trailing" id="JSN-gc-iGa"/>
                             <constraint firstItem="rrd-7g-TBC" firstAttribute="leading" secondItem="sEb-pJ-iWL" secondAttribute="leading" id="Uc4-rD-g8Y"/>
-                            <constraint firstAttribute="trailing" secondItem="tD7-2K-zCc" secondAttribute="trailing" id="zue-2T-ROK"/>
+                            <constraint firstItem="tD7-2K-zCc" firstAttribute="leading" secondItem="sEb-pJ-iWL" secondAttribute="leading" id="g5n-4y-YZW"/>
+                            <constraint firstItem="tD7-2K-zCc" firstAttribute="top" secondItem="dBv-tS-TNt" secondAttribute="bottom" id="gCN-3T-Mrj"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wtT-cv-V9i"/>
@@ -766,12 +769,12 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NWg-WI-SGY">
-                                <rect key="frame" x="0.0" y="-64" width="600" height="600"/>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NWg-WI-SGY">
+                                <rect key="frame" x="0.0" y="-64" width="375" height="667"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BvW-zN-VE7" userLabel="activityIndicator">
-                                <rect key="frame" x="290" y="234" width="37" height="37"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BvW-zN-VE7" userLabel="activityIndicator">
+                                <rect key="frame" x="177.5" y="267" width="37" height="37"/>
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                         </subviews>
@@ -828,18 +831,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="22z-vG-wY4" userLabel="ContainerView">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="22z-vG-wY4" userLabel="ContainerView">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
-                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lxh-lX-h4p">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lxh-lX-h4p">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <items/>
                                     </toolbar>
-                                    <mapView multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kqc-gw-KcW">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
+                                    <mapView multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kqc-gw-KcW">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                     </mapView>
-                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q47-EZ-0wC">
-                                        <rect key="frame" x="0.0" y="536" width="600" height="44"/>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q47-EZ-0wC">
+                                        <rect key="frame" x="0.0" y="603" width="375" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="ckH-M2-hKI"/>
                                         </constraints>
