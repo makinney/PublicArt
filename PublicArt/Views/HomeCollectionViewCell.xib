@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,31 +22,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CdF-f1-Vcd">
-                                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="18" y="18" width="164" height="164"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="31n-QR-UeR"/>
+                                    <constraint firstAttribute="width" secondItem="CdF-f1-Vcd" secondAttribute="height" multiplier="1:1" id="NiG-RH-71j"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6NR-3r-tH5">
-                                <rect key="frame" x="0.0" y="75" width="200" height="50"/>
+                                <rect key="frame" x="0.0" y="184" width="200" height="16"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Z5H-rh-thU"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6NR-3r-tH5" firstAttribute="centerY" secondItem="kW4-X4-S5Q" secondAttribute="centerY" id="F2K-k7-QZx"/>
-                            <constraint firstAttribute="trailing" secondItem="CdF-f1-Vcd" secondAttribute="trailing" id="eHz-hG-91n"/>
-                            <constraint firstItem="CdF-f1-Vcd" firstAttribute="leading" secondItem="kW4-X4-S5Q" secondAttribute="leading" id="fjQ-dn-Xaf"/>
-                            <constraint firstItem="CdF-f1-Vcd" firstAttribute="top" secondItem="kW4-X4-S5Q" secondAttribute="top" id="ifz-9w-ocS"/>
+                            <constraint firstItem="6NR-3r-tH5" firstAttribute="top" secondItem="CdF-f1-Vcd" secondAttribute="bottom" constant="2" id="YJo-p1-02t"/>
+                            <constraint firstAttribute="trailing" secondItem="CdF-f1-Vcd" secondAttribute="trailing" constant="18" id="eHz-hG-91n"/>
+                            <constraint firstItem="CdF-f1-Vcd" firstAttribute="leading" secondItem="kW4-X4-S5Q" secondAttribute="leading" constant="18" id="fjQ-dn-Xaf"/>
+                            <constraint firstItem="CdF-f1-Vcd" firstAttribute="top" secondItem="kW4-X4-S5Q" secondAttribute="top" constant="18" id="ifz-9w-ocS"/>
                             <constraint firstAttribute="trailing" secondItem="6NR-3r-tH5" secondAttribute="trailing" id="oGP-EB-yYo"/>
+                            <constraint firstAttribute="bottom" secondItem="6NR-3r-tH5" secondAttribute="bottom" id="qXB-Ea-ZkC"/>
                             <constraint firstItem="6NR-3r-tH5" firstAttribute="leading" secondItem="kW4-X4-S5Q" secondAttribute="leading" id="wlk-B0-jBu"/>
                         </constraints>
                     </view>
@@ -61,9 +61,7 @@
             <size key="customSize" width="162" height="378"/>
             <connections>
                 <outlet property="imageView" destination="CdF-f1-Vcd" id="ioE-kG-fr9"/>
-                <outlet property="imageViewHeight" destination="31n-QR-UeR" id="efG-cU-eSc"/>
                 <outlet property="menuItemName" destination="6NR-3r-tH5" id="zMe-Ak-hQr"/>
-                <outlet property="menuItemNameHeight" destination="Z5H-rh-thU" id="3HW-ZZ-8lf"/>
             </connections>
             <point key="canvasLocation" x="94" y="548"/>
         </collectionViewCell>

@@ -43,7 +43,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 			artworkCollectionViewLayout.delegate = self
 			artworkCollectionViewLayout.numberOfColumns = 1
 		} else {
-			artworkCollectionViewLayout.cellPadding = 1
+			artworkCollectionViewLayout.cellPadding = 0
 			artworkCollectionViewLayout.delegate = self
 			artworkCollectionViewLayout.numberOfColumns = 2
 		}
@@ -114,7 +114,7 @@ final class MainMenuCollectionViewController: UICollectionViewController {
 		
 		if let mainMenuItem = mainMenuItem {
 			cell.menuItemName.text = mainMenuItem.title
-//			cell.imageView.image = mainMenuItem.image
+			cell.imageView.image = mainMenuItem.image
 		}
         return cell
     }

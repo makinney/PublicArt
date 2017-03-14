@@ -575,7 +575,7 @@
                                                 <subviews>
                                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="poq-xo-sc2" userLabel="artImageView">
                                                         <rect key="frame" x="0.0" y="2" width="600" height="600"/>
-                                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="poq-xo-sc2" secondAttribute="height" multiplier="1:1" id="YZg-Ve-1YN"/>
                                                         </constraints>

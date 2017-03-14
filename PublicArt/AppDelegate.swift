@@ -24,11 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 	//	self.useWelcomeAsRoot()
 
-		if UserDefaults.standard.bool(forKey: didShowLandingScreenKey) {
-			self.normalWindowRoot(animate:false)
-		} else {
-			self.useWelcomeAsRoot()
-		}
+        self.normalWindowRoot(animate:false)
+
+//		if UserDefaults.standard.bool(forKey: didShowLandingScreenKey) {
+//			self.normalWindowRoot(animate:false)
+//		} else {
+//			self.useWelcomeAsRoot()
+//		}
 		self.window?.makeKeyAndVisible()
 
 		setAppearanceProxies()
@@ -133,7 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		UINavigationBar.appearance().tintColor = UIColor.white
 		UINavigationBar.appearance().barTintColor = UIColor.black
 		UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white,
-															NSFontAttributeName: UIFont.systemFont(ofSize: 20)]
+															NSFontAttributeName: UIFont.systemFont(ofSize: 18)]
 		
 		UITabBar.appearance().barTintColor = UIColor.black
 		UITabBar.appearance().tintColor = UIColor.white

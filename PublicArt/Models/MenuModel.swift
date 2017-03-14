@@ -105,22 +105,22 @@ struct MainMenu {
 		switch(mainMenuType) {
 		case .artists:
 			image = UIImage(named: "FlutePlayers") ?? image
-			title = "Artists"
+			title = "by Artists"
 		case .catagory:
 			image = UIImage(named: "LionClose") ?? image
-			title = "Catagories"
+			title = "by Catagories"
 		case .neighborhoods:
 			image = UIImage(named: "IMG_0951") ?? image
-			title = "Locations"
+			title = "by Locations"
 		case .titles:
 			image = UIImage(named: "IMG_5037") ?? image
-			title = "Titles"
+			title = "by Titles"
 		case .medium:
 			image = UIImage(named: "IMG_5838") ?? image
-			title = "Media"
+			title = "by Media"
 		case .favorites:
 		//	image = UIImage(named: "SixteenthAveTiledStepsCropped") ?? image
-			image = UIImage.imageWithColor(UIColor.white)
+			image = UIImage.imageWithColor(UIColor.black)
 			title =  ""
 		}
 		
