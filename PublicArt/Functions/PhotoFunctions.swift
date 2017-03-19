@@ -17,18 +17,18 @@ func convertToSortedArray(_ set: Set<Photo>) -> [Photo] {
 	}
 	return photos
 }
-
-func sortThumbnailPhotoToFirstPositionIn(_ photos: [Photo]) -> [Photo] {
-	var photos = photos
-	for (index, photo) in photos.enumerated() {
-		if photo.tnMatch == true {
-			photos.remove(at: index)
-			photos.insert(photo, at: 0)
-			break
-		}
-	}
-	return photos
-}
+//
+//func sortThumbnailPhotoToFirstPositionIn(_ photos: [Photo]) -> [Photo] {
+//	var photos = photos
+//	for (index, photo) in photos.enumerated() {
+//		if photo.tnMatch == true {
+//			photos.remove(at: index)
+//			photos.insert(photo, at: 0)
+//			break
+//		}
+//	}
+//	return photos
+//}
 
 
 func thumbNailsHighResolutionVersionIn(_ art: Art) -> Photo? {

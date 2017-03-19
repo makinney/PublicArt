@@ -19,7 +19,9 @@ class ArtRefresh {
 					if clientLastRefreshed != serverLastRefreshed as Date{
 						complete(true, clientLastRefreshed, serverLastRefreshed as Date)
 					} else {
-						complete(false, clientLastRefreshed, serverLastRefreshed as Date)
+						complete(true, clientLastRefreshed, serverLastRefreshed as Date)
+       //                 complete(false, clientLastRefreshed, serverLastRefreshed as Date) // TODO
+
 					}
 				} else {
 					// first time app's art has every been refreshed

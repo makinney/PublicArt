@@ -17,7 +17,6 @@ extension Photo {
 			photo.objectId = parsePhoto.objectId!
 			photo.updatedAt = parsePhoto.updatedAt!
 			photo.idArt = parsePhoto.idArt ?? ""
-            photo.imageAspectRatio = NSNumber(value: parsePhoto.imageAspectRatio)
 			photo.tnMatch = parsePhoto.tnMatch as NSNumber? ?? false
 
 			if let imageFile = parsePhoto.imageFile {
@@ -40,7 +39,6 @@ extension Photo {
 			photo.tnMatch = parsePhoto.tnMatch as NSNumber? ?? false
 
 			if let imageFile = parsePhoto.imageFile {
-//				photo.imageFileName = extractImageFileName(imageFile.name)
                 photo.imageFileName = imageFile.name
 				photo.imageFileURL = imageFile.url ?? ""
 

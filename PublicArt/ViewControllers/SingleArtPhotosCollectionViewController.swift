@@ -15,7 +15,6 @@ final class SingleArtPhotosCollectionViewController: UICollectionViewController 
 			if let art = art,
 				let photoSet: Set<Photo> = art.photos as? Set {
 				photos = convertToSortedArray(photoSet)
-				photos = sortThumbnailPhotoToFirstPositionIn(photos!)
 				collectionView?.reloadData()
 			}
 		}

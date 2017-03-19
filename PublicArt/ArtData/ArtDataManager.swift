@@ -156,6 +156,7 @@ class ArtDataManager : NSObject {
 		}
 	}
 	
+    // TODO: bug - artist need at least one piece of art for artist to show up in list
 	fileprivate func updateArtToArtistBindings(_ art:[Art]) {
 		for art in art {
 			if let artist = self.fetcher.fetchArtist(art.idArtist) {
