@@ -10,12 +10,20 @@ import UIKit
 
 class ArtworkCollectionViewCell: UICollectionViewCell {
     
-	@IBOutlet weak var titleHeight: NSLayoutConstraint!
 	@IBOutlet weak var imageViewHeight: NSLayoutConstraint!
-	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-	@IBOutlet weak var imageView: UIImageView!
+
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet weak var imageView: UIImageView! {
+        didSet {
+            imageView.layer.shadowRadius = 4.0
+            imageView.layer.shadowOpacity = 1
+            imageView.layer.shadowOffset = CGSize(width: 3, height: -3)
+            imageView.layer.shadowColor = UIColor.black.cgColor
+        }
+    }
 	@IBOutlet weak var title: UILabel!
-	@IBOutlet weak var noImageTitle: UILabel!
+    
 	
 	var imageFileName = String()
 	

@@ -11,8 +11,8 @@ import CoreData
 import AVFoundation
 
 protocol ArtPiecesCollectionViewControllerDataFilterProtocol {
-	var fetchFilterKey: String {get set}
-	var fetchFilterValue: String {get set}
+//	var fetchFilterKey: String {get set}
+//	var fetchFilterValue: String {get set}
 	var pageTitle: String {get set}
 }
 
@@ -25,13 +25,13 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 
 	fileprivate var error:NSError?
 	
-	var fetchFilterKey: String?
-	var fetchFilterValue: String?
+//	var fetchFilterKey: String?
+//	var fetchFilterValue: String?
 	var pageTitle: String?
 	
 	func fetchFilter(_ filter: ArtPiecesCollectionViewControllerDataFilterProtocol) {
-		fetchFilterKey = filter.fetchFilterKey
-		fetchFilterValue = filter.fetchFilterValue
+	//	fetchFilterKey = filter.fetchFilterKey
+	//	fetchFilterValue = filter.fetchFilterValue
 		pageTitle = filter.pageTitle
 	}
 	
@@ -54,8 +54,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		navigationController?.interactivePopGestureRecognizer?.isEnabled = false
 		navigationController?.delegate = self
 	
-		let nibName = UINib(nibName: CellIdentifier.ArtworkCollectionViewCell.rawValue, bundle: nil)
-		self.collectionView?.register(nibName, forCellWithReuseIdentifier: CellIdentifier.ArtworkCollectionViewCell.rawValue)
         if #available(iOS 10.0, *) {
             collectionView?.isPrefetchingEnabled = false
         } else {
@@ -81,7 +79,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 			title = pageTitle
 		}
 		
-		collectionView?.backgroundColor = UIColor.black
+		collectionView?.backgroundColor = UIColor.white
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -114,14 +112,14 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		let fetchRequest = NSFetchRequest<Art>(entityName:ModelEntity.art)
 		var predicates = [NSPredicate]()
 		// TODO: fixme should support multiple key:values
-		if let key = self.fetchFilterKey,
-			let value = self.fetchFilterValue {
-			if key != "tags" {
-				predicates.append(NSPredicate(format:"%K == %@", key,value))
-			} else {
-				predicates.append(NSPredicate(format:"%K CONTAINS[cd] %@", key,value))
-			}
-		}
+//		if let key = self.fetchFilterKey,
+//			let value = self.fetchFilterValue {
+//			if key != "tags" {
+//				predicates.append(NSPredicate(format:"%K == %@", key,value))
+//			} else {
+//				predicates.append(NSPredicate(format:"%K CONTAINS[cd] %@", key,value))
+//			}
+//		}
 		//
 		predicates.append(NSPredicate(format:"%K == %@", "hasThumb",NSNumber(value: true as Bool))) // has photos FIXME: Swift 3 what is true as Bool
 		
@@ -148,11 +146,9 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 			if let image = image {
 				cell.imageView.image = image
 				cell.title.text = art.title
-				cell.noImageTitle.text = ""
 			} else {
-				cell.imageView.image = nil
-				cell.title.text = ""
-				cell.noImageTitle.text = art.title
+		//		cell.imageView?.image = nil
+				cell.title.text = art.title
 			}
 			
 			cell.activityIndicator.stopAnimating()
@@ -199,7 +195,7 @@ extension ArtPiecesCollectionViewController: ArtworkLayoutDelegate {
 		if let thumb = art.thumb {
             imageHeight = width / (thumb.imageAspectRatio as CGFloat)
 		} else {
-			imageHeight = width * 0.25
+			imageHeight = width
 		}
 		
 		let rect = AVMakeRect(aspectRatio: CGSize(width: width, height: imageHeight), insideRect: boundingRect)
