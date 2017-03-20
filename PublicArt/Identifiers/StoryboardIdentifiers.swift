@@ -26,6 +26,7 @@ enum SegueIdentifier: String {
 	case ArtToMap = "idArtToMap"
 	case ButtonToMap = "ButtonToMapID"
 	case MainMenuToMediaSegue = "MainMenuToMediaSegueID"
+    case artPiecesToArtViewSeque = "ArtPiecesToArtViewSeque"
 	case ArtListToArtNav = "idArtListToArtNav"
 	case ArtTitleToWebView = "ArtTitleToWebViewID"
 	case ArtTitleInfoButtonToWebView = "ArtTitleInfoButtonToWebViewID"
@@ -40,12 +41,12 @@ enum SegueIdentifier: String {
 
 enum ViewControllerIdentifier: String { // TODO: make these consistent
 	case MainViewController = "MainTabBarControllerID"
+    case ArtViewController = "ArtViewController"
 	case ArtPiecesViewController = "ArtPiecesViewControllerID"
 	case ArtistCollectionViewController = "ArtistCollectionViewControllerID"
 	case CityMapsViewController = "CityMapsViewControllerID"
 	case LocationCollectionViewController = "LocationCollectionViewControllerID"
 	case CatagoryCollectionViewController = "ExploreCollectionViewControllerID"
-	case ArtViewController = "ArtViewControllerID"
 	case SingleArtViewController = "SingleArtViewControllerID"
 	case MediaCollectionViewController = "MediaCollectionViewControllerID"
 	case TitlesCollectionViewController = "TitlesCollectionViewControllerID"

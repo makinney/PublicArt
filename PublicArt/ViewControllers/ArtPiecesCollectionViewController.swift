@@ -176,9 +176,9 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let art = fetchResultsController.object(at: indexPath)
-		if let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ViewControllerIdentifier.SingleArtViewController.rawValue) as?  SingleArtViewController {
-			singleArtViewController.update(art, artBackgroundColor: nil)
-			show(singleArtViewController, sender: self)
+		if let artViewController: ArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ViewControllerIdentifier.ArtViewController.rawValue) as?  ArtViewController {
+            artViewController.art = art
+			show(artViewController, sender: self)
 		}
 	}
 
