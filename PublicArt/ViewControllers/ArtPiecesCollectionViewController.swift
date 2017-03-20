@@ -59,6 +59,9 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
         } else {
             // Fallback on earlier versions
         }
+        
+        collectionView?.backgroundColor = UIColor.black
+
 		
 		let artworkCollectionViewLayout = collectionViewLayout as! ArtworkCollectionViewLayout
 		artworkCollectionViewLayout.cellPadding = 5
@@ -79,11 +82,13 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 			title = pageTitle
 		}
 		
-		collectionView?.backgroundColor = UIColor.white
+//		collectionView?.backgroundColor = UIColor.white
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
+        collectionView?.backgroundColor = UIColor.white
+
 //		collectionView?.reloadData()
 	}
 	
@@ -147,7 +152,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 				cell.imageView.image = image
 				cell.title.text = art.title
 			} else {
-		//		cell.imageView?.image = nil
+				cell.imageView?.image = nil
 				cell.title.text = art.title
 			}
 			
@@ -177,10 +182,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		}
 	}
 
-	// MARK: Notification handlers
-	func newArtCityDatabase(_ notification: Notification) {
-		collectionView?.reloadData()
-	}
 }
 
 extension ArtPiecesCollectionViewController: ArtworkLayoutDelegate {

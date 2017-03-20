@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -225,15 +226,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FlutePlayers" translatesAutoresizingMaskIntoConstraints="NO" id="WDB-gD-clI">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WDB-gD-clI">
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" priority="750" constant="200" id="7F4-DX-Pe9"/>
                                             </constraints>
                                         </imageView>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="gNa-Z6-ZOY">
-                                            <rect key="frame" x="46" y="59" width="20" height="20"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="gNa-Z6-ZOY">
+                                            <rect key="frame" x="90" y="90" width="20" height="20"/>
                                         </activityIndicatorView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1z-4p-pbt" userLabel="title">
                                             <rect key="frame" x="8" y="179" width="184" height="21"/>
@@ -253,7 +254,9 @@
                                     <constraint firstAttribute="trailing" secondItem="R1z-4p-pbt" secondAttribute="trailing" constant="8" id="Xim-0J-EBe"/>
                                     <constraint firstItem="WDB-gD-clI" firstAttribute="leading" secondItem="i6r-Wo-am1" secondAttribute="leading" id="j3t-5I-gYU"/>
                                     <constraint firstItem="R1z-4p-pbt" firstAttribute="bottom" secondItem="WDB-gD-clI" secondAttribute="bottom" id="jip-na-6n5"/>
+                                    <constraint firstItem="gNa-Z6-ZOY" firstAttribute="centerY" secondItem="i6r-Wo-am1" secondAttribute="centerYWithinMargins" id="mBo-ks-CPE"/>
                                     <constraint firstItem="R1z-4p-pbt" firstAttribute="leading" secondItem="i6r-Wo-am1" secondAttribute="leading" constant="8" id="vNs-Pn-7pL"/>
+                                    <constraint firstItem="gNa-Z6-ZOY" firstAttribute="centerX" secondItem="i6r-Wo-am1" secondAttribute="centerXWithinMargins" id="wmP-vD-VVp"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="activityIndicator" destination="gNa-Z6-ZOY" id="zfN-au-Tdq"/>
@@ -941,7 +944,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="FlutePlayers" width="311" height="311"/>
         <image name="tab-art" width="32" height="32"/>
         <image name="tab-map" width="32" height="32"/>
         <image name="tab-photos" width="32" height="32"/>
