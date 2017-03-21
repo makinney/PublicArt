@@ -22,6 +22,7 @@ class ArtViewController: UIViewController {
     @IBOutlet weak var dLabel5: UILabel!
     @IBOutlet weak var artTitle: UILabel!
     @IBOutlet weak var mapToolbar: UIToolbar!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var singleArtMapViewController: SingleArtMapViewController?
     
@@ -39,6 +40,7 @@ class ArtViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareMapToolbarItems()
+        scrollView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +64,12 @@ class ArtViewController: UIViewController {
         if let singleArtMapViewController = segue.destination as? SingleArtMapViewController {
             self.singleArtMapViewController = singleArtMapViewController
             self.singleArtMapViewController!.art = art
+        } else if let photosPageViewController = segue.destination as? PhotosPageViewController {
+            if let art = art,
+                let photoSet: Set<Photo> = art.photos as? Set {
+                photosPageViewController.photos = convertToSortedArray(photoSet)
+            }
+
         }
     }
 

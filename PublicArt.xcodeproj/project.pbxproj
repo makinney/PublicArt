@@ -134,6 +134,7 @@
 		1FFE49B71C09672100AED9A4 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE49B61C09672100AED9A4 /* ImageExtension.swift */; };
 		242481A01E8077FE00F744C7 /* ArtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2424819F1E8077FE00F744C7 /* ArtViewController.swift */; };
 		242481A21E8080BA00F744C7 /* PhotosPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242481A11E8080BA00F744C7 /* PhotosPageViewController.swift */; };
+		242481A41E81B6DC00F744C7 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242481A31E81B6DC00F744C7 /* PhotoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -292,6 +293,7 @@
 		1FFE49B61C09672100AED9A4 /* ImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageExtension.swift; path = Extensions/ImageExtension.swift; sourceTree = "<group>"; };
 		2424819F1E8077FE00F744C7 /* ArtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtViewController.swift; path = ViewControllers/ArtViewController.swift; sourceTree = "<group>"; };
 		242481A11E8080BA00F744C7 /* PhotosPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotosPageViewController.swift; path = ViewControllers/PhotosPageViewController.swift; sourceTree = "<group>"; };
+		242481A31E81B6DC00F744C7 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoViewController.swift; path = ViewControllers/PhotoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -413,6 +415,7 @@
 				1F09BB571B2F79D400E4807C /* MainMenuSplitViewController.swift */,
 				1F01D4051B22745A00D4B156 /* MainMenuCollectionViewController.swift */,
 				1F09BB6F1B54BEF000191100 /* MediaCollectionViewController.swift */,
+				242481A11E8080BA00F744C7 /* PhotosPageViewController.swift */,
 				1FD0A7CE1B4CC1090086FDB2 /* SingleArtMapViewController.swift */,
 				1F4C733E1B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewController.swift */,
 				1F4C733F1B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewFlowLayout.swift */,
@@ -423,7 +426,7 @@
 				1F060E251BC0BC2E0092F9AF /* MoreTableViewController.swift */,
 				1F060E271BC0BCCA0092F9AF /* LegalDisclaimerViewController.swift */,
 				2424819F1E8077FE00F744C7 /* ArtViewController.swift */,
-				242481A11E8080BA00F744C7 /* PhotosPageViewController.swift */,
+				242481A31E81B6DC00F744C7 /* PhotoViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -822,6 +825,7 @@
 				1F8916921B23D04100E83891 /* CoreDataStack.swift in Sources */,
 				1F456D9D1B40D10A00302DE9 /* WelcomeContributeViewController.swift in Sources */,
 				1F03195F1B603259000778E4 /* Photo.swift in Sources */,
+				242481A41E81B6DC00F744C7 /* PhotoViewController.swift in Sources */,
 				1F09BB7A1B30BE8100E4807C /* ArtworkCollectionViewCell.swift in Sources */,
 				1F8916BF1B23D22B00E83891 /* MKArtAnnotationView.swift in Sources */,
 				1F4C73281B3E6B9F001ACEE0 /* SingleArtPhotosPresentAnimatedTransistioning.swift in Sources */,
