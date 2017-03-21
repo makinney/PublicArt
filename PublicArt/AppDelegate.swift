@@ -141,7 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		UITabBar.appearance().tintColor = UIColor.white
 	//	UITabBar.appearance().translucent = true
 		
-		UIToolbar.appearance().barTintColor = UIColor.black
+	//	UIToolbar.appearance().barTintColor = UIColor.black
 		UIToolbar.appearance().tintColor = UIColor.white
 
 	//	UIToolbar.appearance().translucent = true

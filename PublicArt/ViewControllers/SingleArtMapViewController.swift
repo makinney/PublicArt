@@ -13,53 +13,27 @@ import MapKit
 final class SingleArtMapViewController : UIViewController {
 	
 	@IBOutlet weak var bottomToolbar: UIToolbar!
-	@IBOutlet weak var containerView: UIView!
+//	@IBOutlet weak var containerView: UIView!
 	@IBOutlet weak var mapView: MKMapView!
-	@IBOutlet weak var topToolbar: UIToolbar!
 
 	fileprivate let annotationViewId = "annotationViewId"
 	var art:Art?
 	fileprivate var mapRouting: MapRouting?
-	
-	lazy var artMapAnnotation:ArtMapAnnotation = {
-			ArtMapAnnotation(art: self.art!)
-		}()
 	
 	fileprivate lazy var artUserLocation: ArtUserLocation = {
 		var userLocation = ArtUserLocation(mapView: self.mapView)
 		userLocation.trackingCallback = {(tracking) ->() in
 			if tracking {
 				let image = UIImage(named: "toolbar-location_arrow_filled")
-				self.locateMeBarButtonItem?.image = image
+// todo				self.locateMeBarButtonItem?.image = image
 			} else {
 				let image = UIImage(named: "toolbar-arrow")
-				self.locateMeBarButtonItem?.image = image
+// todo				self.locateMeBarButtonItem?.image = image
 			}
 		}
 		return userLocation
 	}()
 	
-	var doneBarButtonItem: UIBarButtonItem {
-		return UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(SingleArtMapViewController.onDoneButton(_:)))
-	}
-	
-	var routeBarButtonItem: UIBarButtonItem {
-		let image = UIImage(named: "DirectionsArrow")
-		return UIBarButtonItem(image:image, style: .plain, target:self, action: #selector(SingleArtMapViewController.onRouteButton(_:)))
-
-	}
-	var flexibleSpaceBarButtonItem: UIBarButtonItem {
-		return UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-	}
-
-	var infoBarButtonItem: UIBarButtonItem {
-		let image = UIImage(named: "toolbar-infoButton")
-		return UIBarButtonItem(image:image, style: .plain, target:self, action: #selector(SingleArtMapViewController.onInfoButton(_:)))
-	}
-	
-	var locateMeBarButtonItem: UIBarButtonItem?
-
-
 
 	// MARK: lifecycle
 
@@ -75,31 +49,21 @@ final class SingleArtMapViewController : UIViewController {
 		super.viewDidLoad()
 		mapView.delegate = self
 		mapView.mapType = getSavedMapType()
-		containerView.sendSubview(toBack: mapView)
+//		containerView.sendSubview(toBack: mapView)
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		prepareToolbarItems()
 		zoomToRegion()
-		mapView.addAnnotation(artMapAnnotation)
+        if let art = self.art {
+            mapView.addAnnotation(ArtMapAnnotation(art: art))
+        }
 	}
 	
 	func dismiss() {
 		self.dismiss(animated: true, completion:nil)
 	}
 	
-	// MARK: preps
-	
-	func prepareToolbarItems() {
-		let image = UIImage(named: "toolbar-arrow")
-		locateMeBarButtonItem = UIBarButtonItem(image:image, style: .plain, target:self, action: #selector(SingleArtMapViewController.onLocateMeButton(_:)))
-		let bottomItems = [locateMeBarButtonItem!, flexibleSpaceBarButtonItem, infoBarButtonItem]
-		bottomToolbar.items = bottomItems
-		let topItems = [routeBarButtonItem, flexibleSpaceBarButtonItem, doneBarButtonItem]
-		topToolbar.items = topItems
-	}
-
 	// MARK: Mapping
 	
 	fileprivate func mapCoordinates() -> CLLocationCoordinate2D {
@@ -122,10 +86,6 @@ final class SingleArtMapViewController : UIViewController {
 
 	// MARK: button actions
 
-	func onDoneButton(_ barbuttonItem: UIBarButtonItem) {
-		dismiss()
-	}
-	
 	func onRouteButton(_ barButtonItem: UIBarButtonItem) {
 		if let art = self.art {
 			mapRouting = MapRouting(art: art)
