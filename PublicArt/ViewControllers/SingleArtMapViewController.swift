@@ -78,7 +78,7 @@ final class SingleArtMapViewController : UIViewController {
 	
 	func zoomToRegion() {
 		if let _ = art {
-			let span = MKCoordinateSpan(latitudeDelta: 0.010, longitudeDelta: 0.010) // TODO:
+			let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005) // TODO:
 			let region = MKCoordinateRegion(center:mapCoordinates(), span:span)
 			mapView?.setRegion(region, animated: false)
 		}

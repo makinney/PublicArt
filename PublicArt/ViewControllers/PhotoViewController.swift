@@ -14,6 +14,7 @@ class PhotoViewController: UIViewController {
     var photo: Photo?
     var page: Int = 0
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -22,7 +23,9 @@ class PhotoViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if let photo = photo {
+            activityIndicator.startAnimating()
             PhotoImages.sharedInstance.getImage(photo, complete: {[weak self] (image, imageFileName) -> () in
+                self?.activityIndicator.stopAnimating()
                 if let image = image, imageFileName == photo.imageFileName {
                     self?.imageView.image = image
                 }

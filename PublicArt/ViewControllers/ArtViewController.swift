@@ -49,14 +49,19 @@ class ArtViewController: UIViewController {
     }
     
     func updateDetails() {
+        dLabel1.text = "Artist - "
+        dLabel2.text = "Medium - "
+        dLabel3.text = "Dimensions - "
+        dLabel4.text = "Location - "
+        dLabel5.text = "Address - "
         if let art = art,
            let artist = art.artist {
             artTitle.text = art.title
-            dLabel1.text = "Artist : " + artist.firstName + " " + artist.lastName
-            dLabel2.text = "Medium : " + art.medium
-            dLabel3.text = "Dimensions : " + art.dimensions
-            dLabel4.text = "Location : " + art.location.name
-            dLabel5.text = "Address : " + art.address
+            dLabel1.text! += artist.firstName + " " + artist.lastName
+            dLabel2.text! += art.medium
+            dLabel3.text! += art.dimensions
+            dLabel4.text! += art.location.name
+            dLabel5.text! += art.address
         }
     }
     
