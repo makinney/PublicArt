@@ -60,6 +60,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
             // Fallback on earlier versions
         }
         
+        title = "SF Public Art"
         collectionView?.backgroundColor = UIColor.black
 
 		

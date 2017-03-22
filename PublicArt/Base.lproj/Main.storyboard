@@ -141,12 +141,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="36H-rX-PDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1536" y="2017"/>
+            <point key="canvasLocation" x="1234" y="2017"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pbb-6U-D4K">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsWhenVerticallyCompact="YES" id="rMD-Y1-dPa" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainMenuNav" automaticallyAdjustsScrollViewInsets="NO" hidesBarsWhenVerticallyCompact="YES" id="rMD-Y1-dPa" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="J9D-hH-VjQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -434,7 +434,7 @@
                                             <constraint firstAttribute="height" constant="280" id="tA4-9I-6U6"/>
                                         </constraints>
                                         <connections>
-                                            <segue destination="yZu-Kr-YZd" kind="embed" id="Jbp-1v-Um9"/>
+                                            <segue destination="yZu-Kr-YZd" kind="embed" identifier="ArtViewToPhotosPage" id="Jbp-1v-Um9"/>
                                         </connections>
                                     </containerView>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMT-pD-nIr" userLabel="mapToolbar">
@@ -609,32 +609,32 @@
         <scene sceneID="Sza-By-O19">
             <objects>
                 <collectionViewController storyboardIdentifier="ArtistCollectionViewControllerID" id="Kqd-lx-yAS" customClass="ArtistCollectionViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="0he-up-d9K">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="0he-up-d9K">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="odW-Jn-mfV">
-                            <size key="itemSize" width="368" height="50"/>
+                            <size key="itemSize" width="320" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ArtistCollectionViewCell" id="Kai-h4-HdL" customClass="ArtistCollectionViewCell" customModule="PublicArt" customModuleProvider="target">
-                                <rect key="frame" x="4" y="0.0" width="368" height="50"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                                <rect key="frame" x="28" y="0.0" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="368" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atu-ea-ask" userLabel="artistName">
-                                            <rect key="frame" x="8" y="8" width="332" height="34"/>
+                                            <rect key="frame" x="8" y="8" width="284" height="34"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="miL-di-kDS">
-                                            <rect key="frame" x="348" y="19" width="12" height="13"/>
+                                            <rect key="frame" x="300" y="19" width="12" height="13"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="13" id="9jx-G3-B2n"/>
                                                 <constraint firstAttribute="width" constant="12" id="GxO-Jl-wOv"/>
@@ -743,7 +743,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IyS-jG-5DV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="277" y="2863"/>
+            <point key="canvasLocation" x="275" y="2017"/>
         </scene>
         <!--City Maps View Controller-->
         <scene sceneID="AVe-nP-pbv">
@@ -853,40 +853,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ohO-AK-Axw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1548" y="1132"/>
-        </scene>
-        <!--Single Art Photos Collection View Controller-->
-        <scene sceneID="2QA-fj-RXT">
-            <objects>
-                <collectionViewController id="Ee6-nE-tU4" customClass="SingleArtPhotosCollectionViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="2" dataMode="prototypes" id="WTg-wj-p59">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ofP-oc-jVS">
-                            <size key="itemSize" width="133" height="163"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ArtworkCollectionViewCell" id="L30-wl-b6T" customClass="ArtworkCollectionViewCell" customModule="PublicArt" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="133" height="163"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="133" height="163"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </view>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="Ee6-nE-tU4" id="MP8-wN-cPL"/>
-                            <outlet property="delegate" destination="Ee6-nE-tU4" id="VXo-hn-t4o"/>
-                        </connections>
-                    </collectionView>
-                    <extendedEdge key="edgesForExtendedLayout"/>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zi2-8v-hqr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3338" y="2038"/>
         </scene>
         <!--Photos Page View Controller-->
         <scene sceneID="Ozo-zY-FGq">
