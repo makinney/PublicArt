@@ -337,7 +337,7 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="887"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uud-a8-EMV">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uud-a8-EMV">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="887"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M9R-V3-xvb" userLabel="title">
@@ -438,7 +438,7 @@
                                         </connections>
                                     </containerView>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMT-pD-nIr" userLabel="mapToolbar">
-                                        <rect key="frame" x="20" y="640" width="335" height="44"/>
+                                        <rect key="frame" x="0.0" y="476" width="375" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="ozM-Hq-Bk8"/>
                                         </constraints>
@@ -448,7 +448,7 @@
                                         <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </toolbar>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ft5-Fm-LSZ" userLabel="MapContainerView">
-                                        <rect key="frame" x="20" y="480" width="335" height="160"/>
+                                        <rect key="frame" x="0.0" y="520" width="375" height="160"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="160" id="Ehv-PZ-00g"/>
                                         </constraints>
@@ -458,21 +458,21 @@
                                     </containerView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="oMT-pD-nIr" secondAttribute="bottom" constant="20" id="30K-rN-9pV"/>
                                     <constraint firstItem="oMT-pD-nIr" firstAttribute="width" secondItem="ft5-Fm-LSZ" secondAttribute="width" id="3iK-GA-Pg7"/>
+                                    <constraint firstItem="oMT-pD-nIr" firstAttribute="top" secondItem="WoG-aO-D8a" secondAttribute="bottom" constant="20" id="4dr-vf-rEv"/>
                                     <constraint firstAttribute="trailing" secondItem="M9R-V3-xvb" secondAttribute="trailing" id="EOI-4H-zJg"/>
-                                    <constraint firstItem="ft5-Fm-LSZ" firstAttribute="top" secondItem="WoG-aO-D8a" secondAttribute="bottom" constant="24" id="ETi-Wt-LdQ"/>
                                     <constraint firstAttribute="trailing" secondItem="WoG-aO-D8a" secondAttribute="trailing" id="KZ8-KF-80x"/>
                                     <constraint firstItem="oMT-pD-nIr" firstAttribute="centerX" secondItem="ft5-Fm-LSZ" secondAttribute="centerX" id="YMt-hU-HcG"/>
                                     <constraint firstItem="M9R-V3-xvb" firstAttribute="top" secondItem="uud-a8-EMV" secondAttribute="top" constant="10" id="aTr-PF-pBm"/>
                                     <constraint firstItem="V9C-AT-D3K" firstAttribute="top" secondItem="M9R-V3-xvb" secondAttribute="bottom" constant="20" id="azO-BH-G8E"/>
                                     <constraint firstAttribute="trailing" secondItem="V9C-AT-D3K" secondAttribute="trailing" id="dzR-ff-yZj"/>
                                     <constraint firstItem="WoG-aO-D8a" firstAttribute="leading" secondItem="uud-a8-EMV" secondAttribute="leading" id="kKm-fb-kDf"/>
-                                    <constraint firstItem="oMT-pD-nIr" firstAttribute="top" secondItem="ft5-Fm-LSZ" secondAttribute="bottom" id="maI-FB-wzR"/>
+                                    <constraint firstItem="oMT-pD-nIr" firstAttribute="bottom" secondItem="ft5-Fm-LSZ" secondAttribute="top" id="maI-FB-wzR"/>
+                                    <constraint firstAttribute="bottom" secondItem="ft5-Fm-LSZ" secondAttribute="bottom" constant="20" id="mcu-37-6bK"/>
                                     <constraint firstItem="WoG-aO-D8a" firstAttribute="top" secondItem="V9C-AT-D3K" secondAttribute="bottom" constant="20" id="tHV-RM-v7H"/>
                                     <constraint firstItem="V9C-AT-D3K" firstAttribute="leading" secondItem="uud-a8-EMV" secondAttribute="leading" id="uiI-CH-77C"/>
-                                    <constraint firstItem="ft5-Fm-LSZ" firstAttribute="leading" secondItem="uud-a8-EMV" secondAttribute="leading" constant="20" id="veE-ts-nCc"/>
-                                    <constraint firstAttribute="trailing" secondItem="ft5-Fm-LSZ" secondAttribute="trailing" constant="20" id="xdm-uh-mwA"/>
+                                    <constraint firstItem="ft5-Fm-LSZ" firstAttribute="leading" secondItem="uud-a8-EMV" secondAttribute="leading" id="veE-ts-nCc"/>
+                                    <constraint firstAttribute="trailing" secondItem="ft5-Fm-LSZ" secondAttribute="trailing" id="xdm-uh-mwA"/>
                                     <constraint firstItem="M9R-V3-xvb" firstAttribute="leading" secondItem="uud-a8-EMV" secondAttribute="leading" id="ywN-kH-KwW"/>
                                 </constraints>
                             </scrollView>
@@ -887,11 +887,11 @@
             <objects>
                 <viewController storyboardIdentifier="SingleArtMapViewController" id="hIs-97-5Ut" customClass="SingleArtMapViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Erd-Hf-9Wh">
-                        <rect key="frame" x="0.0" y="0.0" width="335" height="160"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IXx-sm-9xv">
-                                <rect key="frame" x="0.0" y="0.0" width="335" height="160"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
