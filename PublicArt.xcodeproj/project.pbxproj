@@ -419,6 +419,7 @@
 				1F01D4051B22745A00D4B156 /* MainMenuCollectionViewController.swift */,
 				1F09BB6F1B54BEF000191100 /* MediaCollectionViewController.swift */,
 				242481A11E8080BA00F744C7 /* PhotosPageViewController.swift */,
+				242481A31E81B6DC00F744C7 /* PhotoViewController.swift */,
 				1FD0A7CE1B4CC1090086FDB2 /* SingleArtMapViewController.swift */,
 				1F4C733E1B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewController.swift */,
 				1F4C733F1B3E6E02001ACEE0 /* SingleArtPhotosCollectionViewFlowLayout.swift */,
@@ -428,7 +429,6 @@
 				1FD0A7C71B4C68BC0086FDB2 /* WebViewController.swift */,
 				1F060E251BC0BC2E0092F9AF /* MoreTableViewController.swift */,
 				1F060E271BC0BCCA0092F9AF /* LegalDisclaimerViewController.swift */,
-				242481A31E81B6DC00F744C7 /* PhotoViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";

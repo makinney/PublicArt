@@ -659,7 +659,7 @@
         <scene sceneID="AOI-HN-6gT">
             <objects>
                 <navigationController storyboardIdentifier="ArtPiecesNavControllerID" automaticallyAdjustsScrollViewInsets="NO" id="b9c-af-Gjq" userLabel="Art" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Art" image="tab-art" id="5KZ-IY-8uS" userLabel="Art"/>
+                    <tabBarItem key="tabBarItem" title="Art" image="tab-photos" id="5KZ-IY-8uS" userLabel="Art"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="gG2-4p-E6F">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -874,13 +874,13 @@
         <!--Photos Page View Controller-->
         <scene sceneID="Ozo-zY-FGq">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="6" navigationOrientation="horizontal" spineLocation="none" id="yZu-Kr-YZd" customClass="PhotosPageViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="yZu-Kr-YZd" customClass="PhotosPageViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="281"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4m0-Dg-4SD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5208.8000000000002" y="179.46026986506749"/>
+            <point key="canvasLocation" x="5207" y="179"/>
         </scene>
         <!--Single Art Map View Controller-->
         <scene sceneID="K7B-qx-r3g">
@@ -956,11 +956,11 @@
             </objects>
             <point key="canvasLocation" x="5919.1999999999998" y="352.17391304347831"/>
         </scene>
-        <!--Artists-->
+        <!--Artist-->
         <scene sceneID="Sfc-6i-BEp">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rog-87-eQI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Artists" id="EJY-Ba-4RG"/>
+                    <tabBarItem key="tabBarItem" title="Artist" image="tab-art" id="EJY-Ba-4RG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="L4e-bb-6xF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

@@ -19,7 +19,12 @@ class PhotosPageViewController: UIPageViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setViewControllers([photoViewController(0)], direction: .forward, animated: false, completion: nil)
+        if photos.count > 0 {
+            setViewControllers([photoViewController(0)], direction: .forward, animated: false, completion: nil)
+        } else { // hack solution for no photos, just to get this app out
+            pageCount = 1
+            setViewControllers([photoViewController(0)], direction: .forward, animated: false, completion: nil)
+        }
         dataSource = self
     }
     
@@ -30,7 +35,7 @@ class PhotosPageViewController: UIPageViewController {
         if page < photos.count {
             photoViewController.photo = photos[page]
         } else {
-            photoViewController.photo = nil
+            photoViewController.noPhotoImage = UIImage(named: "noThumb")
         }
         return photoViewController
     }

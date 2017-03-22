@@ -306,17 +306,14 @@ extension CityMapsViewController : MKMapViewDelegate, UIPopoverPresentationContr
 	}
 
 	func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-		if let annotation = view.annotation as? ArtMapAnnotation {
-			if let art = annotation.art {
-	//			if let rightCalloutAccessoryView = view.rightCalloutAccessoryView {
-	//				displayArtSummaryViewControllerAt(view.rightCalloutAccessoryView, art: art)
-					let singleArtViewController: SingleArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ViewControllerIdentifier.SingleArtViewController.rawValue) as! SingleArtViewController
-					singleArtViewController.update(art, artBackgroundColor: nil)
-					show(singleArtViewController, sender: self)
-	//			}
-			}
-		}		
-	}
+		if let annotation = view.annotation as? ArtMapAnnotation,
+            let art = annotation.art {
+            if let artViewController: ArtViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ViewControllerIdentifier.ArtViewController.rawValue) as?  ArtViewController {
+                artViewController.art = art
+                show(artViewController, sender: self)
+            }
+        }
+    }
 	
 	func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 		if  let imageView = view.leftCalloutAccessoryView as? UIImageView,

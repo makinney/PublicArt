@@ -54,14 +54,17 @@ class ArtViewController: UIViewController {
         dLabel3.text = "Dimensions - "
         dLabel4.text = "Location - "
         dLabel5.text = "Address - "
-        if let art = art,
-           let artist = art.artist {
+        if let art = art {
             artTitle.text = art.title
-            dLabel1.text! += artist.firstName + " " + artist.lastName
             dLabel2.text! += art.medium
             dLabel3.text! += art.dimensions
             dLabel4.text! += art.location.name
             dLabel5.text! += art.address
+            if let artist = art.artist {
+                dLabel1.text! += artist.firstName + " " + artist.lastName
+            } else {
+                dLabel1.text = "Artist - To Be Determined"
+            }
         }
     }
     

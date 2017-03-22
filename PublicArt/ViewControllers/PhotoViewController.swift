@@ -13,6 +13,7 @@ class PhotoViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     var photo: Photo?
     var page: Int = 0
+    var noPhotoImage: UIImage?
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     override func viewDidLoad() {
@@ -30,6 +31,8 @@ class PhotoViewController: UIViewController {
                     self?.imageView.image = image
                 }
             })
+        } else {
+            imageView.image = noPhotoImage
         }
     }
 }
