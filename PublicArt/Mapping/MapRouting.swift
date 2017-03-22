@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import MapKit
-//import AddressBook
 import Contacts
 
 final class MapRouting {
@@ -44,30 +43,14 @@ final class MapRouting {
 	}
 	
 	
-	func showAvailableAppsSheet(_ viewController: UIViewController, barButtonItem: UIBarButtonItem) {
-		let appsSheet = UIAlertController(title: "Directions to Art", message: "Select App", preferredStyle: .actionSheet)
-		appsSheet.popoverPresentationController?.barButtonItem = barButtonItem
-		
-		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (alert) -> Void in
-		}
-		appsSheet.addAction(cancelAction)
-		
-		let routeWithAppleMapsAction = UIAlertAction(title: "Apple Maps", style: .default) {[weak self] (alert) -> Void in
-			self?.useAppleMaps()
-		}
-		appsSheet.addAction(routeWithAppleMapsAction)
-	
+	func showRoutingMap() {		
 		if googleMapsAvailable() {
-			let routeWithGoogleMapsAction = UIAlertAction(title: "Google Maps", style: .default) {[weak self] (alert) -> Void in
-			self?.useGoogleMaps()
-		}
-			appsSheet.addAction(routeWithGoogleMapsAction)
-		}
-		
-		viewController.present(appsSheet, animated: true) { () -> Void in
-		}
+            useGoogleMaps()
+
+        } else {
+            useAppleMaps()
+        }
 	}
 
-	
 	
 }

@@ -246,7 +246,7 @@ final class SingleArtViewController: UIViewController {
 	func directionsButtonTouched(_ sender: UIBarButtonItem) {
 		if let art = self.art {
 			mapRouting = MapRouting(art: art)
-			mapRouting?.showAvailableAppsSheet(self, barButtonItem: sender)
+			mapRouting?.showRoutingMap()
 		}
 	}
 
@@ -259,9 +259,6 @@ final class SingleArtViewController: UIViewController {
 		performSegue(withIdentifier: SegueIdentifier.ButtonToMap.rawValue, sender: nil)
 	}
 	
-	
-	
-
 	func shareArtwork(_ barButtonItem: UIBarButtonItem) {
 		let moc = CoreDataStack.sharedInstance.managedObjectContext
 		let fetcher = Fetcher(managedObjectContext: moc!)

@@ -89,7 +89,7 @@ final class SingleArtMapViewController : UIViewController {
 	func onRouteButton(_ barButtonItem: UIBarButtonItem) {
 		if let art = self.art {
 			mapRouting = MapRouting(art: art)
-			mapRouting?.showAvailableAppsSheet(self, barButtonItem: barButtonItem)
+			mapRouting?.showRoutingMap()
 		}
 	}
 
