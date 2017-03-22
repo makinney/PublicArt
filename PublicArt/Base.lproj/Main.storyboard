@@ -627,17 +627,33 @@
                                     <rect key="frame" x="0.0" y="0.0" width="368" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atu-ea-ask" userLabel="artistName">
-                                            <rect key="frame" x="8" y="15" width="352" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atu-ea-ask" userLabel="artistName">
+                                            <rect key="frame" x="8" y="8" width="332" height="34"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="miL-di-kDS">
+                                            <rect key="frame" x="348" y="19" width="12" height="13"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="13" id="9jx-G3-B2n"/>
+                                                <constraint firstAttribute="width" constant="12" id="GxO-Jl-wOv"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                 </view>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="atu-ea-ask" secondAttribute="bottom" constant="8" id="1PP-6P-ejb"/>
+                                    <constraint firstItem="miL-di-kDS" firstAttribute="centerY" secondItem="Kai-h4-HdL" secondAttribute="centerY" id="5LE-36-uJT"/>
+                                    <constraint firstItem="atu-ea-ask" firstAttribute="top" secondItem="Kai-h4-HdL" secondAttribute="top" constant="8" id="6Lj-wk-g4r"/>
+                                    <constraint firstItem="atu-ea-ask" firstAttribute="leading" secondItem="Kai-h4-HdL" secondAttribute="leading" constant="8" id="Iez-fL-rBt"/>
+                                    <constraint firstAttribute="trailing" secondItem="miL-di-kDS" secondAttribute="trailing" constant="8" id="oky-4v-cwZ"/>
+                                    <constraint firstItem="miL-di-kDS" firstAttribute="leading" secondItem="atu-ea-ask" secondAttribute="trailing" constant="8" id="uQn-6P-uqS"/>
+                                    <constraint firstItem="atu-ea-ask" firstAttribute="centerY" secondItem="Kai-h4-HdL" secondAttribute="centerY" id="zZQ-HZ-xPJ"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="artistName" destination="atu-ea-ask" id="lCR-eg-XWh"/>
+                                    <outlet property="disclosureImage" destination="miL-di-kDS" id="CLm-ct-REu"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

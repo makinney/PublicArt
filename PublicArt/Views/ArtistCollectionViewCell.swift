@@ -11,5 +11,5 @@ import UIKit
 class ArtistCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var artistName: UILabel!
-    
+    @IBOutlet weak var disclosureImage: UIImageView!
 }

@@ -183,6 +183,7 @@ final class ArtistCollectionViewController: UICollectionViewController {
 		artistCollectionViewCell.artistName.text = artistFullName(artist)
 		artistCollectionViewCell.backgroundColor = UIColor.white
 		artistCollectionViewCell.artistName.textColor = UIColor.black
+        artistCollectionViewCell.disclosureImage.image = UIImage(named: "disclosureIndicator")
         return artistCollectionViewCell
 	}
 	
