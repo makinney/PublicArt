@@ -42,10 +42,7 @@ final class ArtistCollectionViewController: UICollectionViewController {
 		super.viewDidLoad()
 		
 		title = "Artists" // TITLE
-		
-		let nibName = UINib(nibName: CellIdentifier.MediaCollectionViewCell.rawValue, bundle: nil) 
-		self.collectionView?.register(nibName, forCellWithReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue)
-		
+				
 		collectionView?.backgroundColor = UIColor.black
         if #available(iOS 10.0, *) {
             collectionView?.isPrefetchingEnabled = false
@@ -84,16 +81,16 @@ final class ArtistCollectionViewController: UICollectionViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		if UIScreen.main.traitCollection.horizontalSizeClass == .regular,
-			let selectedArtist = selectedArtist {
-				if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArtPiecesNavControllerID") as? UINavigationController,
-					let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
-						let artistName = artistFullName(selectedArtist)
-						let filter = ArtPiecesCollectionViewDataFilter(key: "idArtist", value: selectedArtist.idArtist, title: artistName)
-						artPiecesCollectionViewController.fetchFilter(filter)
-						showDetailViewController(navigationController, sender: self)
-				}
-		}
+//		if UIScreen.main.traitCollection.horizontalSizeClass == .regular,
+//			let selectedArtist = selectedArtist {
+//				if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArtPiecesNavControllerID") as? UINavigationController,
+//					let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
+//						let artistName = artistFullName(selectedArtist)
+//						let filter = ArtPiecesCollectionViewDataFilter(key: "idArtist", value: selectedArtist.idArtist, title: artistName)
+//						artPiecesCollectionViewController.fetchFilter(filter)
+//						showDetailViewController(navigationController, sender: self)
+//				}
+//		}
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -125,11 +122,11 @@ final class ArtistCollectionViewController: UICollectionViewController {
 	func setupArtistsFlowLayout() {
 		if let collectionViewFlowLayout: UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
 			collectionViewFlowLayout.scrollDirection = .vertical
-			let masterViewsWidth = splitViewController?.primaryColumnWidth ?? 100
+			let masterViewsWidth = UIScreen.main.bounds.width
 			collectionViewFlowLayout.headerReferenceSize = CGSize(width: 0, height: 0)
 			
-			collectionViewFlowLayout.minimumLineSpacing = 1
-			var minimumCellsPerLine = 2 // ultimately up to flow layout
+			collectionViewFlowLayout.minimumLineSpacing = 4
+			var minimumCellsPerLine = 1 // ultimately up to flow layout
 			
 			userInterfaceIdion = traitCollection.userInterfaceIdiom
 			if userInterfaceIdion == .phone || userInterfaceIdion == .unspecified {
@@ -137,10 +134,10 @@ final class ArtistCollectionViewController: UICollectionViewController {
 				collectionViewFlowLayout.sectionInset.top = sectionInset
 				collectionViewFlowLayout.sectionInset.left = sectionInset
 				collectionViewFlowLayout.sectionInset.right = sectionInset
-				let itemSpacing: CGFloat = 1
+				let itemSpacing: CGFloat = 8
 				collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
 				
-				
+
 				minimumCellsPerLine = 1
 				maxCellWidth = cellWidthToUse(masterViewsWidth, cellsPerLine: minimumCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
 				collectionViewFlowLayout.itemSize = CGSize(width: maxCellWidth, height: maxCellWidth / 8.0) // TODO: hard constant hack for aspect ratio
@@ -181,12 +178,12 @@ final class ArtistCollectionViewController: UICollectionViewController {
 	// MARK: UICollectionViewDataSource
 	
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.MediaCollectionViewCell.rawValue, for: indexPath) as! MediaCollectionViewCell
+		let artistCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.ArtistCollectionViewCell.rawValue, for: indexPath ) as! ArtistCollectionViewCell
 		let artist = self.artists[indexPath.row]
-		cell.title.text = artistFullName(artist)
-		cell.backgroundColor = UIColor.white
-		cell.title.textColor = UIColor.black
-        return cell
+		artistCollectionViewCell.artistName.text = artistFullName(artist)
+		artistCollectionViewCell.backgroundColor = UIColor.white
+		artistCollectionViewCell.artistName.textColor = UIColor.black
+        return artistCollectionViewCell
 	}
 	
 	override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -202,23 +199,10 @@ final class ArtistCollectionViewController: UICollectionViewController {
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 	
 		let artist = self.artists[indexPath.row]
-		selectedArtist = artist
-		let artistName = artistFullName(artist)
-		let filter = ArtPiecesCollectionViewDataFilter(key: "idArtist", value: artist.idArtist, title: artistName)
-	
-		if UIScreen.main.traitCollection.horizontalSizeClass == .compact {
-			artPiecesCollectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArtPiecesViewControllerID") as? ArtPiecesCollectionViewController
-			if artPiecesCollectionViewController != nil {
-				artPiecesCollectionViewController!.fetchFilter(filter)
-				showDetailViewController(artPiecesCollectionViewController!, sender: self)
-			}
-		} else {
-			if let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArtPiecesNavControllerID") as? UINavigationController,
-				let artPiecesCollectionViewController = navigationController.viewControllers.last as? ArtPiecesCollectionViewController {
-					artPiecesCollectionViewController.fetchFilter(filter)
-					showDetailViewController(navigationController, sender: self)
-			}
-		}
+        if let webViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ViewControllerIdentifier.WebViewController.rawValue ) as? WebViewController {
+            webViewController.webViewAddress = artist.webLink
+            show(webViewController, sender: self)
+        }
 	}
 	
 

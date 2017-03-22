@@ -11,6 +11,7 @@ import Foundation
 
 enum CellIdentifier: String {
 	case ArtworkCollectionViewCell = "ArtworkCollectionViewCell"
+    case ArtistCollectionViewCell = "ArtistCollectionViewCell"
 	case LocationCollectionViewCell = "LocationCollectionViewCell"
 	case CategoryCollectionViewCell = "CategoryCollectionViewCell"
 	case MediaCollectionViewCell = "MediaCollectionViewCell"
@@ -50,6 +51,7 @@ enum ViewControllerIdentifier: String { // TODO: make these consistent
 	case SingleArtViewController = "SingleArtViewControllerID"
 	case MediaCollectionViewController = "MediaCollectionViewControllerID"
 	case TitlesCollectionViewController = "TitlesCollectionViewControllerID"
+    case WebViewController = "WebViewController"
 }
 
 enum WelcomeIdentifier: String {
