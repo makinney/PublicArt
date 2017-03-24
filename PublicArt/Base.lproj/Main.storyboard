@@ -218,6 +218,18 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
+                        <view key="backgroundView" contentMode="scaleToFill" id="exO-UX-TIk">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="w34-eA-ey8" userLabel="loadingIndicator">
+                                    <rect key="frame" x="169" y="259" width="37" height="37"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </activityIndicatorView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <cells>
                             <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ArtworkCollectionViewCell" id="i6r-Wo-am1" customClass="ArtworkCollectionViewCell" customModule="PublicArt" customModuleProvider="target">
                                 <rect key="frame" x="88" y="0.0" width="200" height="200"/>
@@ -273,6 +285,7 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="Xvn-Yy-cqt"/>
                     <connections>
+                        <outlet property="loadingIndicator" destination="w34-eA-ey8" id="BPB-pK-Y8s"/>
                         <segue destination="3fw-4r-UlI" kind="show" identifier="ArtPiecesToArtViewSeque" id="65M-Uv-p81"/>
                     </connections>
                 </collectionViewController>
@@ -869,6 +882,10 @@
         <scene sceneID="K7B-qx-r3g">
             <objects>
                 <viewController storyboardIdentifier="SingleArtMapViewController" id="hIs-97-5Ut" customClass="SingleArtMapViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KHC-Re-0cq"/>
+                        <viewControllerLayoutGuide type="bottom" id="lwX-HH-Gwh"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Erd-Hf-9Wh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -22,8 +22,8 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	fileprivate var maxPhotoWidth: CGFloat = 0.0
 	fileprivate let moc: NSManagedObjectContext?
 	fileprivate var userInterfaceIdion: UIUserInterfaceIdiom = .phone
-
 	fileprivate var error:NSError?
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
 	
 //	var fetchFilterKey: String?
 //	var fetchFilterValue: String?
@@ -60,8 +60,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
         }
         
         title = "Public Art"
-        collectionView?.backgroundColor = UIColor.black
-
+        loadingIndicator.startAnimating()
 		
 		let artworkCollectionViewLayout = collectionViewLayout as! ArtworkCollectionViewLayout
 		artworkCollectionViewLayout.cellPadding = 5
@@ -152,6 +151,8 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.ArtworkCollectionViewCell.rawValue, for: indexPath) as! ArtworkCollectionViewCell
+        
+        loadingIndicator.stopAnimating()
 
 		let art = fetchResultsController.object(at: indexPath)
 
