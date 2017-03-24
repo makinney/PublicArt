@@ -11,7 +11,7 @@ import UIKit
 class MapPresentAnimatedTransistioning: NSObject, UIViewControllerAnimatedTransitioning {
 	
 	func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-		return 1.0 // TODO:
+		return 1.0
 	}
 
 func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -26,7 +26,7 @@ func animateTransition(using transitionContext: UIViewControllerContextTransitio
         transitionContext.containerView.addSubview(animatingView)
 	
 		let presentedTransform = CGAffineTransform.identity
-		let scale = CGAffineTransform(scaleX: 0.001,y: 0.001) // TODO:
+		let scale = CGAffineTransform(scaleX: 0.001,y: 0.001) 
 		let rotation = CGAffineTransform(rotationAngle: 8 * CGFloat(M_PI)) // TODO:
 		let dismissedTransform = scale.concatenating(rotation)
 		

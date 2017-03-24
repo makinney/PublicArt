@@ -46,7 +46,6 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	}
 	
 	deinit {
-		NotificationCenter.default.removeObserver(self)
 	}
 	
 	override func viewDidLoad() {
@@ -60,7 +59,7 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
             // Fallback on earlier versions
         }
         
-        title = "SF Public Art"
+        title = "Public Art"
         collectionView?.backgroundColor = UIColor.black
 
 		
@@ -68,29 +67,41 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 		artworkCollectionViewLayout.cellPadding = 5
 		artworkCollectionViewLayout.delegate = self
 		artworkCollectionViewLayout.numberOfColumns = 2
-		
+        
+ 		
 		fetchResultsController.delegate = self
-		do {
-			try fetchResultsController.performFetch()
-		} catch let error1 as NSError {
-			error = error1
-		}
-	}
+        if UserDefaults.standard.bool(forKey: UserDefaultKeys.initialArtDataBindingsComplete.rawValue) == true {
+            do {
+                try fetchResultsController.performFetch()
+                collectionView?.reloadData()
+            } catch let error1 as NSError {
+                error = error1
+            }
+        } else { // because no thumb.imageAspectRatio available until bindings complete at least one time so that art entity has a thumb entity
+            NotificationCenter.default.addObserver(self, selector: #selector(ArtPiecesCollectionViewController.artDataDidBind), name: Notification.Name(rawValue: ArtAppNotifications.artDataDidBind.rawValue), object: nil)
+        }
+    }
 	
+    func artDataDidBind() {
+        do {
+            try fetchResultsController.performFetch()
+            collectionView?.reloadData()
+            UserDefaults.standard.set(true, forKey: UserDefaultKeys.initialArtDataBindingsComplete.rawValue)
+        } catch let error1 as NSError {
+            error = error1
+        }
+    }
+    
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		if let pageTitle = pageTitle {
 			title = pageTitle
 		}
-		
-//		collectionView?.backgroundColor = UIColor.white
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
         collectionView?.backgroundColor = UIColor.white
-
-//		collectionView?.reloadData()
 	}
 	
 
@@ -168,8 +179,9 @@ final class ArtPiecesCollectionViewController: UICollectionViewController, UINav
 	}
 	
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		let sectionInfo = fetchResultsController.sections![section]
-		return sectionInfo.numberOfObjects
+        if let sectionInfo = fetchResultsController.sections?[section] {
+            return sectionInfo.numberOfObjects
+        } else { return 0 }
 	}
 	
 	// MARK: ArtPhotos Navigation
@@ -197,7 +209,7 @@ extension ArtPiecesCollectionViewController: ArtworkLayoutDelegate {
 		if let thumb = art.thumb {
             imageHeight = width / (thumb.imageAspectRatio as CGFloat)
 		} else {
-			imageHeight = width
+			imageHeight = 25
 		}
 		
 		let rect = AVMakeRect(aspectRatio: CGSize(width: width, height: imageHeight), insideRect: boundingRect)

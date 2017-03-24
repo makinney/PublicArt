@@ -86,7 +86,7 @@ final class LocationPiecesCollectionViewController: UICollectionViewController, 
 		
 		NotificationCenter.default.addObserver(self,
 			selector:#selector(LocationPiecesCollectionViewController.newArtCityDatabase(_:)),
-			name: NSNotification.Name(rawValue: ArtAppNotifications.NewArtCityDatabase.rawValue),
+			name: NSNotification.Name(rawValue: ArtAppNotifications.newArtCityDatabase.rawValue),
 			object: nil)
 		
 		

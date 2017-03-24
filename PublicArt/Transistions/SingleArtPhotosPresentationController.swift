@@ -89,6 +89,7 @@ class SingleArtPhotosPresentationController: UIPresentationController {
 //		setupCloseButton()
 	}
 	
+    // RW Replace with Ray's Approach?
 	override var frameOfPresentedViewInContainerView : CGRect {//
 		let containerBounds:CGRect = self.containerView?.bounds ?? CGRect()
 		var presentedViewFrame = CGRect.zero

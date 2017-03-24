@@ -26,13 +26,17 @@ public enum SortOrder {
 }
 
 public enum ArtAppNotifications: String {
-	case PhotosDownloaded = "PhotosDownloadedNotification"
-	case NewArtCityDatabase = "NewArtCityDatabase"
+	case photosDownloaded = "PhotosDownloadedNotification"
+	case newArtCityDatabase = "NewArtCityDatabase"
+    case artDataDidBind = "artDataDidBind"
 }
 
+
+
 enum UserDefaultKeys: String {
-	case LastPublicArtUpdate = "LastPublicArtUpdateKey"
-	case SingleArtViewPhotoTouchedAtLeastOnce = "KeySingleArtViewPhotoTouchedAtLeastOnce"
+	case lastPublicArtUpdate = "LastPublicArtUpdateKey"
+	case singleArtViewPhotoTouchedAtLeastOnce = "KeySingleArtViewPhotoTouchedAtLeastOnce"
+    case initialArtDataBindingsComplete = "KeyInitialArtDataBindingsComplete"
 }
 
 

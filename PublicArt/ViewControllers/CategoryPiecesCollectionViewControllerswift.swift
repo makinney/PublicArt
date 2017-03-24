@@ -49,16 +49,16 @@ class CategoryPiecesCollectionViewController: UICollectionViewController, UINavi
 		
 		
 		
-		let nibName = UINib(nibName: "ArtworkCollectionViewCell", bundle: nil) // TODO:
+		let nibName = UINib(nibName: "ArtworkCollectionViewCell", bundle: nil) // :
 		self.collectionView?.register(nibName, forCellWithReuseIdentifier: "ArtworkCollectionViewCell")
-//		var subNibName = UINib(nibName: "ArtCitySupplementaryView", bundle: nil) // TODO:
+//		var subNibName = UINib(nibName: "ArtCitySupplementaryView", bundle: nil) // :
 //		self.collectionView?.registerNib(subNibName, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ArtCitySupplementaryView")
 		
 		setupArtCityPhotosFlowLayout()
 		
 		NotificationCenter.default.addObserver(self,
 			selector:#selector(CategoryPiecesCollectionViewController.newArtCityDatabase(_:)),
-			name: NSNotification.Name(rawValue: ArtAppNotifications.NewArtCityDatabase.rawValue),
+			name: NSNotification.Name(rawValue: ArtAppNotifications.newArtCityDatabase.rawValue),
 			object: nil)
 		
 		

@@ -55,19 +55,16 @@ final class SingleArtViewController: UIViewController {
 		self.scrollView?.backgroundColor = UIColor.white
 		setupPhotoImage()
 		prepareNavButtons()
-		runAutoPromptTimer()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		hideTouchPrompt()
 		update()
 	}
 	
 	 override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		_ = navigationController?.navigationBar
-		hideTouchPrompt()
 	}
 	
 	// MARK setups and prepares
@@ -125,7 +122,6 @@ final class SingleArtViewController: UIViewController {
 	// MARK: update
 	
 	func update(_ art: Art, artBackgroundColor: UIColor?) {
-		hideTouchPrompt() // split view expanded
 		self.art = art
 		self.artBackgroundColor = artBackgroundColor
 		if self.isViewLoaded {
@@ -306,57 +302,53 @@ final class SingleArtViewController: UIViewController {
 
 	func artImageTapped(_ tapRecognizer: UITapGestureRecognizer) {
 		performSegue(withIdentifier: SegueIdentifier.SingleImageToImageCollection.rawValue, sender: nil)
-		if !photoTouchedAtLeastOnce {
-			photoTouchedAtLeastOnce = true
-			hideTouchPrompt() // just in case
-		}
 	}
 	
-	func showTouchPrompt() {
-		if !photoTouchedAtLeastOnce {
-			artImageView.addSubview(touchImagePrompt)
-			UIView.animate(withDuration: 2.0, animations: { [weak self] () -> Void in
-				self?.touchImagePrompt?.alpha = 0.75
-			})
-		}
-	}
+//	func showTouchPrompt() {
+//		if !photoTouchedAtLeastOnce {
+//			artImageView.addSubview(touchImagePrompt)
+//			UIView.animate(withDuration: 2.0, animations: { [weak self] () -> Void in
+//				self?.touchImagePrompt?.alpha = 0.75
+//			})
+//		}
+//	}
 	
-	fileprivate func hideTouchPrompt() {
-		touchImagePrompt?.alpha = 0.0
-	}
+//	fileprivate func hideTouchPrompt() {
+//		touchImagePrompt?.alpha = 0.0
+//	}
 
 	
-	fileprivate func runAutoPromptTimer() {
-		if !photoTouchedAtLeastOnce {
-			promptUserTimer?.invalidate()
-			promptUserTimer = Timer.scheduledTimer(timeInterval: promptUserTimerTimeout,
-								target: self,
-							  selector: #selector(SingleArtViewController.showTouchPrompt),
-							  userInfo: nil,
-							   repeats: false)
-		} else {
-			// has touched one time at least so nothing to do
-		}
-	}
-	
-	var photoTouchedAtLeastOnce: Bool {
-		get {
-			let userDefaults = UserDefaults.standard
-			if let touched = userDefaults.object(forKey: UserDefaultKeys.SingleArtViewPhotoTouchedAtLeastOnce.rawValue) as? Bool { // TODO: define key
-				if touched {
-					return true
-				} else {
-					return false
-				}
-			} else {
-				return false
-			}
-		}
-		
-		set(newValue) {
-			UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.SingleArtViewPhotoTouchedAtLeastOnce.rawValue) // TODO define key
-		}
-	}
+//	fileprivate func runAutoPromptTimer() {
+//		if !photoTouchedAtLeastOnce {
+//			promptUserTimer?.invalidate()
+//			promptUserTimer = Timer.scheduledTimer(timeInterval: promptUserTimerTimeout,
+//								target: self,
+//							  selector: #selector(SingleArtViewController.showTouchPrompt),
+//							  userInfo: nil,
+//							   repeats: false)
+//		} else {
+//			// has touched one time at least so nothing to do
+//		}
+//	}
+//	
+//	var photoTouchedAtLeastOnce: Bool {
+//		get {
+//			let userDefaults = UserDefaults.standard
+//			if let touched = userDefaults.object(forKey: UserDefaultKeys.singleArtViewPhotoTouchedAtLeastOnce.rawValue) as? Bool { // TODO: define key
+//				if touched {
+//					return true
+//				} else {
+//					return false
+//				}
+//			} else {
+//				return false
+//			}
+//		}
+//		
+//		set(newValue) {
+//			UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.singleArtViewPhotoTouchedAtLeastOnce.rawValue) // TODO define key
+//		}
+//	}
 	
 }
 

@@ -74,7 +74,7 @@ final class CatagoryCollectionViewController: UICollectionViewController {
 				
 				minimumCellsPerLine = 1
 				let maxPhotoWidth = maxCellWidth(masterViewsWidth, cellsPerLine: minimumCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
-				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxCellHeight) // TODO: hard constant hack for aspect ratio
+				collectionViewFlowLayout.itemSize = CGSize(width: maxPhotoWidth, height: maxCellHeight) // : hard constant hack for aspect ratio
 			} else {
 				let sectionInset: CGFloat = 2
 				collectionViewFlowLayout.sectionInset.top = sectionInset

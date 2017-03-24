@@ -140,7 +140,7 @@ final class ArtistCollectionViewController: UICollectionViewController {
 
 				minimumCellsPerLine = 1
 				maxCellWidth = cellWidthToUse(masterViewsWidth, cellsPerLine: minimumCellsPerLine, itemSpacing: itemSpacing, flowLayout: collectionViewFlowLayout)
-				collectionViewFlowLayout.itemSize = CGSize(width: maxCellWidth, height: maxCellWidth / 8.0) // TODO: hard constant hack for aspect ratio
+				collectionViewFlowLayout.itemSize = CGSize(width: maxCellWidth, height: maxCellWidth / 8.0) // : hard constant hack for aspect ratio
 			} else {
 				let sectionInset: CGFloat = 2
 				collectionViewFlowLayout.sectionInset.top = sectionInset

@@ -34,6 +34,8 @@ class ArtDataManager : NSObject {
 			self?.updateArtToArtistBindings(art)
 			self?.updateThumbToArtBindings(thumbs)
 			self?.updateLocPhotoToLocationBindings(locPhotos)
+            let notification = Notification(name: Notification.Name(rawValue: ArtAppNotifications.artDataDidBind.rawValue))
+            NotificationCenter.default.post(notification)
 			if self?.coreDataStack.saveContext() == true {
 				ArtRefresh.clientRefreshed(endingAtDate)
 			}
@@ -207,7 +209,7 @@ class ArtDataManager : NSObject {
 	func postNewPhotosNotification() {
 //		if let newPhotos = newPhotos where newPhotos.count > 0 {
 //			var dict = ["photos": newPhotos]
-//			NSNotificationCenter.defaultCenter().postNotificationName(ArtAppNotifications.PhotosDownloaded.rawValue,
+//			NSNotificationCenter.defaultCenter().postNotificationName(ArtAppNotifications.photosDownloaded.rawValue,
 //																		object: self,
 //																	  userInfo: dict)
 //		}

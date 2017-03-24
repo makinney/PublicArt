@@ -107,7 +107,7 @@ extension ArtViewController {
 
     
     func prepareMapToolbarItems() {
-        let bottomItems = [routeBarButtonItem,flexibleSpaceBarButtonItem, locateMeBarButtonItem, flexibleSpaceBarButtonItem, infoBarButtonItem]
+        let bottomItems = [locateMeBarButtonItem, flexibleSpaceBarButtonItem, routeBarButtonItem, flexibleSpaceBarButtonItem, infoBarButtonItem]
         mapToolbar.items = bottomItems
     }
     

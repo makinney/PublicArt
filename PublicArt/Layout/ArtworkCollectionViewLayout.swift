@@ -67,7 +67,8 @@ class ArtworkCollectionViewLayout: UICollectionViewLayout {
 
 
 	 override func prepare() {
-		guard let delegate = delegate else {
+		guard let delegate = delegate,
+              collectionView!.numberOfSections > 0 else {
 			return
 		}
 		if cache.isEmpty {

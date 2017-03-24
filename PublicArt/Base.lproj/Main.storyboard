@@ -832,11 +832,11 @@
             </objects>
             <point key="canvasLocation" x="3414" y="-282"/>
         </scene>
-        <!--Explore-->
+        <!--City Map-->
         <scene sceneID="0mG-7l-uTL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsWhenVerticallyCompact="YES" id="nBu-ce-fRo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Explore" image="tab-map" id="J3O-Vs-Evl"/>
+                    <tabBarItem key="tabBarItem" title="City Map" image="tab-map" id="J3O-Vs-Evl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="hhr-y3-ii9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
