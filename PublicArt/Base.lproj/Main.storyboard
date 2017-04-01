@@ -364,17 +364,17 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V9C-AT-D3K" userLabel="PhotosContainerView">
-                                        <rect key="frame" x="0.0" y="51" width="375" height="280"/>
+                                        <rect key="frame" x="0.0" y="51" width="375" height="300"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="280" id="tA4-9I-6U6"/>
+                                            <constraint firstAttribute="height" constant="300" id="tA4-9I-6U6"/>
                                         </constraints>
                                         <connections>
                                             <segue destination="yZu-Kr-YZd" kind="embed" identifier="ArtViewToPhotosPage" id="Jbp-1v-Um9"/>
                                         </connections>
                                     </containerView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="eai-qN-kOp" userLabel="DetailsStackView">
-                                        <rect key="frame" x="8" y="339" width="359" height="116"/>
+                                        <rect key="frame" x="8" y="359" width="359" height="116"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="z9f-4u-wZH" userLabel="dLabel1">
                                                 <rect key="frame" x="0.0" y="0.0" width="359" height="20"/>
@@ -413,45 +413,46 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMT-pD-nIr" userLabel="mapToolbar">
-                                        <rect key="frame" x="0.0" y="463" width="375" height="44"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="j5A-eY-vNx" userLabel="MapStackView">
+                                        <rect key="frame" x="0.0" y="483" width="375" height="204"/>
+                                        <subviews>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ft5-Fm-LSZ" userLabel="MapContainerView">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+                                                <connections>
+                                                    <segue destination="hIs-97-5Ut" kind="embed" identifier="ArtViewToMapViewSeque" id="CR3-CG-eys"/>
+                                                </connections>
+                                            </containerView>
+                                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMT-pD-nIr" userLabel="mapToolbar">
+                                                <rect key="frame" x="0.0" y="160" width="375" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="ozM-Hq-Bk8"/>
+                                                </constraints>
+                                                <items>
+                                                    <barButtonItem title="Item" id="OTi-tT-NMf"/>
+                                                </items>
+                                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            </toolbar>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="ozM-Hq-Bk8"/>
+                                            <constraint firstAttribute="height" constant="204" id="9FL-17-se5"/>
                                         </constraints>
-                                        <items>
-                                            <barButtonItem title="Item" id="OTi-tT-NMf"/>
-                                        </items>
-                                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    </toolbar>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ft5-Fm-LSZ" userLabel="MapContainerView">
-                                        <rect key="frame" x="0.0" y="515" width="375" height="160"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="160" id="Ehv-PZ-00g"/>
-                                        </constraints>
-                                        <connections>
-                                            <segue destination="hIs-97-5Ut" kind="embed" identifier="ArtViewToMapViewSeque" id="CR3-CG-eys"/>
-                                        </connections>
-                                    </containerView>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="eai-qN-kOp" firstAttribute="leading" secondItem="uud-a8-EMV" secondAttribute="leading" constant="8" id="4gz-NB-su3"/>
-                                    <constraint firstItem="oMT-pD-nIr" firstAttribute="centerX" secondItem="uud-a8-EMV" secondAttribute="centerX" id="5hx-8j-Ea8"/>
+                                    <constraint firstItem="j5A-eY-vNx" firstAttribute="top" secondItem="eai-qN-kOp" secondAttribute="bottom" constant="8" id="4hL-2n-eoh"/>
+                                    <constraint firstItem="j5A-eY-vNx" firstAttribute="leading" secondItem="V9C-AT-D3K" secondAttribute="leading" id="AO5-xq-I4f"/>
+                                    <constraint firstAttribute="bottom" secondItem="j5A-eY-vNx" secondAttribute="bottom" constant="200" id="BMe-xg-vqG"/>
                                     <constraint firstAttribute="trailing" secondItem="M9R-V3-xvb" secondAttribute="trailing" id="EOI-4H-zJg"/>
                                     <constraint firstItem="V9C-AT-D3K" firstAttribute="width" secondItem="uud-a8-EMV" secondAttribute="width" id="HWo-hJ-X4x"/>
                                     <constraint firstItem="eai-qN-kOp" firstAttribute="top" secondItem="V9C-AT-D3K" secondAttribute="bottom" constant="8" id="Ja8-Mg-NOp"/>
-                                    <constraint firstItem="oMT-pD-nIr" firstAttribute="top" secondItem="eai-qN-kOp" secondAttribute="bottom" constant="8" id="KM2-Bh-Cy2"/>
-                                    <constraint firstItem="ft5-Fm-LSZ" firstAttribute="top" secondItem="oMT-pD-nIr" secondAttribute="bottom" constant="8" id="Pq2-VH-Gzu"/>
                                     <constraint firstAttribute="trailing" secondItem="eai-qN-kOp" secondAttribute="trailing" constant="8" id="SBM-Ng-WUw"/>
                                     <constraint firstItem="M9R-V3-xvb" firstAttribute="top" secondItem="uud-a8-EMV" secondAttribute="top" constant="10" id="aTr-PF-pBm"/>
                                     <constraint firstItem="V9C-AT-D3K" firstAttribute="top" secondItem="M9R-V3-xvb" secondAttribute="bottom" constant="20" id="azO-BH-G8E"/>
                                     <constraint firstAttribute="trailing" secondItem="V9C-AT-D3K" secondAttribute="trailing" id="dzR-ff-yZj"/>
-                                    <constraint firstItem="oMT-pD-nIr" firstAttribute="width" secondItem="ft5-Fm-LSZ" secondAttribute="width" id="f5E-nb-bR8"/>
-                                    <constraint firstAttribute="bottom" secondItem="ft5-Fm-LSZ" secondAttribute="bottom" constant="20" id="mcu-37-6bK"/>
-                                    <constraint firstItem="ft5-Fm-LSZ" firstAttribute="width" secondItem="uud-a8-EMV" secondAttribute="width" id="ntW-ZY-teq"/>
+                                    <constraint firstItem="j5A-eY-vNx" firstAttribute="trailing" secondItem="V9C-AT-D3K" secondAttribute="trailing" id="lnU-gO-7Tk"/>
                                     <constraint firstItem="V9C-AT-D3K" firstAttribute="leading" secondItem="uud-a8-EMV" secondAttribute="leading" id="uiI-CH-77C"/>
-                                    <constraint firstItem="ft5-Fm-LSZ" firstAttribute="leading" secondItem="uud-a8-EMV" secondAttribute="leading" id="veE-ts-nCc"/>
-                                    <constraint firstAttribute="trailing" secondItem="ft5-Fm-LSZ" secondAttribute="trailing" id="xdm-uh-mwA"/>
                                     <constraint firstItem="M9R-V3-xvb" firstAttribute="leading" secondItem="uud-a8-EMV" secondAttribute="leading" id="ywN-kH-KwW"/>
                                 </constraints>
                             </scrollView>
@@ -836,13 +837,10 @@
         <!--Photos Page View Controller-->
         <scene sceneID="Ozo-zY-FGq">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="yZu-Kr-YZd" customClass="PhotosPageViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController">
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="281"/>
-                </pageViewController>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="yZu-Kr-YZd" customClass="PhotosPageViewController" customModule="PublicArt" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4m0-Dg-4SD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5207" y="179"/>
+            <point key="canvasLocation" x="5186" y="242"/>
         </scene>
         <!--Single Art Map View Controller-->
         <scene sceneID="K7B-qx-r3g">
@@ -892,14 +890,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rj5-tk-gAA">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="280" id="han-Zh-TIr"/>
+                                            <constraint firstAttribute="height" constant="300" id="han-Zh-TIr"/>
                                         </constraints>
                                     </imageView>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="4p9-N8-hE1" userLabel="activityIndicator">
-                                        <rect key="frame" x="169" y="121.5" width="37" height="37"/>
+                                        <rect key="frame" x="169" y="131.5" width="37" height="37"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="37" id="AGP-vd-rTd"/>
                                             <constraint firstAttribute="height" constant="37" id="kNB-Dd-6nO"/>
