@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 mkinney. All rights reserved.
 //
 
+// Hello there Xcode Source Control
+
 import Foundation
 import CoreData
 // FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
